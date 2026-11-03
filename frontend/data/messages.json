@@ -1,0 +1,35 @@
+[
+  {
+    "id": "msg_1793716556_6764",
+    "name": "honore",
+    "email": "honorescott140@gmail.com",
+    "phone": "0991926394",
+    "subject": "jhzhdgijsgh",
+    "message": "petit",
+    "date": "03/11/2026 à 16:35",
+    "timestamp": 1793716556,
+    "read": false
+  },
+  {
+    "id": "msg_1793716267_7711",
+    "name": "Marc Mwamba",
+    "email": "m.mwamba@student.unilu.ac.cd",
+    "phone": "+243 812 345 678",
+    "subject": "Question sur les cours du soir",
+    "message": "Bonjour, proposez-vous des cours d initiation en bureautique le soir ?",
+    "date": "03/11/2026 à 16:31",
+    "timestamp": 1793716267,
+    "read": true
+  },
+  {
+    "id": "msg_sample_01",
+    "name": "Pr. Jean-Luc Kalenga",
+    "email": "jl.kalenga@unilu.ac.cd",
+    "phone": "+243 998 123 456",
+    "subject": "Réservation de la salle pour séminaire de recherche",
+    "message": "Bonjour à l'équipe de la SNU, je souhaite réserver la salle du numérique pour un séminaire universitaire ce jeudi de 10h à 13h. Merci de me confirmer les disponibilités.",
+    "date": "03/11/2026 à 14:15",
+    "timestamp": 1762172100,
+    "read": false
+  }
+]

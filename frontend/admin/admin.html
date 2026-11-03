@@ -1,0 +1,2327 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Administration — Salle du Numérique UNILU</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="Referrer-Policy" content="no-referrer">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+    <link href="img/Logo_SNU.jpg" rel="icon" type="image/jpeg">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="lib/fontawesome/css/all.min.css" rel="stylesheet">
+    <link href="lib/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css?v=1.2" rel="stylesheet">
+
+    <style>
+        :root {
+            --snu-red: #d10000;
+            --snu-red-hover: #b00000;
+            --snu-blue: #0B2545;
+            --snu-blue-light: rgba(11, 37, 69, 0.08);
+            --snu-card-bg: #ffffff;
+            --snu-border: rgba(0, 0, 0, 0.08);
+            --snu-text-dark: #1a1a1a;
+            --snu-text-muted: #6c757d;
+        }
+
+        body.admin-body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--snu-text-dark);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            background: #f8fafc;
+        }
+
+        /* Tech background motif exact du site */
+        .tech-bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: url('img/tech_background.png') center/cover no-repeat fixed;
+            opacity: 0.45;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        h1, h2, h3, h4, h5, h6, .brand-title, .admin-card-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+        }
+
+        /* Top Bar Identique à la Navbar du site */
+        .admin-header-bar {
+            background-color: var(--snu-red) !important;
+            border-bottom: 2px solid #ffffff;
+            box-shadow: 0 4px 18px rgba(209, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1030;
+            padding: 10px 0;
+        }
+
+        .admin-logo-img {
+            height: 55px;
+            width: 55px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-right: 14px;
+            border: 2px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        }
+
+        .admin-brand-text {
+            color: #ffffff !important;
+            font-weight: 900 !important;
+            font-size: 1.45rem;
+            margin: 0;
+            line-height: 1.1;
+        }
+
+        .admin-badge-pill {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            color: #ffffff;
+            font-size: 0.74rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 2px 10px;
+            border-radius: 20px;
+            margin-top: 3px;
+        }
+
+        /* Boutons de la Topbar */
+        .btn-view-site {
+            background: transparent;
+            color: #ffffff !important;
+            border: 1.5px solid rgba(255, 255, 255, 0.85);
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            padding: 7px 16px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-view-site:hover {
+            background: #ffffff;
+            color: var(--snu-red) !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-save-master {
+            background: #ffffff;
+            color: var(--snu-red) !important;
+            border: 2px solid #ffffff;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 0.88rem;
+            padding: 7px 18px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+            transition: all 0.3s ease;
+        }
+
+        .btn-save-master:hover {
+            background: var(--snu-blue);
+            color: #ffffff !important;
+            border-color: var(--snu-blue);
+            transform: translateY(-1px);
+        }
+
+        .btn-logout-header {
+            background: rgba(255, 255, 255, 0.15);
+            color: #ffffff !important;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 8px;
+            padding: 7px 14px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-logout-header:hover {
+            background: rgba(0, 0, 0, 0.25);
+            color: #ffffff !important;
+        }
+
+        /* Layout Structure */
+        .admin-main-wrapper {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex: 1;
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+            height: calc(100vh - 75px);
+            overflow: hidden;
+        }
+
+        /* Sidebar Blanche & Rouge Style Salle SNU - STATIQUE ET FIXE */
+        .admin-sidebar {
+            width: 280px;
+            background: #ffffff;
+            border-right: 1px solid var(--snu-border);
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.03);
+            padding: 24px 0;
+            flex-shrink: 0;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .sidebar-section-title {
+            color: var(--snu-red);
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 0 24px 12px 24px;
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar-section-title::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: rgba(209, 0, 0, 0.15);
+            margin-left: 10px;
+        }
+
+        .nav-snu-link {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            margin: 3px 14px;
+            border-radius: 8px;
+            color: var(--snu-blue);
+            font-weight: 700;
+            font-size: 0.92rem;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        .nav-snu-link i {
+            width: 26px;
+            font-size: 1.15rem;
+            margin-right: 10px;
+            color: var(--snu-red);
+            transition: all 0.25s ease;
+        }
+
+        .nav-snu-link:hover {
+            background: rgba(209, 0, 0, 0.06);
+            color: var(--snu-red);
+            transform: translateX(4px);
+        }
+
+        .nav-snu-link.active {
+            background: var(--snu-red) !important;
+            color: #ffffff !important;
+            box-shadow: 0 6px 18px rgba(209, 0, 0, 0.22);
+        }
+
+        .nav-snu-link.active i {
+            color: #ffffff !important;
+        }
+
+        /* Contenu Principal - SEUL CE BLOC DÉROULE */
+        .admin-content-pane {
+            flex: 1;
+            height: 100%;
+            padding: 32px 36px;
+            overflow-y: auto;
+        }
+
+        /* Scrollbars fines et fluides */
+        .admin-sidebar::-webkit-scrollbar,
+        .admin-content-pane::-webkit-scrollbar {
+            width: 6px;
+        }
+        .admin-sidebar::-webkit-scrollbar-track,
+        .admin-content-pane::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .admin-sidebar::-webkit-scrollbar-thumb,
+        .admin-content-pane::-webkit-scrollbar-thumb {
+            background: rgba(209, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+        .admin-sidebar::-webkit-scrollbar-thumb:hover,
+        .admin-content-pane::-webkit-scrollbar-thumb:hover {
+            background: rgba(209, 0, 0, 0.5);
+        }
+
+        @media (max-width: 991.98px) {
+            body.admin-body {
+                height: auto;
+                overflow: auto;
+            }
+            .admin-main-wrapper {
+                flex-direction: column;
+                height: auto;
+                overflow: visible;
+            }
+            .admin-sidebar {
+                width: 100%;
+                height: auto;
+            }
+            .admin-content-pane {
+                height: auto;
+                overflow: visible;
+                padding: 20px 16px;
+            }
+        }
+
+        /* Cartes Style SNU */
+        .admin-card {
+            background: #ffffff;
+            border-radius: 14px;
+            border: 1px solid var(--snu-border);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+            padding: 28px;
+            margin-bottom: 28px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .admin-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--snu-red) 0%, rgba(209, 0, 0, 0.4) 100%);
+        }
+
+        .admin-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 16px;
+            margin-bottom: 24px;
+            border-bottom: 1.5px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .admin-card-title {
+            font-size: 1.35rem;
+            color: var(--snu-text-dark);
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .admin-card-title i {
+            color: var(--snu-red);
+            margin-right: 12px;
+            font-size: 1.3rem;
+        }
+
+        /* Formulaires & Contrôles */
+        .form-label {
+            color: var(--snu-blue);
+            font-weight: 700;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            margin-bottom: 6px;
+        }
+
+        .form-control, .form-select {
+            border: 1.5px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 0.95rem;
+            transition: all 0.25s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--snu-red) !important;
+            box-shadow: 0 0 0 0.25rem rgba(209, 0, 0, 0.15) !important;
+            outline: none;
+        }
+
+        /* Cadre de Prévisualisation d'Image */
+        .img-preview-box {
+            width: 100%;
+            height: 150px;
+            border: 2px dashed rgba(209, 0, 0, 0.28);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: #fafbfc;
+            margin-bottom: 12px;
+            position: relative;
+            transition: border-color 0.3s ease;
+        }
+
+        .img-preview-box:hover {
+            border-color: var(--snu-red);
+        }
+
+        .img-preview-box img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        /* Boutons SNU */
+        .btn-snu-red {
+            background-color: var(--snu-red);
+            border: 2px solid var(--snu-red);
+            color: #ffffff !important;
+            font-weight: 700;
+            border-radius: 8px;
+            padding: 8px 18px;
+            transition: all 0.25s ease;
+        }
+
+        .btn-snu-red:hover {
+            background-color: var(--snu-red-hover);
+            border-color: var(--snu-red-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(209, 0, 0, 0.25);
+        }
+
+        .btn-snu-outline-red {
+            background-color: transparent;
+            border: 2px solid var(--snu-red);
+            color: var(--snu-red) !important;
+            font-weight: 700;
+            border-radius: 8px;
+            padding: 7px 16px;
+            transition: all 0.25s ease;
+        }
+
+        .btn-snu-outline-red:hover {
+            background-color: var(--snu-red);
+            color: #ffffff !important;
+            box-shadow: 0 4px 14px rgba(209, 0, 0, 0.2);
+        }
+
+        .btn-snu-blue {
+            background-color: var(--snu-blue);
+            border: 2px solid var(--snu-blue);
+            color: #ffffff !important;
+            font-weight: 700;
+            border-radius: 8px;
+            padding: 8px 18px;
+            transition: all 0.25s ease;
+        }
+
+        .btn-snu-blue:hover {
+            background-color: #051426;
+            border-color: #051426;
+            transform: translateY(-2px);
+        }
+
+        /* Login Screen avec le style de la Salle SNU */
+        #loginOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('img/tech_background.png') center/cover no-repeat fixed;
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        #loginOverlay::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(8px);
+        }
+
+        .snu-login-card {
+            position: relative;
+            z-index: 2;
+            background: #ffffff;
+            border-radius: 18px;
+            width: 100%;
+            max-width: 440px;
+            padding: 40px 36px;
+            box-shadow: 0 20px 50px rgba(209, 0, 0, 0.12), 0 4px 20px rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(209, 0, 0, 0.15);
+            text-align: center;
+        }
+
+        .snu-login-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: var(--snu-red);
+            border-radius: 18px 18px 0 0;
+        }
+
+        .badge-snu-tag {
+            background: rgba(209, 0, 0, 0.08);
+            border: 1px solid rgba(209, 0, 0, 0.22);
+            color: var(--snu-red);
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 5px 16px;
+            border-radius: 30px;
+            display: inline-block;
+        }
+
+        /* Toast de Notification */
+        .toast-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 999999;
+        }
+        
+        .toast-snu {
+            background: var(--snu-red) !important;
+            color: #ffffff !important;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(209, 0, 0, 0.35);
+        }
+    </style>
+</head>
+
+<body class="admin-body">
+
+    <!-- Fond technologique officiel du site -->
+    <div class="tech-bg-canvas"></div>
+
+    <!-- ════════════════════════════════════════════════════════
+         ECRAN DE CONNEXION ADMIN (Style Salle SNU)
+    ════════════════════════════════════════════════════════ -->
+    <div id="loginOverlay">
+        <div class="snu-login-card">
+            <img src="img/Logo_SNU.jpg" alt="Logo SNU" class="admin-logo-img mb-3" style="width: 76px; height: 76px;">
+            <h3 class="mb-1" style="color: var(--snu-text-dark); font-weight: 900;">Salle du <span style="color: var(--snu-red);">Numérique</span></h3>
+            <p class="text-muted small mb-4">Université de Lubumbashi — Espace Administration</p>
+
+            <form id="loginForm">
+                <div class="mb-3 text-start">
+                    <label class="form-label">Mot de passe Administrateur</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-white border-end-0"><i class="fa fa-lock text-danger"></i></span>
+                        <input type="password" id="adminPassword" class="form-control border-start-0" placeholder="Entrez votre mot de passe" required autofocus>
+                        <button class="btn btn-outline-secondary border" type="button" id="togglePwdBtn"><i class="fa fa-eye"></i></button>
+                    </div>
+                </div>
+                <div id="loginError" class="alert alert-danger py-2 small d-none mb-3">Mot de passe incorrect.</div>
+                <button type="submit" class="btn btn-snu-red w-100 py-2 mb-3">
+                    <i class="fa fa-sign-in-alt me-2"></i> Accéder au tableau de bord
+                </button>
+                <a href="/" target="_blank" class="text-decoration-none small text-muted">
+                    <i class="fa fa-arrow-left me-1"></i> Retour au site public
+                </a>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- ════════════════════════════════════════════════════════
+         TOP BAR DE NAVIGATION (Style Navbar Officielle SNU)
+    ════════════════════════════════════════════════════════ -->
+    <header class="admin-header-bar">
+        <div class="container-fluid px-4">
+            <div class="d-flex align-items-center justify-content-between">
+                
+                <!-- Logo & Titre SNU -->
+                <div class="d-flex align-items-center">
+                    <img src="img/Logo_SNU.jpg" alt="Logo SNU" class="admin-logo-img">
+                    <div>
+                        <h1 class="admin-brand-text">Salle du Numérique</h1>
+                        <span class="admin-badge-pill">Administration</span>
+                    </div>
+                </div>
+
+                <!-- Boutons d'Action Header -->
+                <div class="d-flex align-items-center gap-2">
+                    <!-- Bouton Voir le Site Public -->
+                    <a href="/" target="_blank" class="btn btn-view-site d-flex align-items-center" title="Ouvrir le site utilisateur">
+                        <i class="fa fa-external-link-alt me-2"></i> Voir le Site Utilisateur
+                    </a>
+
+                    <!-- Bouton Enregistrer Tout (Blanc et Rouge) -->
+                    <button id="btnSaveAll" class="btn btn-save-master d-flex align-items-center">
+                        <i class="fa fa-save me-2"></i> Enregistrer Tout
+                    </button>
+
+                    <!-- Déconnexion -->
+                    <button id="btnLogout" class="btn btn-logout-header" title="Se déconnecter">
+                        <i class="fa fa-power-off"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+
+    <!-- ════════════════════════════════════════════════════════
+         CORPS DU DASHBOARD (Sidebar Blanche + Contenu)
+    ════════════════════════════════════════════════════════ -->
+    <div class="admin-main-wrapper">
+
+        <!-- Sidebar Blanche & Rouge -->
+        <aside class="admin-sidebar">
+            <div class="sidebar-section-title">Sections du Site</div>
+            <nav class="nav flex-column" id="adminNav">
+                <a class="nav-snu-link active" href="#tab-hero" data-tab="tab-hero">
+                    <i class="fa fa-home"></i> Contenu Accueil
+                </a>
+                <a class="nav-snu-link" href="#tab-about" data-tab="tab-about">
+                    <i class="fa fa-info-circle"></i> À Propos &amp; Atouts
+                </a>
+                <a class="nav-snu-link" href="#tab-directeur" data-tab="tab-directeur">
+                    <i class="fa fa-user-tie"></i> Mot du Directeur
+                </a>
+                <a class="nav-snu-link" href="#tab-team" data-tab="tab-team">
+                    <i class="fa fa-users"></i> Équipe de Gestion
+                </a>
+                <a class="nav-snu-link" href="#tab-services" data-tab="tab-services">
+                    <i class="fa fa-desktop"></i> Nos Services
+                </a>
+                <a class="nav-snu-link" href="#tab-formations" data-tab="tab-formations">
+                    <i class="fa fa-graduation-cap"></i> Formations
+                </a>
+                <a class="nav-snu-link" href="#tab-salle" data-tab="tab-salle">
+                    <i class="fa fa-building"></i> Page "La Salle"
+                </a>
+                <a class="nav-snu-link" href="#tab-testimonials" data-tab="tab-testimonials">
+                    <i class="fa fa-comments"></i> Témoignages
+                </a>
+                <a class="nav-snu-link" href="#tab-media" data-tab="tab-media">
+                    <i class="fa fa-photo-video"></i> Médiathèque Photos
+                </a>
+                <div class="sidebar-section-title mt-2">Communication</div>
+                <a class="nav-snu-link d-flex align-items-center justify-content-between" href="#tab-messages" data-tab="tab-messages" id="navLinkMessages">
+                    <span><i class="fa fa-envelope me-2"></i> Messagerie</span>
+                    <span id="badgeUnreadMessages" class="badge rounded-pill bg-danger d-none">0</span>
+                </a>
+                <a class="nav-snu-link" href="#tab-settings" data-tab="tab-settings">
+                    <i class="fa fa-cog"></i> Paramètres
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Zone de Contenu -->
+        <main class="admin-content-pane">
+
+            <!-- ── TAB 1 : CONTENU ACCUEIL (HERO & SLOGANS) ── -->
+            <div class="tab-pane-admin" id="tab-hero">
+                <div class="admin-card">
+                    <div class="admin-card-header">
+                        <h4 class="admin-card-title"><i class="fa fa-home"></i> Contenu Accueil</h4>
+                        <button class="btn btn-sm btn-snu-red btn-save-section"><i class="fa fa-save me-1"></i> Sauvegarder</button>
+                    </div>
+
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6">
+                            <label class="form-label">Titre Principal (Ligne 1 - Blanc)</label>
+                            <input type="text" class="form-control" data-bind="hero.main_title">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Sous-titre Accent (Ligne 2 - Rouge)</label>
+                            <input type="text" class="form-control" data-bind="hero.subtitle_accent">
+                        </div>
+                    </div>
+
+                    <h5 class="fw-bold mb-3 border-bottom pb-2" style="color: var(--snu-blue);">Photos du Carrousel d'Accueil (Plein écran)</h5>
+                    <div class="row g-4 mb-4">
+                        <!-- Slide 1 -->
+                        <div class="col-md-4">
+                            <div class="p-3 border rounded-3 bg-light">
+                                <label class="form-label d-block">Photo Slide 1</label>
+                                <div class="img-preview-box">
+                                    <img id="preview_hero_slide_0" src="img/Salle1.jpg" alt="Slide 1">
+                                </div>
+                                <input type="text" class="form-control form-control-sm mb-2" data-bind="hero.slides.0" id="input_hero_slide_0">
+                                <label class="btn btn-sm btn-snu-outline-red w-100">
+                                    <i class="fa fa-upload me-1"></i> Remplacer la photo
+                                    <input type="file" class="d-none img-file-input" data-target="hero.slides.0" data-preview="preview_hero_slide_0" accept="image/*">
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Slide 2 -->
+                        <div class="col-md-4">
+                            <div class="p-3 border rounded-3 bg-light">
+                                <label class="form-label d-block">Photo Slide 2</label>
+                                <div class="img-preview-box">
+                                    <img id="preview_hero_slide_1" src="img/Salle2.jpg" alt="Slide 2">
+                                </div>
+                                <input type="text" class="form-control form-control-sm mb-2" data-bind="hero.slides.1" id="input_hero_slide_1">
+                                <label class="btn btn-sm btn-snu-outline-red w-100">
+                                    <i class="fa fa-upload me-1"></i> Remplacer la photo
+                                    <input type="file" class="d-none img-file-input" data-target="hero.slides.1" data-preview="preview_hero_slide_1" accept="image/*">
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Slide 3 -->
+                        <div class="col-md-4">
+                            <div class="p-3 border rounded-3 bg-light">
+                                <label class="form-label d-block">Photo Slide 3</label>
+                                <div class="img-preview-box">
+                                    <img id="preview_hero_slide_2" src="img/Salle3.jpg" alt="Slide 3">
+                                </div>
+                                <input type="text" class="form-control form-control-sm mb-2" data-bind="hero.slides.2" id="input_hero_slide_2">
+                                <label class="btn btn-sm btn-snu-outline-red w-100">
+                                    <i class="fa fa-upload me-1"></i> Remplacer la photo
+                                    <input type="file" class="d-none img-file-input" data-target="hero.slides.2" data-preview="preview_hero_slide_2" accept="image/*">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h5 class="fw-bold mb-3 border-bottom pb-2" style="color: var(--snu-blue);">Les 3 Atouts Rapides (Sous la bannière)</h5>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label class="form-label">Atout 1</label>
+                            <input type="text" class="form-control" data-bind="hero.feat_1_title">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Atout 2</label>
+                            <input type="text" class="form-control" data-bind="hero.feat_2_title">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Atout 3</label>
+                            <input type="text" class="form-control" data-bind="hero.feat_3_title">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ── TAB 4 : À PROPOS & ATOUTS ── -->
+            <div class="tab-pane-admin d-none" id="tab-about">
+                <div class="admin-card">
+                    <div class="admin-card-header">
+                        <h4 class="admin-card-title"><i class="fa fa-info-circle"></i> Section À Propos &amp; Pourquoi Nous Choisir</h4>
+                        <button class="btn btn-sm btn-snu-red btn-save-section"><i class="fa fa-save me-1"></i> Sauvegarder</button>
+                    </div>
+
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <label class="form-label">Titre (Préfixe)</label>
+                            <input type="text" class="form-control" data-bind="about.title_prefix">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Titre (Accentué en rouge)</label>
+                            <input type="text" class="form-control" data-bind="about.title_highlight">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Paragraphe 1</label>
+                            <textarea class="form-control" rows="3" data-bind="about.p1"></textarea>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Paragraphe 2</label>
+                            <textarea class="form-control" rows="3" data-bind="about.p2"></textarea>
+                        </div>
+                    </div>
+
+                    <h5 class="fw-bold mb-3 border-bottom pb-2" style="color: var(--snu-blue);">Photos de la Section À Propos</h5>
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6">
+                            <div class="p-3 border rounded-3 bg-light">
+                                <label class="form-label d-block">Photo 1 (Salle du Numérique)</label>
+                                <div class="img-preview-box">
+                                    <img id="preview_about_img1" src="img/about-1.jpg" alt="About 1">
+                                </div>
+                                <input type="text" class="form-control form-control-sm mb-2" data-bind="about.img1">
+                                <label class="btn btn-sm btn-snu-outline-red w-100">
+                                    <i class="fa fa-upload me-1"></i> Remplacer cette photo
+                                    <input type="file" class="d-none img-file-input" data-target="about.img1" data-preview="preview_about_img1" accept="image/*">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-3 border rounded-3 bg-light">
+                                <label class="form-label d-block">Photo 2 (Université de Lubumbashi)</label>
+                                <div class="img-preview-box">
+                                    <img id="preview_about_img2" src="img/about-2.jpg" alt="About 2">
+                                </div>
+                                <input type="text" class="form-control form-control-sm mb-2" data-bind="about.img2">
+                                <label class="btn btn-sm btn-snu-outline-red w-100">
+                                    <i class="fa fa-upload me-1"></i> Remplacer cette photo
+                                    <input type="file" class="d-none img-file-input" data-target="about.img2" data-preview="preview_about_img2" accept="image/*">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h5 class="fw-bold mb-3 border-bottom pb-2" style="color: var(--snu-blue);">Points Clés (Cases à cocher)</h5>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" data-bind="about.points.0" placeholder="Point 1">
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" data-bind="about.points.1" placeholder="Point 2">
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" data-bind="about.points.2" placeholder="Point 3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ── TAB 5 : MOT DU DIRECTEUR ── -->
+            <div class="tab-pane-admin d-none" id="tab-directeur">
+                <div class="admin-card">
+                    <div class="admin-card-header">
+                        <h4 class="admin-card-title"><i class="fa fa-user-tie"></i> Mot de Bienvenue du Directeur</h4>
+                        <button class="btn btn-sm btn-snu-red btn-save-section"><i class="fa fa-save me-1"></i> Sauvegarder</button>
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- Photo du directeur -->
+                        <div class="col-md-4">
+                            <div class="p-3 border rounded-3 bg-light text-center">
+                                <label class="form-label d-block">Photo Officielle du Directeur</label>
+                                <div class="img-preview-box" style="height: 250px;">
+                                    <img id="preview_dir_photo" src="img/Dr roger .jpeg" alt="Directeur">
+                                </div>
+                                <input type="text" class="form-control form-control-sm mb-2 text-center" data-bind="directeur.photo">
+                                <label class="btn btn-sm btn-snu-red w-100">
+                                    <i class="fa fa-camera me-1"></i> Charger une nouvelle photo
+                                    <input type="file" class="d-none img-file-input" data-target="directeur.photo" data-preview="preview_dir_photo" accept="image/*">
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Textes du message -->
+                        <div class="col-md-8">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Nom du Directeur</label>
+                                    <input type="text" class="form-control" data-bind="directeur.name">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Titre / Fonction</label>
+                                    <input type="text" class="form-control" data-bind="directeur.role">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Phrase d'introduction (Lead)</label>
+                                    <input type="text" class="form-control" data-bind="directeur.lead">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Paragraphe 1</label>
+                                    <textarea class="form-control" rows="3" data-bind="directeur.p1"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Paragraphe 2</label>
+                                    <textarea class="form-control" rows="3" data-bind="directeur.p2"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Paragraphe 3 (Vision &amp; Invitation)</label>
+                                    <textarea class="form-control" rows="3" data-bind="directeur.p3"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ── TAB 6 : ÉQUIPE DE GESTION ── -->
+            <div class="tab-pane-admin d-none" id="tab-team">
+                <div class="admin-card">
+                    <div class="admin-card-header">
+                        <h4 class="admin-card-title"><i class="fa fa-users"></i> Membres de l'Équipe de Gestion</h4>
+                        <button class="btn btn-sm btn-snu-red btn-save-section"><i class="fa fa-save me-1"></i> Sauvegarder</button>
+                    </div>
+
+                    <div id="teamMembersList" class="row g-4">
+                        <!-- Rempli dynamiquement en JS -->
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ── TAB 7 : NOS SERVICES ── -->
+            <div class="tab-pane-admin d-none" id="tab-services">
+                <div class="admin-card">
+                    <div class="admin-card-header flex-wrap gap-2">
+                        <h4 class="admin-card-title"><i class="fa fa-desktop"></i> Nos Services</h4>
+                        <div class="d-flex gap-2">
+                            <button type="button" class="btn btn-sm btn-snu-blue" id="btnAddService">
+                                <i class="fa fa-plus-circle me-1"></i> Ajouter un Service
+                            </button>
+                            <button class="btn btn-sm btn-snu-red btn-save-section"><i class="fa fa-save me-1"></i> Sauvegarder</button>
+                        </div>
+                    </div>
+
+                    <div id="servicesList" class="row g-4">
+                        <!-- Rempli dynamiquement en JS -->
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ── TAB 8 : FORMATIONS & ATELIERS ── -->
+            <div class="tab-pane-admin d-none" id="tab-formations">
+                <div class="admin-card">
+                    <div class="admin-card-header flex-wrap gap-2">
+                        <h4 class="admin-card-title"><i class="fa fa-graduation-cap"></i> Formations &amp; Modules</h4>
+                        <div class="d-flex gap-2">
+                            <button type="button" class="btn btn-sm btn-snu-blue" id="btnAddFormation">
+                                <i class="fa fa-plus-circle me-1"></i> Ajouter une Formation
+                            </button>
+                            <button class="btn btn-sm btn-snu-red btn-save-section"><i class="fa fa-save me-1"></i> Sauvegarder</button>
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-center justify-content-between mb-3 border-bottom pb-2">
+                        <h5 class="fw-bold mb-0" style="color: var(--snu-blue);">Formations Principales</h5>
+                        <button type="button" class="btn btn-sm btn-snu-blue" id="btnAddFormationSecondary">
+                            <i class="fa fa-plus-circle me-1"></i> Ajouter une Formation
+                        </button>
+                    </div>
+                    <div id="formationsPrincipalesList" class="row g-4 mb-5">
+                        <!-- Rempli dynamiquement en JS -->
+                    </div>
+
+                    <div class="d-flex align-items-center justify-content-between mb-3 border-bottom pb-2">
+                        <h5 class="fw-bold mb-0" style="color: var(--snu-blue);">Modules Spécifiques Disponibles</h5>
+                        <button type="button" class="btn btn-sm btn-snu-blue" id="btnAddModule">
+                            <i class="fa fa-plus-circle me-1"></i> Ajouter un Module
+                        </button>
+                    </div>
+                    <div id="formationsModulesList" class="row g-4">
+                        <!-- Rempli dynamiquement en JS -->
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ── TAB 9 : PAGE "LA SALLE" (project.html) ── -->
+            <div class="tab-pane-admin d-none" id="tab-salle">
+                <div class="admin-card">
+                    <div class="admin-card-header">
+                        <h4 class="admin-card-title"><i class="fa fa-building"></i> Page "La Salle" (Présentation, Chiffres &amp; Photos)</h4>
+                        <button class="btn btn-sm btn-snu-red btn-save-section"><i class="fa fa-save me-1"></i> Sauvegarder</button>
+                    </div>
+
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <label class="form-label">Titre de la bannière</label>
+                            <input type="text" class="form-control" data-bind="salle_page.hero_title">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Sous-titre d'introduction</label>
+                            <input type="text" class="form-control" data-bind="salle_page.intro_title_highlight">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Paragraphe 1</label>
+                            <textarea class="form-control" rows="3" data-bind="salle_page.intro_p1"></textarea>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Paragraphe 2</label>
+                            <textarea class="form-control" rows="3" data-bind="salle_page.intro_p2"></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Statistique Postes PC</label>
+                            <input type="text" class="form-control" data-bind="salle_page.stat_pc">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Statistique Zones Spécialisées</label>
+                            <input type="text" class="form-control" data-bind="salle_page.stat_zones">
+                        </div>
+                    </div>
+
+                    <h5 class="fw-bold mb-3 border-bottom pb-2" style="color: var(--snu-blue);">Galerie Photos de la Salle</h5>
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <div class="p-2 border rounded-3 bg-light text-center">
+                                <label class="form-label d-block small mb-1">Photo 1</label>
+                                <div class="img-preview-box" style="height: 110px;">
+                                    <img id="preview_salle_0" src="img/Salle1.jpg">
+                                </div>
+                                <input type="text" class="form-control form-control-sm mb-1" data-bind="salle_page.gallery.0">
+                                <label class="btn btn-sm btn-snu-outline-red w-100">
+                                    <i class="fa fa-upload"></i> Changer
+                                    <input type="file" class="d-none img-file-input" data-target="salle_page.gallery.0" data-preview="preview_salle_0" accept="image/*">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="p-2 border rounded-3 bg-light text-center">
+                                <label class="form-label d-block small mb-1">Photo 2</label>
+                                <div class="img-preview-box" style="height: 110px;">
+                                    <img id="preview_salle_1" src="img/project-3.jpg">
+                                </div>
+                                <input type="text" class="form-control form-control-sm mb-1" data-bind="salle_page.gallery.1">
+                                <label class="btn btn-sm btn-snu-outline-red w-100">
+                                    <i class="fa fa-upload"></i> Changer
+                                    <input type="file" class="d-none img-file-input" data-target="salle_page.gallery.1" data-preview="preview_salle_1" accept="image/*">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="p-2 border rounded-3 bg-light text-center">
+                                <label class="form-label d-block small mb-1">Photo 3</label>
+                                <div class="img-preview-box" style="height: 110px;">
+                                    <img id="preview_salle_2" src="img/project-2.jpg">
+                                </div>
+                                <input type="text" class="form-control form-control-sm mb-1" data-bind="salle_page.gallery.2">
+                                <label class="btn btn-sm btn-snu-outline-red w-100">
+                                    <i class="fa fa-upload"></i> Changer
+                                    <input type="file" class="d-none img-file-input" data-target="salle_page.gallery.2" data-preview="preview_salle_2" accept="image/*">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="p-2 border rounded-3 bg-light text-center">
+                                <label class="form-label d-block small mb-1">Photo 4</label>
+                                <div class="img-preview-box" style="height: 110px;">
+                                    <img id="preview_salle_3" src="img/Salle2.jpg">
+                                </div>
+                                <input type="text" class="form-control form-control-sm mb-1" data-bind="salle_page.gallery.3">
+                                <label class="btn btn-sm btn-snu-outline-red w-100">
+                                    <i class="fa fa-upload"></i> Changer
+                                    <input type="file" class="d-none img-file-input" data-target="salle_page.gallery.3" data-preview="preview_salle_3" accept="image/*">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ── TAB : TÉMOIGNAGES (CE QUE PENSENT NOS APPRENANTS) ── -->
+            <div class="tab-pane-admin d-none" id="tab-testimonials">
+                <div class="admin-card">
+                    <div class="admin-card-header">
+                        <h4 class="admin-card-title"><i class="fa fa-comments"></i> Ce que pensent nos apprenants (Témoignages)</h4>
+                        <button class="btn btn-sm btn-snu-red btn-save-section"><i class="fa fa-save me-1"></i> Sauvegarder</button>
+                    </div>
+
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <label class="form-label">Titre Principal</label>
+                            <input type="text" class="form-control" data-bind="testimonials.main_title">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Sous-titre / Description</label>
+                            <input type="text" class="form-control" data-bind="testimonials.subtitle">
+                        </div>
+                    </div>
+
+                    <h5 class="fw-bold mb-3 border-bottom pb-2" style="color: var(--snu-blue);">Les 3 Témoignages (Carrousel Déroulant)</h5>
+                    <div id="testimonialsList" class="row g-4">
+                        <!-- Rempli dynamiquement en JS -->
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ── TAB 10 : MÉDIATHÈQUE & UPLOADS ── -->
+            <div class="tab-pane-admin d-none" id="tab-media">
+                <div class="admin-card">
+                    <div class="admin-card-header">
+                        <h4 class="admin-card-title"><i class="fa fa-photo-video"></i> Médiathèque &amp; Importateur d'Images</h4>
+                    </div>
+
+                    <div class="p-4 border-2 rounded-3 text-center bg-light mb-4" id="dropArea" style="border: 2px dashed var(--snu-red);">
+                        <i class="fa fa-cloud-upload-alt text-danger fs-1 mb-2"></i>
+                        <h5 class="fw-bold" style="color: var(--snu-blue);">Ajouter de nouvelles photos au site</h5>
+                        <p class="text-muted small mb-3">Formats supportés : JPG, PNG, WEBP, GIF. Choisissez vos photos ci-dessous.</p>
+                        <label class="btn btn-snu-red px-4 py-2">
+                            <i class="fa fa-folder-open me-2"></i> Parcourir mes dossiers
+                            <input type="file" id="mediaUploadInput" class="d-none" accept="image/*" multiple>
+                        </label>
+                    </div>
+
+                    <h5 class="fw-bold mb-3" style="color: var(--snu-blue);">Toutes les photos du projet</h5>
+                    <div id="mediaGrid" class="row g-3">
+                        <!-- Rempli dynamiquement en JS -->
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ════════════════════════════════════════════════════
+                 ONGLET : BOÎTE DE RÉCEPTION & MESSAGERIE
+            ════════════════════════════════════════════════════ -->
+            <div class="tab-pane-admin d-none" id="tab-messages">
+                <div class="admin-card">
+                    <div class="admin-card-header d-flex align-items-center justify-content-between flex-wrap gap-2">
+                        <div>
+                            <h4 class="admin-card-title mb-1"><i class="fa fa-envelope text-danger me-2"></i> Boîte de Réception &amp; Messages du Site</h4>
+                            <p class="small text-muted mb-0">Consultez en direct tous les messages envoyés depuis le formulaire de contact du site.</p>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <button id="btnRefreshMessages" class="btn btn-outline-secondary btn-sm d-flex align-items-center">
+                                <i class="fa fa-sync-alt me-1"></i> Actualiser
+                            </button>
+                            <button id="btnMarkAllRead" class="btn btn-outline-primary btn-sm d-flex align-items-center">
+                                <i class="fa fa-check-double me-1"></i> Tout marquer comme lu
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Cartes de statistiques -->
+                    <div class="row g-3 mb-4">
+                        <div class="col-sm-4">
+                            <div class="p-3 bg-light rounded-3 border text-center">
+                                <div class="text-muted small fw-semibold text-uppercase">Total Reçus</div>
+                                <div class="fs-3 fw-bold text-dark mt-1" id="statTotalMessages">0</div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="p-3 bg-light rounded-3 border border-danger text-center shadow-sm">
+                                <div class="text-danger small fw-bold text-uppercase">Nouveaux / Non Lus</div>
+                                <div class="fs-3 fw-bold text-danger mt-1" id="statUnreadMessages">0</div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="p-3 bg-light rounded-3 border text-center">
+                                <div class="text-muted small fw-semibold text-uppercase">Messages Traités</div>
+                                <div class="fs-3 fw-bold text-success mt-1" id="statReadMessages">0</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Barre de filtre -->
+                    <div class="d-flex align-items-center justify-content-between mb-3 pb-2 border-bottom flex-wrap gap-2">
+                        <div class="btn-group btn-group-sm" role="group">
+                            <button type="button" class="btn btn-outline-dark active filter-msg-btn" data-filter="all">Tous les messages</button>
+                            <button type="button" class="btn btn-outline-dark filter-msg-btn" data-filter="unread">Non lus uniquement</button>
+                            <button type="button" class="btn btn-outline-dark filter-msg-btn" data-filter="read">Messages lus</button>
+                        </div>
+                        <span class="small text-muted" id="messagesLastUpdated"><i class="fa fa-clock me-1"></i>Synchronisation active</span>
+                    </div>
+
+                    <!-- Liste des messages -->
+                    <div id="messagesListContainer" class="d-flex flex-column gap-3">
+                        <div class="text-center py-5 text-muted" id="messagesEmptyState">
+                            <i class="fa fa-inbox fa-3x mb-3 text-secondary opacity-50"></i>
+                            <p class="mb-1 fw-bold">Aucun message pour le moment</p>
+                            <small class="text-muted">Dès qu'un visiteur remplit le formulaire de contact sur le site, son message apparaîtra directement ici.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── TAB 11 : PARAMÈTRES ── -->
+            <div class="tab-pane-admin d-none" id="tab-settings">
+                <div class="admin-card">
+                    <div class="admin-card-header">
+                        <h4 class="admin-card-title"><i class="fa fa-cog"></i> Paramètres du Site</h4>
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- 1. Changer le Mot de Passe Admin -->
+                        <div class="col-md-6">
+                            <div class="p-4 border rounded-3 bg-light h-100 shadow-sm">
+                                <h5 class="fw-bold text-dark mb-2"><i class="fa fa-key me-2 text-danger"></i>Changer le Mot de Passe Admin</h5>
+                                <p class="small text-muted mb-3">Modifiez le mot de passe requis pour accéder à cette page d'administration.</p>
+                                <div class="input-group mb-0">
+                                    <input type="password" id="newAdminPassword" class="form-control" placeholder="Nouveau mot de passe">
+                                    <button class="btn btn-snu-red px-3" id="btnUpdatePassword">Mettre à jour</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 2. Réinitialiser aux Valeurs d'Origine -->
+                        <div class="col-md-6">
+                            <div class="p-4 border rounded-3 bg-white h-100 border-danger shadow-sm">
+                                <h5 class="fw-bold text-danger mb-2"><i class="fa fa-undo me-2"></i>Réinitialiser aux Valeurs d'Origine</h5>
+                                <p class="small text-muted mb-3">Efface toutes vos modifications et réapplique tous les textes et photos initiaux du site SNU.</p>
+                                <button id="btnResetDefaults" class="btn btn-outline-danger py-2 px-3 fw-bold">
+                                    <i class="fa fa-exclamation-triangle me-1"></i> Réinitialiser Tout le Site
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+
+    <!-- ════════════════════════════════════════════════════════
+         TOAST NOTIFICATION (Style SNU)
+    ════════════════════════════════════════════════════════ -->
+    <div class="toast-container">
+        <div id="adminToast" class="toast toast-snu align-items-center text-white border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body fs-6" id="toastMessage">
+                    <i class="fa fa-check-circle me-2"></i> Modifications enregistrées avec succès !
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Scripts -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script>
+        (function() {
+            'use strict';
+
+            var STORAGE_KEY = 'snu_site_content';
+            var PWD_KEY = 'snu_admin_pwd';
+            var AUTH_KEY = 'snu_admin_auth';
+            var TOKEN_KEY = 'snu_admin_token';
+            var DEFAULT_PWD = 'snu@2026!';
+            var currentContent = {};
+            var backendUrl = window.location.origin;
+
+            // ── GESTION DU STOCKAGE DES JETONS (TOKENS) ──
+            function getAdminToken() {
+                return sessionStorage.getItem(TOKEN_KEY) || localStorage.getItem(TOKEN_KEY) || '';
+            }
+
+            function setAdminToken(token) {
+                sessionStorage.setItem(TOKEN_KEY, token);
+                localStorage.setItem(TOKEN_KEY, token);
+            }
+
+            function clearAdminToken() {
+                sessionStorage.removeItem(TOKEN_KEY);
+                localStorage.removeItem(TOKEN_KEY);
+            }
+
+            // ── 1. GESTION DE L'AUTHENTIFICATION ──
+            var loginOverlay = document.getElementById('loginOverlay');
+            var loginForm = document.getElementById('loginForm');
+            var loginError = document.getElementById('loginError');
+            var adminPassword = document.getElementById('adminPassword');
+            var togglePwdBtn = document.getElementById('togglePwdBtn');
+            var btnLogout = document.getElementById('btnLogout');
+
+            function getStoredPassword() {
+                return localStorage.getItem(PWD_KEY) || DEFAULT_PWD;
+            }
+
+            function checkAuth() {
+                if (sessionStorage.getItem(AUTH_KEY) === 'true' && getAdminToken()) {
+                    loginOverlay.classList.add('d-none');
+                } else {
+                    loginOverlay.classList.remove('d-none');
+                }
+            }
+
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                var entered = adminPassword.value.trim();
+                if (entered === getStoredPassword()) {
+                    sessionStorage.setItem(AUTH_KEY, 'true');
+                    var token = 'snu_token_' + btoa(Date.now() + '_' + Math.random().toString(36).substring(2, 10));
+                    setAdminToken(token);
+                    loginOverlay.classList.add('d-none');
+                    loginError.classList.add('d-none');
+                    showToast('Bienvenue dans votre espace d\'administration ! (Jeton session activé)', 'success');
+                } else {
+                    loginError.classList.remove('d-none');
+                }
+            });
+
+            togglePwdBtn.addEventListener('click', function() {
+                var type = adminPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+                adminPassword.setAttribute('type', type);
+                this.innerHTML = type === 'password' ? '<i class="fa fa-eye"></i>' : '<i class="fa fa-eye-slash"></i>';
+            });
+
+            btnLogout.addEventListener('click', function() {
+                if (confirm('Voulez-vous vous déconnecter de l\'administration ?')) {
+                    sessionStorage.removeItem(AUTH_KEY);
+                    clearAdminToken();
+                    window.location.reload();
+                }
+            });
+
+            checkAuth();
+
+            // ── 2. SYSTÈME D'ONGLETS DU DASHBOARD ──
+            var navLinks = document.querySelectorAll('.nav-snu-link');
+            var tabPanes = document.querySelectorAll('.tab-pane-admin');
+
+            function switchTab(targetId) {
+                navLinks.forEach(function(l) {
+                    if (l.getAttribute('data-tab') === targetId) {
+                        l.classList.add('active');
+                    } else {
+                        l.classList.remove('active');
+                    }
+                });
+
+                tabPanes.forEach(function(pane) {
+                    if (pane.id === targetId) {
+                        pane.classList.remove('d-none');
+                    } else {
+                        pane.classList.add('d-none');
+                    }
+                });
+            }
+
+            navLinks.forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    var targetId = this.getAttribute('data-tab');
+                    window.location.hash = targetId;
+                    switchTab(targetId);
+                });
+            });
+
+            if (window.location.hash) {
+                var hashTab = window.location.hash.replace('#', '');
+                if (document.getElementById(hashTab)) {
+                    switchTab(hashTab);
+                }
+            }
+
+            // ── 3. CHARGEMENT DU CONTENU ──
+            function getNested(obj, path) {
+                var parts = path.split('.');
+                var curr = obj;
+                for (var i = 0; i < parts.length; i++) {
+                    if (curr && typeof curr === 'object' && parts[i] in curr) {
+                        curr = curr[parts[i]];
+                    } else {
+                        return null;
+                    }
+                }
+                return curr;
+            }
+
+            function setNested(obj, path, value) {
+                var parts = path.split('.');
+                var curr = obj;
+                for (var i = 0; i < parts.length - 1; i++) {
+                    var p = parts[i];
+                    if (!curr[p] || typeof curr[p] !== 'object') {
+                        curr[p] = isNaN(parts[i + 1]) ? {} : [];
+                    }
+                    curr = curr[p];
+                }
+                curr[parts[parts.length - 1]] = value;
+            }
+
+            function populateInputs() {
+                // Remplir tous les inputs avec [data-bind]
+                var inputs = document.querySelectorAll('[data-bind]');
+                inputs.forEach(function(input) {
+                    var path = input.getAttribute('data-bind');
+                    var val = getNested(currentContent, path);
+                    if (val !== null && val !== undefined) {
+                        input.value = val;
+                    }
+                });
+
+                // Mettre à jour les prévisualisations d'images
+                if (currentContent.hero && currentContent.hero.slides) {
+                    currentContent.hero.slides.forEach(function(src, i) {
+                        var img = document.getElementById('preview_hero_slide_' + i);
+                        if (img && src) img.src = src;
+                    });
+                }
+                if (currentContent.about) {
+                    if (currentContent.about.img1) document.getElementById('preview_about_img1').src = currentContent.about.img1;
+                    if (currentContent.about.img2) document.getElementById('preview_about_img2').src = currentContent.about.img2;
+                }
+                if (currentContent.directeur && currentContent.directeur.photo) {
+                    document.getElementById('preview_dir_photo').src = currentContent.directeur.photo;
+                }
+                if (currentContent.salle_page && currentContent.salle_page.gallery) {
+                    currentContent.salle_page.gallery.forEach(function(src, i) {
+                        var img = document.getElementById('preview_salle_' + i);
+                        if (img && src) img.src = src;
+                    });
+                }
+
+                // Remplir les listes dynamiques (Team, Services, Formations, Témoignages)
+                renderTeamList();
+                renderServicesList();
+                renderFormationsLists();
+                renderTestimonialsList();
+            }
+
+            function loadInitialData() {
+                var tryApi = fetch(backendUrl + '/api/content?v=' + Date.now())
+                    .then(function(res) { if (res.ok) return res.json(); throw new Error('API non dispo'); })
+                    .then(function(result) {
+                        if (result && result.success && result.data) return result.data;
+                        throw new Error('Données API invalides');
+                    });
+
+                var tryLocal = function() {
+                    return fetch('data/content.json?v=' + Date.now())
+                        .then(function(res) { if (res.ok) return res.json(); throw new Error('data/content.json non dispo'); })
+                        .catch(function() {
+                            return fetch('base_de_donnees/content.json?v=' + Date.now())
+                                .then(function(res) { return res.json(); });
+                        });
+                };
+
+                tryApi.catch(tryLocal)
+                    .then(function(data) {
+                        currentContent = data;
+
+                        var localRaw = localStorage.getItem(STORAGE_KEY);
+                        if (localRaw) {
+                            try {
+                                var localData = JSON.parse(localRaw);
+                                currentContent = Object.assign({}, currentContent, localData);
+                            } catch(e) {}
+                        }
+
+                        populateInputs();
+                        checkBackendConnection();
+                        loadMediaList();
+                        loadMessages();
+                    })
+                    .catch(function(err) {
+                        var localRaw = localStorage.getItem(STORAGE_KEY);
+                        if (localRaw) {
+                            currentContent = JSON.parse(localRaw);
+                            populateInputs();
+                        }
+                        loadMessages();
+                    });
+            }
+
+            // ── 4. RENDU DES LISTES DYNAMIQUES ──
+            function renderTeamList() {
+                var container = document.getElementById('teamMembersList');
+                container.innerHTML = '';
+                if (!currentContent.team || !currentContent.team.members) return;
+
+                currentContent.team.members.forEach(function(m, idx) {
+                    var col = document.createElement('div');
+                    col.className = 'col-md-4 col-sm-6';
+                    col.innerHTML = `
+                        <div class="p-3 border rounded-3 bg-light text-center h-100">
+                            <div class="img-preview-box" style="height: 180px;">
+                                <img id="preview_team_${idx}" src="${m.img}" alt="${m.name}">
+                            </div>
+                            <div class="mb-2 text-start">
+                                <label class="form-label small">Nom du membre</label>
+                                <input type="text" class="form-control form-control-sm team-name-input" data-index="${idx}" value="${m.name}">
+                            </div>
+                            <div class="mb-2 text-start">
+                                <label class="form-label small">Rôle / Fonction</label>
+                                <input type="text" class="form-control form-control-sm team-role-input" data-index="${idx}" value="${m.role}">
+                            </div>
+                            <div class="mb-2 text-start">
+                                <label class="form-label small">Chemin de l'image</label>
+                                <input type="text" class="form-control form-control-sm team-img-input" data-index="${idx}" value="${m.img}">
+                            </div>
+                            <label class="btn btn-sm btn-snu-outline-red w-100">
+                                <i class="fa fa-camera me-1"></i> Remplacer la photo
+                                <input type="file" class="d-none team-file-input" data-index="${idx}" accept="image/*">
+                            </label>
+                        </div>
+                    `;
+                    container.appendChild(col);
+                });
+
+                container.querySelectorAll('.team-name-input').forEach(function(inp) {
+                    inp.addEventListener('input', function() {
+                        var i = this.getAttribute('data-index');
+                        currentContent.team.members[i].name = this.value;
+                    });
+                });
+                container.querySelectorAll('.team-role-input').forEach(function(inp) {
+                    inp.addEventListener('input', function() {
+                        var i = this.getAttribute('data-index');
+                        currentContent.team.members[i].role = this.value;
+                    });
+                });
+                container.querySelectorAll('.team-img-input').forEach(function(inp) {
+                    inp.addEventListener('input', function() {
+                        var i = this.getAttribute('data-index');
+                        currentContent.team.members[i].img = this.value;
+                        document.getElementById('preview_team_' + i).src = this.value;
+                    });
+                });
+                container.querySelectorAll('.team-file-input').forEach(function(inp) {
+                    inp.addEventListener('change', function(e) {
+                        var i = this.getAttribute('data-index');
+                        if (e.target.files && e.target.files[0]) {
+                            handleImageUpload(e.target.files[0], function(newSrc) {
+                                currentContent.team.members[i].img = newSrc;
+                                container.querySelector(`.team-img-input[data-index="${i}"]`).value = newSrc;
+                                document.getElementById('preview_team_' + i).src = newSrc;
+                            });
+                        }
+                    });
+                });
+            }
+
+            function renderServicesList() {
+                var container = document.getElementById('servicesList');
+                container.innerHTML = '';
+                if (!currentContent.services) currentContent.services = { items: [] };
+                if (!currentContent.services.items) currentContent.services.items = [];
+
+                currentContent.services.items.forEach(function(srv, idx) {
+                    var col = document.createElement('div');
+                    col.className = 'col-md-4';
+                    col.innerHTML = `
+                        <div class="p-3 border rounded-3 bg-light h-100 shadow-sm">
+                            <div class="d-flex align-items-center mb-2">
+                                <span class="badge bg-danger me-2">${idx + 1}</span>
+                                <input type="text" class="form-control form-control-sm fw-bold srv-title-input" data-index="${idx}" value="${srv.title}" placeholder="Nom du service">
+                                <button type="button" class="btn btn-sm btn-outline-danger ms-2 srv-delete-btn" data-index="${idx}" title="Supprimer ce service">
+                                    <i class="fa fa-trash-alt"></i>
+                                </button>
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label small">Icône FontAwesome</label>
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-text"><i class="${srv.icon}"></i></span>
+                                    <input type="text" class="form-control srv-icon-input" data-index="${idx}" value="${srv.icon}" placeholder="ex: fa fa-laptop">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="form-label small">Description</label>
+                                <textarea class="form-control form-control-sm srv-desc-input" rows="3" data-index="${idx}" placeholder="Description du service">${srv.desc}</textarea>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(col);
+                });
+
+                container.querySelectorAll('.srv-title-input').forEach(function(inp) {
+                    inp.addEventListener('input', function() {
+                        currentContent.services.items[this.getAttribute('data-index')].title = this.value;
+                    });
+                });
+                container.querySelectorAll('.srv-icon-input').forEach(function(inp) {
+                    inp.addEventListener('input', function() {
+                        currentContent.services.items[this.getAttribute('data-index')].icon = this.value;
+                        this.previousElementSibling.innerHTML = `<i class="${this.value}"></i>`;
+                    });
+                });
+                container.querySelectorAll('.srv-desc-input').forEach(function(inp) {
+                    inp.addEventListener('input', function() {
+                        currentContent.services.items[this.getAttribute('data-index')].desc = this.value;
+                    });
+                });
+                container.querySelectorAll('.srv-delete-btn').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        var i = parseInt(this.getAttribute('data-index'), 10);
+                        var srvName = currentContent.services.items[i]?.title || 'ce service';
+                        if (confirm(`Voulez-vous vraiment supprimer "${srvName}" ?`)) {
+                            currentContent.services.items.splice(i, 1);
+                            renderServicesList();
+                            showToast('Service supprimé avec succès ! N\'oubliez pas d\'enregistrer.', 'info');
+                        }
+                    });
+                });
+            }
+
+            // Bouton Ajouter un Service
+            var btnAddService = document.getElementById('btnAddService');
+            if (btnAddService) {
+                btnAddService.addEventListener('click', function() {
+                    if (!currentContent.services) currentContent.services = { items: [] };
+                    if (!currentContent.services.items) currentContent.services.items = [];
+                    currentContent.services.items.push({
+                        id: 'srv_' + (currentContent.services.items.length + 1),
+                        icon: 'fa fa-laptop',
+                        title: 'Nouveau Service',
+                        desc: 'Description du nouveau service proposé par la Salle du Numérique.'
+                    });
+                    renderServicesList();
+                    showToast('Nouveau service ajouté en bas de liste ! N\'oubliez pas d\'enregistrer.', 'success');
+                });
+            }
+
+            function renderFormationsLists() {
+                var containerPrinc = document.getElementById('formationsPrincipalesList');
+                containerPrinc.innerHTML = '';
+                if (!currentContent.formations) currentContent.formations = { principales: [], modules: [] };
+                if (!currentContent.formations.principales) currentContent.formations.principales = [];
+
+                currentContent.formations.principales.forEach(function(f, idx) {
+                    var col = document.createElement('div');
+                    col.className = 'col-md-4';
+                    col.innerHTML = `
+                        <div class="p-3 border rounded-3 bg-light h-100 shadow-sm">
+                            <div class="d-flex align-items-center mb-2">
+                                <span class="badge bg-danger me-2">${idx + 1}</span>
+                                <input type="text" class="form-control form-control-sm fw-bold form-princ-title" data-index="${idx}" value="${f.title}" placeholder="Nom de la formation">
+                                <button type="button" class="btn btn-sm btn-outline-danger ms-2 form-princ-delete-btn" data-index="${idx}" title="Supprimer cette formation">
+                                    <i class="fa fa-trash-alt"></i>
+                                </button>
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label small">Icône FontAwesome</label>
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-text"><i class="${f.icon || 'fa fa-graduation-cap'}"></i></span>
+                                    <input type="text" class="form-control form-princ-icon" data-index="${idx}" value="${f.icon || 'fa fa-graduation-cap'}" placeholder="ex: fab fa-windows">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="form-label small">Description</label>
+                                <textarea class="form-control form-control-sm form-princ-desc" rows="3" data-index="${idx}" placeholder="Description de la formation">${f.desc}</textarea>
+                            </div>
+                        </div>
+                    `;
+                    containerPrinc.appendChild(col);
+                });
+
+                containerPrinc.querySelectorAll('.form-princ-title').forEach(function(inp) {
+                    inp.addEventListener('input', function() {
+                        currentContent.formations.principales[this.getAttribute('data-index')].title = this.value;
+                    });
+                });
+                containerPrinc.querySelectorAll('.form-princ-icon').forEach(function(inp) {
+                    inp.addEventListener('input', function() {
+                        var i = this.getAttribute('data-index');
+                        currentContent.formations.principales[i].icon = this.value;
+                        this.previousElementSibling.innerHTML = `<i class="${this.value}"></i>`;
+                    });
+                });
+                containerPrinc.querySelectorAll('.form-princ-desc').forEach(function(inp) {
+                    inp.addEventListener('input', function() {
+                        currentContent.formations.principales[this.getAttribute('data-index')].desc = this.value;
+                    });
+                });
+                containerPrinc.querySelectorAll('.form-princ-delete-btn').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        var i = parseInt(this.getAttribute('data-index'), 10);
+                        var fName = currentContent.formations.principales[i]?.title || 'cette formation';
+                        if (confirm(`Voulez-vous vraiment supprimer "${fName}" ?`)) {
+                            currentContent.formations.principales.splice(i, 1);
+                            renderFormationsLists();
+                            showToast('Formation supprimée avec succès ! N\'oubliez pas d\'enregistrer.', 'info');
+                        }
+                    });
+                });
+
+                var containerMod = document.getElementById('formationsModulesList');
+                containerMod.innerHTML = '';
+                if (!currentContent.formations.modules) currentContent.formations.modules = [];
+
+                currentContent.formations.modules.forEach(function(m, idx) {
+                    var col = document.createElement('div');
+                    col.className = 'col-md-4';
+                    col.innerHTML = `
+                        <div class="p-3 border rounded-3 bg-light h-100 shadow-sm">
+                            <div class="d-flex align-items-center mb-2">
+                                <span class="badge bg-secondary me-2">${idx + 1}</span>
+                                <input type="text" class="form-control form-control-sm fw-bold form-mod-title" data-index="${idx}" value="${m.title}" placeholder="Nom du module">
+                                <button type="button" class="btn btn-sm btn-outline-danger ms-2 form-mod-delete-btn" data-index="${idx}" title="Supprimer ce module">
+                                    <i class="fa fa-trash-alt"></i>
+                                </button>
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label small">Icône FontAwesome</label>
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-text"><i class="${m.icon || 'far fa-file'}"></i></span>
+                                    <input type="text" class="form-control form-mod-icon" data-index="${idx}" value="${m.icon || 'far fa-file'}" placeholder="ex: far fa-file-word">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="form-label small">Description</label>
+                                <textarea class="form-control form-control-sm form-mod-desc" rows="2" data-index="${idx}" placeholder="Description du module">${m.desc}</textarea>
+                            </div>
+                        </div>
+                    `;
+                    containerMod.appendChild(col);
+                });
+
+                containerMod.querySelectorAll('.form-mod-title').forEach(function(inp) {
+                    inp.addEventListener('input', function() {
+                        currentContent.formations.modules[this.getAttribute('data-index')].title = this.value;
+                    });
+                });
+                containerMod.querySelectorAll('.form-mod-icon').forEach(function(inp) {
+                    inp.addEventListener('input', function() {
+                        var i = this.getAttribute('data-index');
+                        currentContent.formations.modules[i].icon = this.value;
+                        this.previousElementSibling.innerHTML = `<i class="${this.value}"></i>`;
+                    });
+                });
+                containerMod.querySelectorAll('.form-mod-desc').forEach(function(inp) {
+                    inp.addEventListener('input', function() {
+                        currentContent.formations.modules[this.getAttribute('data-index')].desc = this.value;
+                    });
+                });
+                containerMod.querySelectorAll('.form-mod-delete-btn').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        var i = parseInt(this.getAttribute('data-index'), 10);
+                        var mName = currentContent.formations.modules[i]?.title || 'ce module';
+                        if (confirm(`Voulez-vous vraiment supprimer "${mName}" ?`)) {
+                            currentContent.formations.modules.splice(i, 1);
+                            renderFormationsLists();
+                            showToast('Module supprimé avec succès ! N\'oubliez pas d\'enregistrer.', 'info');
+                        }
+                    });
+                });
+            }
+
+            function addFormationAction() {
+                if (!currentContent.formations) currentContent.formations = { principales: [], modules: [] };
+                if (!currentContent.formations.principales) currentContent.formations.principales = [];
+                currentContent.formations.principales.push({
+                    id: 'form_' + (currentContent.formations.principales.length + 1),
+                    icon: 'fa fa-graduation-cap',
+                    title: 'Nouvelle Formation',
+                    desc: 'Description des objectifs et compétences acquises dans cette nouvelle formation.'
+                });
+                renderFormationsLists();
+                showToast('Nouvelle formation ajoutée avec succès ! N\'oubliez pas d\'enregistrer.', 'success');
+            }
+
+            var btnAddFormation = document.getElementById('btnAddFormation');
+            if (btnAddFormation) btnAddFormation.addEventListener('click', addFormationAction);
+
+            var btnAddFormationSecondary = document.getElementById('btnAddFormationSecondary');
+            if (btnAddFormationSecondary) btnAddFormationSecondary.addEventListener('click', addFormationAction);
+
+            var btnAddModule = document.getElementById('btnAddModule');
+            if (btnAddModule) {
+                btnAddModule.addEventListener('click', function() {
+                    if (!currentContent.formations) currentContent.formations = { principales: [], modules: [] };
+                    if (!currentContent.formations.modules) currentContent.formations.modules = [];
+                    currentContent.formations.modules.push({
+                        id: 'mod_' + (currentContent.formations.modules.length + 1),
+                        icon: 'far fa-file-alt',
+                        title: 'Nouveau Module',
+                        desc: 'Description pratique du module de formation.'
+                    });
+                    renderFormationsLists();
+                    showToast('Nouveau module ajouté avec succès ! N\'oubliez pas d\'enregistrer.', 'success');
+                });
+            }
+
+            function renderTestimonialsList() {
+                var container = document.getElementById('testimonialsList');
+                if (!container) return;
+                container.innerHTML = '';
+                if (!currentContent.testimonials) {
+                    currentContent.testimonials = {
+                        main_title: "Ce que pensent nos apprenants",
+                        subtitle: "Découvrez les expériences des étudiants et professionnels qui ont choisi la Salle du Numérique pour développer leurs compétences.",
+                        items: []
+                    };
+                }
+                if (!currentContent.testimonials.items) {
+                    currentContent.testimonials.items = [];
+                }
+
+                currentContent.testimonials.items.forEach(function(m, idx) {
+                    var col = document.createElement('div');
+                    col.className = 'col-lg-4 col-md-6';
+                    col.innerHTML = `
+                        <div class="p-3 border rounded-3 bg-light h-100 shadow-sm d-flex flex-column justify-content-between">
+                            <div>
+                                <div class="d-flex align-items-center justify-content-between mb-3 border-bottom pb-2">
+                                    <span class="badge bg-danger">Avis #${idx + 1}</span>
+                                    <span class="small fw-bold text-muted">${m.name || 'Apprenant'}</span>
+                                </div>
+                                <div class="img-preview-box mb-2" style="height: 140px; background: #fff; border-radius: 8px; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 1px solid #e0e0e0;">
+                                    <img id="preview_testi_${idx}" src="${m.img}" alt="${m.name}" style="max-height: 100%; max-width: 100%; object-fit: cover;">
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label small mb-1">Chemin de la photo</label>
+                                    <input type="text" class="form-control form-control-sm testi-img-input" data-index="${idx}" value="${m.img}">
+                                </div>
+                                <label class="btn btn-sm btn-snu-outline-red w-100 mb-3">
+                                    <i class="fa fa-camera me-1"></i> Remplacer la photo
+                                    <input type="file" class="d-none testi-file-input" data-index="${idx}" accept="image/*">
+                                </label>
+                                <div class="mb-2">
+                                    <label class="form-label small mb-1">Nom complet de l'apprenant</label>
+                                    <input type="text" class="form-control form-control-sm testi-name-input" data-index="${idx}" value="${m.name}" placeholder="Nom et prénom">
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label small mb-1">Rôle / Statut</label>
+                                    <input type="text" class="form-control form-control-sm testi-role-input" data-index="${idx}" value="${m.role}" placeholder="Ex: Étudiante en Informatique">
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label small mb-1">Titre de l'avis</label>
+                                    <input type="text" class="form-control form-control-sm testi-title-input" data-index="${idx}" value="${m.title}" placeholder="Ex: Une formation qui change tout !">
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label small mb-1">Texte du témoignage</label>
+                                    <textarea class="form-control form-control-sm testi-text-input" rows="4" data-index="${idx}" placeholder="Commentaire...">${m.text}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(col);
+                });
+
+                container.querySelectorAll('.testi-name-input').forEach(function(inp) {
+                    inp.addEventListener('input', function() {
+                        var i = this.getAttribute('data-index');
+                        currentContent.testimonials.items[i].name = this.value;
+                    });
+                });
+                container.querySelectorAll('.testi-role-input').forEach(function(inp) {
+                    inp.addEventListener('input', function() {
+                        var i = this.getAttribute('data-index');
+                        currentContent.testimonials.items[i].role = this.value;
+                    });
+                });
+                container.querySelectorAll('.testi-title-input').forEach(function(inp) {
+                    inp.addEventListener('input', function() {
+                        var i = this.getAttribute('data-index');
+                        currentContent.testimonials.items[i].title = this.value;
+                    });
+                });
+                container.querySelectorAll('.testi-text-input').forEach(function(inp) {
+                    inp.addEventListener('input', function() {
+                        var i = this.getAttribute('data-index');
+                        currentContent.testimonials.items[i].text = this.value;
+                    });
+                });
+                container.querySelectorAll('.testi-img-input').forEach(function(inp) {
+                    inp.addEventListener('input', function() {
+                        var i = this.getAttribute('data-index');
+                        currentContent.testimonials.items[i].img = this.value;
+                        var prev = document.getElementById('preview_testi_' + i);
+                        if (prev) prev.src = this.value;
+                    });
+                });
+                container.querySelectorAll('.testi-file-input').forEach(function(inp) {
+                    inp.addEventListener('change', function(e) {
+                        var i = this.getAttribute('data-index');
+                        if (e.target.files && e.target.files[0]) {
+                            handleImageUpload(e.target.files[0], function(newSrc) {
+                                currentContent.testimonials.items[i].img = newSrc;
+                                var imgInp = container.querySelector(`.testi-img-input[data-index="${i}"]`);
+                                if (imgInp) imgInp.value = newSrc;
+                                var prev = document.getElementById('preview_testi_' + i);
+                                if (prev) prev.src = newSrc;
+                            });
+                        }
+                    });
+                });
+            }
+
+            // ── 5. GESTION DES UPLOADS D'IMAGES ──
+            function handleImageUpload(file, callback) {
+                var formData = new FormData();
+                formData.append('image', file);
+
+                fetch(backendUrl + '/api/upload', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer ' + getAdminToken(),
+                        'X-Admin-Token': getAdminToken()
+                    },
+                    body: formData
+                })
+                .then(function(res) {
+                    if (res.ok) return res.json();
+                    throw new Error('Erreur upload serveur');
+                })
+                .then(function(json) {
+                    if (json.success && json.path) {
+                        callback(json.path);
+                        showToast('Photo envoyée sur le serveur !', 'success');
+                    } else {
+                        throw new Error('Format invalide');
+                    }
+                })
+                .catch(function(err) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        callback(e.target.result);
+                        showToast('Photo convertie et prête !', 'info');
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+
+            document.querySelectorAll('.img-file-input').forEach(function(inp) {
+                inp.addEventListener('change', function(e) {
+                    if (e.target.files && e.target.files[0]) {
+                        var targetPath = this.getAttribute('data-target');
+                        var previewId = this.getAttribute('data-preview');
+
+                        handleImageUpload(e.target.files[0], function(newSrc) {
+                            setNested(currentContent, targetPath, newSrc);
+                            if (previewId) {
+                                var prev = document.getElementById(previewId);
+                                if (prev) prev.src = newSrc;
+                            }
+                            var textInp = document.querySelector(`[data-bind="${targetPath}"]`);
+                            if (textInp) textInp.value = newSrc;
+                        });
+                    }
+                });
+            });
+
+            document.querySelectorAll('[data-bind]').forEach(function(inp) {
+                inp.addEventListener('input', function() {
+                    var path = this.getAttribute('data-bind');
+                    setNested(currentContent, path, this.value);
+                });
+            });
+
+            // ── 6. SAUVEGARDE GLOBALE ──
+            function saveAllChanges() {
+                var saveBtn = document.getElementById('btnSaveAll');
+                var originalHtml = saveBtn.innerHTML;
+                saveBtn.innerHTML = '<i class="fa fa-spinner fa-spin me-2"></i> Enregistrement...';
+                saveBtn.disabled = true;
+
+                var jsonStr = JSON.stringify(currentContent);
+                localStorage.setItem(STORAGE_KEY, jsonStr);
+
+                fetch(backendUrl + '/api/content', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + getAdminToken(),
+                        'X-Admin-Token': getAdminToken()
+                    },
+                    body: jsonStr
+                })
+                .then(function(res) {
+                    if (res.ok) return res.json();
+                    throw new Error('Erreur écriture fichier');
+                })
+                .then(function(data) {
+                    showToast('Toutes les modifications ont été enregistrées sur le serveur !', 'success');
+                })
+                .catch(function(err) {
+                    showToast('Modifications enregistrées localement !', 'success');
+                })
+                .finally(function() {
+                    saveBtn.innerHTML = originalHtml;
+                    saveBtn.disabled = false;
+                });
+            }
+
+            document.getElementById('btnSaveAll').addEventListener('click', saveAllChanges);
+            document.querySelectorAll('.btn-save-section').forEach(function(btn) {
+                btn.addEventListener('click', saveAllChanges);
+            });
+
+            // ── 7. MÉDIATHÈQUE ──
+            function loadMediaList() {
+                var grid = document.getElementById('mediaGrid');
+                grid.innerHTML = '';
+
+                var defaultImages = [
+                    'img/Logo_SNU.jpg', 'img/Salle1.jpg', 'img/Salle2.jpg', 'img/Salle3.jpg',
+                    'img/about-1.jpg', 'img/about-2.jpg', 'img/Dr roger .jpeg', 'img/Rachel.PNG',
+                    'img/Jhone.PNG', 'img/Patric.PNG', 'img/brigitte.png', 'img/Denis.PNG',
+                    'img/project-2.jpg', 'img/project-3.jpg', 'img/claudia.png',
+                    'img/testimonial-1.jpeg', 'img/testimonial-2.jpeg', 'img/testimonial-3.jpeg'
+                ];
+
+                defaultImages.forEach(function(src) {
+                    var col = document.createElement('div');
+                    col.className = 'col-md-2 col-sm-4 col-6 text-center';
+                    col.innerHTML = `
+                        <div class="p-2 border rounded-3 bg-white shadow-sm h-100">
+                            <div style="height: 100px; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #fafbfc; border-radius: 6px;">
+                                <img src="${src}" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                            </div>
+                            <small class="d-block text-truncate mt-2 text-muted" title="${src}">${src.split('/').pop()}</small>
+                            <button class="btn btn-sm btn-link text-danger p-0 mt-1 small copy-path-btn" data-path="${src}">
+                                <i class="fa fa-copy me-1"></i> Copier
+                            </button>
+                        </div>
+                    `;
+                    grid.appendChild(col);
+                });
+
+                grid.querySelectorAll('.copy-path-btn').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        var path = this.getAttribute('data-path');
+                        navigator.clipboard.writeText(path).then(function() {
+                            showToast('Chemin copié : ' + path, 'info');
+                        });
+                    });
+                });
+            }
+
+            document.getElementById('mediaUploadInput').addEventListener('change', function(e) {
+                if (e.target.files && e.target.files.length) {
+                    var count = e.target.files.length;
+                    showToast(`${count} photo(s) en cours d'envoi...`, 'info');
+                    for (var i = 0; i < count; i++) {
+                        handleImageUpload(e.target.files[i], function(newSrc) {
+                            loadMediaList();
+                        });
+                    }
+                }
+            });
+
+            // ── 8. PARAMÈTRES ──
+            document.getElementById('btnResetDefaults').addEventListener('click', function() {
+                if (confirm('Êtes-vous sûr de vouloir réinitialiser tout le site aux textes et photos d\'origine ?')) {
+                    localStorage.removeItem(STORAGE_KEY);
+                    fetch('data/content.json?v=' + Date.now())
+                        .then(function(res) { return res.json(); })
+                        .then(function(data) {
+                            currentContent = data;
+                            populateInputs();
+                            showToast('Site réinitialisé aux valeurs d\'origine.', 'info');
+                        });
+                }
+            });
+
+            document.getElementById('btnUpdatePassword').addEventListener('click', function() {
+                var newPwd = document.getElementById('newAdminPassword').value.trim();
+                if (newPwd.length < 4) {
+                    alert('Le mot de passe doit comporter au moins 4 caractères.');
+                    return;
+                }
+                localStorage.setItem(PWD_KEY, newPwd);
+                document.getElementById('newAdminPassword').value = '';
+                showToast('Mot de passe administrateur modifié avec succès !', 'success');
+            });
+
+            // ── 9. TOAST NOTIFICATIONS ──
+            function showToast(message, type) {
+                var toastEl = document.getElementById('adminToast');
+                var toastMsg = document.getElementById('toastMessage');
+                toastMsg.innerHTML = `<i class="fa fa-check-circle me-2"></i> ${message}`;
+
+                var toast = new bootstrap.Toast(toastEl, { delay: 3500 });
+                toast.show();
+            }
+
+            function checkBackendConnection() {
+                var badge = document.getElementById('backendStatusBadge');
+                fetch(backendUrl + '/claudia/status')
+                    .then(function(res) {
+                        if (res.ok) {
+                            badge.innerHTML = '<i class="fa fa-check-circle me-1"></i> Synchronisation Serveur Active';
+                        }
+                    })
+                    .catch(function() {
+                        badge.innerHTML = '<i class="fa fa-sync me-1"></i> Synchronisation Navigateur Active';
+                    });
+            }
+
+            // ── 9. GESTION DE LA MESSAGERIE (BOÎTE DE RÉCEPTION) ──
+            var allMessagesList = [];
+            var currentMessageFilter = 'all';
+
+            function loadMessages() {
+                var tryApi = fetch(backendUrl + '/api/messages?v=' + Date.now(), {
+                    headers: {
+                        'Authorization': 'Bearer ' + getAdminToken(),
+                        'X-Admin-Token': getAdminToken()
+                    }
+                })
+                .then(function(res) {
+                    if (res.ok) return res.json();
+                    throw new Error('API non dispo');
+                });
+
+                var tryLocal = function() {
+                    return fetch('../data/messages.json?v=' + Date.now())
+                        .then(function(res) { if (res.ok) return res.json(); throw new Error('data/messages non dispo'); })
+                        .catch(function() {
+                            return JSON.parse(localStorage.getItem('snu_messages') || '[]');
+                        });
+                };
+
+                tryApi.catch(tryLocal)
+                    .then(function(data) {
+                        if (Array.isArray(data)) {
+                            try {
+                                var local = JSON.parse(localStorage.getItem('snu_messages') || '[]');
+                                var ids = new Set(data.map(function(m) { return m.id; }));
+                                local.forEach(function(lm) {
+                                    if (!ids.has(lm.id)) {
+                                        data.push(lm);
+                                        ids.add(lm.id);
+                                    }
+                                });
+                            } catch(e) {}
+
+                            data.sort(function(a, b) {
+                                return (b.timestamp || 0) - (a.timestamp || 0);
+                            });
+
+                            allMessagesList = data;
+                            updateMessagesUI();
+                        }
+                    })
+                    .catch(function(err) {
+                        console.warn('Erreur chargement messages:', err);
+                    });
+            }
+
+            function updateMessagesUI() {
+                var total = allMessagesList.length;
+                var unread = allMessagesList.filter(function(m) { return !m.read; }).length;
+                var read = total - unread;
+
+                var statTotal = document.getElementById('statTotalMessages');
+                var statUnread = document.getElementById('statUnreadMessages');
+                var statRead = document.getElementById('statReadMessages');
+                var badgeUnread = document.getElementById('badgeUnreadMessages');
+
+                if (statTotal) statTotal.textContent = total;
+                if (statUnread) statUnread.textContent = unread;
+                if (statRead) statRead.textContent = read;
+
+                if (badgeUnread) {
+                    if (unread > 0) {
+                        badgeUnread.textContent = unread;
+                        badgeUnread.classList.remove('d-none');
+                    } else {
+                        badgeUnread.classList.add('d-none');
+                    }
+                }
+
+                var lastUpdated = document.getElementById('messagesLastUpdated');
+                if (lastUpdated) {
+                    var now = new Date();
+                    lastUpdated.innerHTML = `<i class="fa fa-clock me-1"></i>Mis à jour à ${now.toLocaleTimeString('fr-FR', {hour: '2-digit', minute:'2-digit'})}`;
+                }
+
+                renderMessagesList();
+            }
+
+            function renderMessagesList() {
+                var container = document.getElementById('messagesListContainer');
+                if (!container) return;
+
+                var filtered = allMessagesList.filter(function(m) {
+                    if (currentMessageFilter === 'unread') return !m.read;
+                    if (currentMessageFilter === 'read') return m.read;
+                    return true;
+                });
+
+                if (filtered.length === 0) {
+                    container.innerHTML = `
+                        <div class="text-center py-5 text-muted" id="messagesEmptyState">
+                            <i class="fa fa-inbox fa-3x mb-3 text-secondary opacity-50"></i>
+                            <p class="mb-1 fw-bold">${currentMessageFilter === 'unread' ? 'Aucun nouveau message non lu' : 'Aucun message trouvé'}</p>
+                            <small class="text-muted">Les messages envoyés depuis le site web apparaîtront directement ici.</small>
+                        </div>
+                    `;
+                    return;
+                }
+
+                var html = '';
+                filtered.forEach(function(msg) {
+                    var isUnread = !msg.read;
+                    var cardBorder = isUnread ? 'border-danger' : 'border-light-subtle';
+                    var bgClass = isUnread ? 'bg-white shadow-sm' : 'bg-light';
+                    var unreadBadge = isUnread ? '<span class="badge bg-danger ms-2"><i class="fa fa-bell me-1"></i>Nouveau</span>' : '<span class="badge bg-secondary ms-2 opacity-75">Lu</span>';
+
+                    html += `
+                        <div class="card p-3 p-md-4 border rounded-3 ${cardBorder} ${bgClass} position-relative transition-all mb-3" data-id="${msg.id}">
+                            <div class="d-flex align-items-start justify-content-between flex-wrap gap-2 mb-3">
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold ${isUnread ? 'bg-danger' : 'bg-secondary'}" style="width: 44px; height: 44px; font-size: 1.1rem;">
+                                        ${(msg.name || 'V').charAt(0).toUpperCase()}
+                                    </div>
+                                    <div>
+                                        <div class="fw-bold fs-6 text-dark d-flex align-items-center flex-wrap">
+                                            ${escapeHtml(msg.name || 'Visiteur')}
+                                            ${unreadBadge}
+                                        </div>
+                                        <div class="small text-muted d-flex align-items-center gap-3 flex-wrap mt-1">
+                                            ${msg.email ? `<span><i class="fa fa-envelope text-primary me-1"></i><a href="mailto:${escapeHtml(msg.email)}?subject=Re: ${encodeURIComponent(msg.subject || '')}" class="text-decoration-none text-muted">${escapeHtml(msg.email)}</a></span>` : ''}
+                                            ${msg.phone ? `<span><i class="fa fa-phone text-success me-1"></i><a href="tel:${escapeHtml(msg.phone)}" class="text-decoration-none text-muted">${escapeHtml(msg.phone)}</a></span>` : ''}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-end">
+                                    <span class="badge bg-light text-dark border small"><i class="fa fa-calendar-alt me-1 text-muted"></i>${escapeHtml(msg.date || '')}</span>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="fw-semibold text-dark mb-1" style="font-size: 0.95rem;">
+                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle me-2">Objet</span>
+                                    ${escapeHtml(msg.subject || 'Sans objet')}
+                                </div>
+                                <div class="p-3 bg-white rounded border text-secondary" style="white-space: pre-wrap; line-height: 1.6; font-size: 0.92rem;">
+                                    ${escapeHtml(msg.message || '')}
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-center justify-content-between pt-2 border-top flex-wrap gap-2">
+                                <div class="d-flex align-items-center gap-2">
+                                    <button class="btn btn-sm ${isUnread ? 'btn-outline-primary' : 'btn-outline-secondary'} btn-toggle-read" data-id="${msg.id}" data-read="${msg.read}">
+                                        <i class="fa ${isUnread ? 'fa-check' : 'fa-envelope-open'} me-1"></i>
+                                        ${isUnread ? 'Marquer comme lu' : 'Marquer comme non lu'}
+                                    </button>
+                                    ${msg.email ? `
+                                        <a href="mailto:${escapeHtml(msg.email)}?subject=Re: ${encodeURIComponent(msg.subject || 'Contact Salle du Numérique')}&body=Bonjour ${encodeURIComponent(msg.name || '')},%0D%0A%0D%0A" class="btn btn-sm btn-outline-success">
+                                            <i class="fa fa-reply me-1"></i> Répondre par e-mail
+                                        </a>
+                                    ` : ''}
+                                </div>
+                                <div>
+                                    <button class="btn btn-sm btn-outline-danger btn-delete-msg" data-id="${msg.id}" title="Supprimer ce message">
+                                        <i class="fa fa-trash me-1"></i> Supprimer
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                container.innerHTML = html;
+                attachMessageListeners();
+            }
+
+            function attachMessageListeners() {
+                document.querySelectorAll('.btn-toggle-read').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        var id = this.getAttribute('data-id');
+                        var currentRead = this.getAttribute('data-read') === 'true';
+                        toggleMessageRead(id, !currentRead);
+                    });
+                });
+
+                document.querySelectorAll('.btn-delete-msg').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        var id = this.getAttribute('data-id');
+                        if (confirm('Voulez-vous vraiment supprimer définitivement ce message ?')) {
+                            deleteMessage(id);
+                        }
+                    });
+                });
+            }
+
+            function toggleMessageRead(id, newReadStatus) {
+                var msg = allMessagesList.find(function(m) { return m.id === id; });
+                if (msg) {
+                    msg.read = newReadStatus;
+                    updateMessagesUI();
+
+                    fetch(backendUrl + '/api/messages/read', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + getAdminToken(),
+                            'X-Admin-Token': getAdminToken()
+                        },
+                        body: JSON.stringify({ id: id, read: newReadStatus })
+                    }).catch(function(e) {});
+
+                    try {
+                        localStorage.setItem('snu_messages', JSON.stringify(allMessagesList));
+                    } catch(e) {}
+                }
+            }
+
+            function markAllMessagesAsRead() {
+                if (allMessagesList.length === 0) return;
+                allMessagesList.forEach(function(m) { m.read = true; });
+                updateMessagesUI();
+                showToast('Tous les messages ont été marqués comme lus.', 'info');
+
+                fetch(backendUrl + '/api/messages/read', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + getAdminToken(),
+                        'X-Admin-Token': getAdminToken()
+                    },
+                    body: JSON.stringify({ all: true })
+                }).catch(function(e) {});
+
+                try {
+                    localStorage.setItem('snu_messages', JSON.stringify(allMessagesList));
+                } catch(e) {}
+            }
+
+            function deleteMessage(id) {
+                allMessagesList = allMessagesList.filter(function(m) { return m.id !== id; });
+                updateMessagesUI();
+                showToast('Message supprimé.', 'warning');
+
+                fetch(backendUrl + '/api/messages/delete', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + getAdminToken(),
+                        'X-Admin-Token': getAdminToken()
+                    },
+                    body: JSON.stringify({ id: id })
+                }).catch(function(e) {});
+
+                try {
+                    localStorage.setItem('snu_messages', JSON.stringify(allMessagesList));
+                } catch(e) {}
+            }
+
+            function escapeHtml(str) {
+                if (!str) return '';
+                return String(str)
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#39;');
+            }
+
+            var btnRefreshMsgs = document.getElementById('btnRefreshMessages');
+            if (btnRefreshMsgs) {
+                btnRefreshMsgs.addEventListener('click', function() {
+                    loadMessages();
+                    showToast('Messages actualisés !', 'info');
+                });
+            }
+
+            var btnMarkAll = document.getElementById('btnMarkAllRead');
+            if (btnMarkAll) {
+                btnMarkAll.addEventListener('click', markAllMessagesAsRead);
+            }
+
+            document.querySelectorAll('.filter-msg-btn').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-msg-btn').forEach(function(b) { b.classList.remove('active'); });
+                    this.classList.add('active');
+                    currentMessageFilter = this.getAttribute('data-filter');
+                    renderMessagesList();
+                });
+            });
+
+            // Polling automatique en arrière-plan toutes les 15 secondes
+            setInterval(loadMessages, 15000);
+
+            loadInitialData();
+
+        })();
+    </script>
+</body>
+
+</html>

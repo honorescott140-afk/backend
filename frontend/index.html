@@ -1,0 +1,2030 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <title>Salle du Numérique UNILU | Université de Lubumbashi (Site Officiel)</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="application-name" content="Salle du Numérique UNILU">
+    <meta property="og:site_name" content="Salle du Numérique UNILU">
+    <meta property="og:title" content="Salle du Numérique UNILU | Université de Lubumbashi">
+    <meta property="og:description" content="Site officiel de la Salle du Numérique de l'Université de Lubumbashi (UNILU). Formations, ateliers, innovation et services numériques.">
+    <meta
+        content="SNU, salle numérique, Lubumbashi, centre technologique, programmation, ateliers, formation numérique, université, RDC"
+        name="keywords">
+    <meta name="description"
+        content="Site officiel de la Salle du Numérique de l'Université de Lubumbashi (UNILU). Formations, ateliers, innovation, intelligence artificielle, Microsoft 365 et services numériques.">
+
+    <!-- Schema.org JSON-LD pour forcer le Nom du Site sur Google Search -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Salle du Numérique UNILU",
+      "alternateName": ["SNU UNILU", "Salle du Numérique - Université de Lubumbashi"],
+      "url": "https://snu-unilu01.netlify.app/"
+    }
+    </script>
+    
+    <!-- Favicon -->
+    <link href="img/Logo_SNU.jpg" rel="icon" type="image/jpeg">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Roboto:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="lib/fontawesome/css/all.min.css" rel="stylesheet">
+    <link href="lib/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css?v=1.2" rel="stylesheet">
+    <link href="lib/fonts/fonts.css" rel="stylesheet">
+</head>
+
+<body class="tech-bg">
+    <!-- Spinner Start -->
+    <div id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+    <!-- Navbar Start -->
+    <div class="container-fluid sticky-top" style="background-color: #d10000 !important; top: 0px !important;">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light border-bottom border-2 border-white">
+                <a href="index.html" class="navbar-brand d-flex align-items-center">
+                    <img src="img/Logo_SNU.jpg" alt="Logo SNU"
+                        style="height: 60px; width: 60px; object-fit: cover; border-radius: 50%; margin-right: 10px; border: 2px solid rgba(255,255,255,0.4); box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+                    <h1 class="navbar-title animate-title"
+                        style="color: #ffffff !important; font-weight: 900 !important; margin-bottom: 0;">Salle du
+                        Numérique</h1>
+                </a>
+                <button type="button" class="navbar-toggler ms-auto me-0" data-bs-toggle="collapse"
+                    data-bs-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto">
+                        <a href="index.html" class="nav-item nav-link"
+                            style="color: #ffffff !important; font-weight: 700 !important;">Accueil</a>
+                        <a href="project.html" class="nav-item nav-link"
+                            style="color: #ffffff !important; font-weight: 700 !important;">La Salle</a>
+                        <a href="contact.html" class="nav-item nav-link"
+                            style="color: #ffffff !important; font-weight: 700 !important;">Contact</a>
+                        <a href="admin/" class="nav-item nav-link"
+                            style="color: #ffffff !important; font-weight: 700 !important; border: 1.5px solid rgba(255,255,255,0.85); border-radius: 6px; padding: 6px 16px; margin-left: 15px; background: rgba(255,255,255,0.12); transition: all 0.3s ease;" title="Espace Administrateur"><i class="fa fa-lock me-1"></i> Admin</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+
+    <!-- Hero Start -->
+    <div class="hero-header mb-5">
+        <!-- Wrapper position:relative pour superposer texte + carousel -->
+        <div class="hero-banner position-relative">
+
+            <!-- Carousel pleine largeur -->
+            <div class="owl-carousel header-carousel animated fadeIn" style="width:100%;">
+                <img class="w-100" src="img/Salle1.jpg" alt="Salle 1">
+                <img class="w-100" src="img/Salle2.jpg" alt="Salle 2">
+                <img class="w-100" src="img/Salle3.jpg" alt="Salle 3">
+            </div>
+
+            <!-- Overlay sombre pour lisibilité -->
+            <div class="hero-overlay"></div>
+
+            <!-- Texte superposé AU-DESSUS des images -->
+            <div class="hero-text-overlay">
+                <h1 class="hero-main-title animated slideInDown">
+                    <strong data-cms="hero.main_title">INNOVER AUJOURD'HUI</strong><br>
+                    <strong class="hero-subtitle-accent" data-cms="hero.subtitle_accent">INSPIRER DEMAIN</strong>
+                </h1>
+            </div>
+
+        </div>
+
+        <!-- Features bar -->
+        <div class="container py-4">
+            <div class="row g-4 animated fadeIn justify-content-center">
+                <div class="col-md-4 col-sm-6">
+                    <div class="hero-feat-card">
+                        <div class="hero-feat-icon">
+                            <i class="fa fa-desktop"></i>
+                        </div>
+                        <h5 class="lh-base mb-0" style="font-weight: 700; color: #1a1a1a;" data-cms="hero.feat_1_title">Ordinateurs Modernes</h5>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="hero-feat-card">
+                        <div class="hero-feat-icon">
+                            <i class="fa fa-bolt"></i>
+                        </div>
+                        <h5 class="lh-base mb-0" style="font-weight: 700; color: #1a1a1a;" data-cms="hero.feat_2_title">Connexion Ultra Rapide</h5>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="hero-feat-card">
+                        <div class="hero-feat-icon">
+                            <i class="fa fa-building"></i>
+                        </div>
+                        <h5 class="lh-base mb-0" style="font-weight: 700; color: #1a1a1a;" data-cms="hero.feat_3_title">Espaces de Travail</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Hero End -->
+
+
+    <!-- About Start -->
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-6">
+                    <div class="row g-2">
+                        <div class="col-6 wow fadeIn" data-wow-delay="0.1s">
+                            <img class="img-fluid w-100" src="img/about-1.jpg" alt="Salle du Numérique"
+                                style="object-fit: cover; height: 180px !important;" data-cms-img="about.img1">
+                            <div class="d-flex align-items-center justify-content-center text-center bg-primary px-3 py-2"
+                                style="height: 60px !important;">
+                                <h4 class="text-white lh-base mb-0" style="font-size: 0.9rem; font-weight: 700;">Salle
+                                    du Numérique</h4>
+                            </div>
+                        </div>
+                        <div class="col-6 wow fadeIn" data-wow-delay="0.3s">
+                            <img class="img-fluid w-100" src="img/about-2.jpg" alt="de l'Université de Lubumbashi"
+                                style="object-fit: cover; height: 180px !important;" data-cms-img="about.img2">
+                            <div class="d-flex align-items-center justify-content-center text-center bg-primary px-3 py-2"
+                                style="height: 60px !important;">
+                                <h4 class="text-white lh-base mb-0" style="font-size: 0.9rem; font-weight: 700;">de
+                                    l'Université de Lubumbashi</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                    <h1 class="mb-5"><span data-cms="about.title_prefix">Découvrez notre</span> <span
+                            style="color: #d10000 !important; font-weight: 900; text-transform: uppercase;" data-cms="about.title_highlight">Espace
+                            Tech</span></h1>
+                    <p class="mb-4" data-cms="about.p1">La Salle du Numérique de l'Université de Lubumbashi (SNU) est un centre
+                        technologique moderne conçu pour propulser l'éducation, la formation et la recherche vers de
+                        nouveaux sommets. Nous mettons à la disposition de la communauté universitaire des ressources de
+                        pointe.</p>
+                    <p class="mb-5" data-cms="about.p2">Que vous soyez étudiant cherchant à approfondir vos compétences pratiques,
+                        enseignant préparant des cours interactifs, ou jeune innovateur travaillant sur des projets
+                        tech, notre espace offre des solutions adaptées à vos besoins.</p>
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <h6 class="mb-3"><i class="fa fa-check text-primary me-2"></i>Matériel Professionnel</h6>
+                            <h6 class="mb-0"><i class="fa fa-check text-primary me-2"></i>Encadrement Qualifié</h6>
+                        </div>
+                        <div class="col-sm-6">
+                            <h6 class="mb-0"><i class="fa fa-check text-primary me-2"></i>Assistance Technique</h6>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center mt-5">
+                        <a class="btn btn-primary px-4 me-2" href="project.html">En savoir plus</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+
+
+    <!-- Feature Start -->
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="text-center wow fadeIn" data-wow-delay="0.1s">
+                <h1 class="mb-5">Pourquoi Nous <span style="color: #d10000 !important; font-weight: 900 !important;"
+                        class="mb-5">Choisir</span> ?
+                </h1>
+            </div>
+            <div class="row g-5 align-items-center text-center">
+                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.1s">
+                    <i class="fa fa-desktop fa-5x text-primary mb-4"></i>
+                    <h4>Matériel de pointe</h4>
+                    <p class="mb-0">Accédez à des ordinateurs performants adaptés aux besoins de programmation, de
+                        modélisation et de recherche universitaire.</p>
+                </div>
+                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.3s">
+                    <i class="fa fa-wifi fa-5x text-primary mb-4"></i>
+                    <h4>Connexion Internet 5G</h4>
+                    <p class="mb-0">Bénéficiez d'une connexion internet 5G ultra-rapide, stable et à haut débit pour vos
+                        recherches en ligne, streaming éducatif.
+                    </p>
+                </div>
+
+                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.5s">
+                    <i class="fa fa-credit-card fa-5x text-primary mb-4"></i>
+                    <h4>Abonnements Mensuels</h4>
+                    <p class="mb-0">Profitez de nos abonnements mensuels accessibles à tous et bénéficiez d'un accès
+                        privilégié à nos équipements numériques.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Team Start -->
+    <div class="container-fluid py-5" style="background: #ffffff;">
+        <div class="container py-5">
+            <div class="text-center mb-5 wow fadeIn" data-wow-delay="0.1s">
+                <span
+                    style="display:inline-block; background: rgba(209,0,0,0.1); border: 1px solid rgba(209,0,0,0.25); color: #d10000; font-size: 0.78rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; padding: 6px 20px; border-radius: 30px; margin-bottom: 16px;">Notre
+                    Équipe</span>
+                <h1
+                    style="color: #1a1a1a; font-weight: 900; font-family: 'Montserrat', sans-serif; font-size: clamp(2rem,5vw,3rem);">
+                    L'Équipe de <span style="color: #d10000;">Gestion</span></h1>
+                <p style="color: #6c757d; max-width: 560px; margin: 0 auto; font-size: 1rem;">Les professionnels dévoués
+                    qui font vivre la Salle du Numérique chaque jour.</p>
+            </div>
+            <style>
+                .snu-team-card {
+                    background: #fff;
+                    border: 1px solid rgba(0, 0, 0, 0.08);
+                    border-radius: 14px;
+                    overflow: hidden;
+                    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+                    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+                }
+
+                .snu-team-card:hover {
+                    transform: translateY(-8px);
+                    box-shadow: 0 20px 48px rgba(209, 0, 0, 0.15);
+                    border-color: rgba(209, 0, 0, 0.3);
+                }
+
+                .snu-team-card .snu-img-wrap {
+                    height: 320px;
+                    overflow: hidden;
+                }
+
+                .snu-team-card .snu-img-wrap img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transition: transform 0.5s ease;
+                }
+
+                .snu-team-card:hover .snu-img-wrap img {
+                    transform: scale(1.05);
+                }
+
+                .snu-team-card .snu-info {
+                    padding: 16px 18px;
+                    text-align: center;
+                    border-top: 3px solid #d10000;
+                    background: #fff;
+                }
+
+                .snu-team-card .snu-name {
+                    font-family: 'Montserrat', sans-serif;
+                    font-size: 1rem;
+                    font-weight: 800;
+                    color: #1a1a1a;
+                    margin-bottom: 5px;
+                }
+
+                .snu-team-card .snu-role {
+                    font-family: 'Roboto', sans-serif;
+                    font-size: 0.7rem;
+                    font-weight: 700;
+                    color: #d10000;
+                    text-transform: uppercase;
+                    letter-spacing: 1.5px;
+                }
+            </style>
+            <div class="row g-4 justify-content-center">
+                <!-- Member 1 -->
+                <div class="col-sm-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="snu-team-card">
+                        <div class="snu-img-wrap">
+                            <img src="img/Rachel.PNG" alt="Mme Rachel">
+                        </div>
+                        <div class="snu-info">
+                            <div class="snu-name">Mme Rachel</div>
+                            <div class="snu-role">Secrétaire de la Salle</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Member 2 -->
+                <div class="col-sm-6 col-lg-4 wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="snu-team-card">
+                        <div class="snu-img-wrap">
+                            <img src="img/Jhone.PNG" alt="Mr J. le grand">
+                        </div>
+                        <div class="snu-info">
+                            <div class="snu-name">Mr J. le grand</div>
+                            <div class="snu-role">Resp. des Formations</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Member 3 -->
+                <div class="col-sm-6 col-lg-4 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="snu-team-card">
+                        <div class="snu-img-wrap">
+                            <img src="img/Patric.PNG" alt="Mr Patrick Shimaitu">
+                        </div>
+                        <div class="snu-info">
+                            <div class="snu-name">Mr Patrick Shimaitu</div>
+                            <div class="snu-role">Tuteur &amp; Support Tech</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Member 4 -->
+                <div class="col-sm-6 col-lg-4 wow fadeInUp" data-wow-delay="0.4s">
+                    <div class="snu-team-card">
+                        <div class="snu-img-wrap">
+                            <img src="img/brigitte.png" alt="Mme Nsapu Brigitte">
+                        </div>
+                        <div class="snu-info">
+                            <div class="snu-name">Mme Nsapu Brigitte</div>
+                            <div class="snu-role">Chargée de la Comptabilité</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Member 5 -->
+                <div class="col-sm-6 col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="snu-team-card">
+                        <div class="snu-img-wrap">
+                            <img src="img/Denis.PNG" alt="Mr Mikobi Denis">
+                        </div>
+                        <div class="snu-info">
+                            <div class="snu-name">Mr Mikobi Denis</div>
+                            <div class="snu-role">Maintenance &amp; Logistique</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Team End -->
+
+
+    <!-- Mot du Directeur Start -->
+    <div class="container-fluid py-5 bg-white">
+        <div class="container py-5">
+            <div class="row align-items-center g-5">
+
+                <!-- IMAGE À GAUCHE -->
+                <div class="col-lg-5 text-center wow fadeInLeft" data-wow-delay="0.1s">
+                    <div class="shadow-lg rounded overflow-hidden" style="border: 6px solid #f8f9fa;">
+                        <img src="img/Dr roger .jpeg" class="img-fluid w-100" alt="Dr Roger - Directeur de la Salle du Numérique"
+                            style="height: 420px; object-fit: cover; object-position: top;" data-cms-img="directeur.photo">
+                    </div>
+                </div>
+
+                <!-- TEXTE À DROITE -->
+                <div class="col-lg-7 wow fadeInRight" data-wow-delay="0.3s">
+                    <h6 class="text-uppercase text-danger fw-bold mb-2" style="letter-spacing: 2px;" data-cms="directeur.subtitle">
+                        Message du Directeur
+                    </h6>
+                    <h2 class="mb-4" style="font-weight: 800;">
+                        <span data-cms="directeur.title_prefix">Mot de Bienvenue du</span> <span style="color: #d10000;" data-cms="directeur.name">CT ROGER</span>
+                    </h2>
+                    <p class="lead text-muted mb-4" style="font-size: 1.1rem; font-weight: 500;" data-cms="directeur.lead">
+                        Chers visiteurs, chers apprenants,
+                    </p>
+                    <p class="text-secondary" style="line-height: 1.8;" data-cms="directeur.p1">
+                        C'est avec un grand plaisir que je vous accueille au sein de la Salle du Numérique. Dans un
+                        monde en constante évolution, notre engagement est de former des femmes et des hommes capables
+                        de créer, d'innover et d'apporter des solutions concrètes aux défis de notre époque.
+                    </p>
+                    <p class="text-secondary" style="line-height: 1.8;" data-cms="directeur.p2">
+                        Au-delà des compétences techniques, nous cultivons la créativité, l'esprit d'initiative et la
+                        confiance en soi — des qualités essentielles pour transformer les idées en opportunités réelles.
+                        Chaque apprenant est encouragé à développer son potentiel et à devenir un acteur du changement
+                        dans sa communauté.
+                    </p>
+                    <p class="text-secondary" style="line-height: 1.8;" data-cms="directeur.p3">
+                        Notre vision est simple : <strong style="color: #d10000;">Innover aujourd'hui pour inspirer
+                            demain.</strong> Je vous invite à rejoindre cette aventure où l'apprentissage, l'innovation
+                        et l'excellence se rencontrent pour bâtir ensemble l'avenir.
+                    </p>
+                    <div class="mt-4 pt-3 border-top">
+                        <h5 class="mb-1" style="font-weight: 700;" data-cms="directeur.name">CT ROGER</h5>
+                        <span class="text-danger fw-bold" style="font-size: 0.9rem;" data-cms="directeur.role">
+                            Directeur de la Salle du Numérique (SNU)
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Mot du Directeur End -->
+
+
+    <!-- Section Nos Services Start -->
+    <div class="container-fluid py-5" style="background: rgba(255, 255, 255, 0.03);">
+        <div class="container py-5">
+            <div class="text-center wow fadeIn" data-wow-delay="0.1s">
+                <h1 class="mb-5">NOS <span style="color: #d10000 !important; font-weight: 900 !important;"
+                        class="mb-5">SERVICES</span></h1>
+            </div>
+            <div class="row g-4 justify-content-center" id="servicesContainer">
+                <!-- Service 1 -->
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="service-card p-4 d-flex flex-column align-items-center text-center">
+                        <div class="text-center mb-3" style="font-size: 3.5rem; color: var(--accent-blue) !important;">
+                            <i class="fa fa-desktop"></i>
+                        </div>
+                        <h4 class="mb-3" style="color: #1a1a1a; font-weight: 700;">100 Ordinateurs Disponibles</h4>
+                        <p class="mb-0 text-muted" style="font-size: 0.9rem; line-height: 1.6;">Accédez à l'un de nos
+                            100 postes de travail performants et modernes pour vos travaux pratiques et recherches
+                            académiques.</p>
+                    </div>
+                </div>
+                <!-- Service 2 -->
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="service-card p-4 d-flex flex-column align-items-center text-center">
+                        <div class="text-center mb-3" style="font-size: 3.5rem; color: var(--accent-blue) !important;">
+                            <i class="fa fa-wifi"></i>
+                        </div>
+                        <h4 class="mb-3" style="color: #1a1a1a; font-weight: 700;">Connexion Internet</h4>
+                        <p class="mb-0 text-muted" style="font-size: 0.9rem; line-height: 1.6;">Profitez d'une connexion
+                            internet 5G ultra-rapide, stable et continue pour toutes vos activités de recherche en
+                            ligne.</p>
+                    </div>
+                </div>
+                <!-- Service 3 -->
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="service-card p-4 d-flex flex-column align-items-center text-center">
+                        <div class="text-center mb-3" style="font-size: 3.5rem; color: var(--accent-blue) !important;">
+                            <i class="fa fa-book"></i>
+                        </div>
+                        <h4 class="mb-3" style="color: #1a1a1a; font-weight: 700;">Bibliothèques Numériques</h4>
+                        <p class="mb-0 text-muted" style="font-size: 0.9rem; line-height: 1.6;">Consultez des milliers
+                            d'ouvrages numériques, articles de recherche et bases de données scientifiques
+                            universitaires.</p>
+                    </div>
+                </div>
+                <!-- Service 4 -->
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="service-card p-4 d-flex flex-column align-items-center text-center">
+                        <div class="text-center mb-3" style="font-size: 3.5rem; color: var(--accent-blue) !important;">
+                            <i class="fa fa-laptop"></i>
+                        </div>
+                        <h4 class="mb-3" style="color: #1a1a1a; font-weight: 700;">Espaces de Travail Privés</h4>
+                        <p class="mb-0 text-muted" style="font-size: 0.9rem; line-height: 1.6;">Bénéficiez de boxes et
+                            de bureaux individuels isolés pour vous concentrer pleinement sur vos projets de fin de
+                            cycle.</p>
+                    </div>
+                </div>
+                <!-- Service 5 -->
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="service-card p-4 d-flex flex-column align-items-center text-center">
+                        <div class="text-center mb-3" style="font-size: 3.5rem; color: var(--accent-blue) !important;">
+                            <i class="fa fa-users"></i>
+                        </div>
+                        <h4 class="mb-3" style="color: #1a1a1a; font-weight: 700;">Espaces Collaboratifs</h4>
+                        <p class="mb-0 text-muted" style="font-size: 0.9rem; line-height: 1.6;">Travaillez en synergie
+                            avec votre équipe dans des zones modulables équipées de tableaux et de mobilier dynamique.
+                        </p>
+                    </div>
+                </div>
+                <!-- Service 6 -->
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="service-card p-4 d-flex flex-column align-items-center text-center">
+                        <div class="text-center mb-3" style="font-size: 3.5rem; color: var(--accent-blue) !important;">
+                            <i class="fa fa-chalkboard-teacher"></i>
+                        </div>
+                        <h4 class="mb-3" style="color: #1a1a1a; font-weight: 700;">Ateliers de Midi</h4>
+                        <p class="mb-0 text-muted" style="font-size: 0.9rem; line-height: 1.6;">Prenez part à nos
+                            sessions d'échange courtes organisées durant la pause de midi sur des thématiques
+                            technologiques d'actualité.</p>
+                    </div>
+                </div>
+                <!-- Service 7 -->
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="service-card p-4 d-flex flex-column align-items-center text-center">
+                        <div class="text-center mb-3" style="font-size: 3.5rem; color: var(--accent-blue) !important;">
+                            <i class="fa fa-graduation-cap"></i>
+                        </div>
+                        <h4 class="mb-3" style="color: #1a1a1a; font-weight: 700;">Mini Formations</h4>
+                        <p class="mb-0 text-muted" style="font-size: 0.9rem; line-height: 1.6;">Développez des
+                            compétences spécifiques rapidement grâce à nos modules de formation ciblés et pratiques.</p>
+                    </div>
+                </div>
+                <!-- Service 8 -->
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="service-card p-4 d-flex flex-column align-items-center text-center">
+                        <div class="text-center mb-3" style="font-size: 3.5rem; color: var(--accent-blue) !important;">
+                            <i class="fa fa-comments"></i>
+                        </div>
+                        <h4 class="mb-3" style="color: #1a1a1a; font-weight: 700;">Cadre d'Échanges</h4>
+                        <p class="mb-0 text-muted" style="font-size: 0.9rem; line-height: 1.6;">Partagez vos idées et
+                            collaborez avec d'autres passionnés de technologie, étudiants et professionnels de
+                            l'écosystème.</p>
+                    </div>
+                </div>
+                <!-- Service 9 -->
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="service-card p-4 d-flex flex-column align-items-center text-center">
+                        <div class="text-center mb-3" style="font-size: 3.5rem; color: var(--accent-blue) !important;">
+                            <i class="fa fa-book-open"></i>
+                        </div>
+                        <h4 class="mb-3" style="color: #1a1a1a; font-weight: 700;">Pratique TP & TPE</h4>
+                        <p class="mb-0 text-muted" style="font-size: 0.9rem; line-height: 1.6;">Un environnement propice
+                            pour réaliser vos Travaux Pratiques et vos Travaux Pratiques Encadrés dans les meilleures
+                            conditions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Section Nos Services End -->
+
+    <!-- Section Ateliers & Formations Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="text-center wow fadeIn" data-wow-delay="0.1s">
+                <h1 class="mb-5">ATELIERS & <span style="color: #d10000 !important;" class="mb-5">FORMATIONS</span></h1>
+            </div>
+
+            <h3 class="mb-4 text-center wow fadeIn" data-wow-delay="0.1s" style="color: #1a1a1a; font-weight: 900;">
+                Formations Principales</h3>
+            <div id="formationsPrincipalesContainer" class="row g-4 justify-content-center mb-5 pb-5">
+                <!-- Formation 1 -->
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="formation-card p-4 d-flex flex-column h-100 text-center">
+                        <div class="text-center mb-3" style="font-size: 3.5rem; color: #d10000;">
+                            <i class="fab fa-windows"></i>
+                        </div>
+                        <h5 class="mb-3" style="font-weight: 700; color: #1a1a1a;">Les Bases de Windows</h5>
+                        <p class="text-muted small mb-4" style="line-height: 1.6;">Maîtrisez le système d'exploitation
+                            Windows, le panneau de configuration, la gestion des fichiers et la sécurité essentielle.
+                        </p>
+                        <button class="btn btn-primary w-100 mt-auto py-2 btn-inscrire" data-bs-toggle="modal"
+                            data-bs-target="#registrationModal"
+                            data-formation="Les Bases de Windows">S'inscrire</button>
+                    </div>
+                </div>
+                <!-- Formation 2 -->
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="formation-card p-4 d-flex flex-column h-100 text-center">
+                        <div class="text-center mb-3" style="font-size: 3.5rem; color: #d10000;">
+                            <i class="fab fa-microsoft"></i>
+                        </div>
+                        <h5 class="mb-3" style="font-weight: 700; color: #1a1a1a;">Bureautique (Microsoft 365)</h5>
+                        <p class="text-muted small mb-4" style="line-height: 1.6;">Une formation complète pour prendre
+                            en main les outils de productivité cloud et le travail collaboratif moderne.</p>
+                        <button class="btn btn-primary w-100 mt-auto py-2 btn-inscrire" data-bs-toggle="modal"
+                            data-bs-target="#registrationModal"
+                            data-formation="Bureautique (Microsoft 365)">S'inscrire</button>
+                    </div>
+                </div>
+                <!-- Formation 3 -->
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="formation-card p-4 d-flex flex-column h-100 text-center">
+                        <div class="text-center mb-3" style="font-size: 3.5rem; color: #d10000;">
+                            <i class="fa fa-robot"></i>
+                        </div>
+                        <h5 class="mb-3" style="font-weight: 700; color: #1a1a1a;">Initiation à l'IA</h5>
+                        <p class="text-muted small mb-4" style="line-height: 1.6;">Découvrez et intégrez les outils
+                            d'Intelligence Artificielle générative au quotidien pour booster votre productivité.</p>
+                        <button class="btn btn-primary w-100 mt-auto py-2 btn-inscrire" data-bs-toggle="modal"
+                            data-bs-target="#registrationModal"
+                            data-formation="Initiation aux outils d'IA">S'inscrire</button>
+                    </div>
+                </div>
+                <!-- Formation 4 -->
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.4s">
+                    <div class="formation-card p-4 d-flex flex-column h-100 text-center">
+                        <div class="text-center mb-3" style="font-size: 3.5rem; color: #d10000;">
+                            <i class="fa fa-palette"></i>
+                        </div>
+                        <h5 class="mb-3" style="font-weight: 700; color: #1a1a1a;">Les Bases du Design</h5>
+                        <p class="text-muted small mb-4" style="line-height: 1.6;">Apprenez les règles essentielles de
+                            la typographie, l'harmonie des couleurs et concevez des visuels créatifs et pro.</p>
+                        <button class="btn btn-primary w-100 mt-auto py-2 btn-inscrire" data-bs-toggle="modal"
+                            data-bs-target="#registrationModal" data-formation="Les Bases du Design">S'inscrire</button>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="mb-4 text-center wow fadeIn" data-wow-delay="0.1s" style="color: #1a1a1a; font-weight: 900;">
+                Modules Spécifiques Disponibles</h3>
+            <div id="formationsModulesContainer" class="row g-4 justify-content-center">
+                <!-- Module 1 -->
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="formation-card p-4 d-flex flex-column h-100">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="far fa-file-word fs-1 me-3" style="color: #d10000;"></i>
+                            <h5 class="mb-0" style="font-weight: 700; color: #1a1a1a;">Microsoft Word</h5>
+                        </div>
+                        <p class="text-muted small mb-4" style="line-height: 1.6;">Mise en page académique avancée,
+                            structuration de mémoires, gestion de styles et publipostage.</p>
+                        <button class="btn btn-primary w-100 mt-auto py-2 btn-inscrire" data-bs-toggle="modal"
+                            data-bs-target="#registrationModal" data-formation="Microsoft Word">S'inscrire</button>
+                    </div>
+                </div>
+                <!-- Module 2 -->
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="formation-card p-4 d-flex flex-column h-100">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="far fa-file-excel fs-1 me-3" style="color: #d10000;"></i>
+                            <h5 class="mb-0" style="font-weight: 700; color: #1a1a1a;">Microsoft Excel</h5>
+                        </div>
+                        <p class="text-muted small mb-4" style="line-height: 1.6;">Formules complexes, modélisation de
+                            données, tableaux croisés dynamiques (TCD) et graphiques.</p>
+                        <button class="btn btn-primary w-100 mt-auto py-2 btn-inscrire" data-bs-toggle="modal"
+                            data-bs-target="#registrationModal" data-formation="Microsoft Excel">S'inscrire</button>
+                    </div>
+                </div>
+                <!-- Module 3 -->
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="formation-card p-4 d-flex flex-column h-100">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fa fa-database fs-1 me-3" style="color: #d10000;"></i>
+                            <h5 class="mb-0" style="font-weight: 700; color: #1a1a1a;">Microsoft Access</h5>
+                        </div>
+                        <p class="text-muted small mb-4" style="line-height: 1.6;">Conception, requêtes SQL simples et
+                            gestion structurée de bases de données relationnelles.</p>
+                        <button class="btn btn-primary w-100 mt-auto py-2 btn-inscrire" data-bs-toggle="modal"
+                            data-bs-target="#registrationModal" data-formation="Microsoft Access">S'inscrire</button>
+                    </div>
+                </div>
+                <!-- Module 4 -->
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="formation-card p-4 d-flex flex-column h-100">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="far fa-file-powerpoint fs-1 me-3" style="color: #d10000;"></i>
+                            <h5 class="mb-0" style="font-weight: 700; color: #1a1a1a;">Microsoft PowerPoint</h5>
+                        </div>
+                        <p class="text-muted small mb-4" style="line-height: 1.6;">Conception de présentations
+                            interactives et dynamiques pour soutenir vos projets et examens.</p>
+                        <button class="btn btn-primary w-100 mt-auto py-2 btn-inscrire" data-bs-toggle="modal"
+                            data-bs-target="#registrationModal"
+                            data-formation="Microsoft PowerPoint">S'inscrire</button>
+                    </div>
+                </div>
+                <!-- Module 5 -->
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="formation-card p-4 d-flex flex-column h-100">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fa fa-newspaper fs-1 me-3" style="color: #d10000;"></i>
+                            <h5 class="mb-0" style="font-weight: 700; color: #1a1a1a;">Microsoft Publisher</h5>
+                        </div>
+                        <p class="text-muted small mb-4" style="line-height: 1.6;">Création de supports de communication
+                            imprimables : dépliants, affiches et bulletins.</p>
+                        <button class="btn btn-primary w-100 mt-auto py-2 btn-inscrire" data-bs-toggle="modal"
+                            data-bs-target="#registrationModal" data-formation="Microsoft Publisher">S'inscrire</button>
+                    </div>
+                </div>
+                <!-- Module 6 -->
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="formation-card p-4 d-flex flex-column h-100">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fa fa-cloud fs-1 me-3" style="color: #d10000;"></i>
+                            <h5 class="mb-0" style="font-weight: 700; color: #1a1a1a;">Microsoft SharePoint</h5>
+                        </div>
+                        <p class="text-muted small mb-4" style="line-height: 1.6;">Gestion de portails d'information
+                            d'équipe, espaces documentaires et collaboration en nuage.</p>
+                        <button class="btn btn-primary w-100 mt-auto py-2 btn-inscrire" data-bs-toggle="modal"
+                            data-bs-target="#registrationModal"
+                            data-formation="Microsoft SharePoint">S'inscrire</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Section Ateliers & Formations End -->
+
+
+    <!-- Testimonial Start -->
+    <div class="container-xxl pb-5">
+        <div class="container pb-5">
+            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 800px;">
+                <h6 class="section-title bg-white text-center text-primary px-3">Témoignages</h6>
+                <h1 class="mb-5" style="font-weight: 800; font-family: 'Montserrat', sans-serif;" data-cms="testimonials.main_title">
+                    Ce que pensent nos apprenants
+                </h1>
+                <p class="text-muted" data-cms="testimonials.subtitle">
+                    Découvrez les expériences des étudiants et professionnels qui ont choisi la Salle du Numérique pour
+                    développer leurs compétences.
+                </p>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-md-12 col-lg-9">
+                    <div class="owl-carousel testimonial-carousel wow fadeIn" data-wow-delay="0.2s">
+
+                        <!-- Témoignage 1 -->
+                        <div class="testimonial-item">
+                            <div class="row g-5 align-items-center">
+                                <div class="col-md-6">
+                                    <div class="testimonial-img">
+                                        <img class="img-fluid" src="img/testimonial-1.jpeg" alt="">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="testimonial-text pb-5 pb-md-0">
+                                        <h3>Une formation qui change tout !</h3>
+
+                                        <p>
+                                            J'ai suivi la formation en Intelligence Artificielle et j'ai été
+                                            impressionné par
+                                            la qualité des formateurs. Ils prennent le temps d'expliquer chaque notion
+                                            avec
+                                            des exemples pratiques. Grâce à cette expérience, j'utilise aujourd'hui
+                                            plusieurs
+                                            outils d'IA dans mes études et mes projets personnels.
+                                        </p>
+
+                                        <h5 class="mb-0">Junior Katende</h5>
+                                        <span class="text-primary">Étudiante en Informatique</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Témoignage 2 -->
+                        <div class="testimonial-item">
+                            <div class="row g-5 align-items-center">
+                                <div class="col-md-6">
+                                    <div class="testimonial-img">
+                                        <img class="img-fluid" src="img/testimonial-2.jpeg" alt="">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="testimonial-text pb-5 pb-md-0">
+                                        <h3>Des équipements modernes et un excellent encadrement</h3>
+
+                                        <p>
+                                            La Salle du Numérique offre un environnement idéal pour apprendre. Les
+                                            ordinateurs
+                                            sont performants, la connexion Internet est rapide et les formateurs sont
+                                            toujours
+                                            disponibles pour accompagner chaque participant. Je recommande cette salle à
+                                            tous
+                                            les étudiants qui souhaitent développer leurs compétences numériques.
+                                        </p>
+
+                                        <h5 class="mb-0">Rocky Kahozi</h5>
+                                        <span class="text-primary">Étudiant en Sciences</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Témoignage 3 -->
+                        <div class="testimonial-item">
+                            <div class="row g-5 align-items-center">
+                                <div class="col-md-6">
+                                    <div class="testimonial-img">
+                                        <img class="img-fluid" src="img/testimonial-3.jpeg" alt="">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="testimonial-text pb-5 pb-md-0">
+                                        <h3>Une expérience enrichissante</h3>
+
+                                        <p>
+                                            Les formations en Microsoft 365 et Design m'ont permis d'améliorer
+                                            considérablement
+                                            mes compétences professionnelles. J'apprécie particulièrement la pédagogie
+                                            des
+                                            formateurs, l'ambiance conviviale et les espaces de travail modernes qui
+                                            favorisent
+                                            l'apprentissage et les échanges entre étudiants.
+                                        </p>
+
+                                        <h5 class="mb-0">Jenos Mbayo</h5>
+                                        <span class="text-primary">Entrepreneure & Apprenante</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Testimonial End -->
+
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-white-50 footer pt-5">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
+                    <a href="index.html" class="d-inline-block mb-3">
+                        <h1 class="text-white">SNU<span class="text-primary">-UNILU</span></h1>
+                    </a>
+                    <p class="mb-4">Espace d'apprentissage, de collaboration et d'innovation technologique de
+                        l'Université de Lubumbashi.</p>
+                    <a class="btn btn-primary border-2 px-4" href="#">Visiter la SNU</a>
+                </div>
+                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.3s">
+                    <h5 class="text-white mb-4">Contact</h5>
+                    <p><i class="fa fa-map-marker-alt me-3"></i>Fac. Sciences Sociales, UNILU — Auditoire WAZIA,
+                        Lubumbashi, RDC</p>
+                    <p><i class="fa fa-phone-alt me-3"></i>+243 972 147 721</p>
+                    <p><i class="fa fa-envelope me-3"></i>numerique@SNU.ac.cd</p>
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-outline-primary btn-square border-2 me-2"
+                            href="https://www.facebook.com/unilu.ac.cd" target="_blank" rel="noopener noreferrer"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-primary btn-square border-2 me-2" href="mailto:snunilu@unilu.ac.cd"><i
+                                class="fa fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container wow fadeIn" data-wow-delay="0.1s">
+            <div class="copyright">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0"> Salle du Numérique UNILU
+                        &copy; 2026
+                         | <a href="admin/" class="text-white-50"><i class="fa fa-lock me-1"></i>Espace Admin</a>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+
+    <!-- ══════════════════════════════════════════════════
+         CLAUDIA — Widget Vocal Premium (Rouge & Blanc)
+    ══════════════════════════════════════════════════ -->
+
+    <!-- Bouton flottant Claudia (Robot) -->
+    <div id="claudiaVoiceWidget">
+        <div id="claudiaLabel">Claudia · IA Vocale</div>
+        <button id="claudiaVoiceBtn" title="Parler à Claudia" aria-label="Ouvrir Claudia">
+            <span class="c-ring c-ring-1"></span>
+            <span class="c-ring c-ring-2"></span>
+            <span class="c-icon-wrap" id="claudiaBtnIcon">
+                <!-- Icône Robot -->
+                <svg class="c-robot" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h2a3 3 0 0 1 3 3v2h1a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-1v1a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3v-1H5a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2h1V10a3 3 0 0 1 3-3h2V5.73A2 2 0 0 1 10 4a2 2 0 0 1 2-2zM9 9a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-7a1 1 0 0 0-1-1H9zm-4 5v-2h1v2H5zm14 0v-2h1v2h-1zM9.5 12a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm5 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"
+                        fill="white" />
+                </svg>
+            </span>
+            <span class="c-dot" id="claudiaDot"></span>
+        </button>
+    </div>
+
+    <!-- Panel vocal Claudia -->
+    <div id="claudiaSpeakModal" role="dialog" aria-label="Claudia Assistante Vocale">
+        <div class="cm-head" id="claudiaHead">
+            <div class="cm-avatar">
+                <img src="img/claudia.png" alt="Claudia" onerror="this.src='img/Logo_SNU.jpg'">
+                <span class="cm-avatar-ring"></span>
+            </div>
+            <div class="cm-head-info">
+                <div class="cm-name">Claudia</div>
+                <div class="cm-subtitle" id="claudiaStatus">Prête à vous écouter</div>
+            </div>
+            <div class="cm-head-right">
+                <span class="cm-counter" id="claudiaQCounter">15 restantes</span>
+                <button class="cm-close-btn" id="claudiaCloseBtn" title="Fermer" aria-label="Fermer">&#x2715;</button>
+            </div>
+        </div>
+
+        <div class="cm-body">
+            <div class="cm-visualizer" id="claudiaVisualizer">
+                <!-- Animation Cerveau -->
+                <div class="cm-brain-container" id="cmBrainContainer">
+                    <svg class="cm-brain-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M16 3a3.5 3.5 0 0 1 3.2 4.93c1.66.7 2.8 2.37 2.8 4.37A4.8 4.8 0 0 1 19.3 16.7c.37.95.44 2-.11 2.92-1.02 1.74-3.3 2.1-5.18 1.13A4.5 4.5 0 0 1 12 22a4.5 4.5 0 0 1-2.01-1.25C8.1 21.72 5.83 21.36 4.8 19.62c-.55-.92-.48-1.97-.1-2.92A4.8 4.8 0 0 1 2 12.3c0-2 1.14-3.67 2.8-4.37A3.5 3.5 0 0 1 8 3c1.55 0 2.87.97 3.32 2.36L12 6.1l.68-.74A3.5 3.5 0 0 1 16 3z"
+                            fill="url(#brainGrad)" />
+                        <path d="M12 6.1l-.68-.74m1.36 0l-.68.74" stroke="rgba(255,255,255,0.8)" stroke-width="1.2"
+                            stroke-linecap="round" />
+                        <path d="M7.5 7.5c2 1 1.5 3.5 4 4.5" stroke="rgba(255,255,255,0.7)" stroke-width="1.2"
+                            stroke-linecap="round" />
+                        <path d="M16.5 7.5c-2 1-1.5 3.5-4 4.5" stroke="rgba(255,255,255,0.7)" stroke-width="1.2"
+                            stroke-linecap="round" />
+                        <path d="M6 14.5c2-1 3.5 0 5-1.5" stroke="rgba(255,255,255,0.7)" stroke-width="1.2"
+                            stroke-linecap="round" />
+                        <path d="M18 14.5c-2-1-3.5 0-5-1.5" stroke="rgba(255,255,255,0.7)" stroke-width="1.2"
+                            stroke-linecap="round" />
+                        <defs>
+                            <linearGradient id="brainGrad" x1="2" y1="3" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+                                <stop offset="0%" stop-color="#ff4444" />
+                                <stop offset="100%" stop-color="#a50000" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <span class="cm-pulse cm-pulse-1"></span>
+                    <span class="cm-pulse cm-pulse-2"></span>
+                    <span class="cm-pulse cm-pulse-3"></span>
+                </div>
+                <div class="cm-bars" id="cmBars">
+                    <span class="cm-bar" style="--h:14px;--d:0s"></span>
+                    <span class="cm-bar" style="--h:24px;--d:0.08s"></span>
+                    <span class="cm-bar" style="--h:36px;--d:0.16s"></span>
+                    <span class="cm-bar" style="--h:48px;--d:0.04s"></span>
+                    <span class="cm-bar" style="--h:30px;--d:0.12s"></span>
+                    <span class="cm-bar" style="--h:40px;--d:0.20s"></span>
+                    <span class="cm-bar" style="--h:22px;--d:0.06s"></span>
+                    <span class="cm-bar" style="--h:14px;--d:0.18s"></span>
+                </div>
+            </div>
+            <div class="cm-bubble" id="claudiaSpeakText">
+                Bonjour, je suis <strong>Claudia</strong>, votre guide de la Salle du Num&#233;rique.<br>Appuyez sur le
+                micro pour me parler.
+            </div>
+            <div class="cm-hint" id="claudiaHint">Appuyez &#224; nouveau pour r&#233;pondre</div>
+        </div>
+
+        <div class="cm-controls">
+            <button class="cm-mic-btn" id="claudiaMicBtn" title="Activer/Désactiver le micro"
+                aria-label="Contrôler le microphone">
+                <i class="fa fa-microphone"></i>
+                <span class="cm-mic-label" id="claudiaMicLabel">Commencer à parler</span>
+            </button>
+        </div>
+    </div>
+
+    <style>
+        :root {
+            --c-red: #d10000;
+            --c-red-dark: #a50000;
+            --c-white: #ffffff;
+        }
+
+        /* ── Bouton flottant ── */
+        #claudiaVoiceWidget {
+            position: fixed;
+            right: 18px;
+            bottom: 22px;
+            z-index: 1050;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 7px;
+        }
+
+        #claudiaLabel {
+            background: rgba(209, 0, 0, 0.9);
+            color: #fff;
+            font-size: 0.68rem;
+            font-weight: 700;
+            padding: 3px 11px;
+            border-radius: 20px;
+            letter-spacing: .05em;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity .3s, transform .3s;
+            pointer-events: none;
+            white-space: nowrap;
+            backdrop-filter: blur(6px);
+        }
+
+        #claudiaVoiceWidget:hover #claudiaLabel {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #claudiaVoiceBtn {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            border: none;
+            background: linear-gradient(135deg, var(--c-red), var(--c-red-dark));
+            color: #fff;
+            box-shadow: 0 6px 22px rgba(209, 0, 0, .5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            transition: transform .18s, box-shadow .18s, background .4s;
+        }
+
+        #claudiaVoiceBtn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 8px 28px rgba(209, 0, 0, .7);
+        }
+
+        #claudiaVoiceBtn:active {
+            transform: scale(0.95);
+        }
+
+        /* Anneaux de pulse rouges */
+        .c-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid rgba(209, 0, 0, .4);
+            pointer-events: none;
+            animation: cRingPulse 2.4s ease-out infinite;
+        }
+
+        .c-ring-1 {
+            width: 74px;
+            height: 74px;
+            animation-delay: 0s;
+        }
+
+        .c-ring-2 {
+            width: 92px;
+            height: 92px;
+            animation-delay: .8s;
+        }
+
+        @keyframes cRingPulse {
+            0% {
+                transform: scale(.85);
+                opacity: .8
+            }
+
+            100% {
+                transform: scale(1.25);
+                opacity: 0
+            }
+        }
+
+        /* Icône Robot */
+        .c-icon-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .c-robot {
+            width: 30px;
+            height: 30px;
+            animation: cRobotIdle 2s ease-in-out infinite;
+            filter: drop-shadow(0 1px 3px rgba(0, 0, 0, .3));
+        }
+
+        @keyframes cRobotIdle {
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(-3px)
+            }
+        }
+
+        /* Point status */
+        .c-dot {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 11px;
+            height: 11px;
+            background: #fff;
+            border-radius: 50%;
+            border: 2px solid var(--c-red);
+            transition: background .3s, box-shadow .3s;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Etats du bouton principal (TOUJOURS ROUGE ET BLANC) */
+        #claudiaVoiceBtn.state-listening {
+            box-shadow: 0 0 30px rgba(255, 255, 255, .6), 0 6px 22px rgba(209, 0, 0, .8);
+            border: 2px solid #fff;
+        }
+
+        #claudiaVoiceBtn.state-thinking {
+            background: linear-gradient(135deg, var(--c-red-dark), #800000);
+        }
+
+        #claudiaVoiceBtn.state-thinking .c-robot {
+            animation: cRobotThink .5s ease-in-out infinite alternate;
+        }
+
+        @keyframes cRobotThink {
+            from {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+
+            to {
+                transform: scale(1.15);
+                opacity: 1;
+                filter: drop-shadow(0 0 8px #fff);
+            }
+        }
+
+        #claudiaVoiceBtn.state-speaking {
+            box-shadow: 0 6px 22px rgba(209, 0, 0, .8);
+            animation: cBtnSpeakPulse .8s infinite alternate;
+        }
+
+        @keyframes cBtnSpeakPulse {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.05);
+            }
+        }
+
+        /* ── Panel vocal ── */
+        #claudiaSpeakModal {
+            display: none;
+            position: fixed;
+            bottom: 92px;
+            right: 18px;
+            z-index: 1060;
+            width: 300px;
+            background: rgba(255, 255, 255, .98);
+            border: 1px solid rgba(209, 0, 0, 0.15);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 20px;
+            box-shadow: 0 16px 48px rgba(0, 0, 0, .22), 0 0 0 1px rgba(209, 0, 0, .1);
+            overflow: hidden;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        /* En-tete ROUGE UNIFORME */
+        .cm-head {
+            background: linear-gradient(135deg, var(--c-red), var(--c-red-dark));
+            padding: 12px 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: background .4s;
+        }
+
+        .cm-head.state-listening {
+            background: linear-gradient(135deg, #ff3333, var(--c-red));
+        }
+
+        .cm-head.state-thinking {
+            background: linear-gradient(135deg, #8b0000, #5c0000);
+        }
+
+        .cm-avatar {
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .cm-avatar img {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 2.5px solid rgba(255, 255, 255, .9);
+            object-fit: cover;
+        }
+
+        .cm-avatar-ring {
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, .6);
+            animation: cmAvatarRing 2s ease-in-out infinite;
+        }
+
+        @keyframes cmAvatarRing {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: .6
+            }
+
+            50% {
+                transform: scale(1.12);
+                opacity: 1
+            }
+        }
+
+        .cm-head-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .cm-name {
+            color: #fff;
+            font-weight: 800;
+            font-size: .92rem;
+            letter-spacing: .02em;
+        }
+
+        .cm-subtitle {
+            color: rgba(255, 255, 255, .9);
+            font-size: .68rem;
+            margin-top: 1px;
+        }
+
+        .cm-head-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cm-counter {
+            font-size: .62rem;
+            font-weight: 700;
+            color: var(--c-red);
+            background: #fff;
+            padding: 2px 8px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        .cm-close-btn {
+            background: rgba(255, 255, 255, .2);
+            border: none;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background .2s;
+        }
+
+        .cm-close-btn:hover {
+            background: rgba(255, 255, 255, .4);
+        }
+
+        /* Corps */
+        .cm-body {
+            padding: 16px 16px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Visualiseur Cerveau */
+        .cm-visualizer {
+            position: relative;
+            width: 100%;
+            height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+        }
+
+        /* Conteneur Cerveau */
+        .cm-brain-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 64px;
+            height: 64px;
+            flex-shrink: 0;
+        }
+
+        .cm-brain-svg {
+            width: 54px;
+            height: 54px;
+            animation: cmBrainIdle 2s ease-in-out infinite;
+            z-index: 2;
+            position: relative;
+            filter: drop-shadow(0 4px 8px rgba(209, 0, 0, .25));
+        }
+
+        @keyframes cmBrainIdle {
+
+            0%,
+            100% {
+                transform: scale(1)
+            }
+
+            50% {
+                transform: scale(1.05)
+            }
+        }
+
+        /* Animation de réflexion du cerveau (Très important) */
+        .cm-visualizer.state-thinking .cm-brain-svg {
+            animation: cmBrainThink .7s ease-in-out infinite alternate;
+            filter: drop-shadow(0 0 12px rgba(209, 0, 0, .6));
+        }
+
+        @keyframes cmBrainThink {
+            0% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: scale(1.15);
+                opacity: 1;
+            }
+        }
+
+        .cm-visualizer.state-listening .cm-brain-svg {
+            animation: cmBrainListen 1s ease-in-out infinite;
+        }
+
+        @keyframes cmBrainListen {
+
+            0%,
+            100% {
+                transform: scale(1)
+            }
+
+            50% {
+                transform: scale(1.08)
+            }
+        }
+
+        .cm-visualizer.state-speaking .cm-brain-svg {
+            animation: cmBrainSpeak .4s ease-in-out infinite alternate;
+        }
+
+        @keyframes cmBrainSpeak {
+            0% {
+                transform: scale(1)
+            }
+
+            100% {
+                transform: scale(1.1)
+            }
+        }
+
+        /* Ondes pulse autour du cerveau (toujours rouges) */
+        .cm-pulse {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid rgba(209, 0, 0, .2);
+            pointer-events: none;
+            animation: cmPulse 2s ease-out infinite;
+        }
+
+        .cm-pulse-1 {
+            width: 60px;
+            height: 60px;
+            animation-delay: 0s;
+        }
+
+        .cm-pulse-2 {
+            width: 76px;
+            height: 76px;
+            animation-delay: .6s;
+        }
+
+        .cm-pulse-3 {
+            width: 92px;
+            height: 92px;
+            animation-delay: 1.2s;
+        }
+
+        @keyframes cmPulse {
+            0% {
+                transform: scale(.7);
+                opacity: .8
+            }
+
+            100% {
+                transform: scale(1.3);
+                opacity: 0
+            }
+        }
+
+        .cm-visualizer.state-thinking .cm-pulse {
+            animation-duration: .8s;
+            border-color: rgba(209, 0, 0, .4);
+        }
+
+        .cm-visualizer.state-listening .cm-pulse {
+            border-color: rgba(209, 0, 0, .5);
+            animation-duration: 1.2s;
+        }
+
+        .cm-visualizer.state-speaking .cm-pulse {
+            border-color: rgba(209, 0, 0, .3);
+            animation-duration: 1s;
+        }
+
+        /* Barres vocales rouges */
+        .cm-bars {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            height: 60px;
+        }
+
+        .cm-bar {
+            width: 5px;
+            height: var(--h);
+            background: linear-gradient(to top, var(--c-red), #ff6b6b);
+            border-radius: 4px;
+            animation: cmBarAnim .9s ease-in-out var(--d) infinite;
+            opacity: .2;
+            transition: opacity .3s, transform .3s;
+        }
+
+        .cm-visualizer.state-listening .cm-bar {
+            opacity: 1;
+            animation-duration: .5s;
+        }
+
+        .cm-visualizer.state-speaking .cm-bar {
+            opacity: 1;
+            animation-duration: .7s;
+            background: var(--c-red);
+        }
+
+        .cm-visualizer.state-thinking .cm-bar {
+            opacity: .05;
+            animation: none;
+            transform: scaleY(.2);
+        }
+
+        @keyframes cmBarAnim {
+
+            0%,
+            100% {
+                transform: scaleY(.35)
+            }
+
+            50% {
+                transform: scaleY(1.6)
+            }
+        }
+
+        /* Bulle texte */
+        .cm-bubble {
+            width: 100%;
+            background: #fff;
+            border-radius: 12px;
+            padding: 10px 13px;
+            font-size: .79rem;
+            color: #333;
+            line-height: 1.55;
+            min-height: 44px;
+            border: 1px solid rgba(209, 0, 0, 0.15);
+            border-left: 4px solid var(--c-red);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            transition: border-color .4s, box-shadow .4s;
+        }
+
+        .cm-head.state-listening~.cm-body .cm-bubble {
+            border-left-color: #ff3333;
+            box-shadow: 0 2px 12px rgba(209, 0, 0, 0.15);
+        }
+
+        .cm-head.state-thinking~.cm-body .cm-bubble {
+            border-left-color: #8b0000;
+        }
+
+        .cm-head.state-speaking~.cm-body .cm-bubble {
+            border-left-color: var(--c-red);
+        }
+
+        /* Hint */
+        .cm-hint {
+            font-size: .65rem;
+            color: #888;
+            text-align: center;
+            display: none;
+            animation: cmHintFade 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes cmHintFade {
+            from {
+                opacity: .5
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        /* Controles Purement Vocaux (UI/UX) */
+        .cm-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 16px 18px;
+            border-top: 1px solid rgba(209, 0, 0, .08);
+            background: #fcfcfc;
+        }
+
+        .cm-mic-btn {
+            width: 100%;
+            max-width: 240px;
+            height: 46px;
+            border-radius: 23px;
+            border: none;
+            background: linear-gradient(135deg, var(--c-red), var(--c-red-dark));
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            font-size: .95rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            transition: all .25s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 6px 16px rgba(209, 0, 0, .25);
+        }
+
+        .cm-mic-btn:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 22px rgba(209, 0, 0, .35);
+            background: linear-gradient(135deg, var(--c-red-dark), #800000);
+        }
+
+        .cm-mic-btn:active {
+            transform: scale(0.97);
+        }
+
+        .cm-mic-btn.active {
+            background: #fff;
+            color: var(--c-red);
+            border: 2px solid var(--c-red);
+            box-shadow: 0 0 18px rgba(209, 0, 0, .3);
+            animation: cmMicPulse .8s ease-in-out infinite alternate;
+        }
+
+        .cm-mic-label {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        @keyframes cmMicPulse {
+            from {
+                box-shadow: 0 0 8px rgba(209, 0, 0, .2)
+            }
+
+            to {
+                box-shadow: 0 0 24px rgba(209, 0, 0, .5)
+            }
+        }
+
+        @media(max-width:380px) {
+            #claudiaSpeakModal {
+                width: calc(100vw - 28px);
+                right: 14px;
+            }
+        }
+    </style>
+    <!-- Claudia Speak Mini Panel -->
+    <div id="claudiaSpeakModal">
+        <div class="cmodal-head">
+            <img src="img/claudia.png" alt="Claudia" onerror="this.src='img/Logo_SNU.jpg'">
+            <div style="flex:1;">
+                <div class="cname">Claudia</div>
+                <div class="cstatus" id="claudiaStatus">Assistante Vocale — En ligne</div>
+            </div>
+            <span id="claudiaQCounter"
+                style="font-size:0.65rem; font-weight:700; color:#22c55e; background:rgba(0,0,0,0.25); padding:2px 8px; border-radius:20px; white-space:nowrap;">
+                10 questions restantes
+            </span>
+        </div>
+        <div class="cmodal-body">
+            <div class="cwave">
+                <span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <p id="claudiaSpeakText">Bonjour, je suis <strong>Claudia</strong>, votre assistante vocale de la Salle du
+                Numérique. Posez-moi vos questions sur la plateforme.</p>
+        </div>
+        <!-- Zone de saisie -->
+        <div style="padding: 8px 12px; border-top: 1px solid #f0f0f0; display:flex; gap:6px; align-items:center;">
+            <button id="claudiaMicBtn" title="Parler"
+                style="flex-shrink:0; width:34px; height:34px; border-radius:50%; border:none; background:#d10000; color:#fff; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:0.85rem; transition:all 0.2s;">
+                <i class="fa fa-microphone"></i>
+            </button>
+            <input id="claudiaInput" type="text" placeholder="Posez votre question..."
+                style="flex:1; border:1px solid #e5e7eb; border-radius:20px; padding:6px 12px; font-size:0.78rem; outline:none; font-family:'Roboto',sans-serif;">
+            <button id="claudiaSendBtn" title="Envoyer"
+                style="flex-shrink:0; width:34px; height:34px; border-radius:50%; border:none; background:#d10000; color:#fff; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:0.85rem; transition:all 0.2s;">
+                <i class="fa fa-paper-plane"></i>
+            </button>
+        </div>
+        <div class="cmodal-footer">
+            <button id="claudiaCloseBtn">Fermer</button>
+        </div>
+    </div>
+
+    <!-- Registration Modal -->
+    <div class="modal fade" id="registrationModal" tabindex="-1" aria-labelledby="registrationModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content shadow-lg border-0" style="border-radius: 12px; overflow: hidden;">
+                <div class="modal-header p-4 d-flex align-items-center" style="background-color: #d10000 !important;">
+                    <img src="img/Logo_SNU.jpg" alt="Logo SNU"
+                        style="height: 40px; width: 40px; border-radius: 50%; margin-right: 12px; border: 2px solid #fff; object-fit: cover;">
+                    <h5 class="modal-title text-white mb-0" id="registrationModalLabel"
+                        style="font-weight: 800; font-family: 'Montserrat', sans-serif;">Inscription à la Formation</h5>
+                    <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="modal"
+                        aria-label="Close" style="box-shadow: none !important;"></button>
+                </div>
+                <div class="modal-body p-4 bg-light">
+                    <!-- Step 1: Input Form -->
+                    <div id="registrationFormContainer">
+                        <p class="text-muted mb-4">Veuillez remplir le formulaire ci-dessous pour réserver votre place à
+                            la formation choisie.</p>
+                        <form id="enrollmentForm" class="needs-validation" novalidate>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="regFullName"
+                                            placeholder="Nom complet" required>
+                                        <label for="regFullName"><i class="fa fa-user me-2 text-muted"></i>Nom
+                                            complet</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="form-floating">
+                                        <select class="form-select" id="regGender" required>
+                                            <option value="" disabled selected>Choisir...</option>
+                                            <option value="Masculin">Masculin</option>
+                                            <option value="Féminin">Féminin</option>
+                                        </select>
+                                        <label for="regGender"><i
+                                                class="fa fa-venus-mars me-2 text-muted"></i>Sexe</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="form-floating">
+                                        <input type="number" class="form-control" id="regAge" placeholder="Âge" min="5"
+                                            max="100" required>
+                                        <label for="regAge"><i
+                                                class="fa fa-birthday-cake me-2 text-muted"></i>Âge</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="tel" class="form-control" id="regPhone" placeholder="Téléphone"
+                                            required>
+                                        <label for="regPhone"><i
+                                                class="fa fa-phone me-2 text-muted"></i>Téléphone</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control" id="regEmail"
+                                            placeholder="Adresse e-mail" required>
+                                        <label for="regEmail"><i class="fa fa-envelope me-2 text-muted"></i>Adresse
+                                            e-mail</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="regAddress" placeholder="Adresse"
+                                            required>
+                                        <label for="regAddress"><i
+                                                class="fa fa-map-marker-alt me-2 text-muted"></i>Adresse
+                                            physique</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="regProfession"
+                                            placeholder="Profession" required>
+                                        <label for="regProfession"><i
+                                                class="fa fa-briefcase me-2 text-muted"></i>Profession /
+                                            Occupation</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <select class="form-select" id="regEducation" required>
+                                            <option value="" disabled selected>Choisir...</option>
+                                            <option value="Diplômé d'État">Diplômé d'État</option>
+                                            <option value="Gradué / Étudiant">Gradué / Étudiant</option>
+                                            <option value="Licencié">Licencié</option>
+                                            <option value="Master">Master</option>
+                                            <option value="Doctorat">Doctorat</option>
+                                            <option value="Autre">Autre</option>
+                                        </select>
+                                        <label for="regEducation"><i
+                                                class="fa fa-graduation-cap me-2 text-muted"></i>Niveau d'étude</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <select class="form-select" id="regFormation" required>
+                                            <option value="" disabled>Choisir la formation...</option>
+                                            <optgroup label="Formations Principales">
+                                                <option value="Les Bases de Windows">Les Bases de Windows</option>
+                                                <option value="Bureautique (Microsoft 365)">Bureautique (Microsoft 365)
+                                                </option>
+                                                <option value="Initiation aux outils d'IA">Initiation aux outils d'IA
+                                                </option>
+                                                <option value="Les Bases du Design">Les Bases du Design</option>
+                                            </optgroup>
+                                            <optgroup label="Modules spécifiques">
+                                                <option value="Microsoft Word">Microsoft Word</option>
+                                                <option value="Microsoft Excel">Microsoft Excel</option>
+                                                <option value="Microsoft Access">Microsoft Access</option>
+                                                <option value="Microsoft PowerPoint">Microsoft PowerPoint</option>
+                                                <option value="Microsoft Publisher">Microsoft Publisher</option>
+                                                <option value="Microsoft SharePoint">Microsoft SharePoint</option>
+                                            </optgroup>
+                                        </select>
+                                        <label for="regFormation"><i class="fa fa-book me-2 text-muted"></i>Formation
+                                            choisie</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="date" class="form-control" id="regDate" required>
+                                        <label for="regDate"><i class="fa fa-calendar-alt me-2 text-muted"></i>Date
+                                            souhaitée</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <textarea class="form-control" placeholder="Commentaire" id="regComment"
+                                            style="height: 100px;"></textarea>
+                                        <label for="regComment"><i
+                                                class="fa fa-comment-dots me-2 text-muted"></i>Commentaire /
+                                            Attentes</label>
+                                    </div>
+                                </div>
+                                <div class="col-12 mt-4 text-end">
+                                    <button type="submit" class="btn btn-primary px-5 py-3 w-100"
+                                        style="font-weight: 700;">Valider l'Inscription</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Step 2: Fiche d'inscription générée -->
+                    <div id="registrationReceiptContainer" class="d-none">
+                        <div class="alert alert-success d-flex align-items-center mb-4" role="alert">
+                            <i class="fa fa-check-circle fs-4 me-2"></i>
+                            <div>
+                                <strong>Inscription validée avec succès !</strong> Votre fiche d'inscription a été
+                                générée ci-dessous.
+                            </div>
+                        </div>
+
+                        <!-- Printable/Dynamic sheet visual mockup -->
+                        <div id="registrationFichePrint" class="bg-white p-4 border rounded shadow-sm mb-4"
+                            style="font-family: 'Roboto', sans-serif; position: relative;">
+                            <div class="watermark-snu"
+                                style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-30deg); font-size: 4rem; font-weight: 900; color: rgba(209, 0, 0, 0.03); pointer-events: none; white-space: nowrap;">
+                                SALLE DU NUMERIQUE</div>
+
+                            <div class="d-flex align-items-center justify-content-between border-bottom pb-3 mb-4">
+                                <div class="d-flex align-items-center">
+                                    <img src="img/Logo_SNU.jpg" alt="Logo SNU"
+                                        style="height: 55px; width: 55px; border-radius: 50%; margin-right: 12px; object-fit: cover;">
+                                    <div>
+                                        <h4 class="mb-0"
+                                            style="color: #d10000; font-weight: 800; font-family: 'Montserrat', sans-serif;">
+                                            Salle du Numérique</h4>
+                                        <small class="text-muted">Université de Lubumbashi - UNILU</small>
+                                    </div>
+                                </div>
+                                <div class="text-end">
+                                    <span class="badge bg-danger p-2 fs-6" id="ficheCode"
+                                        style="font-family: monospace;">SNU-2026-XXXX</span>
+                                </div>
+                            </div>
+
+                            <h3 class="text-center mb-4 text-dark"
+                                style="font-family: 'Montserrat', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 1.3rem;">
+                                Fiche d'Inscription Officielle</h3>
+
+                            <div class="row g-3 text-dark text-start">
+                                <div class="col-sm-6">
+                                    <div class="pb-2 border-bottom">
+                                        <span class="text-muted d-block small" style="font-size: 0.75rem;">Nom Complet
+                                            :</span>
+                                        <strong id="ficheFullName" class="fs-6">Jean Dupont</strong>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-6">
+                                    <div class="pb-2 border-bottom">
+                                        <span class="text-muted d-block small" style="font-size: 0.75rem;">Sexe :</span>
+                                        <strong id="ficheGender">Masculin</strong>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-6">
+                                    <div class="pb-2 border-bottom">
+                                        <span class="text-muted d-block small" style="font-size: 0.75rem;">Âge :</span>
+                                        <strong id="ficheAge">22 ans</strong>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="pb-2 border-bottom">
+                                        <span class="text-muted d-block small" style="font-size: 0.75rem;">Téléphone
+                                            :</span>
+                                        <strong id="fichePhone">+243 999 999 999</strong>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="pb-2 border-bottom">
+                                        <span class="text-muted d-block small" style="font-size: 0.75rem;">Adresse
+                                            E-mail :</span>
+                                        <strong id="ficheEmail">jean.dupont@gmail.com</strong>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="pb-2 border-bottom">
+                                        <span class="text-muted d-block small" style="font-size: 0.75rem;">Adresse
+                                            Physique :</span>
+                                        <strong id="ficheAddress">Av. Université, C/ Kasapa, Lubumbashi</strong>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="pb-2 border-bottom">
+                                        <span class="text-muted d-block small" style="font-size: 0.75rem;">Profession /
+                                            Occupation :</span>
+                                        <strong id="ficheProfession">Étudiant</strong>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="pb-2 border-bottom">
+                                        <span class="text-muted d-block small" style="font-size: 0.75rem;">Niveau
+                                            d'Étude :</span>
+                                        <strong id="ficheEducation">Gradué / Étudiant</strong>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="pb-2 border-bottom"
+                                        style="background: rgba(209, 0, 0, 0.03); padding: 5px; border-radius: 4px;">
+                                        <span class="text-muted d-block small" style="font-size: 0.75rem;">Formation
+                                            Sélectionnée :</span>
+                                        <strong id="ficheFormation" class="text-danger fs-6">Microsoft Excel</strong>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="pb-2 border-bottom">
+                                        <span class="text-muted d-block small" style="font-size: 0.75rem;">Date de
+                                            Rentrée Souhaitée :</span>
+                                        <strong id="ficheDate">2026-07-01</strong>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div>
+                                        <span class="text-muted d-block small" style="font-size: 0.75rem;">Commentaire /
+                                            Attentes :</span>
+                                        <p id="ficheComment" class="mb-0 text-muted small" style="font-style: italic;">
+                                            Aucun commentaire.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center border-top pt-3 mt-4">
+                                <small class="text-muted">Généré le <span id="ficheGenDate">19 Juin 2026</span></small>
+                                <small style="color: #d10000; font-weight: 700;">Salle du numerique</small>
+                            </div>
+                        </div>
+
+                        <!-- Barre de statut de téléchargement (masquée par défaut) -->
+                        <div id="waStatusBox" class="d-none mt-3 p-3 rounded-3 border"
+                            style="background:#f8f9fa; font-size:0.82rem;">
+                            <div class="d-flex align-items-center gap-2 mb-2">
+                                <i id="waStatusIcon" class="fa fa-spinner fa-spin text-danger"></i>
+                                <span id="waStatusMsg" class="fw-600" style="font-weight:600;">Préparation...</span>
+                            </div>
+                            <!-- Progress bar -->
+                            <div class="progress" style="height: 5px; border-radius: 10px;">
+                                <div id="waProgressBar" class="progress-bar bg-success" role="progressbar"
+                                    style="width: 0%; transition: width 0.5s ease;"></div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="row g-2 justify-content-center mt-3">
+                            <div class="col-sm-9">
+                                <button id="btnShareWhatsApp" type="button"
+                                    class="btn btn-success w-100 py-3 d-flex align-items-center justify-content-center"
+                                    style="font-weight: 700; background: linear-gradient(135deg, #25D366, #1da851); border: none; color: #fff; font-size: 0.95rem; border-radius: 10px; box-shadow: 0 4px 15px rgba(37,211,102,0.4);">
+                                    <i class="fab fa-whatsapp fs-4 me-2"></i>Télécharger &amp; Envoyer sur WhatsApp SNU
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Guide utilisateur pour les envois -->
+                        <div class="alert alert-light border py-2 px-3 mt-3 shadow-sm"
+                            style="font-size: 0.8rem; border-radius: 8px;">
+                            <div class="mb-1"><i class="fa fa-info-circle text-success me-1"></i><strong>Comment ça
+                                    marche :</strong></div>
+                            <div class="d-flex align-items-start gap-2 mb-1">
+                                <i class="fa fa-download text-danger mt-1" style="min-width:14px;"></i>
+                                <span>Le PDF est <strong>enregistré automatiquement</strong> sur votre appareil.</span>
+                            </div>
+                            <div class="d-flex align-items-start gap-2 mb-1">
+                                <i class="fab fa-whatsapp text-success mt-1" style="min-width:14px;"></i>
+                                <span>Une discussion WhatsApp s'ouvre avec le numéro <strong>+243 972 147
+                                        721</strong>.</span>
+                            </div>
+                            <div class="d-flex align-items-start gap-2">
+                                <i class="fa fa-paperclip text-primary mt-1" style="min-width:14px;"></i>
+                                <span><strong>Joignez le fichier PDF</strong> téléchargé et envoyez-le.</span>
+                            </div>
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <button type="button" class="btn btn-link text-muted" id="btnBackToForm">Retourner au
+                                formulaire</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmation WhatsApp (Etape 4) -->
+    <div class="modal fade" id="waConfirmModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 420px;">
+            <div class="modal-content shadow-lg border-0" style="border-radius: 16px; overflow: hidden;">
+                <div class="modal-header text-white border-0 pb-2"
+                    style="background: linear-gradient(135deg, #25D366, #1da851);">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="fa fa-check-circle fs-4"></i>
+                        <h6 class="modal-title mb-0 fw-bold">PDF téléchargé avec succès</h6>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="modal"
+                        style="box-shadow:none;"></button>
+                </div>
+                <div class="modal-body px-4 py-3">
+                    <p class="text-muted mb-3" style="font-size:0.88rem;">
+                        Votre fiche d'inscription a été <strong>enregistrée</strong> sur votre appareil.<br>
+                        Cliquez ci-dessous pour ouvrir la discussion WhatsApp avec le SNU.
+                    </p>
+                    <!-- AIDE DE TÉLÉCHARGEMENT IOS (IPHONE/IPAD) -->
+                    <div id="iosDownloadHelp" class="d-none mb-3 text-center">
+                        <a id="btnIosDownloadPdf" href="#" target="_blank" class="btn btn-outline-danger w-100 fw-bold"
+                            style="border-radius: 20px; font-size: 0.88rem; padding: 8px 16px;">
+                            <i class="fa fa-file-pdf me-2"></i>Ouvrir / Enregistrer le PDF
+                        </a>
+                        <small class="text-muted d-block mt-1" style="font-size:0.75rem;">
+                            Sur iPhone/iPad, cliquez ci-dessus puis utilisez le bouton de partage <i
+                                class="fa fa-share-square"></i> pour l'enregistrer dans vos Fichiers.
+                        </small>
+                    </div>
+                    <div class="rounded-3 p-3 mb-1" style="background:#f0fdf4; border:1px solid #bbf7d0;">
+                        <p class="mb-2 fw-bold" style="font-size:0.85rem; color:#166534;">Veuillez maintenant :</p>
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <span class="badge rounded-pill bg-success">1</span>
+                            <span style="font-size:0.83rem;">Cliquer sur le bouton <strong>Pièce jointe</strong> <i
+                                    class="fa fa-paperclip"></i></span>
+                        </div>
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <span class="badge rounded-pill bg-success">2</span>
+                            <span style="font-size:0.83rem;">Sélectionner le <strong>PDF téléchargé</strong> dans vos
+                                fichiers</span>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="badge rounded-pill bg-success">3</span>
+                            <span style="font-size:0.83rem;">Envoyer au numéro <strong>+243 972 147 721</strong></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-0 pt-0 justify-content-center">
+                    <a id="btnModalOpenWhatsApp" href="#" target="_blank" data-bs-dismiss="modal"
+                        class="btn btn-success px-5 fw-bold"
+                        style="background: linear-gradient(135deg, #25D366, #1da851); border: none; color: #fff; text-decoration: none; border-radius: 20px; display: inline-flex; align-items: center; justify-content: center; padding: 10px 24px;">
+                        <i class="fab fa-whatsapp me-2"></i>Ouvrir WhatsApp &amp; Envoyer
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jsPDF CDN Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <!-- JavaScript Libraries -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <script>
+        window.CLAUDIA_BACKEND_URL = 'https://salle-unilu-backend.onrender.com';
+    </script>
+    <!-- Template Javascript -->
+    <script src="js/site-content.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  .gitignore — Salle du Numérique UNILU
+#  NE JAMAIS commiter les fichiers listés ici
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# ── Secrets & credentials ──────────────────────
+backend/.env
+.env
+*.key
+*.pem
+
+# ── Cache Python ────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+backend/__pycache__/
+
+# ── Fichiers de vérification tiers ─────────────
+frontend/google*.html
+frontend/BingSiteAuth.xml
+
+# ── Uploads utilisateurs (données) ─────────────
+frontend/img/uploads/*
+!frontend/img/uploads/.gitkeep
+
+# ── Logs & processus ────────────────────────────
+*.pid
+*.log
+
+# ── Environnements virtuels ─────────────────────
+venv/
+.venv/
+env/
+
+# ── IDE & OS ─────────────────────────────────────
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp

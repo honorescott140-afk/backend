@@ -1,0 +1,1195 @@
+/********** Template CSS **********/
+
+/*** Spinner ***/
+#spinner {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .5s ease-out, visibility 0s linear .5s;
+    z-index: 99999;
+}
+
+#spinner.show {
+    transition: opacity .5s ease-out, visibility 0s linear 0s;
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Chatbot Widget Styles */
+#chatbotBtn {
+    position: fixed;
+    right: 45px;
+    bottom: 45px;
+    z-index: 999;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+#chatbotBtn:hover {
+    transform: scale(1.1);
+}
+#chatbotBox {
+    transition: all 0.3s ease;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2) !important;
+}
+#chatbotMessages::-webkit-scrollbar {
+    width: 5px;
+}
+#chatbotMessages::-webkit-scrollbar-track {
+    background: transparent;
+}
+#chatbotMessages::-webkit-scrollbar-thumb {
+    background: #d1000030;
+    border-radius: 10px;
+}
+#chatbotMessages::-webkit-scrollbar-thumb:hover {
+    background: #d1000080;
+}
+.chat-msg-anim {
+    animation: chatFadeIn 0.3s ease-out forwards;
+}
+@keyframes chatFadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/*** Button ***/
+.btn {
+    transition: .5s;
+}
+
+.btn-square {
+    width: 38px;
+    height: 38px;
+}
+
+.btn-sm-square {
+    width: 32px;
+    height: 32px;
+}
+
+.btn-lg-square {
+    width: 48px;
+    height: 48px;
+}
+
+.btn-square,
+.btn-sm-square,
+.btn-lg-square {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: normal;
+}
+
+
+/*** Navbar ***/
+.sticky-top {
+    top: -150px;
+    transition: .5s;
+}
+
+.navbar {
+    padding: 15px 0;
+    font-family: "Montserrat", "Space Grotesk", sans-serif;
+    font-size: 18px;
+}
+
+.navbar .navbar-nav .nav-link {
+    margin-left: 30px;
+    padding: 0;
+    outline: none;
+    color: var(--bs-dark);
+}
+
+.navbar .navbar-nav .nav-link:hover,
+.navbar .navbar-nav .nav-link.active {
+    color: var(--bs-primary)
+}
+
+.navbar .dropdown-toggle::after {
+    border: none;
+    content: "\f107";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    vertical-align: middle;
+    margin-left: 8px;
+}
+
+.navbar .dropdown-menu .dropdown-item:hover,
+.navbar .dropdown-menu .dropdown-item.active {
+    color: var(--bs-white);
+    background: var(--bs-primary);
+}
+
+@media (max-width: 991.98px) {
+    .navbar .navbar-nav .nav-link {
+        margin-left: 0;
+        padding: 10px 0;
+    }
+}
+
+@media (min-width: 992px) {
+    .navbar .nav-item .dropdown-menu {
+        display: block;
+        border: none;
+        margin-top: 0;
+        top: 150%;
+        opacity: 0;
+        visibility: hidden;
+        transition: .5s;
+    }
+
+    .navbar .nav-item:hover .dropdown-menu {
+        top: 100%;
+        visibility: visible;
+        transition: .5s;
+        opacity: 1;
+    }
+}
+
+
+/*** Hero Header ***/
+.hero-header {
+    margin-top: -100px;
+    padding-top: 150px;
+    background: url(../img/hero-bg.jpg) top center no-repeat;
+    background-size: cover;
+}
+
+.hero-header h1 {
+    font-weight: 700 !important;
+    /* bold heading */
+}
+
+.hero-header .breadcrumb-item+.breadcrumb-item::before {
+    color: var(--light);
+}
+
+/* === HERO BANNER : texte superposé sur le carousel === */
+.hero-banner {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    display: block;
+}
+
+/* Overlay sombre pour contraste du texte */
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+            rgba(0, 0, 0, 0.55) 0%,
+            rgba(0, 0, 0, 0.30) 60%,
+            rgba(0, 0, 0, 0.55) 100%);
+    z-index: 10;
+    pointer-events: none;
+}
+
+/* Texte superposé centré au milieu du banner */
+.hero-text-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    pointer-events: none;
+    padding: 0 20px;
+}
+
+/* Titre principal hero */
+.hero-main-title {
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 900 !important;
+    font-size: clamp(1.6rem, 4vw, 3.2rem) !important;
+    line-height: 1.1 !important;
+    color: #ffffff !important;
+    letter-spacing: -1px;
+    text-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.7),
+        0 2px 6px rgba(0, 0, 0, 0.5);
+    margin: 0;
+}
+
+/* Ligne "INSPIRER DEMAIN" en rouge accent */
+.hero-subtitle-accent {
+    color: #ff4444 !important;
+    text-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.7),
+        0 0 30px rgba(209, 0, 0, 0.5);
+}
+
+/* Carousel pleine largeur sans décoration */
+.header-carousel {
+    position: relative;
+    padding: 0;
+    overflow: hidden;
+    width: 100%;
+    display: block;
+}
+
+.header-carousel img {
+    width: 100%;
+    height: 580px;
+    object-fit: cover;
+    display: block;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+}
+
+/* Dots en bas centrés */
+.header-carousel .owl-dots {
+    position: absolute;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    z-index: 30;
+}
+
+.header-carousel .owl-dot {
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    border: 2px solid var(--bs-white);
+    transition: .5s;
+}
+
+.header-carousel .owl-dot.active {
+    width: 30px;
+    border-radius: 6px;
+    background: var(--bs-white);
+}
+
+
+/*** About ***/
+.about-img {
+    position: relative;
+    overflow: hidden;
+}
+
+.about-img::after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: url(../img/bg-about-img.png) top left no-repeat;
+    background-size: contain;
+}
+
+
+/*** Project ***/
+.project-item img {
+    transition: .5s;
+}
+
+.project-item:hover img {
+    transform: scale(1.2);
+}
+
+.project-overlay {
+    position: absolute;
+    padding: 25px;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    background: linear-gradient(rgba(255, 255, 255, .1) 50%, var(--bs-dark));
+    z-index: 1;
+}
+
+
+/*** Service ***/
+.service-item {
+    position: relative;
+    padding: 30px 25px;
+    transition: .5s;
+    font-weight: 700;
+    /* make text bold */
+    font-size: 0.95rem;
+    /* slightly smaller */
+}
+
+.service-item.bg-primary:hover {
+    background: var(--bs-light) !important;
+    color: var(--bs-dark);
+}
+
+.service-item.bg-primary p {
+    color: var(--bs-light);
+    transition: .5s;
+    font-weight: 600;
+    /* make bold */
+    font-size: 0.9rem;
+    /* slightly smaller */
+}
+
+.service-item.bg-primary:hover p {
+    color: var(--bs-secondary);
+}
+
+.service-item.bg-light:hover {
+    background: var(--bs-primary) !important;
+}
+
+.service-item.bg-light p {
+    color: var(--bs-secondary);
+    transition: .5s;
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    /* make bold */
+    font-size: 0.9rem;
+    /* slightly smaller */
+}
+
+.service-item.bg-light:hover p {
+    color: var(--bs-light);
+}
+
+
+.service-item .service-img h3 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0 12px 7px 0;
+    font-weight: 700;
+    /* ensure bold */
+    font-size: 1rem;
+    /* slightly smaller */
+    color: var(--bs-white);
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 0 0 4px 0;
+    padding: 4px 8px;
+}
+
+.service-item.bg-primary .service-img h3 {
+    background: var(--bs-primary);
+    color: var(--bs-white);
+    transition: .5s;
+    font-size: 1rem;
+}
+
+.service-item.bg-primary:hover .service-img h3 {
+    background: var(--bs-light);
+    color: var(--bs-dark);
+    font-size: 1rem;
+}
+
+.service-item.bg-light .service-img h3 {
+    background: var(--bs-light);
+    color: var(--bs-dark);
+    transition: .5s;
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.service-item.bg-light:hover .service-img h3 {
+    background: var(--bs-primary);
+    color: var(--bs-white);
+    font-size: 1rem;
+}
+
+
+/*** Our Team ***/
+.team-item img {
+    transition: .5s;
+}
+
+.team-item:hover img {
+    transform: scale(1.2);
+}
+
+.team-overlay {
+    position: absolute;
+    padding: 30px;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    background: transparent;
+    z-index: 1;
+}
+
+.team-overlay small {
+    display: inline-block;
+    padding: 3px 15px;
+    color: var(--bs-white);
+    background: var(--bs-primary);
+}
+
+
+/*** Testimonial Premium Redesign ***/
+.testimonial-item {
+    background: #ffffff;
+    border-radius: 24px;
+    box-shadow: 0 15px 40px rgba(11, 37, 69, 0.06);
+    padding: 40px;
+    margin: 20px 15px;
+    border: 1px solid rgba(11, 37, 69, 0.05);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.testimonial-item::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 100%;
+    background: var(--accent-blue);
+}
+
+.testimonial-img {
+    position: relative;
+    padding: 10px;
+    text-align: center;
+}
+
+.testimonial-img img {
+    border-radius: 20px !important;
+    box-shadow: 0 10px 30px rgba(11, 37, 69, 0.15);
+    border: 6px solid #ffffff !important;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.testimonial-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 50px rgba(11, 37, 69, 0.1);
+}
+
+.testimonial-item:hover .testimonial-img img {
+    transform: scale(1.05) rotate(1deg);
+}
+
+.testimonial-text {
+    position: relative;
+    padding: 20px 20px 20px 40px;
+}
+
+/* Elegant decorative double quote mark */
+.testimonial-text::before {
+    content: "\f10d";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    position: absolute;
+    top: -5px;
+    left: 0;
+    font-size: 2.5rem;
+    color: rgba(11, 37, 69, 0.08); /* light night blue tint */
+}
+
+.testimonial-text h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #0B2545; /* Night blue */
+    margin-bottom: 12px;
+    line-height: 1.35;
+}
+
+.testimonial-text p {
+    font-size: 0.98rem;
+    line-height: 1.75;
+    color: #4f5e71;
+    margin-bottom: 24px;
+}
+
+.testimonial-text h5 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0;
+}
+
+.testimonial-text span.text-primary {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent-blue) !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: inline-block;
+    margin-top: 2px;
+}
+
+/* Dots styling */
+.testimonial-carousel .owl-dots {
+    position: absolute;
+    height: 20px;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+}
+
+.testimonial-carousel .owl-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #e2e8f0 !important;
+    border: none !important;
+    transition: all 0.3s ease;
+}
+
+.testimonial-carousel .owl-dot.active {
+    width: 28px;
+    border-radius: 5px;
+    background: var(--accent-blue) !important;
+}
+
+@media (max-width: 768px) {
+    .testimonial-carousel .owl-dots {
+        left: 0;
+        right: auto;
+    }
+
+    .testimonial-carousel .owl-dot {
+        margin-right: 10px;
+        margin-left: 0;
+    }
+}
+
+
+/*** Newsletter ***/
+.newsletter {
+    background: url(../img/hero-bg.jpg) bottom right no-repeat;
+    background-size: cover;
+}
+
+@media (min-width: 992px) {
+    .newsletter .container {
+        max-width: 100% !important;
+    }
+
+    .newsletter .newsletter-text {
+        padding-right: calc(((100% - 960px) / 2) + .75rem);
+    }
+}
+
+@media (min-width: 1200px) {
+    .newsletter .newsletter-text {
+        padding-right: calc(((100% - 1140px) / 2) + .75rem);
+    }
+}
+
+@media (min-width: 1400px) {
+    .newsletter .newsletter-text {
+        padding-right: calc(((100% - 1320px) / 2) + .75rem);
+    }
+}
+
+
+/*** Footer ***/
+.footer .btn.btn-link {
+    display: block;
+    margin-bottom: 10px;
+    padding: 0;
+    text-align: left;
+    color: rgba(255, 255, 255, .5);
+    font-weight: normal;
+    transition: .3s;
+}
+
+.footer .btn.btn-link:hover {
+    color: var(--bs-white);
+    letter-spacing: 1px;
+    box-shadow: none;
+}
+
+.footer .btn.btn-link::before {
+    position: relative;
+    content: "\f105";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    margin-right: 10px;
+}
+
+.footer .copyright {
+    padding: 25px 0;
+    font-size: 14px;
+    border-top: 1px solid rgba(256, 256, 256, .1);
+}
+
+.footer .copyright a {
+    color: rgba(255, 255, 255, .5);
+}
+
+.footer .copyright a:hover {
+    color: var(--bs-white);
+}
+
+.footer .footer-menu a {
+    margin-right: 15px;
+    padding-right: 15px;
+    border-right: 1px solid rgba(255, 255, 255, .1);
+}
+
+.footer .footer-menu a:last-child {
+    margin-right: 0;
+    padding-right: 0;
+    border-right: none;
+}
+
+/*** Custom overrides for SNU Salle du NumÃ©rique ***/
+:root {
+    --accent-blue: #0B2545; /* Night blue brand accent */
+    --primary-red: #d10000; /* Main SNU brand red */
+    --white: #ffffff;
+    --bs-primary: #0B2545;
+}
+
+/* Global font stack */
+body {
+    font-family: "Roboto", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.navbar,
+.navbar-brand h1 {
+    font-family: "Montserrat", sans-serif;
+}
+
+/* Tech background class */
+.tech-bg {
+    background: url('../img/tech_background.png') center/cover no-repeat fixed;
+    position: relative;
+}
+
+.tech-bg::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.86);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Make checkmarks and specific highlight icons blue */
+.fa-check,
+.fa-check-circle {
+    color: var(--accent-blue) !important;
+}
+
+/* Color icons in the grid */
+.fa-wifi,
+.fa-laptop,
+.fa-print,
+.fa-users,
+.fa-clock,
+.fa-book,
+.fa-shield-alt,
+.fa-microchip,
+.fa-cogs,
+.fa-desktop,
+.fa-network-wired,
+.fa-bolt,
+.fa-snowflake,
+.fa-headset,
+.fa-credit-card,
+.fa-wallet {
+    color: var(--accent-blue) !important;
+}
+
+/* Customize primary outline button hover to blue */
+.btn-outline-primary {
+    border: 1px solid var(--accent-blue) !important;
+    background: transparent !important;
+    color: var(--accent-blue) !important;
+    transition: .3s;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--accent-blue) !important;
+    border-color: var(--accent-blue) !important;
+    color: #ffffff !important;
+}
+
+/* Make active navbar links blue for visibility */
+.navbar .navbar-nav .nav-link.active {
+    color: var(--accent-blue) !important;
+}
+
+/* Make active navbar links hover blue */
+.navbar .navbar-nav .nav-link:hover {
+    color: var(--accent-blue) !important;
+}
+
+/* Newsletter paper plane color */
+.newsletter-text button .fa-paper-plane {
+    color: var(--accent-blue) !important;
+}
+
+/* Make pagination/dots blue */
+.header-carousel .owl-dot.active,
+.testimonial-carousel .owl-dot.active {
+    background: var(--accent-blue) !important;
+    border-color: var(--accent-blue) !important;
+}
+
+/*** Premium Design Polishes for Salle du numerique ***/
+
+/* Sticky navbar with glassmorphism effect */
+.container-fluid.sticky-top {
+    background: rgba(255, 255, 255, 0.92) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 2px 20px rgba(209, 0, 0, 0.08);
+    transition: box-shadow 0.3s ease;
+}
+
+/* Navbar brand name styling */
+.navbar-brand h1 {
+    font-size: clamp(1.1rem, 2.2vw, 1.6rem) !important;
+    letter-spacing: -0.5px;
+    font-weight: 900 !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    background: none !important;
+    white-space: nowrap;
+}
+
+@keyframes titleSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.animate-title {
+    animation: titleSlideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Hero header slight gradient overlay */
+.hero-header {
+    background: linear-gradient(135deg, rgba(248, 249, 250, 0.97) 0%, rgba(248, 230, 230, 0.8) 100%), url(../img/hero-bg.jpg) top center no-repeat;
+    background-size: cover;
+}
+
+/* Animated red border-left accent for About checkmark items */
+h6 i.fa-check {
+    color: var(--accent-blue) !important;
+    font-size: 0.85rem;
+}
+
+/* Primary buttons – gradient red effect */
+.btn-primary {
+    background: linear-gradient(135deg, #d10000, #a50000) !important;
+    border: none !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.3s ease !important;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #f50000, #d10000) !important;
+    box-shadow: none !important;
+    transform: translateY(-2px);
+}
+
+/* Service items shadow on hover */
+.service-item {
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.service-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Team item smooth scale effect */
+.team-item {
+    transition: box-shadow 0.3s ease;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.team-item:hover {
+    box-shadow: 0 10px 30px rgba(209, 0, 0, 0.25);
+}
+
+/* Project item badge text style */
+.project-overlay h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Footer SNU brand */
+.footer h1.text-white span.text-primary {
+    color: #ff8080 !important;
+    /* Softer lighter red on dark footer */
+}
+
+
+
+/* Chatbot Launcher Button styling */
+#chatbotBtn {
+    background: linear-gradient(135deg, #d10000, #a50000) !important;
+    border: none !important;
+    box-shadow: 0 4px 15px rgba(209, 0, 0, 0.4) !important;
+}
+
+/* Hero title — gras maximum superposé */
+.hero-header h1,
+.hero-main-title,
+.hero-main-title strong {
+    font-weight: 900 !important;
+    text-shadow:
+        0 4px 24px rgba(0,0,0,0.75),
+        0 2px 8px rgba(0,0,0,0.6);
+}
+
+/* INNOVER / INSPIRER : ultra bold */
+.hero-main-title strong {
+    font-weight: 900 !important;
+    letter-spacing: 1px;
+}
+
+/* Tout texte en rouge (#d10000) doit être en gras */
+[style*="color: #d10000"],
+[style*="color:#d10000"] {
+    font-weight: 900 !important;
+}
+
+/* Spans rouges dans les titres h1/h3 */
+h1 > span[style*="#d10000"],
+h3 > span[style*="#d10000"] {
+    font-weight: 900 !important;
+}
+
+/* Section title highlight labels */
+.text-uppercase.text-primary.bg-light.px-2 {
+    letter-spacing: 0.5px;
+    box-shadow: inset 0 -3px 0 rgba(209, 0, 0, 0.3);
+}
+
+/* Focus ring matches red brand */
+*:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(209, 0, 0, 0.2) !important;
+}
+
+/* Breadcrumb items */
+.breadcrumb-item a {
+    color: rgba(255, 255, 255, 0.85) !important;
+    font-weight: 500;
+}
+
+/* Input focus in newsletter */
+.newsletter .form-control:focus {
+    box-shadow: 0 0 0 3px rgba(209, 0, 0, 0.25) !important;
+    border-color: #d10000 !important;
+}
+
+/* Red navbar header and white menu links */
+.sticky-top {
+    background: #d10000 !important;
+    top: 0px !important;
+    margin-top: 0 !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15) !important;
+}
+
+.navbar {
+    padding: 12px 0 !important;
+}
+
+.navbar-brand h1 {
+    color: #ffffff !important;
+}
+
+.navbar .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.85) !important;
+    font-weight: 700 !important;
+    font-size: 1.05rem !important;
+    padding: 8px 16px !important;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.navbar .navbar-nav .nav-link:hover,
+.navbar .navbar-nav .nav-link.active {
+    color: #ffffff !important;
+    border-bottom: 2px solid #ffffff !important;
+}
+
+/* Mobile responsive menu button and links */
+.navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.navbar-toggler-icon {
+    filter: invert(1) grayscale(1) brightness(2) !important;
+}
+
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        background: #d10000 !important;
+        padding: 15px !important;
+        border-radius: 4px !important;
+        margin-top: 15px !important;
+    }
+
+    .navbar .navbar-nav .nav-link {
+        margin-left: 0 !important;
+        padding: 10px 0 !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+    }
+
+    .navbar .navbar-nav .nav-link:hover,
+    .navbar .navbar-nav .nav-link.active {
+        border-bottom: 1px solid #ffffff !important;
+    }
+}
+
+/* --- NOUVEAUX STYLES AJOUTÉS POUR LES SERVICES ET LES FORMATIONS --- */
+
+/* Cartes de caractéristiques Hero */
+.hero-feat-card {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 24px 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.hero-feat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    border-color: rgba(209, 0, 0, 0.2);
+}
+
+.hero-feat-icon {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+    color: var(--accent-blue) !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    width: auto !important;
+    height: auto !important;
+    line-height: normal !important;
+    display: inline-block !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+}
+
+.hero-feat-icon i {
+    color: var(--accent-blue) !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+/* Section Nos Services */
+.service-card {
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    height: 100%;
+}
+
+.service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(209, 0, 0, 0.12);
+    border-color: rgba(209, 0, 0, 0.25);
+}
+
+.service-icon-box {
+    width: 60px;
+    height: 60px;
+    background: rgba(209, 0, 0, 0.08);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #d10000 !important;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    transition: all 0.4s ease;
+}
+
+.service-card:hover .service-icon-box {
+    background: #d10000 !important;
+    color: #ffffff !important;
+    transform: rotate(360deg);
+}
+
+/* Cartes Formations & Modules */
+.formation-card {
+    background: #ffffff;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+}
+
+.formation-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    border-color: rgba(209, 0, 0, 0.2);
+}
+
+.formation-card .card-img-container {
+    height: 200px;
+    overflow: hidden;
+    border-radius: 9px 9px 0 0;
+    position: relative;
+}
+
+.formation-card .card-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.formation-card:hover .card-img-container img {
+    transform: scale(1.06);
+}
+
+.formation-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #d10000;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: 4px 10px;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+/* Grille Équipe de gestion */
+.team-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    height: 320px;
+}
+
+.team-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.5s ease;
+}
+
+.team-item:hover img {
+    transform: scale(1.08);
+}
+
+.team-overlay {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%) !important;
+}
+
+/* Personnalisation Popup Modal */
+.modal-header {
+    background-color: #d10000 !important;
+    border-bottom: none !important;
+}
+
+.modal-title {
+    font-weight: 900 !important;
+}
+
+.form-floating>.form-control:focus~label::after {
+    background-color: transparent !important;
+}
+
+.form-control:focus {
+    border-color: #d10000 !important;
+    box-shadow: 0 0 0 0.25rem rgba(209, 0, 0, 0.15) !important;
+}
+
+/* Cartes cliquables de la page Contact */
+.contact-link-card {
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+}
+
+.contact-link-card:hover {
+    border-color: #d10000 !important;
+    box-shadow: 0 8px 25px rgba(209, 0, 0, 0.12) !important;
+    transform: translateY(-3px);
+}
+
+/* Correctif d'affichage de l'arrière-plan technologique sur mobile */
+@media (max-width: 767.98px) {
+    .tech-bg {
+        background-attachment: scroll !important;
+        background-size: auto 100% !important;
+    }
+
+    .tech-bg::before {
+        background: rgba(255, 255, 255, 0.68) !important;
+        /* Rend le motif de fond plus visible sur mobile */
+    }
+}
+
+/* Chatbot 100% Responsive & Full-screen layout on Mobile */
+@media (max-width: 576px) {
+    #chatbotModal {
+        padding-right: 0 !important;
+    }
+    #chatbotModal .modal-dialog {
+        margin: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        height: 100% !important;
+    }
+    #chatbotModal .modal-content {
+        height: 100% !important;
+        border-radius: 0 !important;
+    }
+    #chatbotBtn {
+        right: 20px !important;
+        bottom: 20px !important;
+    }
+}
+
