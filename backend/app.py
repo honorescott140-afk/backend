@@ -142,6 +142,23 @@ POURQUOI CHOISIR LA SNU :
 - Encadrement qualifié et personnalisé
 - Assistance technique disponible
 - Abonnements mensuels accessibles à tous
+""",
+    "actualites": """
+ACTUALITÉS & ÉVÉNEMENTS RÉCENTS (PAGE ACTUALITÉS) :
+1. Un espace moderne dédié à l'apprentissage numérique : accueil des étudiants, chercheurs et porteurs de projet.
+2. Des ateliers pratiques du midi : sessions interactives sur les nouvelles technologies, la programmation et l'IA.
+3. Nouvelles compétences à développer : vagues de formations certifiantes ouvertes pour tous les niveaux.
+Pour consulter tous les détails et les articles, rendez-vous sur l'onglet Actualités du site web.
+""",
+    "contrat": """
+CONTRAT & ENGAGEMENT (CONTRAT_SNU.DOCX) :
+L'accès aux équipements et services de la Salle du Numérique s'accompagne d'une charte d'utilisation et d'un contrat officiel.
+Il garantit le respect du matériel informatique, l'usage loyal de la connexion 5G et un environnement propice à la concentration et à l'excellence.
+""",
+    "theme": """
+NAVIGATION & AFFICHAGE DU SITE :
+Le site propose un sélecteur de Mode Sombre (Dark Mode) et Mode Clair via une icône lune/soleil en haut de page.
+Le site comporte les pages : Accueil, Actualités, Formations, Services, La Salle et Contact.
 """
 }
 
@@ -153,13 +170,16 @@ RAG_KEYWORDS = {
     "horaires": ["horaire", "heure", "ouvert", "ferme", "fermé", "ouverture", "quand", "matin", "soir", "lundi", "samedi", "dimanche", "jour"],
     "adresse": ["adresse", "où", "situé", "localisation", "emplacement", "trouver", "venir", "campus", "faculté", "wazia", "maps", "lieu"],
     "formations": ["formation", "cours", "apprendre", "enseigner", "word", "excel", "access", "powerpoint", "windows", "design", "ia", "intelligence", "bureautique", "module", "365"],
-    "inscription": ["inscrire", "inscription", "s'inscrire", "rejoindre", "formulaire", "comment", "accès", "abonnement"],
+    "inscription": ["inscrire", "inscription", "s'inscrire", "rejoindre", "formulaire", "comment", "accès", "abonnement", "modal"],
     "equipements": ["ordinateur", "pc", "internet", "5g", "équipement", "matériel", "connexion", "wifi", "box", "bibliothèque", "espace"],
     "services": ["service", "offre", "disponible", "atelier", "tp", "travaux", "pratique", "collaboratif", "abonnement"],
     "equipe": ["équipe", "directeur", "secrétaire", "tuteur", "responsable", "roger", "patrick", "rachel", "brigitte", "mikobi", "personnel"],
     "contact": ["contact", "téléphone", "whatsapp", "email", "appeler", "joindre", "facebook", "instagram", "numéro", "243"],
     "avantages": ["pourquoi", "avantage", "choisir", "raison", "benefit"],
     "mission": ["mission", "vision", "objectif", "but", "créé", "fondé", "histoire"],
+    "actualites": ["actualité", "actualite", "nouvelle", "événement", "evenement", "atelier", "annonce", "récent", "recent", "activite", "activité", "midi", "quoi de neuf"],
+    "contrat": ["contrat", "règlement", "reglement", "règle", "charte", "condition", "termes", "engagement", "document"],
+    "theme": ["mode sombre", "dark mode", "thème", "theme", "sombre", "clair", "couleur", "page", "menu", "navigation"],
 }
 
 CONTACT_REDIRECT = (
@@ -199,11 +219,30 @@ def retrieve_context(question: str) -> str:
                 matched_chunks.add(topic)
                 break
 
+    # Enrichissement dynamique avec les données fraîches de content.json (actualités, services, formations)
+    dynamic_context = ""
+    target_data = DATA_FILE if os.path.exists(DATA_FILE) else SITE_DATA_FILE
+    if target_data and os.path.exists(target_data):
+        try:
+            with open(target_data, "r", encoding="utf-8") as f:
+                cms_data = json.load(f)
+            dyn_parts = []
+            if "news" in cms_data and "items" in cms_data["news"]:
+                news_lines = ["DERNIÈRES ACTUALITÉS EN LIGNE SUR LE SITE :"]
+                for it in cms_data["news"]["items"]:
+                    news_lines.append(f"- {it.get('title')} ({it.get('category')}) : {it.get('excerpt')}")
+                dyn_parts.append("\n".join(news_lines))
+            if dyn_parts:
+                dynamic_context = "\n\n" + "\n\n".join(dyn_parts)
+        except Exception:
+            pass
+
     if not matched_chunks:
-        return FULL_KNOWLEDGE
+        return FULL_KNOWLEDGE + dynamic_context
 
     matched_chunks.add("identite")
     context = "\n".join(RAG_CHUNKS[topic] for topic in matched_chunks if topic in RAG_CHUNKS)
+    context += dynamic_context
     print(f"[RAG] Chunks sélectionnés pour '{question[:50]}' : {list(matched_chunks)}", flush=True)
     return context
 
@@ -488,6 +527,13 @@ def site_static(filename):
     if ".." in safe_rel:
         return "Accès interdit", 403
     file_path = os.path.join(FRONTEND_DIR, safe_rel)
+
+    # Support des URLs sans extension (ex: /actualites -> actualites.html)
+    if not os.path.exists(file_path) and not os.path.splitext(file_path)[1]:
+        html_candidate = file_path + ".html"
+        if os.path.exists(html_candidate):
+            return send_from_directory(FRONTEND_DIR, safe_rel + ".html")
+
     if os.path.exists(file_path) and os.path.isfile(file_path):
         return send_from_directory(FRONTEND_DIR, safe_rel)
     return "Fichier introuvable", 404
@@ -507,7 +553,7 @@ def api_content():
             try:
                 with open(target, "r", encoding="utf-8") as f:
                     data = json.load(f)
-                return jsonify({"success": True, "data": data})
+                return jsonify({"success": True, "data": data, **data})
             except Exception as e:
                 return jsonify({"success": False, "error": str(e)}), 500
         else:
@@ -602,9 +648,15 @@ def api_messages():
                 return jsonify({"error": str(e)}), 500
         return jsonify([])
 
-    # POST: Nouveau message
+    # POST: Nouveau message ou inscription formation
     try:
         data = request.get_json(force=True)
+        if not data or not isinstance(data, dict):
+            return jsonify({"success": False, "error": "Données invalides"}), 400
+
+        # Protection Anti-spam Honeypot (champ invisible website)
+        if str(data.get("website", "")).strip():
+            return jsonify({"success": True, "message": "Message reçu avec succès !"})
         messages = []
         if os.path.exists(MESSAGES_FILE):
             try:
