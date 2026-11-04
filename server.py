@@ -89,7 +89,7 @@ class ClaudiaUnifiedHandler(SimpleHTTPRequestHandler):
 
     def do_GET(self):
         parsed = urllib.parse.urlparse(self.path)
-        path = parsed.path
+        path = urllib.parse.unquote(parsed.path)
 
         # 1. API Statut
         if path in ("/claudia/status", "/api/status"):
@@ -213,7 +213,7 @@ class ClaudiaUnifiedHandler(SimpleHTTPRequestHandler):
 
     def do_POST(self):
         parsed = urllib.parse.urlparse(self.path)
-        path = parsed.path
+        path = urllib.parse.unquote(parsed.path)
 
         # 1. Sauvegarde CMS : /api/content
         if path == "/api/content":
