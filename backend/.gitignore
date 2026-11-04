@@ -1,0 +1,25 @@
+# Environnement & Secrets
+.env
+*.key
+*.pem
+
+# Cache Python
+__pycache__/
+*.py[cod]
+*.class
+.Python
+
+# Environnements virtuels
+venv/
+.venv/
+env/
+
+# Logs & processus
+*.log
+*.pid
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
