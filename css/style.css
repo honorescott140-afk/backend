@@ -7,7 +7,6 @@
     transition: opacity .5s ease-out, visibility 0s linear .5s;
     z-index: 99999;
 }
-
 #spinner.show {
     transition: opacity .5s ease-out, visibility 0s linear 0s;
     visibility: visible;
@@ -105,6 +104,108 @@
     color: var(--bs-primary)
 }
 
+.section-kicker {
+    display: inline-block;
+    margin-bottom: 12px;
+    padding: 6px 16px;
+    border: 1px solid rgba(209, 0, 0, .2);
+    border-radius: 999px;
+    color: #d10000;
+    background: rgba(209, 0, 0, .06);
+    font-size: .75rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.service-card {
+    border: 1px solid rgba(0, 0, 0, .08);
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, .05);
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+.service-card:hover {
+    border-color: rgba(209, 0, 0, .25);
+    box-shadow: 0 12px 28px rgba(209, 0, 0, .12);
+    transform: translateY(-4px);
+}
+
+.service-icon {
+    display: block;
+    margin-bottom: 18px;
+    color: #d10000;
+    font-size: 2.4rem;
+}
+
+.snu-team-card {
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, .08);
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, .06);
+    transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+}
+
+.snu-team-card:hover {
+    border-color: rgba(209, 0, 0, .3);
+    box-shadow: 0 18px 42px rgba(209, 0, 0, .14);
+    transform: translateY(-6px);
+}
+
+.snu-team-card .snu-img-wrap {
+    height: 280px;
+    overflow: hidden;
+}
+
+.snu-team-card .snu-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .5s ease;
+}
+
+.snu-team-card:hover .snu-img-wrap img {
+    transform: scale(1.05);
+}
+
+.snu-team-card .snu-info {
+    padding: 16px 18px;
+    text-align: center;
+    border-top: 3px solid #d10000;
+}
+
+.snu-team-card .snu-name {
+    margin-bottom: 5px;
+    color: #1a1a1a;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.snu-team-card .snu-role {
+    color: #d10000;
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+}
+
+.news-card {
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, .08);
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, .05);
+}
+
+.news-card-img {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+}
+
 .navbar .dropdown-toggle::after {
     border: none;
     content: "\f107";
@@ -145,6 +246,7 @@
         opacity: 1;
     }
 }
+
 
 
 /*** Hero Header ***/
@@ -193,8 +295,19 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    pointer-events: none;
+    pointer-events: auto;
     padding: 0 20px;
+}
+
+.hero-intro {
+    max-width: 760px;
+}
+
+.hero-description {
+    color: #fff;
+    font-size: clamp(1rem, 2vw, 1.35rem);
+    line-height: 1.55;
+    text-shadow: 0 3px 12px rgba(0, 0, 0, .75);
 }
 
 /* Titre principal hero */
@@ -230,12 +343,18 @@
 
 .header-carousel img {
     width: 100%;
-    height: 580px;
+    height: 390px;
     object-fit: cover;
     display: block;
     border-radius: 0;
     border: none;
     box-shadow: none;
+}
+
+@media (max-width: 767.98px) {
+    .header-carousel img {
+        height: 300px;
+    }
 }
 
 /* Dots en bas centrés */
@@ -959,6 +1078,13 @@ h3 > span[style*="#d10000"] {
 }
 
 /* Mobile responsive menu button and links */
+@media (min-width: 992px) {
+    .navbar-toggler,
+    .snu-navbar .navbar-toggler {
+        display: none !important;
+    }
+}
+
 .navbar-toggler {
     outline: none !important;
     box-shadow: none !important;
@@ -972,6 +1098,21 @@ h3 > span[style*="#d10000"] {
 }
 
 @media (max-width: 991.98px) {
+    .navbar-toggler,
+    .snu-navbar .navbar-toggler {
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 44px;
+        width: 44px;
+        height: 44px;
+        margin-left: auto;
+        border: 1px solid rgba(255, 255, 255, .55) !important;
+        border-radius: 8px;
+        background: transparent;
+        cursor: pointer;
+    }
+
     .navbar-collapse {
         background: #b50000;
         padding: 18px 20px !important;
@@ -1216,4 +1357,146 @@ h3 > span[style*="#d10000"] {
         bottom: 20px !important;
     }
 }
-
+
+/* Garde tous les éléments dans leur conteneur et évite les débordements. */
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+img,
+svg,
+video,
+canvas,
+iframe {
+    max-width: 100%;
+}
+
+.snu-navbar > .container-fluid {
+    width: 100%;
+    max-width: 1440px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.snu-navbar .navbar {
+    width: 100%;
+    min-width: 0;
+}
+
+.snu-navbar .navbar-brand {
+    min-width: 0;
+    max-width: 42%;
+}
+
+.snu-navbar .navbar-brand > div {
+    min-width: 0;
+}
+
+.snu-navbar .navbar-title,
+.snu-navbar .navbar-brand .text-white-50 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.snu-navbar .navbar-collapse,
+.snu-navbar .navbar-nav {
+    min-width: 0;
+}
+
+.snu-navbar .navbar-nav .nav-link {
+    white-space: nowrap;
+}
+
+@media (min-width: 1280px) {
+    .snu-navbar .navbar-nav .nav-link {
+        padding-right: 10px !important;
+        padding-left: 10px !important;
+        font-size: .92rem !important;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1279.98px) {
+    .snu-navbar .navbar-brand {
+        max-width: 28%;
+    }
+
+    .snu-navbar .navbar-brand .text-white-50 {
+        display: none;
+    }
+
+    .snu-navbar .navbar-title {
+        font-size: 1rem !important;
+    }
+
+    .snu-navbar .navbar-nav .nav-link {
+        padding-right: 4px !important;
+        padding-left: 4px !important;
+        font-size: .78rem !important;
+    }
+
+    .snu-navbar .theme-toggle-btn {
+        padding: 6px 8px !important;
+        font-size: .78rem !important;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .snu-navbar .navbar-brand {
+        max-width: calc(100% - 64px);
+    }
+}
+
+/* Structure commune du contenu et accessibilité. */
+.skip-link {
+    position: fixed;
+    top: 8px;
+    left: 8px;
+    z-index: 2000;
+    padding: 8px 14px;
+    border-radius: 6px;
+    color: #fff;
+    background: #1a1a1a;
+    transform: translateY(-150%);
+    transition: transform .2s ease;
+}
+
+.skip-link:focus {
+    transform: translateY(0);
+    color: #fff;
+}
+
+main {
+    display: block;
+    width: 100%;
+    min-width: 0;
+}
+
+main h1,
+main h2,
+main h3,
+main h4 {
+    max-width: 100%;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+}
+
+main p,
+main li {
+    overflow-wrap: anywhere;
+}
+
+main > section > .container,
+main > .container,
+main > .container-fluid > .container {
+    width: 100%;
+}
+
+.content-section {
+    padding-top: clamp(2.5rem, 5vw, 5rem);
+    padding-bottom: clamp(2.5rem, 5vw, 5rem);
+}
+

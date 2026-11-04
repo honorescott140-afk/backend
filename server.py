@@ -10,6 +10,7 @@ import json
 import time
 import mimetypes
 import hmac
+import re
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 import urllib.parse
 
@@ -44,6 +45,7 @@ MESSAGES_FILE = os.path.join(DATA_DIR, "messages.json")
 UPLOAD_DIR = os.path.join(ROOT_DIR, "img", "uploads")
 ADMIN_UPLOAD_DIR = os.path.join(ADMIN_DIR, "img", "uploads")
 ADMIN_TOKEN = os.environ.get("SNU_ADMIN_TOKEN", "").strip()
+CONTACT_ATTEMPTS = {}
 
 os.makedirs(DATA_DIR, exist_ok=True)
 os.makedirs(UPLOAD_DIR, exist_ok=True)
@@ -266,7 +268,6 @@ class ClaudiaUnifiedHandler(SimpleHTTPRequestHandler):
                 filename = None
                 file_bytes = None
 
-                import re
                 for part in parts:
                     if b'filename="' in part:
                         headers_part, content_part = part.split(b"\r\n\r\n", 1)
@@ -315,6 +316,26 @@ class ClaudiaUnifiedHandler(SimpleHTTPRequestHandler):
         # 3. API Messagerie : Envoi d'un message
         if path == "/api/messages":
             try:
+                content_type = self.headers.get("Content-Type", "")
+                if "application/json" not in content_type:
+                    self.send_response(415)
+                    self.send_header("Content-Type", "application/json; charset=utf-8")
+                    self.end_headers()
+                    self.wfile.write(b'{"success": false, "error": "Format JSON requis"}')
+                    return
+
+                client_ip = self.client_address[0] if self.client_address else "unknown"
+                now = time.time()
+                recent_attempts = [t for t in CONTACT_ATTEMPTS.get(client_ip, []) if now - t < 600]
+                if len(recent_attempts) >= 5:
+                    self.send_response(429)
+                    self.send_header("Content-Type", "application/json; charset=utf-8")
+                    self.end_headers()
+                    self.wfile.write(b'{"success": false, "error": "Trop de tentatives. Reessayez plus tard."}')
+                    return
+                recent_attempts.append(now)
+                CONTACT_ATTEMPTS[client_ip] = recent_attempts
+
                 content_len = int(self.headers.get("Content-Length", 0))
                 if content_len > 100_000:
                     self.send_response(413)
@@ -325,8 +346,27 @@ class ClaudiaUnifiedHandler(SimpleHTTPRequestHandler):
                 body = self.rfile.read(content_len)
                 data = json.loads(body.decode("utf-8"))
 
+                if not isinstance(data, dict) or str(data.get("website", "")).strip():
+                    self.send_response(400)
+                    self.send_header("Content-Type", "application/json; charset=utf-8")
+                    self.end_headers()
+                    self.wfile.write(b'{"success": false, "error": "Requete invalide"}')
+                    return
+
                 def sanitize(s, maxlen=500):
                     return str(s or "").strip()[:maxlen]
+
+                name = sanitize(data.get("name", ""), 100)
+                email = sanitize(data.get("email", ""), 200)
+                phone = sanitize(data.get("phone", ""), 30)
+                subject = sanitize(data.get("subject", ""), 200)
+                message = sanitize(data.get("message", ""), 2000)
+                if len(name) < 2 or not re.fullmatch(r"[^@\s]+@[^@\s]+\.[^@\s]+", email) or len(phone) < 7 or len(subject) < 3 or len(message) < 10:
+                    self.send_response(400)
+                    self.send_header("Content-Type", "application/json; charset=utf-8")
+                    self.end_headers()
+                    self.wfile.write(b'{"success": false, "error": "Veuillez verifier les champs du formulaire"}')
+                    return
 
                 messages = []
                 if os.path.exists(MESSAGES_FILE):
@@ -339,11 +379,11 @@ class ClaudiaUnifiedHandler(SimpleHTTPRequestHandler):
                 now_str = time.strftime("%d/%m/%Y a %H:%M")
                 new_msg = {
                     "id": f"msg_{int(time.time())}_{int(time.time() * 1000) % 10000}",
-                    "name": sanitize(data.get("name", "Visiteur")),
-                    "email": sanitize(data.get("email", ""), 200),
-                    "phone": sanitize(data.get("phone", ""), 30),
-                    "subject": sanitize(data.get("subject", "Sans objet"), 200),
-                    "message": sanitize(data.get("message", ""), 2000),
+                    "name": name,
+                    "email": email,
+                    "phone": phone,
+                    "subject": subject,
+                    "message": message,
                     "date": now_str,
                     "timestamp": int(time.time()),
                     "read": False
@@ -360,10 +400,12 @@ class ClaudiaUnifiedHandler(SimpleHTTPRequestHandler):
                 res = json.dumps({"success": True, "message": "Message envoye avec succes !", "data": new_msg})
                 self.wfile.write(res.encode("utf-8"))
             except Exception as e:
+                import traceback
+                traceback.print_exc()
                 self.send_response(500)
                 self.send_header("Content-Type", "application/json; charset=utf-8")
                 self.end_headers()
-                res = json.dumps({"success": False, "error": "Erreur serveur"})
+                res = json.dumps({"success": False, "error": str(e)})
                 self.wfile.write(res.encode("utf-8"))
             return
 
@@ -448,6 +490,8 @@ class ClaudiaUnifiedHandler(SimpleHTTPRequestHandler):
             ".jpeg": "image/jpeg",
             ".webp": "image/webp",
             ".ico": "image/x-icon",
+            ".docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            ".pdf": "application/pdf",
             ".html": "text/html; charset=utf-8"
         }
         if ext in custom_types:

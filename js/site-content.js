@@ -124,9 +124,9 @@
                             </div>
                             <h5 class="mb-3" style="font-weight: 700; color: #1a1a1a;">${f.title || ''}</h5>
                             <p class="text-muted small mb-4" style="line-height: 1.6;">${f.desc || ''}</p>
-                            <button class="btn btn-primary w-100 mt-auto py-2 btn-inscrire" data-bs-toggle="modal"
-                                data-bs-target="#registrationModal"
-                                data-formation="${f.title || ''}">S'inscrire</button>
+                            <button type="button" class="btn btn-primary w-100 mt-auto py-2 btn-open-formation-modal" data-formation="${f.title || ''}" data-bs-toggle="modal" data-bs-target="#formationModal">
+                                <i class="fa fa-user-plus me-1"></i>S'inscrire à cette formation
+                            </button>
                         </div>
                     `;
                     princContainer.appendChild(col);
@@ -151,8 +151,9 @@
                                 <h5 class="mb-0" style="font-weight: 700; color: #1a1a1a;">${m.title || ''}</h5>
                             </div>
                             <p class="text-muted small mb-4" style="line-height: 1.6;">${m.desc || ''}</p>
-                            <button class="btn btn-primary w-100 mt-auto py-2 btn-inscrire" data-bs-toggle="modal"
-                                data-bs-target="#registrationModal" data-formation="${m.title || ''}">S'inscrire</button>
+                            <button type="button" class="btn btn-outline-danger btn-sm w-100 mt-auto py-2 btn-open-module-modal" data-module="${m.title || ''}">
+                                <i class="fa fa-file-signature me-1"></i>Demander ce module
+                            </button>
                         </div>
                     `;
                     modContainer.appendChild(col);
@@ -192,7 +193,29 @@
             }
         }
 
-        // 8. Témoignages (Ce que pensent nos apprenants)
+        // 8. Actualités
+        if (data.news && data.news.items && data.news.items.length) {
+            var newsContainer = document.getElementById('newsContainer');
+            if (newsContainer) {
+                newsContainer.innerHTML = '';
+                data.news.items.forEach(function (item) {
+                    var col = document.createElement('div');
+                    col.className = 'col-md-6 col-lg-4';
+                    col.innerHTML = `
+                        <article class="news-card h-100">
+                            <img src="${item.img || 'img/Salle1.jpg'}" alt="${item.title || 'Actualité de la Salle du Numérique'}" class="news-card-img">
+                            <div class="p-4">
+                                <div class="small text-danger fw-bold mb-2">${item.category || 'Actualité'} · ${item.date || ''}</div>
+                                <h3 class="h5">${item.title || ''}</h3>
+                                <p class="text-muted mb-0">${item.excerpt || ''}</p>
+                            </div>
+                        </article>`;
+                    newsContainer.appendChild(col);
+                });
+            }
+        }
+
+        // 9. Témoignages (Ce que pensent nos apprenants)
         if (data.testimonials) {
             var tTitle = document.querySelector('[data-cms="testimonials.main_title"]');
             var tSub = document.querySelector('[data-cms="testimonials.subtitle"]');
@@ -217,6 +240,172 @@
                 });
             }
         }
+    }
+
+    // Le module possède un parcours distinct : il recueille le niveau et
+    // l'objectif précis du demandeur, au lieu de réutiliser l'inscription générale.
+    function ensureModuleRequestModal() {
+        if (document.getElementById('moduleRequestModal')) return;
+        var modal = document.createElement('div');
+        modal.id = 'moduleRequestModal';
+        modal.className = 'modal fade module-request-modal';
+        modal.tabIndex = -1;
+        modal.setAttribute('aria-labelledby', 'moduleRequestModalLabel');
+        modal.setAttribute('aria-hidden', 'true');
+        modal.innerHTML = `
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content shadow-lg border-0">
+                    <div class="modal-header py-3 px-4 text-white" style="background:#8f0000;">
+                        <div class="d-flex align-items-center">
+                            <i class="fa fa-file-signature fs-2 me-3"></i>
+                            <div>
+                                <h5 class="modal-title fw-bold text-white mb-0" id="moduleRequestModalLabel">Demande de module</h5>
+                                <small class="text-white-50">Formulaire spécifique — Salle du Numérique UNILU</small>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                    </div>
+                    <div class="modal-body p-4 p-md-5">
+                        <div id="moduleRequestSuccess" class="alert alert-success d-none" role="alert"></div>
+                        <div id="moduleRequestError" class="alert alert-danger d-none" role="alert"></div>
+                        <form id="moduleRequestForm" novalidate>
+                            <input type="text" name="website" style="display:none !important" tabindex="-1" autocomplete="off">
+                            <input type="hidden" id="requestedModule" name="module">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold" for="requestedModuleDisplay">Module demandé</label>
+                                <input class="form-control" id="requestedModuleDisplay" readonly>
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold" for="moduleRequesterName">Nom complet <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="moduleRequesterName" name="name" required minlength="2" placeholder="Nom et prénom">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold" for="moduleRequesterPhone">Téléphone / WhatsApp <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="moduleRequesterPhone" name="phone" required minlength="7" placeholder="+243 ...">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold" for="moduleRequesterEmail">Email <span class="text-danger">*</span></label>
+                                    <input type="email" class="form-control" id="moduleRequesterEmail" name="email" required placeholder="nom@exemple.com">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold" for="moduleRequesterLevel">Niveau actuel</label>
+                                    <select class="form-select" id="moduleRequesterLevel" name="level">
+                                        <option>Débutant</option><option>Intermédiaire</option><option>Avancé</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label fw-bold" for="moduleRequesterGoal">Objectif ou besoin principal <span class="text-danger">*</span></label>
+                                    <textarea class="form-control" id="moduleRequesterGoal" name="goal" rows="3" required minlength="10" placeholder="Expliquez ce que vous souhaitez apprendre ou réaliser..."></textarea>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold" for="moduleRequesterAvailability">Disponibilité préférée</label>
+                                    <select class="form-select" id="moduleRequesterAvailability" name="availability">
+                                        <option>Matinée</option><option>Après-midi</option><option>Soirée</option><option>Samedi</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold" for="moduleRequesterFaculty">Faculté / Promotion</label>
+                                    <input class="form-control" id="moduleRequesterFaculty" name="faculty" placeholder="Ex : Droit, L2">
+                                </div>
+                            </div>
+                            <button type="submit" id="moduleRequestSubmit" class="btn btn-primary w-100 py-3 mt-4 fw-bold">
+                                <i class="fa fa-paper-plane me-2"></i>Envoyer la demande de module
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>`;
+        document.body.appendChild(modal);
+
+        // Bootstrap est normalement chargé avant ce fichier. Le repli manuel
+        // garde le formulaire utilisable si un CDN ou un bundle est indisponible.
+        function openModuleModal() {
+            if (window.bootstrap && window.bootstrap.Modal) {
+                window.bootstrap.Modal.getOrCreateInstance(modal).show();
+                return;
+            }
+            modal.classList.add('show');
+            modal.style.display = 'block';
+            modal.removeAttribute('aria-hidden');
+            document.body.classList.add('modal-open');
+        }
+
+        function closeModuleModal() {
+            if (window.bootstrap && window.bootstrap.Modal) {
+                var instance = window.bootstrap.Modal.getInstance(modal);
+                if (instance) instance.hide();
+                return;
+            }
+            modal.classList.remove('show');
+            modal.style.display = 'none';
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('modal-open');
+        }
+
+        document.addEventListener('click', function (event) {
+            var button = event.target.closest('.btn-open-module-modal');
+            if (!button) return;
+            var moduleName = button.getAttribute('data-module') || 'Module spécialisé';
+            document.getElementById('requestedModule').value = moduleName;
+            document.getElementById('requestedModuleDisplay').value = moduleName;
+            document.getElementById('moduleRequestModalLabel').textContent = 'Demande du module : ' + moduleName;
+            openModuleModal();
+        });
+
+        modal.querySelectorAll('[data-bs-dismiss="modal"]').forEach(function (closeButton) {
+            closeButton.addEventListener('click', closeModuleModal);
+        });
+
+        document.getElementById('moduleRequestForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            var form = event.currentTarget;
+            if (!form.checkValidity()) { form.classList.add('was-validated'); return; }
+            var submit = document.getElementById('moduleRequestSubmit');
+            var original = submit.innerHTML;
+            var name = document.getElementById('moduleRequesterName').value.trim();
+            var phone = document.getElementById('moduleRequesterPhone').value.trim();
+            var email = document.getElementById('moduleRequesterEmail').value.trim();
+            var moduleName = document.getElementById('requestedModule').value;
+            var level = document.getElementById('moduleRequesterLevel').value;
+            var goal = document.getElementById('moduleRequesterGoal').value.trim();
+            var availability = document.getElementById('moduleRequesterAvailability').value;
+            var faculty = document.getElementById('moduleRequesterFaculty').value.trim() || 'Non précisée';
+            var payload = {
+                name: name, phone: phone, email: email,
+                subject: 'Demande de module : ' + moduleName,
+                message: "=== DEMANDE DE MODULE ===\nModule : " + moduleName + "\nNom : " + name + "\nTéléphone : " + phone + "\nEmail : " + email + "\nNiveau : " + level + "\nObjectif : " + goal + "\nDisponibilité : " + availability + "\nFaculté / Promotion : " + faculty,
+                website: form.querySelector('input[name="website"]').value || ''
+            };
+            submit.disabled = true;
+            submit.innerHTML = '<i class="fa fa-spinner fa-spin me-2"></i>Transmission...';
+            document.getElementById('moduleRequestSuccess').classList.add('d-none');
+            document.getElementById('moduleRequestError').classList.add('d-none');
+            fetch('/api/messages', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
+                .then(function (response) {
+                    return response.text().then(function (text) {
+                        var data;
+                        try { data = JSON.parse(text); } catch (parseError) {
+                            throw new Error('Le serveur ne répond pas avec un résultat JSON. Vérifiez que le serveur SNU est démarré.');
+                        }
+                        if (!response.ok) throw new Error(data.error || 'Le serveur a refusé la demande.');
+                        return data;
+                    });
+                })
+                .then(function (data) {
+                    if (!data.success) throw new Error(data.error || 'Erreur de transmission.');
+                    document.getElementById('moduleRequestSuccess').innerHTML = '<i class="fa fa-check-circle me-2"></i><strong>Demande envoyée.</strong> Notre équipe vous contactera pour confirmer le module et le prochain créneau.';
+                    document.getElementById('moduleRequestSuccess').classList.remove('d-none');
+                    form.reset();
+                    document.getElementById('requestedModuleDisplay').value = moduleName;
+                    document.getElementById('requestedModule').value = moduleName;
+                })
+                .catch(function (error) {
+                    document.getElementById('moduleRequestError').textContent = error.message || 'Erreur de transmission.';
+                    document.getElementById('moduleRequestError').classList.remove('d-none');
+                })
+                .finally(function () { submit.disabled = false; submit.innerHTML = original; });
+        });
     }
 
     function loadContent() {
@@ -253,6 +442,12 @@
             });
     }
 
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', ensureModuleRequestModal);
+    } else {
+        ensureModuleRequestModal();
+    }
+
     // Écouter les mises à jour depuis d'autres onglets (ex: onglet Admin vers onglet Utilisateur)
     window.addEventListener('storage', function (e) {
         if (e.key === STORAGE_KEY && e.newValue) {
@@ -287,4 +482,3 @@
         reload: loadContent
     };
 })();
-

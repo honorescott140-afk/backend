@@ -1,1 +1,24 @@
-[]
+[
+  {
+    "id": "msg_1793801236_6498",
+    "name": "Prof. Kazadi (Faculté des Sciences Sociales)",
+    "email": "kazadi@unilu.ac.cd",
+    "phone": "+243 972 147 721",
+    "subject": "Réservation Salle SNU : Conférence (15/12/2026)",
+    "message": "=== DEMANDE DE RÉSERVATION DE LA SALLE (CONTRAT SNU) ===\nStructure: Faculté des Sciences Sociales\nActivité: Conférence\nDate: 15/12/2026\nParticipants: 80 personnes\nBesoins: Rétroprojecteur, 50 PC",
+    "date": "04/11/2026 a 16:07",
+    "timestamp": 1793801236,
+    "read": false
+  },
+  {
+    "id": "msg_1793801203_3641",
+    "name": "Test Apprenant",
+    "email": "test.apprenant@unilu.ac.cd",
+    "phone": "+243 972 147 721",
+    "subject": "Inscription Formation : Bureautique (Microsoft 365)",
+    "message": "=== TEST INSCRIPTION ===\nFormation: Bureautique\nStatut: Etudiant UNILU\nSession: Matin",
+    "date": "04/11/2026 a 16:06",
+    "timestamp": 1793801203,
+    "read": false
+  }
+]

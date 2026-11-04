@@ -43,38 +43,16 @@
       "Assistance Technique"
     ]
   },
-  "why_choose_us": {
-    "title_prefix": "Pourquoi Nous",
-    "title_highlight": "Choisir",
-    "cards": [
-      {
-        "icon": "fa fa-desktop",
-        "title": "Matériel de pointe",
-        "desc": "Accédez à des ordinateurs performants adaptés aux besoins de programmation, de modélisation et de recherche universitaire."
-      },
-      {
-        "icon": "fa fa-wifi",
-        "title": "Connexion Internet 5G",
-        "desc": "Bénéficiez d'une connexion internet 5G ultra-rapide, stable et à haut débit pour vos recherches en ligne, streaming éducatif."
-      },
-      {
-        "icon": "fa fa-credit-card",
-        "title": "Abonnements Mensuels",
-        "desc": "Profitez de nos abonnements mensuels accessibles à tous et bénéficiez d'un accès privilégié à nos équipements numériques."
-      }
-    ]
-  },
   "directeur": {
     "subtitle": "Message du Directeur",
-    "title_prefix": "Mot de Bienvenue du",
-    "title_highlight": "CT ROGER",
+    "title_prefix": "Mot de bienvenue du",
     "name": "CT ROGER",
     "role": "Directeur de la Salle du Numérique (SNU)",
     "photo": "img/Dr roger .jpeg",
     "lead": "Chers visiteurs, chers apprenants,",
-    "p1": "C'est avec un grand plaisir que je vous accueille au sein de la Salle du Numérique. Dans un monde en constante évolution, notre engagement est de former des femmes et des hommes capables de créer, d'innover et d'apporter des solutions concrètes aux défis de notre époque.",
-    "p2": "Au-delà des compétences techniques, nous cultivons la créativité, l'esprit d'initiative et la confiance en soi — des qualités essentielles pour transformer les idées en opportunités réelles. Chaque apprenant est encouragé à développer son potentiel et à devenir un acteur du changement dans sa communauté.",
-    "p3": "Notre vision est simple : Innover aujourd'hui pour inspirer demain. Je vous invite à rejoindre cette aventure où l'apprentissage, l'innovation et l'excellence se rencontrent pour bâtir ensemble l'avenir."
+    "p1": "La Salle du Numérique accompagne la communauté universitaire dans l'apprentissage, la recherche et l'innovation.",
+    "p2": "Notre priorité est de proposer un environnement accessible, pratique et professionnel pour développer les compétences numériques.",
+    "p3": "Innover aujourd'hui pour inspirer demain."
   },
   "team": {
     "subtitle": "Notre Équipe",
@@ -121,8 +99,8 @@
       {
         "id": "srv_1",
         "icon": "fa fa-desktop",
-        "title": "100 Ordinateurs Disponibles",
-        "desc": "Accédez à l'un de nos 100 postes de travail performants et modernes pour vos travaux pratiques et recherches académiques."
+        "title": "Postes informatiques",
+        "desc": "Accédez à des postes de travail performants et modernes pour vos travaux pratiques et recherches académiques."
       },
       {
         "id": "srv_2",
@@ -269,6 +247,34 @@
     "p3": "Nous serons heureux de répondre à toutes vos questions et de vous accompagner dans votre parcours d'apprentissage et d'innovation.",
     "slogan": "Ensemble, innovons aujourd'hui pour inspirer demain."
   },
+  "news": {
+    "items": [
+      {
+        "id": "news_1",
+        "category": "Salle du Numérique",
+        "title": "Un espace dédié à l’apprentissage numérique",
+        "date": "À venir",
+        "excerpt": "La Salle du Numérique accompagne les étudiants, enseignants et porteurs de projets dans leurs usages du numérique.",
+        "img": "img/Salle1.jpg"
+      },
+      {
+        "id": "news_2",
+        "category": "Ateliers",
+        "title": "Des ateliers pratiques pour progresser",
+        "date": "À venir",
+        "excerpt": "Retrouvez prochainement les annonces des ateliers, rencontres et activités proposés par notre équipe.",
+        "img": "img/Salle2.jpg"
+      },
+      {
+        "id": "news_3",
+        "category": "Formations",
+        "title": "De nouvelles compétences à développer",
+        "date": "À venir",
+        "excerpt": "Consultez la page Formations pour découvrir les parcours et modules disponibles.",
+        "img": "img/Salle3.jpg"
+      }
+    ]
+  },
   "testimonials": {
     "section_title": "Témoignages",
     "main_title": "Ce que pensent nos apprenants",
@@ -301,4 +307,3 @@
     ]
   }
 }
-

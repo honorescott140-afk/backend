@@ -697,6 +697,172 @@
     });
 
     // Gestion du formulaire de contact avec enregistrement en temps réel
+    var requestedFormation = new URLSearchParams(window.location.search).get('formation');
+    if (requestedFormation && $('#contactSubject').length) {
+        $('#contactSubject').val('Demande d’information - ' + requestedFormation);
+    }
+
+    // ── GESTIONNAIRE GLOBAL D'INSCRIPTION FORMATION SANS QUITTER LA PAGE ──
+    $(document).on('click', '.btn-open-formation-modal, a[href*="contact.html?formation="]', function (e) {
+        e.preventDefault();
+        var formation = $(this).attr('data-formation') || '';
+        if (!formation) {
+            var href = $(this).attr('href') || '';
+            if (href.indexOf('formation=') !== -1) {
+                try {
+                    formation = decodeURIComponent(href.split('formation=')[1].split('&')[0]);
+                } catch (err) {}
+            }
+        }
+        if ($('#modalFormationSelect').length && formation) {
+            var select = $('#modalFormationSelect');
+            var matched = false;
+            select.find('option').each(function () {
+                var optVal = $(this).val().toLowerCase();
+                var search = formation.toLowerCase();
+                if (optVal.includes(search) || search.includes(optVal)) {
+                    select.val($(this).val());
+                    matched = true;
+                    return false;
+                }
+            });
+            if (!matched && formation.trim()) {
+                select.append($('<option>', { value: formation, text: formation, selected: true }));
+            }
+        }
+        var modalEl = document.getElementById('formationModal');
+        if (modalEl && window.bootstrap) {
+            var modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+            modal.show();
+        }
+    });
+
+    // Soumission AJAX du formulaire d'inscription formation
+    $('#formationRegistrationForm').submit(function (e) {
+        e.preventDefault();
+        var form = this;
+        var submitBtn = $(form).find('#modalSubmitBtn');
+        var originalText = submitBtn.html();
+
+        var formation = $('#modalFormationSelect').val() || "Formation Générale";
+        var name = $('#modalNomApprenant').val().trim();
+        var phone = $('#modalPhoneApprenant').val().trim();
+        var email = $('#modalEmailApprenant').val().trim();
+        var statut = $('#modalStatutApprenant').val() || "Étudiant UNILU";
+        var creneau = $('#modalCreneauApprenant').val() || "Session standard";
+        var faculte = $('#modalFaculteApprenant').val().trim() || "Non spécifiée";
+        var remarques = $('#modalRemarquesApprenant').val().trim() || "Aucune remarque particulière.";
+
+        var msgBody = "=== DEMANDE D'INSCRIPTION À LA FORMATION ===\n" +
+                      "Formation : " + formation + "\n" +
+                      "Nom Apprenant : " + name + "\n" +
+                      "Téléphone / WhatsApp : " + phone + "\n" +
+                      "Email : " + email + "\n" +
+                      "Statut : " + statut + "\n" +
+                      "Faculté / Promotion : " + faculte + "\n" +
+                      "Session souhaitée : " + creneau + "\n" +
+                      "Remarques : " + remarques;
+
+        var payload = {
+            name: name,
+            phone: phone,
+            email: email,
+            subject: "Inscription Formation : " + formation,
+            message: msgBody,
+            website: $(form).find('input[name="website"]').val() || ""
+        };
+
+        submitBtn.prop('disabled', true).html('<i class="fa fa-spinner fa-spin me-2"></i> Enregistrement...');
+        $('#formationAlertSuccess').addClass('d-none');
+        $('#formationAlertError').addClass('d-none');
+
+        fetch('/api/messages', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        })
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+            if (!data.success) throw new Error(data.error || 'Erreur lors de l’inscription');
+            var refCode = 'SNU-FRM-' + Math.floor(1000 + Math.random() * 9000);
+            $('#formationAlertSuccess').removeClass('d-none').html(
+                '<i class="fa fa-check-circle me-2"></i><strong>Inscription enregistrée avec succès !</strong> Référence : <code>' + refCode + '</code>.<br>' +
+                'Formation : <strong>' + formation + '</strong>.<br>' +
+                'Notre équipe vous contactera dans les plus brefs délais par WhatsApp au <strong>' + phone + '</strong>.'
+            );
+            form.reset();
+            $('#modalFormationSelect').val(formation);
+        })
+        .catch(function (err) {
+            $('#formationAlertError').removeClass('d-none').text(err.message || 'Erreur de transmission.');
+        })
+        .finally(function () {
+            submitBtn.prop('disabled', false).html(originalText);
+        });
+    });
+
+    // ── SOUMISSION DU FORMULAIRE DE RÉSERVATION DE LA SALLE (CONTRAT SNU) ──
+    $('#reservationForm').submit(function (e) {
+        e.preventDefault();
+        var form = this;
+        var submitBtn = $(form).find('#resSubmitBtn');
+        var originalText = submitBtn.html();
+
+        var org = $('#resOrg').val().trim();
+        var rep = $('#resRep').val().trim();
+        var phone = $('#resPhone').val().trim();
+        var email = $('#resEmail').val().trim();
+        var date = $('#resDate').val();
+        var participants = $('#resParticipants').val();
+        var typeAct = $('#resType').val();
+        var details = $('#resDetails').val().trim();
+
+        var msgBody = "=== DEMANDE DE RÉSERVATION DE LA SALLE (CONTRAT SNU) ===\n" +
+                      "Structure / Organisation : " + org + "\n" +
+                      "Représentant responsable : " + rep + "\n" +
+                      "Téléphone : " + phone + "\n" +
+                      "Email : " + email + "\n" +
+                      "Nature de l'activité : " + typeAct + "\n" +
+                      "Date souhaitée : " + date + "\n" +
+                      "Participants attendus : " + participants + " personnes (Capacité max 90)\n" +
+                      "Besoins matériels & Détails : " + details;
+
+        var payload = {
+            name: rep + " (" + org + ")",
+            phone: phone,
+            email: email,
+            subject: "Réservation Salle SNU : " + typeAct + " (" + date + ")",
+            message: msgBody,
+            website: $(form).find('input[name="website"]').val() || ""
+        };
+
+        submitBtn.prop('disabled', true).html('<i class="fa fa-spinner fa-spin me-2"></i> Transmission...');
+        $('#reservationAlertSuccess').addClass('d-none');
+        $('#reservationAlertError').addClass('d-none');
+
+        fetch('/api/messages', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        })
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+            if (!data.success) throw new Error(data.error || 'Erreur de transmission');
+            var refCode = 'SNU-RES-' + Math.floor(1000 + Math.random() * 9000);
+            $('#reservationAlertSuccess').removeClass('d-none').html(
+                '<i class="fa fa-check-circle me-2"></i><strong>Demande de réservation transmise avec succès !</strong> Référence : <code>' + refCode + '</code>.<br>' +
+                'La Direction de la Salle du Numérique examinera votre dossier et vous contactera sous 24h ouvrées.'
+            );
+            form.reset();
+        })
+        .catch(function (err) {
+            $('#reservationAlertError').removeClass('d-none').text(err.message || 'Erreur lors de la transmission.');
+        })
+        .finally(function () {
+            submitBtn.prop('disabled', false).html(originalText);
+        });
+    });
+
     $('#contactForm').submit(function (e) {
         e.preventDefault();
         var form = this;
@@ -718,19 +884,9 @@
             message: $('#contactMessage').val().trim()
         };
 
-        // Sauvegarde de secours locale (offline fallback)
-        try {
-            var localMsgs = JSON.parse(localStorage.getItem('snu_messages') || '[]');
-            localMsgs.unshift(Object.assign({}, msgData, {
-                id: 'local_' + Date.now(),
-                date: new Date().toLocaleDateString('fr-FR') + ' à ' + new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }),
-                timestamp: Math.floor(Date.now() / 1000),
-                read: false
-            }));
-            localStorage.setItem('snu_messages', JSON.stringify(localMsgs));
-        } catch (err) {}
+        msgData.website = $('#website').val().trim();
 
-        // Envoi au serveur (server.py ou Flask)
+        // Envoi sécurisé au serveur
         fetch('/api/messages', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -740,15 +896,13 @@
             return res.json();
         })
         .then(function (data) {
-            $('#contactAlert').removeClass('d-none').addClass('animate__animated animate__fadeIn');
+            if (!data.success) throw new Error(data.error || 'Envoi impossible');
+            $('#contactAlert').removeClass('d-none alert-danger').addClass('alert-success animate__animated animate__fadeIn').html('<i class="fa fa-check-circle me-2"></i>Message envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.');
             form.reset();
             $(form).removeClass('was-validated');
         })
         .catch(function (err) {
-            // Même si le réseau coupe, l'alerte confirme la prise en compte locale
-            $('#contactAlert').removeClass('d-none').addClass('animate__animated animate__fadeIn');
-            form.reset();
-            $(form).removeClass('was-validated');
+            $('#contactAlert').removeClass('alert-success d-none').addClass('alert-danger').text(err.message || 'Impossible d’envoyer le message.');
         })
         .finally(function () {
             submitBtn.prop('disabled', false).html(originalBtnHtml);
@@ -757,6 +911,22 @@
             }, 6000);
         });
     });
+
+    // Géolocalisation navigateur : la carte suit la position autorisée de la machine,
+    // avec un repli explicite sur l'Université de Lubumbashi si la permission échoue.
+    (function initUniluMapLocation() {
+        var map = document.getElementById('uniluMap');
+        if (!map || !navigator.geolocation) return;
+
+        var fallback = map.getAttribute('data-fallback-map') || '-11.6033,27.4691';
+        navigator.geolocation.getCurrentPosition(function (position) {
+            var lat = position.coords.latitude.toFixed(6);
+            var lng = position.coords.longitude.toFixed(6);
+            map.src = 'https://www.google.com/maps?q=' + lat + ',' + lng + '&z=16&output=embed';
+        }, function () {
+            map.src = 'https://www.google.com/maps?q=' + fallback + '&z=16&output=embed';
+        }, { enableHighAccuracy: true, timeout: 8000, maximumAge: 300000 });
+    })();
 
     // Générateur dynamique de favicon circulaire
     function makeFaviconCircular() {
@@ -1252,4 +1422,3 @@
     setTimeout(function () { checkClaudiaBackend(false); }, 1500);
 
 })(jQuery);
-

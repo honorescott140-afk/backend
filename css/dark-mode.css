@@ -101,16 +101,28 @@ body.dark-mode .navbar-collapse {
     white-space: nowrap;
 }
 
-.snu-navbar .navbar-toggler {
-    flex: 0 0 44px;
-    width: 44px;
-    height: 44px;
-    margin-left: auto;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgba(255, 255, 255, .55) !important;
-    border-radius: 8px;
+@media (min-width: 992px) {
+    .navbar-toggler,
+    .snu-navbar .navbar-toggler {
+        display: none !important;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .navbar-toggler,
+    .snu-navbar .navbar-toggler {
+        flex: 0 0 44px;
+        width: 44px;
+        height: 44px;
+        margin-left: auto;
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(255, 255, 255, .55) !important;
+        border-radius: 8px;
+        background: transparent;
+        cursor: pointer;
+    }
 }
 
 @media (max-width: 991.98px) {
@@ -391,16 +403,28 @@ body.dark-mode .snu-team-section p {
     white-space: nowrap;
 }
 
-.snu-navbar .navbar-toggler {
-    flex: 0 0 44px;
-    width: 44px;
-    height: 44px;
-    margin-left: auto;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgba(255, 255, 255, .5) !important;
-    border-radius: 8px;
+@media (min-width: 992px) {
+    .navbar-toggler,
+    .snu-navbar .navbar-toggler {
+        display: none !important;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .navbar-toggler,
+    .snu-navbar .navbar-toggler {
+        flex: 0 0 44px;
+        width: 44px;
+        height: 44px;
+        margin-left: auto;
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(255, 255, 255, .5) !important;
+        border-radius: 8px;
+        background: transparent;
+        cursor: pointer;
+    }
 }
 
 @media (max-width: 991.98px) {
@@ -1216,4 +1240,598 @@ body.dark-mode .snu-navbar,
 body.dark-mode .snu-navbar .navbar-collapse {
     background: #000000 !important;
     background-image: none !important;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   CLAUDIA SNU — GARANTIE ABSOLUE DE LISIBILITÉ EN MODE SOMBRE
+   Tout ce qui est noir, sombre (#1a1a1a, #333, #555) en mode clair
+   devient OBLIGATOIREMENT blanc pur (#ffffff) ou très clair en mode sombre.
+   ══════════════════════════════════════════════════════════════ */
+body.dark-mode,
+body.dark-mode [style*="color: #1a1a1a"],
+body.dark-mode [style*="color:#1a1a1a"],
+body.dark-mode [style*="color: #333"],
+body.dark-mode [style*="color:#333"],
+body.dark-mode [style*="color: #555"],
+body.dark-mode [style*="color:#555"],
+body.dark-mode [style*="color: #000"],
+body.dark-mode [style*="color:#000"],
+body.dark-mode [style*="color: black"],
+body.dark-mode [style*="color:#000000"],
+body.dark-mode [style*="color: #000000"],
+body.dark-mode [style*="color: #6c757d"],
+body.dark-mode [style*="color:#6c757d"],
+body.dark-mode [style*="color: rgb(26, 26, 26)"],
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6,
+body.dark-mode p,
+body.dark-mode li,
+body.dark-mode label,
+body.dark-mode small,
+body.dark-mode strong,
+body.dark-mode b,
+body.dark-mode .text-dark,
+body.dark-mode .text-secondary,
+body.dark-mode .lead,
+body.dark-mode .modal-title,
+body.dark-mode .modal-body,
+body.dark-mode .modal-body p,
+body.dark-mode .modal-body label,
+body.dark-mode .modal-body h5,
+body.dark-mode .modal-body h6,
+body.dark-mode .modal-body span,
+body.dark-mode .modal-body div,
+body.dark-mode .modal-content,
+body.dark-mode .card-title,
+body.dark-mode .card-text,
+body.dark-mode .hero-feat-card h5,
+body.dark-mode .hero-feat-card p,
+body.dark-mode .service-card h3,
+body.dark-mode .service-card h4,
+body.dark-mode .service-card h5,
+body.dark-mode .service-card p,
+body.dark-mode .formation-card h3,
+body.dark-mode .formation-card h4,
+body.dark-mode .formation-card h5,
+body.dark-mode .formation-card p,
+body.dark-mode .snu-team-card .snu-name,
+body.dark-mode .snu-team-card .snu-role,
+body.dark-mode .contrat-box,
+body.dark-mode .contrat-article,
+body.dark-mode .contrat-article p,
+body.dark-mode .contrat-article li {
+    color: #ffffff !important;
+}
+
+body.dark-mode .text-muted,
+body.dark-mode small.text-muted {
+    color: #d1d5db !important;
+}
+
+body.dark-mode .bg-light,
+body.dark-mode .modal-body,
+body.dark-mode .modal-content,
+body.dark-mode .contrat-box {
+    background-color: #0d0f12 !important;
+    border-color: #272a30 !important;
+}
+
+body.dark-mode .contrat-badge {
+    background: #9B111E !important;
+    color: #ffffff !important;
+}
+
+/*
+ * Les pages publiques utilisent parfois les classes Bootstrap bg-white/bg-light
+ * directement dans le HTML. Ces règles finales gardent un vrai noir uniforme
+ * dans le mode sombre et la texture technologique reste visible en mode clair.
+ */
+html[data-theme="light"] body.tech-bg {
+    background-color: #eef2f5 !important;
+    background-image: url('../img/tech_background.png') !important;
+}
+
+html[data-theme="light"] body.tech-bg::before {
+    background: rgba(255, 255, 255, .78) !important;
+}
+
+html[data-theme="light"] body.tech-bg .bg-white,
+html[data-theme="light"] body.tech-bg .bg-light {
+    background-color: rgba(255, 255, 255, .80) !important;
+}
+
+body.dark-mode,
+body.dark-mode main,
+body.dark-mode .bg-secondary {
+    background-color: #000000 !important;
+}
+
+/* Le décor technologique reste visible en sombre : seules les cartes métier
+ * restent noires afin de garder une hiérarchie nette et une bonne lisibilité. */
+body.dark-mode.tech-bg {
+    background-color: #05070a !important;
+    background-image:
+        linear-gradient(rgba(0, 0, 0, .48), rgba(0, 0, 0, .72)),
+        url('../img/tech_background.png') !important;
+    background-position: center top;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+body.dark-mode.tech-bg::before {
+    background:
+        linear-gradient(rgba(0, 0, 0, .18), rgba(0, 0, 0, .45)),
+        repeating-linear-gradient(0deg, rgba(0, 180, 255, .055) 0 1px, transparent 1px 42px),
+        repeating-linear-gradient(90deg, rgba(0, 180, 255, .04) 0 1px, transparent 1px 42px) !important;
+    opacity: 1 !important;
+}
+
+body.dark-mode main,
+body.dark-mode .container-fluid.bg-white,
+body.dark-mode .container-fluid.bg-light,
+body.dark-mode .bg-white,
+body.dark-mode .bg-light {
+    background-color: rgba(0, 0, 0, .34) !important;
+    background-image: none !important;
+}
+
+body.dark-mode .news-card,
+body.dark-mode .contrat-box,
+body.dark-mode .contrat-box > *,
+body.dark-mode .spec-item,
+body.dark-mode .service-card,
+body.dark-mode .formation-card,
+body.dark-mode .modal-content,
+body.dark-mode .modal-body,
+body.dark-mode .modal-footer,
+body.dark-mode .form-panel {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border-color: #252525 !important;
+}
+
+body.dark-mode .news-card p,
+body.dark-mode .news-card .text-muted,
+body.dark-mode .contrat-box .text-muted,
+body.dark-mode .spec-item p,
+body.dark-mode .form-label,
+body.dark-mode .form-check-label {
+    color: #f1f1f1 !important;
+}
+
+body.dark-mode .news-card h3,
+body.dark-mode .news-card h4,
+body.dark-mode .news-card h5,
+body.dark-mode .contrat-box h2,
+body.dark-mode .contrat-box h3,
+body.dark-mode .contrat-box h4,
+body.dark-mode .contrat-box h5,
+body.dark-mode .spec-item h4,
+body.dark-mode .spec-item h5 {
+    color: #ffffff !important;
+}
+
+body.dark-mode .form-control,
+body.dark-mode .form-select,
+body.dark-mode textarea {
+    background-color: #050505 !important;
+    color: #ffffff !important;
+    border-color: #3a3a3a !important;
+}
+
+body.dark-mode .form-control::placeholder,
+body.dark-mode textarea::placeholder {
+    color: #a8a8a8 !important;
+}
+
+body.dark-mode .snu-team-card .snu-img-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000000 !important;
+}
+
+.snu-team-card .snu-img-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f4f4f4;
+}
+
+.snu-team-card .snu-img-wrap img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center center;
+}
+
+body.dark-mode .snu-team-card .snu-img-wrap {
+    background: #000000 !important;
+}
+
+/* Base fluide : aucun composant ne doit imposer une largeur supérieure au
+ * viewport, même sur un téléphone compact ou un écran pliable. */
+html {
+    overflow-x: hidden;
+    text-size-adjust: 100%;
+}
+
+body,
+main,
+section,
+.container,
+.container-fluid,
+.row,
+[class*="col-"] {
+    min-width: 0;
+}
+
+body {
+    min-width: 320px;
+    overflow-x: hidden;
+}
+
+img,
+svg,
+video,
+iframe,
+table {
+    max-width: 100%;
+}
+
+iframe {
+    width: 100%;
+}
+
+.container,
+.container-fluid {
+    width: 100%;
+}
+
+.row {
+    --bs-gutter-x: clamp(1rem, 3vw, 3rem);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+label,
+button,
+a {
+    overflow-wrap: anywhere;
+}
+
+.modal-dialog {
+    width: auto;
+    max-width: calc(100% - 1rem);
+    margin: .5rem auto;
+}
+
+.modal-content {
+    max-height: calc(100dvh - 1rem);
+    overflow-y: auto;
+}
+
+@media (max-width: 575.98px) {
+    body {
+        min-width: 0;
+    }
+
+    .container,
+    .container-fluid {
+        padding-left: clamp(12px, 4vw, 24px) !important;
+        padding-right: clamp(12px, 4vw, 24px) !important;
+    }
+
+    .navbar-brand .navbar-title {
+        font-size: clamp(.9rem, 4vw, 1.2rem) !important;
+    }
+
+    .navbar-brand > div {
+        min-width: 0;
+    }
+
+    .navbar-brand img {
+        width: clamp(38px, 12vw, 52px) !important;
+        height: clamp(38px, 12vw, 52px) !important;
+        margin-right: 8px !important;
+    }
+
+    .hero-header,
+    .hero-header .container {
+        padding-top: clamp(4rem, 16vw, 7rem) !important;
+        padding-bottom: clamp(2rem, 8vw, 4rem) !important;
+    }
+
+    .modal-dialog {
+        max-width: calc(100% - .75rem);
+        margin: .375rem auto;
+    }
+
+    .modal-body {
+        padding: clamp(1rem, 5vw, 2rem) !important;
+    }
+
+    .modal-header {
+        padding-left: clamp(1rem, 4vw, 1.5rem) !important;
+        padding-right: clamp(1rem, 4vw, 1.5rem) !important;
+    }
+
+    .module-request-modal .modal-header .fs-2 {
+        font-size: 1.4rem !important;
+    }
+
+    .form-control,
+    .form-select,
+    .btn {
+        max-width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body.dark-mode.tech-bg {
+        background-attachment: scroll;
+    }
+}
+
+/* Typographie réellement fluide : les textes suivent la largeur disponible
+ * sans être écrasés ni sortir des cartes, formulaires ou colonnes mobiles. */
+body {
+    font-size: clamp(.96rem, .25vw + .9rem, 1.08rem);
+    line-height: 1.6;
+}
+
+/* Fond global proportionnel : cover remplit chaque format sans déformer
+ * l'image technologique et sans dépendre d'une largeur fixe de téléphone. */
+body.tech-bg {
+    min-height: 100svh;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    background-size: cover !important;
+    background-attachment: scroll !important;
+}
+
+body.tech-bg::before {
+    min-height: 100svh;
+    background-position: center center !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+}
+
+body.dark-mode.tech-bg {
+    background-position: center center !important;
+    background-size: cover !important;
+    background-attachment: scroll !important;
+}
+
+@media (min-width: 768px) {
+    body.tech-bg,
+    body.tech-bg::before {
+        background-attachment: fixed !important;
+    }
+}
+
+@media (max-aspect-ratio: 3/5) {
+    body.tech-bg,
+    body.tech-bg::before {
+        background-position: 50% 35% !important;
+    }
+}
+
+@media (min-aspect-ratio: 16/9) {
+    body.tech-bg,
+    body.tech-bg::before {
+        background-position: 50% 50% !important;
+    }
+}
+
+main h1,
+main .display-1,
+main .display-2,
+main .display-3,
+main .display-4 {
+    font-size: clamp(1.85rem, 6vw, 4.5rem) !important;
+    line-height: 1.08 !important;
+    letter-spacing: clamp(-.04em, -.1vw, -.015em);
+    overflow-wrap: anywhere;
+}
+
+main h2 {
+    font-size: clamp(1.55rem, 4.5vw, 2.6rem) !important;
+    line-height: 1.15 !important;
+}
+
+main h3 {
+    font-size: clamp(1.3rem, 3.8vw, 2rem) !important;
+    line-height: 1.2 !important;
+}
+
+main h4,
+main h5,
+main h6 {
+    line-height: 1.25 !important;
+    overflow-wrap: anywhere;
+}
+
+main p,
+main li,
+main label,
+main small,
+main .lead,
+main .form-text {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: normal;
+}
+
+main p:not(.small):not(.lead),
+main li {
+    font-size: clamp(.92rem, 1.1vw, 1.06rem) !important;
+}
+
+main h4,
+main h5,
+main h6 {
+    font-size: clamp(1.05rem, 2.2vw, 1.5rem) !important;
+}
+
+main p,
+main li {
+    line-height: 1.65;
+}
+
+main .lead {
+    font-size: clamp(1rem, 2.2vw, 1.25rem) !important;
+}
+
+main .btn,
+main button,
+main .form-control,
+main .form-select {
+    min-height: 42px;
+    line-height: 1.25;
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+main .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+main .row > * {
+    min-width: 0;
+}
+
+/* Les légendes sous les images de l'accueil grandissent avec le texte :
+ * aucune phrase ne doit être coupée lorsque le téléphone est étroit. */
+.about-image-caption {
+    width: 100%;
+    min-height: 60px;
+    height: auto !important;
+    padding: .75rem clamp(.5rem, 2vw, 1rem) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+}
+
+.about-image-caption h4 {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 !important;
+    font-size: clamp(.78rem, 1.4vw, .98rem) !important;
+    line-height: 1.35 !important;
+    text-align: center !important;
+    overflow-wrap: anywhere;
+}
+
+/* Repli visuel lorsque le bundle Bootstrap n'est pas disponible : le bouton
+ * module reste utilisable et la fenêtre reste centrée au-dessus de la page. */
+.module-request-modal.show {
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, .68);
+}
+
+.module-request-modal.show .modal-dialog {
+    min-height: calc(100% - 1rem);
+    display: flex;
+    align-items: center;
+}
+
+main .text-nowrap,
+main [style*="white-space: nowrap"] {
+    white-space: normal !important;
+}
+
+@media (max-width: 575.98px) {
+    body {
+        font-size: clamp(.9rem, 3.4vw, 1rem);
+        line-height: 1.55;
+    }
+
+    main h1,
+    main .display-1,
+    main .display-2,
+    main .display-3,
+    main .display-4 {
+        font-size: clamp(1.65rem, 9vw, 2.7rem) !important;
+        line-height: 1.1 !important;
+    }
+
+    main h2 {
+        font-size: clamp(1.4rem, 7vw, 2.1rem) !important;
+    }
+
+    main h3 {
+        font-size: clamp(1.2rem, 6vw, 1.75rem) !important;
+    }
+
+    main h4,
+    main h5,
+    main h6 {
+        font-size: clamp(1.05rem, 4.8vw, 1.4rem) !important;
+    }
+
+    main p,
+    main li {
+        line-height: 1.6;
+    }
+
+    main .small,
+    main small {
+        font-size: clamp(.78rem, 3.2vw, .92rem) !important;
+    }
+
+    main .btn,
+    main button {
+        width: 100%;
+        min-height: 44px;
+        padding: .7rem .85rem !important;
+    }
+
+    main .btn-square,
+    main .btn-sm-square,
+    main .btn-lg-square,
+    main .navbar-toggler,
+    main .theme-toggle-btn {
+        width: auto;
+    }
+
+    main .form-label {
+        font-size: .9rem !important;
+        line-height: 1.35;
+    }
+
+    main .form-control,
+    main .form-select {
+        min-height: 44px;
+        font-size: 1rem;
+    }
+
+    main .section-kicker {
+        max-width: 100%;
+        padding: 5px 10px;
+        font-size: .68rem;
+        line-height: 1.35;
+        white-space: normal;
+    }
+
+    main .d-flex:not(.navbar):not(.btn):not(.btn-group) {
+        min-width: 0;
+        flex-wrap: wrap;
+    }
 }

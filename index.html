@@ -12,7 +12,8 @@
     <meta name="application-name" content="Salle du Numérique UNILU">
     <meta property="og:site_name" content="Salle du Numérique UNILU">
     <meta property="og:title" content="Salle du Numérique UNILU | Université de Lubumbashi">
-    <meta property="og:description" content="Site officiel de la Salle du Numérique de l'Université de Lubumbashi (UNILU). Formations, ateliers, innovation et services numériques.">
+    <meta property="og:description"
+        content="Site officiel de la Salle du Numérique de l'Université de Lubumbashi (UNILU). Formations, ateliers, innovation et services numériques.">
     <meta
         content="SNU, salle numérique, Lubumbashi, centre technologique, programmation, ateliers, formation numérique, université, RDC"
         name="keywords">
@@ -29,7 +30,7 @@
       "url": "https://snu-unilu01.netlify.app/"
     }
     </script>
-    
+
     <!-- Favicon -->
     <link href="img/Logo_SNU.jpg" rel="icon" type="image/jpeg">
 
@@ -59,6 +60,7 @@
 </head>
 
 <body class="tech-bg">
+    <a class="skip-link" href="#main-content">Aller au contenu principal</a>
     <!-- Spinner Start -->
     <div id="spinner"
         class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -76,21 +78,30 @@
                     <img src="img/Logo_SNU.jpg" alt="Logo SNU"
                         style="height: 52px; width: 52px; object-fit: cover; border-radius: 50%; margin-right: 12px; border: 2px solid rgba(255,255,255,0.6); box-shadow: 0 3px 10px rgba(0,0,0,0.3);">
                     <div class="d-flex flex-column">
-                        <span class="navbar-title fw-bold text-white mb-0" style="font-size: 1.35rem; letter-spacing: -0.3px; line-height: 1.1;">Salle du Numérique</span>
-                        <span class="text-white-50" style="font-size: 0.72rem; letter-spacing: 1px; text-transform: uppercase;">Université de Lubumbashi</span>
+                        <span class="navbar-title fw-bold text-white mb-0"
+                            style="font-size: 1.35rem; letter-spacing: -0.3px; line-height: 1.1;">Salle du
+                            Numérique</span>
+                        <span class="text-white-50"
+                            style="font-size: 0.72rem; letter-spacing: 1px; text-transform: uppercase;">Université de
+                            Lubumbashi</span>
                     </div>
                 </a>
                 <button type="button" class="navbar-toggler border-0 p-2" data-bs-toggle="collapse"
-                    data-bs-target="#navbarCollapse" aria-label="Menu de navigation">
+                    data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+                    aria-label="Menu de navigation">
                     <i class="fa fa-bars text-white fs-4"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto align-items-lg-center py-2 py-lg-0">
                         <a href="index.html" class="nav-item nav-link active px-3">Accueil</a>
-                        <a href="project.html" class="nav-item nav-link px-3">La Salle</a>
+                        <a href="services.html" class="nav-item nav-link px-3">Services</a>
+                        <a href="formations.html" class="nav-item nav-link px-3">Formations</a>
+                        <a href="actualites.html" class="nav-item nav-link px-3">Actualités</a>
+                        <a href="project.html" class="nav-item nav-link px-3">En savoir plus</a>
                         <a href="contact.html" class="nav-item nav-link px-3">Contact</a>
                         <div class="ms-lg-3 my-2 my-lg-0">
-                            <button id="themeToggleBtn" class="theme-toggle-btn" title="Basculer Mode Sombre / Mode Clair">
+                            <button id="themeToggleBtn" class="theme-toggle-btn"
+                                title="Basculer Mode Sombre / Mode Clair">
                                 <i class="fa fa-moon me-1 theme-icon"></i> <span class="theme-text">Mode Sombre</span>
                             </button>
                         </div>
@@ -101,734 +112,163 @@
     </div>
 
 
-    <!-- Hero Start -->
-    <div class="hero-header mb-5">
-        <!-- Wrapper position:relative pour superposer texte + carousel -->
-        <div class="hero-banner position-relative">
+    <main id="main-content">
+        <!-- Hero Start -->
+        <div class="hero-header mb-5">
+            <!-- Wrapper position:relative pour superposer texte + carousel -->
+            <div class="hero-banner position-relative">
 
-            <!-- Carousel pleine largeur -->
-            <div class="owl-carousel header-carousel animated fadeIn" style="width:100%;">
-                <img class="w-100" src="img/Salle1.jpg" alt="Salle 1">
-                <img class="w-100" src="img/Salle2.jpg" alt="Salle 2">
-                <img class="w-100" src="img/Salle3.jpg" alt="Salle 3">
+                <!-- Carousel pleine largeur -->
+                <div class="owl-carousel header-carousel animated fadeIn" style="width:100%;">
+                    <img class="w-100" src="img/Salle1.jpg" alt="Salle 1">
+                    <img class="w-100" src="img/Salle2.jpg" alt="Salle 2">
+                    <img class="w-100" src="img/Salle3.jpg" alt="Salle 3">
+                </div>
+
+                <!-- Overlay sombre pour lisibilité -->
+                <div class="hero-overlay"></div>
+
+                <!-- Texte superposé AU-DESSUS des images -->
+                <div class="hero-text-overlay">
+                    <div class="hero-intro animated slideInDown">
+                        <h1 class="hero-main-title mb-3"><strong>La Salle du Numérique</strong></h1>
+                        <p class="hero-description mb-4">Un espace universitaire dédié à la formation, à la recherche et
+                            à l’innovation numérique.</p>
+                        <a class="btn btn-primary px-4" href="project.html">En savoir plus</a>
+                    </div>
+                </div>
+
             </div>
 
-            <!-- Overlay sombre pour lisibilité -->
-            <div class="hero-overlay"></div>
-
-            <!-- Texte superposé AU-DESSUS des images -->
-            <div class="hero-text-overlay">
-                <h1 class="hero-main-title animated slideInDown">
-                    <strong data-cms="hero.main_title">INNOVER AUJOURD'HUI</strong><br>
-                    <strong class="hero-subtitle-accent" data-cms="hero.subtitle_accent">INSPIRER DEMAIN</strong>
-                </h1>
+            <!-- Features bar -->
+            <div class="container py-4">
+                <div class="row g-4 animated fadeIn justify-content-center">
+                    <div class="col-md-4 col-sm-6">
+                        <div class="hero-feat-card">
+                            <div class="hero-feat-icon">
+                                <i class="fa fa-desktop"></i>
+                            </div>
+                            <h5 class="lh-base mb-0" style="font-weight: 700; color: #1a1a1a;"
+                                data-cms="hero.feat_1_title">Ordinateurs Modernes</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="hero-feat-card">
+                            <div class="hero-feat-icon">
+                                <i class="fa fa-bolt"></i>
+                            </div>
+                            <h5 class="lh-base mb-0" style="font-weight: 700; color: #1a1a1a;"
+                                data-cms="hero.feat_2_title">Connexion Ultra Rapide</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="hero-feat-card">
+                            <div class="hero-feat-icon">
+                                <i class="fa fa-building"></i>
+                            </div>
+                            <h5 class="lh-base mb-0" style="font-weight: 700; color: #1a1a1a;"
+                                data-cms="hero.feat_3_title">Espaces de Travail</h5>
+                        </div>
+                    </div>
+                </div>
             </div>
-
         </div>
-
-        <!-- Features bar -->
-        <div class="container py-4">
-            <div class="row g-4 animated fadeIn justify-content-center">
-                <div class="col-md-4 col-sm-6">
-                    <div class="hero-feat-card">
-                        <div class="hero-feat-icon">
-                            <i class="fa fa-desktop"></i>
-                        </div>
-                        <h5 class="lh-base mb-0" style="font-weight: 700; color: #1a1a1a;" data-cms="hero.feat_1_title">Ordinateurs Modernes</h5>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="hero-feat-card">
-                        <div class="hero-feat-icon">
-                            <i class="fa fa-bolt"></i>
-                        </div>
-                        <h5 class="lh-base mb-0" style="font-weight: 700; color: #1a1a1a;" data-cms="hero.feat_2_title">Connexion Ultra Rapide</h5>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="hero-feat-card">
-                        <div class="hero-feat-icon">
-                            <i class="fa fa-building"></i>
-                        </div>
-                        <h5 class="lh-base mb-0" style="font-weight: 700; color: #1a1a1a;" data-cms="hero.feat_3_title">Espaces de Travail</h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Hero End -->
+        <!-- Hero End -->
 
 
-    <!-- About Start -->
-    <div class="container-fluid py-5 snu-about-section">
-        <div class="container">
-            <div class="row g-5">
-                <div class="col-lg-6">
-                    <div class="row g-2">
-                        <div class="col-6 wow fadeIn" data-wow-delay="0.1s">
-                            <img class="img-fluid w-100" src="img/about-1.jpg" alt="Salle du Numérique"
-                                style="object-fit: cover; height: 180px !important;" data-cms-img="about.img1">
-                            <div class="d-flex align-items-center justify-content-center text-center bg-primary px-3 py-2"
-                                style="height: 60px !important;">
-                                <h4 class="text-white lh-base mb-0" style="font-size: 0.9rem; font-weight: 700;">Salle
-                                    du Numérique</h4>
+        <!-- About Start -->
+        <div class="container-fluid py-5 snu-about-section">
+            <div class="container">
+                <div class="row g-5">
+                    <div class="col-lg-6">
+                        <div class="row g-2">
+                            <div class="col-6 wow fadeIn" data-wow-delay="0.1s">
+                                <img class="img-fluid w-100" src="img/about-1.jpg" alt="Salle du Numérique"
+                                    style="object-fit: cover; height: 180px !important;" data-cms-img="about.img1">
+                                <div
+                                    class="about-image-caption d-flex align-items-center justify-content-center text-center bg-primary px-3 py-2">
+                                    <h4 class="text-white lh-base mb-0" style="font-size: 0.9rem; font-weight: 700;">
+                                        Salle
+                                        du Numérique</h4>
+                                </div>
+                            </div>
+                            <div class="col-6 wow fadeIn" data-wow-delay="0.3s">
+                                <img class="img-fluid w-100" src="img/about-2.jpg" alt="de l'Université de Lubumbashi"
+                                    style="object-fit: cover; height: 180px !important;" data-cms-img="about.img2">
+                                <div
+                                    class="about-image-caption d-flex align-items-center justify-content-center text-center bg-primary px-3 py-2">
+                                    <h4 class="text-white lh-base mb-0" style="font-size: 0.9rem; font-weight: 700;">de
+                                        l'Université de Lubumbashi</h4>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-6 wow fadeIn" data-wow-delay="0.3s">
-                            <img class="img-fluid w-100" src="img/about-2.jpg" alt="de l'Université de Lubumbashi"
-                                style="object-fit: cover; height: 180px !important;" data-cms-img="about.img2">
-                            <div class="d-flex align-items-center justify-content-center text-center bg-primary px-3 py-2"
-                                style="height: 60px !important;">
-                                <h4 class="text-white lh-base mb-0" style="font-size: 0.9rem; font-weight: 700;">de
-                                    l'Université de Lubumbashi</h4>
+                    </div>
+                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                        <h1 class="mb-5"><span data-cms="about.title_prefix">Découvrez notre</span> <span
+                                style="color: #d10000 !important; font-weight: 900; text-transform: uppercase;"
+                                data-cms="about.title_highlight">Espace
+                                Tech</span></h1>
+                        <p class="mb-4" data-cms="about.p1">La Salle du Numérique de l'Université de Lubumbashi (SNU)
+                            est un centre
+                            technologique moderne conçu pour propulser l'éducation, la formation et la recherche vers de
+                            nouveaux sommets. Nous mettons à la disposition de la communauté universitaire des
+                            ressources de
+                            pointe.</p>
+                        <p class="mb-5" data-cms="about.p2">Que vous soyez étudiant cherchant à approfondir vos
+                            compétences pratiques,
+                            enseignant préparant des cours interactifs, ou jeune innovateur travaillant sur des projets
+                            tech, notre espace offre des solutions adaptées à vos besoins.</p>
+                        <div class="row g-3">
+                            <div class="col-sm-6">
+                                <h6 class="mb-3"><i class="fa fa-check text-primary me-2"></i>Matériel Professionnel
+                                </h6>
+                                <h6 class="mb-0"><i class="fa fa-check text-primary me-2"></i>Encadrement Qualifié</h6>
+                            </div>
+                            <div class="col-sm-6">
+                                <h6 class="mb-0"><i class="fa fa-check text-primary me-2"></i>Assistance Technique</h6>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
-                    <h1 class="mb-5"><span data-cms="about.title_prefix">Découvrez notre</span> <span
-                            style="color: #d10000 !important; font-weight: 900; text-transform: uppercase;" data-cms="about.title_highlight">Espace
-                            Tech</span></h1>
-                    <p class="mb-4" data-cms="about.p1">La Salle du Numérique de l'Université de Lubumbashi (SNU) est un centre
-                        technologique moderne conçu pour propulser l'éducation, la formation et la recherche vers de
-                        nouveaux sommets. Nous mettons à la disposition de la communauté universitaire des ressources de
-                        pointe.</p>
-                    <p class="mb-5" data-cms="about.p2">Que vous soyez étudiant cherchant à approfondir vos compétences pratiques,
-                        enseignant préparant des cours interactifs, ou jeune innovateur travaillant sur des projets
-                        tech, notre espace offre des solutions adaptées à vos besoins.</p>
-                    <div class="row g-3">
-                        <div class="col-sm-6">
-                            <h6 class="mb-3"><i class="fa fa-check text-primary me-2"></i>Matériel Professionnel</h6>
-                            <h6 class="mb-0"><i class="fa fa-check text-primary me-2"></i>Encadrement Qualifié</h6>
-                        </div>
-                        <div class="col-sm-6">
-                            <h6 class="mb-0"><i class="fa fa-check text-primary me-2"></i>Assistance Technique</h6>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center mt-5">
-                        <a class="btn btn-primary px-4 me-2" href="project.html">En savoir plus</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- About End -->
-
-
-    <!-- Feature Start -->
-    <div class="container-fluid py-5 snu-feature-section">
-        <div class="container">
-            <div class="text-center wow fadeIn" data-wow-delay="0.1s">
-                <h1 class="mb-5">Pourquoi Nous <span style="color: #d10000 !important; font-weight: 900 !important;"
-                        class="mb-5">Choisir</span> ?
-                </h1>
-            </div>
-            <div class="row g-5 align-items-center text-center">
-                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.1s">
-                    <i class="fa fa-desktop fa-5x text-primary mb-4"></i>
-                    <h4>Matériel de pointe</h4>
-                    <p class="mb-0">Accédez à des ordinateurs performants adaptés aux besoins de programmation, de
-                        modélisation et de recherche universitaire.</p>
-                </div>
-                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.3s">
-                    <i class="fa fa-wifi fa-5x text-primary mb-4"></i>
-                    <h4>Connexion Internet 5G</h4>
-                    <p class="mb-0">Bénéficiez d'une connexion internet 5G ultra-rapide, stable et à haut débit pour vos
-                        recherches en ligne, streaming éducatif.
-                    </p>
-                </div>
-
-                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.5s">
-                    <i class="fa fa-credit-card fa-5x text-primary mb-4"></i>
-                    <h4>Abonnements Mensuels</h4>
-                    <p class="mb-0">Profitez de nos abonnements mensuels accessibles à tous et bénéficiez d'un accès
-                        privilégié à nos équipements numériques.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Team Start -->
-    <div class="container-fluid py-5 snu-team-section" style="background: #ffffff;">
-        <div class="container py-5">
-            <div class="text-center mb-5 wow fadeIn" data-wow-delay="0.1s">
-                <span
-                    style="display:inline-block; background: rgba(209,0,0,0.1); border: 1px solid rgba(209,0,0,0.25); color: #d10000; font-size: 0.78rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; padding: 6px 20px; border-radius: 30px; margin-bottom: 16px;">Notre
-                    Équipe</span>
-                <h1
-                    style="color: #1a1a1a; font-weight: 900; font-family: 'Montserrat', sans-serif; font-size: clamp(2rem,5vw,3rem);">
-                    L'Équipe de <span style="color: #d10000;">Gestion</span></h1>
-                <p style="color: #6c757d; max-width: 560px; margin: 0 auto; font-size: 1rem;">Les professionnels dévoués
-                    qui font vivre la Salle du Numérique chaque jour.</p>
-            </div>
-            <style>
-                .snu-team-card {
-                    background: #fff;
-                    border: 1px solid rgba(0, 0, 0, 0.08);
-                    border-radius: 14px;
-                    overflow: hidden;
-                    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-                    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-                }
-
-                .snu-team-card:hover {
-                    transform: translateY(-8px);
-                    box-shadow: 0 20px 48px rgba(209, 0, 0, 0.15);
-                    border-color: rgba(209, 0, 0, 0.3);
-                }
-
-                .snu-team-card .snu-img-wrap {
-                    height: 320px;
-                    overflow: hidden;
-                }
-
-                .snu-team-card .snu-img-wrap img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                    transition: transform 0.5s ease;
-                }
-
-                .snu-team-card:hover .snu-img-wrap img {
-                    transform: scale(1.05);
-                }
-
-                .snu-team-card .snu-info {
-                    padding: 16px 18px;
-                    text-align: center;
-                    border-top: 3px solid #d10000;
-                    background: #fff;
-                }
-
-                .snu-team-card .snu-name {
-                    font-family: 'Montserrat', sans-serif;
-                    font-size: 1rem;
-                    font-weight: 800;
-                    color: #1a1a1a;
-                    margin-bottom: 5px;
-                }
-
-                .snu-team-card .snu-role {
-                    font-family: 'Roboto', sans-serif;
-                    font-size: 0.7rem;
-                    font-weight: 700;
-                    color: #d10000;
-                    text-transform: uppercase;
-                    letter-spacing: 1.5px;
-                }
-            </style>
-            <div class="row g-4 justify-content-center">
-                <!-- Member 1 -->
-                <div class="col-sm-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="snu-team-card">
-                        <div class="snu-img-wrap">
-                            <img src="img/Rachel.PNG" alt="Mme Rachel">
-                        </div>
-                        <div class="snu-info">
-                            <div class="snu-name">Mme Rachel</div>
-                            <div class="snu-role">Secrétaire de la Salle</div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Member 2 -->
-                <div class="col-sm-6 col-lg-4 wow fadeInUp" data-wow-delay="0.2s">
-                    <div class="snu-team-card">
-                        <div class="snu-img-wrap">
-                            <img src="img/Jhone.PNG" alt="Mr J. le grand">
-                        </div>
-                        <div class="snu-info">
-                            <div class="snu-name">Mr J. le grand</div>
-                            <div class="snu-role">Resp. des Formations</div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Member 3 -->
-                <div class="col-sm-6 col-lg-4 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="snu-team-card">
-                        <div class="snu-img-wrap">
-                            <img src="img/Patric.PNG" alt="Mr Patrick Shimaitu">
-                        </div>
-                        <div class="snu-info">
-                            <div class="snu-name">Mr Patrick Shimaitu</div>
-                            <div class="snu-role">Tuteur &amp; Support Tech</div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Member 4 -->
-                <div class="col-sm-6 col-lg-4 wow fadeInUp" data-wow-delay="0.4s">
-                    <div class="snu-team-card">
-                        <div class="snu-img-wrap">
-                            <img src="img/brigitte.png" alt="Mme Nsapu Brigitte">
-                        </div>
-                        <div class="snu-info">
-                            <div class="snu-name">Mme Nsapu Brigitte</div>
-                            <div class="snu-role">Chargée de la Comptabilité</div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Member 5 -->
-                <div class="col-sm-6 col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="snu-team-card">
-                        <div class="snu-img-wrap">
-                            <img src="img/Denis.PNG" alt="Mr Mikobi Denis">
-                        </div>
-                        <div class="snu-info">
-                            <div class="snu-name">Mr Mikobi Denis</div>
-                            <div class="snu-role">Maintenance &amp; Logistique</div>
+                        <div class="d-flex align-items-center mt-5">
+                            <a class="btn btn-primary px-4 me-2" href="project.html">En savoir plus</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Team End -->
+        <!-- About End -->
 
 
-    <!-- Mot du Directeur Start -->
-    <div class="container-fluid py-5 bg-white">
-        <div class="container py-5">
-            <div class="row align-items-center g-5">
-
-                <!-- IMAGE À GAUCHE -->
-                <div class="col-lg-5 text-center wow fadeInLeft" data-wow-delay="0.1s">
-                    <div class="shadow-lg rounded overflow-hidden" style="border: 6px solid #f8f9fa;">
-                        <img src="img/Dr roger .jpeg" class="img-fluid w-100" alt="Dr Roger - Directeur de la Salle du Numérique"
-                            style="height: 420px; object-fit: cover; object-position: top;" data-cms-img="directeur.photo">
-                    </div>
-                </div>
-
-                <!-- TEXTE À DROITE -->
-                <div class="col-lg-7 wow fadeInRight" data-wow-delay="0.3s">
-                    <h6 class="text-uppercase text-danger fw-bold mb-2" style="letter-spacing: 2px;" data-cms="directeur.subtitle">
-                        Message du Directeur
-                    </h6>
-                    <h2 class="mb-4" style="font-weight: 800;">
-                        <span data-cms="directeur.title_prefix">Mot de Bienvenue du</span> <span style="color: #d10000;" data-cms="directeur.name">CT ROGER</span>
-                    </h2>
-                    <p class="lead text-muted mb-4" style="font-size: 1.1rem; font-weight: 500;" data-cms="directeur.lead">
-                        Chers visiteurs, chers apprenants,
-                    </p>
-                    <p class="text-secondary" style="line-height: 1.8;" data-cms="directeur.p1">
-                        C'est avec un grand plaisir que je vous accueille au sein de la Salle du Numérique. Dans un
-                        monde en constante évolution, notre engagement est de former des femmes et des hommes capables
-                        de créer, d'innover et d'apporter des solutions concrètes aux défis de notre époque.
-                    </p>
-                    <p class="text-secondary" style="line-height: 1.8;" data-cms="directeur.p2">
-                        Au-delà des compétences techniques, nous cultivons la créativité, l'esprit d'initiative et la
-                        confiance en soi — des qualités essentielles pour transformer les idées en opportunités réelles.
-                        Chaque apprenant est encouragé à développer son potentiel et à devenir un acteur du changement
-                        dans sa communauté.
-                    </p>
-                    <p class="text-secondary" style="line-height: 1.8;" data-cms="directeur.p3">
-                        Notre vision est simple : <strong style="color: #d10000;">Innover aujourd'hui pour inspirer
-                            demain.</strong> Je vous invite à rejoindre cette aventure où l'apprentissage, l'innovation
-                        et l'excellence se rencontrent pour bâtir ensemble l'avenir.
-                    </p>
-                    <div class="mt-4 pt-3 border-top">
-                        <h5 class="mb-1" style="font-weight: 700;" data-cms="directeur.name">CT ROGER</h5>
-                        <span class="text-danger fw-bold" style="font-size: 0.9rem;" data-cms="directeur.role">
-                            Directeur de la Salle du Numérique (SNU)
-                        </span>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <!-- Mot du Directeur End -->
-
-
-    <!-- Section Nos Services Start -->
-    <div class="container-fluid py-5" style="background: rgba(255, 255, 255, 0.03);">
-        <div class="container py-5">
-            <div class="text-center wow fadeIn" data-wow-delay="0.1s">
-                <h1 class="mb-5">NOS <span style="color: #d10000 !important; font-weight: 900 !important;"
-                        class="mb-5">SERVICES</span></h1>
-            </div>
-            <div class="row g-4 justify-content-center" id="servicesContainer">
-                <!-- Service 1 -->
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="service-card p-4 d-flex flex-column align-items-center text-center">
-                        <div class="text-center mb-3" style="font-size: 3.5rem; color: var(--accent-blue) !important;">
-                            <i class="fa fa-desktop"></i>
-                        </div>
-                        <h4 class="mb-3" style="color: #1a1a1a; font-weight: 700;">100 Ordinateurs Disponibles</h4>
-                        <p class="mb-0 text-muted" style="font-size: 0.9rem; line-height: 1.6;">Accédez à l'un de nos
-                            100 postes de travail performants et modernes pour vos travaux pratiques et recherches
-                            académiques.</p>
-                    </div>
-                </div>
-                <!-- Service 2 -->
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
-                    <div class="service-card p-4 d-flex flex-column align-items-center text-center">
-                        <div class="text-center mb-3" style="font-size: 3.5rem; color: var(--accent-blue) !important;">
-                            <i class="fa fa-wifi"></i>
-                        </div>
-                        <h4 class="mb-3" style="color: #1a1a1a; font-weight: 700;">Connexion Internet</h4>
-                        <p class="mb-0 text-muted" style="font-size: 0.9rem; line-height: 1.6;">Profitez d'une connexion
-                            internet 5G ultra-rapide, stable et continue pour toutes vos activités de recherche en
-                            ligne.</p>
-                    </div>
-                </div>
-                <!-- Service 3 -->
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="service-card p-4 d-flex flex-column align-items-center text-center">
-                        <div class="text-center mb-3" style="font-size: 3.5rem; color: var(--accent-blue) !important;">
-                            <i class="fa fa-book"></i>
-                        </div>
-                        <h4 class="mb-3" style="color: #1a1a1a; font-weight: 700;">Bibliothèques Numériques</h4>
-                        <p class="mb-0 text-muted" style="font-size: 0.9rem; line-height: 1.6;">Consultez des milliers
-                            d'ouvrages numériques, articles de recherche et bases de données scientifiques
-                            universitaires.</p>
-                    </div>
-                </div>
-                <!-- Service 4 -->
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="service-card p-4 d-flex flex-column align-items-center text-center">
-                        <div class="text-center mb-3" style="font-size: 3.5rem; color: var(--accent-blue) !important;">
-                            <i class="fa fa-laptop"></i>
-                        </div>
-                        <h4 class="mb-3" style="color: #1a1a1a; font-weight: 700;">Espaces de Travail Privés</h4>
-                        <p class="mb-0 text-muted" style="font-size: 0.9rem; line-height: 1.6;">Bénéficiez de boxes et
-                            de bureaux individuels isolés pour vous concentrer pleinement sur vos projets de fin de
-                            cycle.</p>
-                    </div>
-                </div>
-                <!-- Service 5 -->
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
-                    <div class="service-card p-4 d-flex flex-column align-items-center text-center">
-                        <div class="text-center mb-3" style="font-size: 3.5rem; color: var(--accent-blue) !important;">
-                            <i class="fa fa-users"></i>
-                        </div>
-                        <h4 class="mb-3" style="color: #1a1a1a; font-weight: 700;">Espaces Collaboratifs</h4>
-                        <p class="mb-0 text-muted" style="font-size: 0.9rem; line-height: 1.6;">Travaillez en synergie
-                            avec votre équipe dans des zones modulables équipées de tableaux et de mobilier dynamique.
+        <!-- Contenu essentiel de la salle -->
+        <section class="container-fluid py-5 bg-white" aria-labelledby="home-purpose-title">
+            <div class="container py-4">
+                <div class="row align-items-center g-5">
+                    <div class="col-lg-7">
+                        <span class="section-kicker">Notre mission</span>
+                        <h2 id="home-purpose-title" class="mb-4">Un espace pour apprendre, créer et innover</h2>
+                        <p class="lead text-muted mb-4">La Salle du Numérique de l’Université de Lubumbashi accompagne
+                            les étudiants, les enseignants et les porteurs de projets dans leurs usages du numérique.
                         </p>
+                        <p class="text-muted mb-4">Retrouvez sur notre site l’essentiel de notre mission, nos espaces,
+                            nos équipements et les possibilités d’accompagnement proposées par notre équipe.</p>
+                        <a class="btn btn-primary px-4" href="project.html">En savoir plus sur la salle</a>
                     </div>
-                </div>
-                <!-- Service 6 -->
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="service-card p-4 d-flex flex-column align-items-center text-center">
-                        <div class="text-center mb-3" style="font-size: 3.5rem; color: var(--accent-blue) !important;">
-                            <i class="fa fa-chalkboard-teacher"></i>
+                    <div class="col-lg-5">
+                        <div class="p-4 rounded-3 shadow-sm bg-light h-100">
+                            <h3 class="h4 mb-3">Ce que vous trouverez ici</h3>
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-3"><i class="fa fa-check text-primary me-2"></i>Un environnement numérique
+                                    universitaire</li>
+                                <li class="mb-3"><i class="fa fa-check text-primary me-2"></i>Des équipements adaptés à
+                                    la pratique</li>
+                                <li><i class="fa fa-check text-primary me-2"></i>Un accompagnement pour vos projets</li>
+                            </ul>
                         </div>
-                        <h4 class="mb-3" style="color: #1a1a1a; font-weight: 700;">Ateliers de Midi</h4>
-                        <p class="mb-0 text-muted" style="font-size: 0.9rem; line-height: 1.6;">Prenez part à nos
-                            sessions d'échange courtes organisées durant la pause de midi sur des thématiques
-                            technologiques d'actualité.</p>
-                    </div>
-                </div>
-                <!-- Service 7 -->
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="service-card p-4 d-flex flex-column align-items-center text-center">
-                        <div class="text-center mb-3" style="font-size: 3.5rem; color: var(--accent-blue) !important;">
-                            <i class="fa fa-graduation-cap"></i>
-                        </div>
-                        <h4 class="mb-3" style="color: #1a1a1a; font-weight: 700;">Mini Formations</h4>
-                        <p class="mb-0 text-muted" style="font-size: 0.9rem; line-height: 1.6;">Développez des
-                            compétences spécifiques rapidement grâce à nos modules de formation ciblés et pratiques.</p>
-                    </div>
-                </div>
-                <!-- Service 8 -->
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
-                    <div class="service-card p-4 d-flex flex-column align-items-center text-center">
-                        <div class="text-center mb-3" style="font-size: 3.5rem; color: var(--accent-blue) !important;">
-                            <i class="fa fa-comments"></i>
-                        </div>
-                        <h4 class="mb-3" style="color: #1a1a1a; font-weight: 700;">Cadre d'Échanges</h4>
-                        <p class="mb-0 text-muted" style="font-size: 0.9rem; line-height: 1.6;">Partagez vos idées et
-                            collaborez avec d'autres passionnés de technologie, étudiants et professionnels de
-                            l'écosystème.</p>
-                    </div>
-                </div>
-                <!-- Service 9 -->
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="service-card p-4 d-flex flex-column align-items-center text-center">
-                        <div class="text-center mb-3" style="font-size: 3.5rem; color: var(--accent-blue) !important;">
-                            <i class="fa fa-book-open"></i>
-                        </div>
-                        <h4 class="mb-3" style="color: #1a1a1a; font-weight: 700;">Pratique TP & TPE</h4>
-                        <p class="mb-0 text-muted" style="font-size: 0.9rem; line-height: 1.6;">Un environnement propice
-                            pour réaliser vos Travaux Pratiques et vos Travaux Pratiques Encadrés dans les meilleures
-                            conditions.</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- Section Nos Services End -->
-
-    <!-- Section Ateliers & Formations Start -->
-    <div class="container-fluid py-5">
-        <div class="container py-5">
-            <div class="text-center wow fadeIn" data-wow-delay="0.1s">
-                <h1 class="mb-5">ATELIERS & <span style="color: #d10000 !important;" class="mb-5">FORMATIONS</span></h1>
-            </div>
-
-            <h3 class="mb-4 text-center wow fadeIn" data-wow-delay="0.1s" style="color: #1a1a1a; font-weight: 900;">
-                Formations Principales</h3>
-            <div id="formationsPrincipalesContainer" class="row g-4 justify-content-center mb-5 pb-5">
-                <!-- Formation 1 -->
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="formation-card p-4 d-flex flex-column h-100 text-center">
-                        <div class="text-center mb-3" style="font-size: 3.5rem; color: #d10000;">
-                            <i class="fab fa-windows"></i>
-                        </div>
-                        <h5 class="mb-3" style="font-weight: 700; color: #1a1a1a;">Les Bases de Windows</h5>
-                        <p class="text-muted small mb-4" style="line-height: 1.6;">Maîtrisez le système d'exploitation
-                            Windows, le panneau de configuration, la gestion des fichiers et la sécurité essentielle.
-                        </p>
-                        <button class="btn btn-primary w-100 mt-auto py-2 btn-inscrire" data-bs-toggle="modal"
-                            data-bs-target="#registrationModal"
-                            data-formation="Les Bases de Windows">S'inscrire</button>
-                    </div>
-                </div>
-                <!-- Formation 2 -->
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
-                    <div class="formation-card p-4 d-flex flex-column h-100 text-center">
-                        <div class="text-center mb-3" style="font-size: 3.5rem; color: #d10000;">
-                            <i class="fab fa-microsoft"></i>
-                        </div>
-                        <h5 class="mb-3" style="font-weight: 700; color: #1a1a1a;">Bureautique (Microsoft 365)</h5>
-                        <p class="text-muted small mb-4" style="line-height: 1.6;">Une formation complète pour prendre
-                            en main les outils de productivité cloud et le travail collaboratif moderne.</p>
-                        <button class="btn btn-primary w-100 mt-auto py-2 btn-inscrire" data-bs-toggle="modal"
-                            data-bs-target="#registrationModal"
-                            data-formation="Bureautique (Microsoft 365)">S'inscrire</button>
-                    </div>
-                </div>
-                <!-- Formation 3 -->
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="formation-card p-4 d-flex flex-column h-100 text-center">
-                        <div class="text-center mb-3" style="font-size: 3.5rem; color: #d10000;">
-                            <i class="fa fa-robot"></i>
-                        </div>
-                        <h5 class="mb-3" style="font-weight: 700; color: #1a1a1a;">Initiation à l'IA</h5>
-                        <p class="text-muted small mb-4" style="line-height: 1.6;">Découvrez et intégrez les outils
-                            d'Intelligence Artificielle générative au quotidien pour booster votre productivité.</p>
-                        <button class="btn btn-primary w-100 mt-auto py-2 btn-inscrire" data-bs-toggle="modal"
-                            data-bs-target="#registrationModal"
-                            data-formation="Initiation aux outils d'IA">S'inscrire</button>
-                    </div>
-                </div>
-                <!-- Formation 4 -->
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.4s">
-                    <div class="formation-card p-4 d-flex flex-column h-100 text-center">
-                        <div class="text-center mb-3" style="font-size: 3.5rem; color: #d10000;">
-                            <i class="fa fa-palette"></i>
-                        </div>
-                        <h5 class="mb-3" style="font-weight: 700; color: #1a1a1a;">Les Bases du Design</h5>
-                        <p class="text-muted small mb-4" style="line-height: 1.6;">Apprenez les règles essentielles de
-                            la typographie, l'harmonie des couleurs et concevez des visuels créatifs et pro.</p>
-                        <button class="btn btn-primary w-100 mt-auto py-2 btn-inscrire" data-bs-toggle="modal"
-                            data-bs-target="#registrationModal" data-formation="Les Bases du Design">S'inscrire</button>
-                    </div>
-                </div>
-            </div>
-
-            <h3 class="mb-4 text-center wow fadeIn" data-wow-delay="0.1s" style="color: #1a1a1a; font-weight: 900;">
-                Modules Spécifiques Disponibles</h3>
-            <div id="formationsModulesContainer" class="row g-4 justify-content-center">
-                <!-- Module 1 -->
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="formation-card p-4 d-flex flex-column h-100">
-                        <div class="d-flex align-items-center mb-3">
-                            <i class="far fa-file-word fs-1 me-3" style="color: #d10000;"></i>
-                            <h5 class="mb-0" style="font-weight: 700; color: #1a1a1a;">Microsoft Word</h5>
-                        </div>
-                        <p class="text-muted small mb-4" style="line-height: 1.6;">Mise en page académique avancée,
-                            structuration de mémoires, gestion de styles et publipostage.</p>
-                        <button class="btn btn-primary w-100 mt-auto py-2 btn-inscrire" data-bs-toggle="modal"
-                            data-bs-target="#registrationModal" data-formation="Microsoft Word">S'inscrire</button>
-                    </div>
-                </div>
-                <!-- Module 2 -->
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
-                    <div class="formation-card p-4 d-flex flex-column h-100">
-                        <div class="d-flex align-items-center mb-3">
-                            <i class="far fa-file-excel fs-1 me-3" style="color: #d10000;"></i>
-                            <h5 class="mb-0" style="font-weight: 700; color: #1a1a1a;">Microsoft Excel</h5>
-                        </div>
-                        <p class="text-muted small mb-4" style="line-height: 1.6;">Formules complexes, modélisation de
-                            données, tableaux croisés dynamiques (TCD) et graphiques.</p>
-                        <button class="btn btn-primary w-100 mt-auto py-2 btn-inscrire" data-bs-toggle="modal"
-                            data-bs-target="#registrationModal" data-formation="Microsoft Excel">S'inscrire</button>
-                    </div>
-                </div>
-                <!-- Module 3 -->
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="formation-card p-4 d-flex flex-column h-100">
-                        <div class="d-flex align-items-center mb-3">
-                            <i class="fa fa-database fs-1 me-3" style="color: #d10000;"></i>
-                            <h5 class="mb-0" style="font-weight: 700; color: #1a1a1a;">Microsoft Access</h5>
-                        </div>
-                        <p class="text-muted small mb-4" style="line-height: 1.6;">Conception, requêtes SQL simples et
-                            gestion structurée de bases de données relationnelles.</p>
-                        <button class="btn btn-primary w-100 mt-auto py-2 btn-inscrire" data-bs-toggle="modal"
-                            data-bs-target="#registrationModal" data-formation="Microsoft Access">S'inscrire</button>
-                    </div>
-                </div>
-                <!-- Module 4 -->
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="formation-card p-4 d-flex flex-column h-100">
-                        <div class="d-flex align-items-center mb-3">
-                            <i class="far fa-file-powerpoint fs-1 me-3" style="color: #d10000;"></i>
-                            <h5 class="mb-0" style="font-weight: 700; color: #1a1a1a;">Microsoft PowerPoint</h5>
-                        </div>
-                        <p class="text-muted small mb-4" style="line-height: 1.6;">Conception de présentations
-                            interactives et dynamiques pour soutenir vos projets et examens.</p>
-                        <button class="btn btn-primary w-100 mt-auto py-2 btn-inscrire" data-bs-toggle="modal"
-                            data-bs-target="#registrationModal"
-                            data-formation="Microsoft PowerPoint">S'inscrire</button>
-                    </div>
-                </div>
-                <!-- Module 5 -->
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
-                    <div class="formation-card p-4 d-flex flex-column h-100">
-                        <div class="d-flex align-items-center mb-3">
-                            <i class="fa fa-newspaper fs-1 me-3" style="color: #d10000;"></i>
-                            <h5 class="mb-0" style="font-weight: 700; color: #1a1a1a;">Microsoft Publisher</h5>
-                        </div>
-                        <p class="text-muted small mb-4" style="line-height: 1.6;">Création de supports de communication
-                            imprimables : dépliants, affiches et bulletins.</p>
-                        <button class="btn btn-primary w-100 mt-auto py-2 btn-inscrire" data-bs-toggle="modal"
-                            data-bs-target="#registrationModal" data-formation="Microsoft Publisher">S'inscrire</button>
-                    </div>
-                </div>
-                <!-- Module 6 -->
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="formation-card p-4 d-flex flex-column h-100">
-                        <div class="d-flex align-items-center mb-3">
-                            <i class="fa fa-cloud fs-1 me-3" style="color: #d10000;"></i>
-                            <h5 class="mb-0" style="font-weight: 700; color: #1a1a1a;">Microsoft SharePoint</h5>
-                        </div>
-                        <p class="text-muted small mb-4" style="line-height: 1.6;">Gestion de portails d'information
-                            d'équipe, espaces documentaires et collaboration en nuage.</p>
-                        <button class="btn btn-primary w-100 mt-auto py-2 btn-inscrire" data-bs-toggle="modal"
-                            data-bs-target="#registrationModal"
-                            data-formation="Microsoft SharePoint">S'inscrire</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Section Ateliers & Formations End -->
-
-
-    <!-- Testimonial Start -->
-    <div class="container-xxl pb-5">
-        <div class="container pb-5">
-            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 800px;">
-                <h6 class="section-title bg-white text-center text-primary px-3">Témoignages</h6>
-                <h1 class="mb-5" style="font-weight: 800; font-family: 'Montserrat', sans-serif;" data-cms="testimonials.main_title">
-                    Ce que pensent nos apprenants
-                </h1>
-                <p class="text-muted" data-cms="testimonials.subtitle">
-                    Découvrez les expériences des étudiants et professionnels qui ont choisi la Salle du Numérique pour
-                    développer leurs compétences.
-                </p>
-            </div>
-
-            <div class="row justify-content-center">
-                <div class="col-md-12 col-lg-9">
-                    <div class="owl-carousel testimonial-carousel wow fadeIn" data-wow-delay="0.2s">
-
-                        <!-- Témoignage 1 -->
-                        <div class="testimonial-item">
-                            <div class="row g-5 align-items-center">
-                                <div class="col-md-6">
-                                    <div class="testimonial-img">
-                                        <img class="img-fluid" src="img/testimonial-1.jpeg" alt="">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="testimonial-text pb-5 pb-md-0">
-                                        <h3>Une formation qui change tout !</h3>
-
-                                        <p>
-                                            J'ai suivi la formation en Intelligence Artificielle et j'ai été
-                                            impressionné par
-                                            la qualité des formateurs. Ils prennent le temps d'expliquer chaque notion
-                                            avec
-                                            des exemples pratiques. Grâce à cette expérience, j'utilise aujourd'hui
-                                            plusieurs
-                                            outils d'IA dans mes études et mes projets personnels.
-                                        </p>
-
-                                        <h5 class="mb-0">Junior Katende</h5>
-                                        <span class="text-primary">Étudiante en Informatique</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Témoignage 2 -->
-                        <div class="testimonial-item">
-                            <div class="row g-5 align-items-center">
-                                <div class="col-md-6">
-                                    <div class="testimonial-img">
-                                        <img class="img-fluid" src="img/testimonial-2.jpeg" alt="">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="testimonial-text pb-5 pb-md-0">
-                                        <h3>Des équipements modernes et un excellent encadrement</h3>
-
-                                        <p>
-                                            La Salle du Numérique offre un environnement idéal pour apprendre. Les
-                                            ordinateurs
-                                            sont performants, la connexion Internet est rapide et les formateurs sont
-                                            toujours
-                                            disponibles pour accompagner chaque participant. Je recommande cette salle à
-                                            tous
-                                            les étudiants qui souhaitent développer leurs compétences numériques.
-                                        </p>
-
-                                        <h5 class="mb-0">Rocky Kahozi</h5>
-                                        <span class="text-primary">Étudiant en Sciences</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Témoignage 3 -->
-                        <div class="testimonial-item">
-                            <div class="row g-5 align-items-center">
-                                <div class="col-md-6">
-                                    <div class="testimonial-img">
-                                        <img class="img-fluid" src="img/testimonial-3.jpeg" alt="">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="testimonial-text pb-5 pb-md-0">
-                                        <h3>Une expérience enrichissante</h3>
-
-                                        <p>
-                                            Les formations en Microsoft 365 et Design m'ont permis d'améliorer
-                                            considérablement
-                                            mes compétences professionnelles. J'apprécie particulièrement la pédagogie
-                                            des
-                                            formateurs, l'ambiance conviviale et les espaces de travail modernes qui
-                                            favorisent
-                                            l'apprentissage et les échanges entre étudiants.
-                                        </p>
-
-                                        <h5 class="mb-0">Jenos Mbayo</h5>
-                                        <span class="text-primary">Entrepreneure & Apprenante</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Testimonial End -->
+        </section>
+        <!-- Contenu détaillé : Services, formations et témoignages accessibles depuis les pages dédiées -->
+    </main>
 
 
     <!-- Footer Start -->
@@ -864,7 +304,7 @@
                 <div class="row">
                     <div class="col-md-6 text-center text-md-start mb-3 mb-md-0"> Salle du Numérique UNILU
                         &copy; 2026
-                         | <a href="admin/" class="text-white-50"><i class="fa fa-lock me-1"></i>Espace Admin</a>
+                        | <a href="admin/" class="text-white-50"><i class="fa fa-lock me-1"></i>Espace Admin</a>
                     </div>
                     <div class="col-md-6 text-center text-md-end"></div>
                 </div>
@@ -1591,428 +1031,134 @@
             }
         }
     </style>
-    <!-- Claudia Speak Mini Panel -->
-    <div id="claudiaSpeakModal">
-        <div class="cmodal-head">
-            <img src="img/claudia.png" alt="Claudia" onerror="this.src='img/Logo_SNU.jpg'">
-            <div style="flex:1;">
-                <div class="cname">Claudia</div>
-                <div class="cstatus" id="claudiaStatus">Assistante Vocale — En ligne</div>
-            </div>
-            <span id="claudiaQCounter"
-                style="font-size:0.65rem; font-weight:700; color:#22c55e; background:rgba(0,0,0,0.25); padding:2px 8px; border-radius:20px; white-space:nowrap;">
-                10 questions restantes
-            </span>
-        </div>
-        <div class="cmodal-body">
-            <div class="cwave">
-                <span></span><span></span><span></span><span></span><span></span>
-            </div>
-            <p id="claudiaSpeakText">Bonjour, je suis <strong>Claudia</strong>, votre assistante vocale de la Salle du
-                Numérique. Posez-moi vos questions sur la plateforme.</p>
-        </div>
-        <!-- Zone de saisie -->
-        <div style="padding: 8px 12px; border-top: 1px solid #f0f0f0; display:flex; gap:6px; align-items:center;">
-            <button id="claudiaMicBtn" title="Parler"
-                style="flex-shrink:0; width:34px; height:34px; border-radius:50%; border:none; background:#d10000; color:#fff; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:0.85rem; transition:all 0.2s;">
-                <i class="fa fa-microphone"></i>
-            </button>
-            <input id="claudiaInput" type="text" placeholder="Posez votre question..."
-                style="flex:1; border:1px solid #e5e7eb; border-radius:20px; padding:6px 12px; font-size:0.78rem; outline:none; font-family:'Roboto',sans-serif;">
-            <button id="claudiaSendBtn" title="Envoyer"
-                style="flex-shrink:0; width:34px; height:34px; border-radius:50%; border:none; background:#d10000; color:#fff; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:0.85rem; transition:all 0.2s;">
-                <i class="fa fa-paper-plane"></i>
-            </button>
-        </div>
-        <div class="cmodal-footer">
-            <button id="claudiaCloseBtn">Fermer</button>
-        </div>
-    </div>
-
-    <!-- Registration Modal -->
-    <div class="modal fade" id="registrationModal" tabindex="-1" aria-labelledby="registrationModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content shadow-lg border-0" style="border-radius: 12px; overflow: hidden;">
-                <div class="modal-header p-4 d-flex align-items-center" style="background-color: #d10000 !important;">
-                    <img src="img/Logo_SNU.jpg" alt="Logo SNU"
-                        style="height: 40px; width: 40px; border-radius: 50%; margin-right: 12px; border: 2px solid #fff; object-fit: cover;">
-                    <h5 class="modal-title text-white mb-0" id="registrationModalLabel"
-                        style="font-weight: 800; font-family: 'Montserrat', sans-serif;">Inscription à la Formation</h5>
-                    <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="modal"
-                        aria-label="Close" style="box-shadow: none !important;"></button>
-                </div>
-                <div class="modal-body p-4 bg-light">
-                    <!-- Step 1: Input Form -->
-                    <div id="registrationFormContainer">
-                        <p class="text-muted mb-4">Veuillez remplir le formulaire ci-dessous pour réserver votre place à
-                            la formation choisie.</p>
-                        <form id="enrollmentForm" class="needs-validation" novalidate>
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="regFullName"
-                                            placeholder="Nom complet" required>
-                                        <label for="regFullName"><i class="fa fa-user me-2 text-muted"></i>Nom
-                                            complet</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-floating">
-                                        <select class="form-select" id="regGender" required>
-                                            <option value="" disabled selected>Choisir...</option>
-                                            <option value="Masculin">Masculin</option>
-                                            <option value="Féminin">Féminin</option>
-                                        </select>
-                                        <label for="regGender"><i
-                                                class="fa fa-venus-mars me-2 text-muted"></i>Sexe</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-floating">
-                                        <input type="number" class="form-control" id="regAge" placeholder="Âge" min="5"
-                                            max="100" required>
-                                        <label for="regAge"><i
-                                                class="fa fa-birthday-cake me-2 text-muted"></i>Âge</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="tel" class="form-control" id="regPhone" placeholder="Téléphone"
-                                            required>
-                                        <label for="regPhone"><i
-                                                class="fa fa-phone me-2 text-muted"></i>Téléphone</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="email" class="form-control" id="regEmail"
-                                            placeholder="Adresse e-mail" required>
-                                        <label for="regEmail"><i class="fa fa-envelope me-2 text-muted"></i>Adresse
-                                            e-mail</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="regAddress" placeholder="Adresse"
-                                            required>
-                                        <label for="regAddress"><i
-                                                class="fa fa-map-marker-alt me-2 text-muted"></i>Adresse
-                                            physique</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="regProfession"
-                                            placeholder="Profession" required>
-                                        <label for="regProfession"><i
-                                                class="fa fa-briefcase me-2 text-muted"></i>Profession /
-                                            Occupation</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <select class="form-select" id="regEducation" required>
-                                            <option value="" disabled selected>Choisir...</option>
-                                            <option value="Diplômé d'État">Diplômé d'État</option>
-                                            <option value="Gradué / Étudiant">Gradué / Étudiant</option>
-                                            <option value="Licencié">Licencié</option>
-                                            <option value="Master">Master</option>
-                                            <option value="Doctorat">Doctorat</option>
-                                            <option value="Autre">Autre</option>
-                                        </select>
-                                        <label for="regEducation"><i
-                                                class="fa fa-graduation-cap me-2 text-muted"></i>Niveau d'étude</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <select class="form-select" id="regFormation" required>
-                                            <option value="" disabled>Choisir la formation...</option>
-                                            <optgroup label="Formations Principales">
-                                                <option value="Les Bases de Windows">Les Bases de Windows</option>
-                                                <option value="Bureautique (Microsoft 365)">Bureautique (Microsoft 365)
-                                                </option>
-                                                <option value="Initiation aux outils d'IA">Initiation aux outils d'IA
-                                                </option>
-                                                <option value="Les Bases du Design">Les Bases du Design</option>
-                                            </optgroup>
-                                            <optgroup label="Modules spécifiques">
-                                                <option value="Microsoft Word">Microsoft Word</option>
-                                                <option value="Microsoft Excel">Microsoft Excel</option>
-                                                <option value="Microsoft Access">Microsoft Access</option>
-                                                <option value="Microsoft PowerPoint">Microsoft PowerPoint</option>
-                                                <option value="Microsoft Publisher">Microsoft Publisher</option>
-                                                <option value="Microsoft SharePoint">Microsoft SharePoint</option>
-                                            </optgroup>
-                                        </select>
-                                        <label for="regFormation"><i class="fa fa-book me-2 text-muted"></i>Formation
-                                            choisie</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="date" class="form-control" id="regDate" required>
-                                        <label for="regDate"><i class="fa fa-calendar-alt me-2 text-muted"></i>Date
-                                            souhaitée</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-floating">
-                                        <textarea class="form-control" placeholder="Commentaire" id="regComment"
-                                            style="height: 100px;"></textarea>
-                                        <label for="regComment"><i
-                                                class="fa fa-comment-dots me-2 text-muted"></i>Commentaire /
-                                            Attentes</label>
-                                    </div>
-                                </div>
-                                <div class="col-12 mt-4 text-end">
-                                    <button type="submit" class="btn btn-primary px-5 py-3 w-100"
-                                        style="font-weight: 700;">Valider l'Inscription</button>
-                                </div>
-                            </div>
-                        </form>
+    <!-- ════════════════════════════════════════════════════════════════════════
+         MODAL D'INSCRIPTION RAPIDE À LA FORMATION (Sans quitter la page)
+    ════════════════════════════════════════════════════════════════════════ -->
+    <div class="modal fade" id="formationModal" tabindex="-1" aria-labelledby="formationModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content shadow-lg border-0" style="border-radius: 16px; overflow: hidden;">
+                <div class="modal-header py-3 px-4 text-white" style="background: #d10000;">
+                    <div class="d-flex align-items-center">
+                        <i class="fa fa-graduation-cap fs-2 me-3"></i>
+                        <div>
+                            <h5 class="modal-title fw-bold text-white mb-0" id="formationModalLabel">Inscription à la
+                                Formation</h5>
+                            <small class="text-white-50">Salle du Numérique — Université de Lubumbashi</small>
+                        </div>
                     </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Fermer"></button>
+                </div>
 
-                    <!-- Step 2: Fiche d'inscription générée -->
-                    <div id="registrationReceiptContainer" class="d-none">
-                        <div class="alert alert-success d-flex align-items-center mb-4" role="alert">
-                            <i class="fa fa-check-circle fs-4 me-2"></i>
-                            <div>
-                                <strong>Inscription validée avec succès !</strong> Votre fiche d'inscription a été
-                                générée ci-dessous.
-                            </div>
-                        </div>
+                <div class="modal-body p-4 p-md-5" style="background: #ffffff;">
+                    <div id="formationAlertSuccess" class="alert alert-success d-none mb-3" role="alert">
+                        <i class="fa fa-check-circle me-2"></i><strong>Inscription enregistrée avec succès !</strong>
+                        Notre équipe vous contactera sous 24h ouvrées pour confirmer votre place et votre horaire.
+                    </div>
+                    <div id="formationAlertError" class="alert alert-danger d-none mb-3" role="alert"></div>
 
-                        <!-- Printable/Dynamic sheet visual mockup -->
-                        <div id="registrationFichePrint" class="bg-white p-4 border rounded shadow-sm mb-4"
-                            style="font-family: 'Roboto', sans-serif; position: relative;">
-                            <div class="watermark-snu"
-                                style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-30deg); font-size: 4rem; font-weight: 900; color: rgba(209, 0, 0, 0.03); pointer-events: none; white-space: nowrap;">
-                                SALLE DU NUMERIQUE</div>
+                    <form id="formationRegistrationForm">
+                        <input type="text" name="website" style="display:none !important;" tabindex="-1"
+                            autocomplete="off">
 
-                            <div class="d-flex align-items-center justify-content-between border-bottom pb-3 mb-4">
-                                <div class="d-flex align-items-center">
-                                    <img src="img/Logo_SNU.jpg" alt="Logo SNU"
-                                        style="height: 55px; width: 55px; border-radius: 50%; margin-right: 12px; object-fit: cover;">
-                                    <div>
-                                        <h4 class="mb-0"
-                                            style="color: #d10000; font-weight: 800; font-family: 'Montserrat', sans-serif;">
-                                            Salle du Numérique</h4>
-                                        <small class="text-muted">Université de Lubumbashi - UNILU</small>
-                                    </div>
-                                </div>
-                                <div class="text-end">
-                                    <span class="badge bg-danger p-2 fs-6" id="ficheCode"
-                                        style="font-family: monospace;">SNU-2026-XXXX</span>
-                                </div>
-                            </div>
-
-                            <h3 class="text-center mb-4 text-dark"
-                                style="font-family: 'Montserrat', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 1.3rem;">
-                                Fiche d'Inscription Officielle</h3>
-
-                            <div class="row g-3 text-dark text-start">
-                                <div class="col-sm-6">
-                                    <div class="pb-2 border-bottom">
-                                        <span class="text-muted d-block small" style="font-size: 0.75rem;">Nom Complet
-                                            :</span>
-                                        <strong id="ficheFullName" class="fs-6">Jean Dupont</strong>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3 col-6">
-                                    <div class="pb-2 border-bottom">
-                                        <span class="text-muted d-block small" style="font-size: 0.75rem;">Sexe :</span>
-                                        <strong id="ficheGender">Masculin</strong>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3 col-6">
-                                    <div class="pb-2 border-bottom">
-                                        <span class="text-muted d-block small" style="font-size: 0.75rem;">Âge :</span>
-                                        <strong id="ficheAge">22 ans</strong>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="pb-2 border-bottom">
-                                        <span class="text-muted d-block small" style="font-size: 0.75rem;">Téléphone
-                                            :</span>
-                                        <strong id="fichePhone">+243 999 999 999</strong>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="pb-2 border-bottom">
-                                        <span class="text-muted d-block small" style="font-size: 0.75rem;">Adresse
-                                            E-mail :</span>
-                                        <strong id="ficheEmail">jean.dupont@gmail.com</strong>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="pb-2 border-bottom">
-                                        <span class="text-muted d-block small" style="font-size: 0.75rem;">Adresse
-                                            Physique :</span>
-                                        <strong id="ficheAddress">Av. Université, C/ Kasapa, Lubumbashi</strong>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="pb-2 border-bottom">
-                                        <span class="text-muted d-block small" style="font-size: 0.75rem;">Profession /
-                                            Occupation :</span>
-                                        <strong id="ficheProfession">Étudiant</strong>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="pb-2 border-bottom">
-                                        <span class="text-muted d-block small" style="font-size: 0.75rem;">Niveau
-                                            d'Étude :</span>
-                                        <strong id="ficheEducation">Gradué / Étudiant</strong>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="pb-2 border-bottom"
-                                        style="background: rgba(209, 0, 0, 0.03); padding: 5px; border-radius: 4px;">
-                                        <span class="text-muted d-block small" style="font-size: 0.75rem;">Formation
-                                            Sélectionnée :</span>
-                                        <strong id="ficheFormation" class="text-danger fs-6">Microsoft Excel</strong>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="pb-2 border-bottom">
-                                        <span class="text-muted d-block small" style="font-size: 0.75rem;">Date de
-                                            Rentrée Souhaitée :</span>
-                                        <strong id="ficheDate">2026-07-01</strong>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div>
-                                        <span class="text-muted d-block small" style="font-size: 0.75rem;">Commentaire /
-                                            Attentes :</span>
-                                        <p id="ficheComment" class="mb-0 text-muted small" style="font-style: italic;">
-                                            Aucun commentaire.</p>
-                                    </div>
-                                </div>
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label class="form-label fw-bold text-dark small" for="modalFormationSelect">Formation
+                                    souhaitée <span class="text-danger">*</span></label>
+                                <select class="form-select form-select-lg py-2" id="modalFormationSelect"
+                                    name="formation" required>
+                                    <option value="" disabled selected>-- Choisissez votre formation --</option>
+                                    <option value="Bureautique (Microsoft 365)">Bureautique (Microsoft 365 — Word,
+                                        Excel, PowerPoint)</option>
+                                    <option value="Initiation aux Outils d'Intelligence Artificielle">Initiation aux
+                                        Outils d'IA (ChatGPT, Gemini, etc.)</option>
+                                    <option value="Les Bases du Design Numérique">Les Bases du Design Numérique (Canva,
+                                        Photoshop)</option>
+                                    <option value="Les Bases de Windows & Informatique">Les Bases de Windows &
+                                        Informatique générale</option>
+                                    <option value="Module Word Avancé">Module Spécifique : Word Avancé (Mise en page de
+                                        mémoire, TFC)</option>
+                                    <option value="Module Excel Avancé">Module Spécifique : Excel & Analyse de données
+                                    </option>
+                                    <option value="Module PowerPoint Professionnel">Module Spécifique : PowerPoint &
+                                        Présentations</option>
+                                    <option value="Module Base de Données Access">Module Spécifique : Base de données
+                                        Access</option>
+                                    <option value="Autre formation personnalisée">Autre formation personnalisée</option>
+                                </select>
                             </div>
 
-                            <div class="d-flex justify-content-between align-items-center border-top pt-3 mt-4">
-                                <small class="text-muted">Généré le <span id="ficheGenDate">19 Juin 2026</span></small>
-                                <small style="color: #d10000; font-weight: 700;">Salle du numerique</small>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold text-dark small" for="modalNomApprenant">Nom complet
+                                    (Nom & Prénom) <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="modalNomApprenant" name="name"
+                                    placeholder="Ex: Kahozi Juniors" required minlength="2">
                             </div>
-                        </div>
 
-                        <!-- Barre de statut de téléchargement (masquée par défaut) -->
-                        <div id="waStatusBox" class="d-none mt-3 p-3 rounded-3 border"
-                            style="background:#f8f9fa; font-size:0.82rem;">
-                            <div class="d-flex align-items-center gap-2 mb-2">
-                                <i id="waStatusIcon" class="fa fa-spinner fa-spin text-danger"></i>
-                                <span id="waStatusMsg" class="fw-600" style="font-weight:600;">Préparation...</span>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold text-dark small" for="modalPhoneApprenant">Numéro
+                                    WhatsApp / Téléphone <span class="text-danger">*</span></label>
+                                <input type="tel" class="form-control" id="modalPhoneApprenant" name="phone"
+                                    placeholder="+243 ..." required minlength="7">
                             </div>
-                            <!-- Progress bar -->
-                            <div class="progress" style="height: 5px; border-radius: 10px;">
-                                <div id="waProgressBar" class="progress-bar bg-success" role="progressbar"
-                                    style="width: 0%; transition: width 0.5s ease;"></div>
-                            </div>
-                        </div>
 
-                        <!-- Action Buttons -->
-                        <div class="row g-2 justify-content-center mt-3">
-                            <div class="col-sm-9">
-                                <button id="btnShareWhatsApp" type="button"
-                                    class="btn btn-success w-100 py-3 d-flex align-items-center justify-content-center"
-                                    style="font-weight: 700; background: linear-gradient(135deg, #25D366, #1da851); border: none; color: #fff; font-size: 0.95rem; border-radius: 10px; box-shadow: 0 4px 15px rgba(37,211,102,0.4);">
-                                    <i class="fab fa-whatsapp fs-4 me-2"></i>Télécharger &amp; Envoyer sur WhatsApp SNU
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold text-dark small" for="modalEmailApprenant">Adresse
+                                    Email <span class="text-danger">*</span></label>
+                                <input type="email" class="form-control" id="modalEmailApprenant" name="email"
+                                    placeholder="nom@exemple.com" required>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold text-dark small"
+                                    for="modalStatutApprenant">Statut</label>
+                                <select class="form-select" id="modalStatutApprenant" name="statut">
+                                    <option value="Étudiant UNILU">Étudiant UNILU</option>
+                                    <option value="Enseignant / Chercheur">Enseignant / Chercheur UNILU</option>
+                                    <option value="Personnel Administratif">Personnel Administratif</option>
+                                    <option value="Professionnel externe">Professionnel externe</option>
+                                    <option value="Autre">Autre</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold text-dark small" for="modalCreneauApprenant">Créneau
+                                    préféré</label>
+                                <select class="form-select" id="modalCreneauApprenant" name="creneau">
+                                    <option value="Matinée (08h30 - 11h30)">Matinée (08h30 — 11h30)</option>
+                                    <option value="Après-midi (12h00 - 15h00)">Après-midi (12h00 — 15h00)</option>
+                                    <option value="Soirée (15h30 - 18h00)">Soirée (15h30 — 18h00)</option>
+                                    <option value="Samedi Intensif">Samedi Intensif (08h30 — 13h30)</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold text-dark small" for="modalFaculteApprenant">Faculté /
+                                    Promotion</label>
+                                <input type="text" class="form-control" id="modalFaculteApprenant" name="faculte"
+                                    placeholder="Ex: Droit, L2">
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label fw-bold text-dark small"
+                                    for="modalRemarquesApprenant">Remarques ou attentes particulières
+                                    (optionnel)</label>
+                                <textarea class="form-control" id="modalRemarquesApprenant" name="remarques" rows="2"
+                                    placeholder="Précisez vos objectifs ou toute information utile..."></textarea>
+                            </div>
+
+                            <div class="col-12 mt-4">
+                                <button type="submit" id="modalSubmitBtn"
+                                    class="btn btn-primary w-100 py-3 fw-bold fs-5 shadow-sm">
+                                    <i class="fa fa-paper-plane me-2"></i>Confirmer mon inscription
                                 </button>
                             </div>
                         </div>
-
-                        <!-- Guide utilisateur pour les envois -->
-                        <div class="alert alert-light border py-2 px-3 mt-3 shadow-sm"
-                            style="font-size: 0.8rem; border-radius: 8px;">
-                            <div class="mb-1"><i class="fa fa-info-circle text-success me-1"></i><strong>Comment ça
-                                    marche :</strong></div>
-                            <div class="d-flex align-items-start gap-2 mb-1">
-                                <i class="fa fa-download text-danger mt-1" style="min-width:14px;"></i>
-                                <span>Le PDF est <strong>enregistré automatiquement</strong> sur votre appareil.</span>
-                            </div>
-                            <div class="d-flex align-items-start gap-2 mb-1">
-                                <i class="fab fa-whatsapp text-success mt-1" style="min-width:14px;"></i>
-                                <span>Une discussion WhatsApp s'ouvre avec le numéro <strong>+243 972 147
-                                        721</strong>.</span>
-                            </div>
-                            <div class="d-flex align-items-start gap-2">
-                                <i class="fa fa-paperclip text-primary mt-1" style="min-width:14px;"></i>
-                                <span><strong>Joignez le fichier PDF</strong> téléchargé et envoyez-le.</span>
-                            </div>
-                        </div>
-
-                        <div class="text-center mt-4">
-                            <button type="button" class="btn btn-link text-muted" id="btnBackToForm">Retourner au
-                                formulaire</button>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Modal de Confirmation WhatsApp (Etape 4) -->
-    <div class="modal fade" id="waConfirmModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" style="max-width: 420px;">
-            <div class="modal-content shadow-lg border-0" style="border-radius: 16px; overflow: hidden;">
-                <div class="modal-header text-white border-0 pb-2"
-                    style="background: linear-gradient(135deg, #25D366, #1da851);">
-                    <div class="d-flex align-items-center gap-2">
-                        <i class="fa fa-check-circle fs-4"></i>
-                        <h6 class="modal-title mb-0 fw-bold">PDF téléchargé avec succès</h6>
-                    </div>
-                    <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="modal"
-                        style="box-shadow:none;"></button>
-                </div>
-                <div class="modal-body px-4 py-3">
-                    <p class="text-muted mb-3" style="font-size:0.88rem;">
-                        Votre fiche d'inscription a été <strong>enregistrée</strong> sur votre appareil.<br>
-                        Cliquez ci-dessous pour ouvrir la discussion WhatsApp avec le SNU.
-                    </p>
-                    <!-- AIDE DE TÉLÉCHARGEMENT IOS (IPHONE/IPAD) -->
-                    <div id="iosDownloadHelp" class="d-none mb-3 text-center">
-                        <a id="btnIosDownloadPdf" href="#" target="_blank" class="btn btn-outline-danger w-100 fw-bold"
-                            style="border-radius: 20px; font-size: 0.88rem; padding: 8px 16px;">
-                            <i class="fa fa-file-pdf me-2"></i>Ouvrir / Enregistrer le PDF
-                        </a>
-                        <small class="text-muted d-block mt-1" style="font-size:0.75rem;">
-                            Sur iPhone/iPad, cliquez ci-dessus puis utilisez le bouton de partage <i
-                                class="fa fa-share-square"></i> pour l'enregistrer dans vos Fichiers.
-                        </small>
-                    </div>
-                    <div class="rounded-3 p-3 mb-1" style="background:#f0fdf4; border:1px solid #bbf7d0;">
-                        <p class="mb-2 fw-bold" style="font-size:0.85rem; color:#166534;">Veuillez maintenant :</p>
-                        <div class="d-flex align-items-center gap-2 mb-2">
-                            <span class="badge rounded-pill bg-success">1</span>
-                            <span style="font-size:0.83rem;">Cliquer sur le bouton <strong>Pièce jointe</strong> <i
-                                    class="fa fa-paperclip"></i></span>
-                        </div>
-                        <div class="d-flex align-items-center gap-2 mb-2">
-                            <span class="badge rounded-pill bg-success">2</span>
-                            <span style="font-size:0.83rem;">Sélectionner le <strong>PDF téléchargé</strong> dans vos
-                                fichiers</span>
-                        </div>
-                        <div class="d-flex align-items-center gap-2">
-                            <span class="badge rounded-pill bg-success">3</span>
-                            <span style="font-size:0.83rem;">Envoyer au numéro <strong>+243 972 147 721</strong></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer border-0 pt-0 justify-content-center">
-                    <a id="btnModalOpenWhatsApp" href="#" target="_blank" data-bs-dismiss="modal"
-                        class="btn btn-success px-5 fw-bold"
-                        style="background: linear-gradient(135deg, #25D366, #1da851); border: none; color: #fff; text-decoration: none; border-radius: 20px; display: inline-flex; align-items: center; justify-content: center; padding: 10px 24px;">
-                        <i class="fab fa-whatsapp me-2"></i>Ouvrir WhatsApp &amp; Envoyer
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- jsPDF CDN Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
     <!-- JavaScript Libraries -->
     <script src="js/jquery.min.js"></script>
@@ -2026,6 +1172,7 @@
         window.CLAUDIA_BACKEND_URL = 'https://salle-unilu-backend.onrender.com';
     </script>
     <!-- Template Javascript -->
+    <script src="js/theme-toggle.js"></script>
     <script src="js/site-content.js"></script>
     <script src="js/main.js"></script>
 </body>

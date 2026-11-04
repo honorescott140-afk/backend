@@ -107,6 +107,7 @@
 </head>
 
 <body class="tech-bg">
+    <a class="skip-link" href="#main-content">Aller au contenu principal</a>
     <!-- Spinner Start -->
     <div id="spinner"
         class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -130,13 +131,16 @@
                     </div>
                 </a>
                 <button type="button" class="navbar-toggler border-0 p-2" data-bs-toggle="collapse"
-                    data-bs-target="#navbarCollapse" aria-label="Menu de navigation">
+                    data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Menu de navigation">
                     <i class="fa fa-bars text-white fs-4"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto align-items-lg-center py-2 py-lg-0">
                         <a href="index.html" class="nav-item nav-link px-3">Accueil</a>
-                        <a href="project.html" class="nav-item nav-link active px-3">La Salle</a>
+                        <a href="services.html" class="nav-item nav-link px-3">Services</a>
+                        <a href="formations.html" class="nav-item nav-link px-3">Formations</a>
+                        <a href="actualites.html" class="nav-item nav-link px-3">Actualités</a>
+                        <a href="project.html" class="nav-item nav-link active px-3">En savoir plus</a>
                         <a href="contact.html" class="nav-item nav-link px-3">Contact</a>
                         <div class="ms-lg-3 my-2 my-lg-0">
                             <button id="themeToggleBtn" class="theme-toggle-btn" title="Basculer Mode Sombre / Mode Clair">
@@ -151,13 +155,14 @@
     <!-- Navbar End -->
 
 
+    <main id="main-content">
     <!-- Hero Start -->
     <div class="container-fluid pb-5 bg-primary hero-header">
         <div class="container py-5">
             <div class="row g-3 align-items-center">
                 <div class="col-lg-6 text-center text-lg-start">
                     <h1 class="display-1 mb-0 animated slideInLeft"
-                        style="font-size: 4.5rem; font-weight: 900; color: #d10000 !important;">La Salle</h1>
+                        style="font-size: 4.5rem; font-weight: 900; color: #d10000 !important;">En savoir plus</h1>
                 </div>
                 <div class="col-lg-6 animated slideInRight">
                     <nav aria-label="breadcrumb">
@@ -165,7 +170,7 @@
                             <li class="breadcrumb-item"><a href="index.html"
                                     style="color: #d10000 !important; font-weight: 600;">Accueil</a></li>
                             <li class="breadcrumb-item active" aria-current="page"
-                                style="color: #6c757d !important; font-weight: 600;">La Salle</li>
+                                style="color: #6c757d !important; font-weight: 600;">En savoir plus</li>
                         </ol>
                     </nav>
                 </div>
@@ -175,23 +180,70 @@
     <!-- Hero End -->
 
 
+    <!-- 1. MOT DU DIRECTEUR / CHEF DE LA SALLE (COMMENCE EN TÊTE DU CONTENU) -->
+    <section class="container-fluid py-5 border-bottom snu-director-section" aria-labelledby="director-title" style="background: rgba(209, 0, 0, 0.025);">
+        <div class="container py-3">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-4 text-center wow fadeIn" data-wow-delay="0.1s">
+                    <div class="position-relative d-inline-block">
+                        <img src="img/Dr roger .jpeg" alt="CT Roger, Directeur de la Salle du Numérique"
+                            class="img-fluid rounded-3 shadow-lg"
+                            style="max-height: 420px; width: 100%; max-width: 330px; object-fit: cover; border: 4px solid #ffffff;"
+                            data-cms-img="directeur.photo">
+                        <div class="position-absolute bottom-0 start-50 translate-middle-x bg-danger text-white px-3 py-1 rounded-pill small fw-bold shadow"
+                            style="white-space: nowrap; margin-bottom: -14px;">
+                            <i class="fa fa-award me-1"></i> Direction SNU
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8 wow fadeIn" data-wow-delay="0.3s">
+                    <span class="section-kicker" data-cms="directeur.subtitle">Message du Directeur</span>
+                    <h2 id="director-title" class="mb-3" style="font-weight: 800; font-size: clamp(1.8rem, 3.2vw, 2.4rem);">
+                        <span data-cms="directeur.title_prefix">Mot de bienvenue du</span> <span class="text-danger" data-cms="directeur.name">CT ROGER</span>
+                    </h2>
+                    <p class="lead fw-bold text-dark mb-3" data-cms="directeur.lead" style="font-size: 1.2rem;">
+                        Chers visiteurs, chers apprenants, chers partenaires,
+                    </p>
+                    <p class="mb-3 text-muted" style="line-height: 1.8; font-size: 1.02rem;" data-cms="directeur.p1">
+                        La Salle du Numérique de l'Université de Lubumbashi (SNU) est née d'une vision claire : accompagner l'ensemble de notre communauté académique et professionnelle vers l'excellence technologique.
+                    </p>
+                    <p class="mb-4 text-muted" style="line-height: 1.8; font-size: 1.02rem;" data-cms="directeur.p2">
+                        Notre priorité absolue est de mettre à votre disposition des équipements de pointe, une connexion ultra-rapide et un encadrement pédagogique rigoureux pour faire de vos idées des projets concrets.
+                    </p>
+                    <div class="p-3 border-start border-4 border-danger bg-light rounded-end mb-4">
+                        <p class="fw-bold text-danger fs-5 mb-0" data-cms="directeur.p3">
+                            <i class="fa fa-quote-left me-2 opacity-50"></i>Innover aujourd'hui pour inspirer demain.<i class="fa fa-quote-right ms-2 opacity-50"></i>
+                        </p>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <div>
+                            <div class="fw-bold fs-5 text-dark" data-cms="directeur.name">CT ROGER</div>
+                            <div class="text-muted small" data-cms="directeur.role">Directeur de la Salle du Numérique (SNU) — Université de Lubumbashi</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Mot de bienvenue du Directeur End -->
+
+
     <!-- Project Start / Presentation Start -->
     <div class="container-fluid py-5">
-        <div class="container py-5">
+        <div class="container py-4">
             <!-- Introduction Section -->
-            <div class="row g-5 align-items-center mb-5 pb-5">
+            <div class="row g-5 align-items-center mb-5 pb-4">
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
                     <h1 class="mb-4"><span data-cms="salle_page.intro_title_prefix">Un Espace</span> <span
                             style="color: #d10000 !important; font-weight: 900; text-transform: uppercase;" data-cms="salle_page.intro_title_highlight">Technologique</span>
                         <span data-cms="salle_page.intro_title_suffix">de Référence</span></h1>
-                    <p class="mb-4" style="font-size: 1.1rem; line-height: 1.7; font-weight: 500;" data-cms="salle_page.intro_p1">
+                    <p class="mb-4" style="font-size: 1.05rem; line-height: 1.8; font-weight: 500;" data-cms="salle_page.intro_p1">
                         La Salle du Numérique SNU de l'Université de Lubumbashi est une infrastructure moderne conçue
                         pour propulser l'apprentissage, la collaboration et l'innovation technologique de pointe.
                     </p>
-                    <p class="mb-4" style="line-height: 1.7;" data-cms="salle_page.intro_p2">
+                    <p class="mb-4 text-muted" style="line-height: 1.8;" data-cms="salle_page.intro_p2">
                         Notre espace physique a été pensé pour répondre à différents usages : l'étude individuelle au
-                        calme, le travail collaboratif en équipe, les examens en ligne sécurisés et le prototypage
-                        matériel dans notre Maker Lab. L'ensemble est propulsé par une connexion fibre optique dédiée et
+                        calme, le travail collaboratif en équipe, les examens en ligne sécurisés et les ateliers pratiques. L'ensemble est propulsé par une connexion fibre optique dédiée et
                         sécurisé par une alimentation électrique ininterrompue.
                     </p>
                     <div class="d-flex align-items-center">
@@ -227,8 +279,96 @@
                 </div>
             </div>
 
+            <!-- 2. SECTION RÉSERVATION DE LA SALLE & CONDITIONS OFFICIELLES (CONTRAT SNU) -->
+            <section class="my-5 py-5 px-4 px-md-5 rounded-4 border shadow-sm contrat-box" style="background: linear-gradient(135deg, #ffffff 0%, #fff9f9 100%); border-left: 6px solid #d10000 !important;">
+                <div class="row align-items-center g-4">
+                    <div class="col-lg-8">
+                        <div class="d-inline-flex align-items-center mb-3 px-3 py-1 rounded-pill bg-danger text-white small fw-bold">
+                            <i class="fa fa-file-signature me-2"></i> Mise à disposition officielle
+                        </div>
+                        <h2 class="mb-3" style="font-weight: 800; color: #1a1a1a;">Réservation & Utilisation de la Salle</h2>
+                        <p class="text-muted mb-4" style="font-size: 1.05rem; line-height: 1.7;">
+                            Vous organisez une conférence, une soutenance, un séminaire académique, un atelier de formation ou un hackathon ? La Salle du Numérique est mise à votre disposition selon un cadre contractuel clair et transparent garantissant des équipements professionnels et un accompagnement dédié.
+                        </p>
+                        <div class="row g-3 mb-4">
+                            <div class="col-sm-6">
+                                <div class="d-flex align-items-center">
+                                    <i class="fa fa-users text-danger fs-4 me-3"></i>
+                                    <div>
+                                        <strong class="d-block" style="color: #1a1a1a;">Capacité autorisée</strong>
+                                        <small class="text-muted">Jusqu'à 90 participants</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="d-flex align-items-center">
+                                    <i class="fa fa-video text-danger fs-4 me-3"></i>
+                                    <div>
+                                        <strong class="d-block" style="color: #1a1a1a;">Équipements inclus</strong>
+                                        <small class="text-muted">Rétroprojecteur HD, Tableau blanc & Sonorisation</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="d-flex align-items-center">
+                                    <i class="fa fa-desktop text-danger fs-4 me-3"></i>
+                                    <div>
+                                        <strong class="d-block" style="color: #1a1a1a;">Parc informatique</strong>
+                                        <small class="text-muted">Ordinateurs modernes prêts à l'emploi</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="d-flex align-items-center">
+                                    <i class="fa fa-wifi text-danger fs-4 me-3"></i>
+                                    <div>
+                                        <strong class="d-block" style="color: #1a1a1a;">Connectivité & Énergie</strong>
+                                        <small class="text-muted">Fibre optique & relais électrique permanent</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-wrap gap-2">
+                            <button type="button" class="btn btn-primary px-4 py-3 fw-bold shadow-sm" data-bs-toggle="modal" data-bs-target="#contratReservationModal">
+                                <i class="fa fa-file-contract me-2"></i>Consulter le Contrat & Réserver la Salle
+                            </button>
+                            <a href="Contrat_SNU.docx" download class="btn btn-outline-danger px-4 py-3 fw-bold">
+                                <i class="fa fa-download me-2"></i>Télécharger le Contrat (DOCX)
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 text-center">
+                        <div class="p-4 rounded-3 border bg-white shadow-sm h-100 d-flex flex-column justify-content-center">
+                            <i class="fa fa-shield-alt text-danger display-4 mb-3"></i>
+                            <h5 class="fw-bold mb-2" style="color: #1a1a1a;">Règles d'Usage Strictes</h5>
+                            <ul class="list-unstyled text-start small text-muted mb-0">
+                                <li class="mb-2"><i class="fa fa-check text-success me-2"></i>Inventaire contradictoire avant et après séance</li>
+                                <li class="mb-2"><i class="fa fa-ban text-danger me-2"></i><strong>Nourriture et boissons formellement interdites</strong></li>
+                                <li class="mb-2"><i class="fa fa-ban text-danger me-2"></i><strong>Interdiction stricte de fumer</strong></li>
+                                <li class="mb-2"><i class="fa fa-check text-success me-2"></i>Installation de logiciels soumise à validation technique</li>
+                                <li><i class="fa fa-check text-success me-2"></i>Capacité strictement limitée à 90 personnes</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-
+            <!-- Équipe de la salle -->
+            <section class="snu-team-section py-5 mb-5" aria-labelledby="team-title">
+                <div class="text-center mb-5">
+                    <span class="section-kicker">Les personnes qui vous accompagnent</span>
+                    <h2 id="team-title">Notre équipe</h2>
+                    <p class="text-muted mx-auto" style="max-width:650px;">Une équipe dédiée à l’accueil, à la formation, au support technique et au bon fonctionnement de la Salle du Numérique.</p>
+                </div>
+                <div class="row g-4 justify-content-center">
+                    <!-- Le Directeur est déjà présenté dans le message d'accueil ci-dessus. -->
+                    <div class="col-sm-6 col-lg-4"><article class="snu-team-card h-100"><div class="snu-img-wrap"><img src="img/Rachel.PNG" alt="Mme Rachel, secrétaire de la salle"></div><div class="snu-info"><div class="snu-name">Mme Rachel</div><div class="snu-role">Secrétaire de la salle</div></div></article></div>
+                    <div class="col-sm-6 col-lg-4"><article class="snu-team-card h-100"><div class="snu-img-wrap"><img src="img/Jhone.PNG" alt="Mr J. le grand, responsable des formations"></div><div class="snu-info"><div class="snu-name">Mr J. le grand</div><div class="snu-role">Responsable des formations</div></div></article></div>
+                    <div class="col-sm-6 col-lg-4"><article class="snu-team-card h-100"><div class="snu-img-wrap"><img src="img/Patric.PNG" alt="Mr Patrick Shimaitu, tuteur et support technique"></div><div class="snu-info"><div class="snu-name">Mr Patrick Shimaitu</div><div class="snu-role">Tuteur &amp; support technique</div></div></article></div>
+                    <div class="col-sm-6 col-lg-4"><article class="snu-team-card h-100"><div class="snu-img-wrap"><img src="img/brigitte.png" alt="Mme Nsapu Brigitte, chargée de la comptabilité"></div><div class="snu-info"><div class="snu-name">Mme Nsapu Brigitte</div><div class="snu-role">Chargée de la comptabilité</div></div></article></div>
+                    <div class="col-sm-6 col-lg-4"><article class="snu-team-card h-100"><div class="snu-img-wrap"><img src="img/Denis.PNG" alt="Mr Mikobi Denis, maintenance et logistique"></div><div class="snu-info"><div class="snu-name">Mr Mikobi Denis</div><div class="snu-role">Maintenance &amp; logistique</div></div></article></div>
+                </div>
+            </section>
 
             <!-- Infrastructure Grid -->
             <div class="text-center wow fadeIn mb-5 mt-5" data-wow-delay="0.1s">
@@ -427,6 +567,8 @@
     <!-- Testimonial End -->
 
 
+
+    </main>
 
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-white-50 footer pt-5">
@@ -659,6 +801,324 @@
             cursor: pointer;
         }
     </style>
+    <!-- ════════════════════════════════════════════════════════════════════════
+         MODAL CONTRAT DE RÉSERVATION & CONDITIONS D'UTILISATION (Contrat_SNU.docx)
+    ════════════════════════════════════════════════════════════════════════ -->
+    <div class="modal fade" id="contratReservationModal" tabindex="-1" aria-labelledby="contratModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content shadow-lg border-0" style="border-radius: 16px; overflow: hidden;">
+                <div class="modal-header py-3 px-4 text-white" style="background: #d10000;">
+                    <div class="d-flex align-items-center">
+                        <img src="img/Logo_SNU.jpg" alt="Logo SNU" style="height: 44px; width: 44px; object-fit: cover; border-radius: 50%; margin-right: 12px; border: 2px solid #ffffff;">
+                        <div>
+                            <h5 class="modal-title fw-bold text-white mb-0" id="contratModalLabel">Conditions d'Utilisation & Contrat de Réservation</h5>
+                            <small class="text-white-50">Document Officiel — Salle du Numérique de l'Université de Lubumbashi (SNU)</small>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                </div>
+
+                <div class="modal-body p-4 p-lg-5" style="background: #fafafa;">
+                    <!-- En-tête du document -->
+                    <div class="p-4 bg-white rounded-3 border shadow-sm mb-4">
+                        <div class="d-flex flex-wrap justify-content-between align-items-center border-bottom pb-3 mb-3 gap-2">
+                            <div>
+                                <span class="badge bg-danger fs-6 px-3 py-2 mb-2">CONTRAT DE RÉSERVATION SNU</span>
+                                <h4 class="fw-bold mb-0" style="color: #1a1a1a;">Conditions de mise à disposition de la Salle du Numérique</h4>
+                            </div>
+                            <div class="text-lg-end">
+                                <span class="text-muted d-block small">Référence officielle :</span>
+                                <strong class="text-dark">SNU / UNILU / MISE-A-DISPOSITION</strong>
+                            </div>
+                        </div>
+                        <p class="text-muted mb-0" style="font-size: 0.95rem; line-height: 1.7;">
+                            Le présent document contractuel fixe l'ensemble des conditions de réservation, de mise à disposition et d'utilisation de la Salle du Numérique de l'Université de Lubumbashi, ainsi que les prestations et les obligations convenues entre les parties.
+                        </p>
+                    </div>
+
+                    <!-- Articles du contrat reproduits fidèlement -->
+                    <div class="row g-4">
+                        <!-- Article 1 : Identification -->
+                        <div class="col-md-6">
+                            <div class="p-4 bg-white rounded-3 border shadow-sm h-100">
+                                <h5 class="fw-bold text-danger mb-3"><i class="fa fa-id-card me-2"></i>1. Identification des Parties</h5>
+                                <div class="mb-3">
+                                    <strong class="d-block text-dark">Le Prestataire :</strong>
+                                    <p class="text-muted small mb-0">Salle du Numérique (SNU) — Université de Lubumbashi, Faculté des Sciences Sociales, Auditoire WAZIA, Lubumbashi, RDC. Tél: +243 972 147 721 — Email: numerique@SNU.ac.cd</p>
+                                </div>
+                                <div>
+                                    <strong class="d-block text-dark">Le Preneur :</strong>
+                                    <p class="text-muted small mb-0">Toute faculté, organisation, entreprise, institution académique ou équipe ayant validé la présente convention.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Article 2 : Objet & Capacité -->
+                        <div class="col-md-6">
+                            <div class="p-4 bg-white rounded-3 border shadow-sm h-100">
+                                <h5 class="fw-bold text-danger mb-3"><i class="fa fa-calendar-check me-2"></i>2. Objet et Capacité d'Accueil</h5>
+                                <p class="text-muted small mb-2">La mise à disposition est consentie pour des activités académiques, professionnelles ou formatives : conférences, ateliers numériques, soutenances, séminaires ou formations intensives.</p>
+                                <div class="alert alert-warning py-2 px-3 small mb-0">
+                                    <i class="fa fa-exclamation-triangle me-2"></i><strong>Capacité maximale stricte :</strong> 90 participants assis. Toute prolongation d'horaire nécessite un accord écrit préalable.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Article 3 : Prestations & Équipements inclus -->
+                        <div class="col-12">
+                            <div class="p-4 bg-white rounded-3 border shadow-sm">
+                                <h5 class="fw-bold text-danger mb-3"><i class="fa fa-toolbox me-2"></i>3. Prestations et Équipements Inclus</h5>
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <div class="p-3 bg-light rounded-2 h-100">
+                                            <h6 class="fw-bold text-dark"><i class="fa fa-desktop text-danger me-2"></i>Parc Informatique</h6>
+                                            <p class="text-muted small mb-0">Ordinateurs modernes, testés et vérifiés avant chaque événement avec un inventaire contradictoire.</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="p-3 bg-light rounded-2 h-100">
+                                            <h6 class="fw-bold text-dark"><i class="fa fa-video text-danger me-2"></i>Audiovisuel</h6>
+                                            <p class="text-muted small mb-0">Rétroprojecteur HD avec connectique HDMI, tableau blanc grand format et sonorisation adaptée.</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="p-3 bg-light rounded-2 h-100">
+                                            <h6 class="fw-bold text-dark"><i class="fa fa-wifi text-danger me-2"></i>Réseau & Énergie</h6>
+                                            <p class="text-muted small mb-0">Connexion Internet haut débit via fibre optique dédiée, climatisation et alimentation électrique permanente.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Article 4 : Engagements & Interdictions -->
+                        <div class="col-12">
+                            <div class="p-4 bg-white rounded-3 border border-danger shadow-sm" style="border-left: 6px solid #d10000 !important;">
+                                <h5 class="fw-bold text-danger mb-3"><i class="fa fa-gavel me-2"></i>4. Obligations du Preneur & Règles Strictes</h5>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <ul class="list-unstyled text-muted small mb-0">
+                                            <li class="mb-2"><i class="fa fa-ban text-danger me-2"></i><strong>Nourriture & Boissons formellement interdites</strong> dans l'enceinte de la salle numérique.</li>
+                                            <li class="mb-2"><i class="fa fa-smoking-ban text-danger me-2"></i><strong>Interdiction totale et absolue de fumer</strong>.</li>
+                                            <li><i class="fa fa-users text-danger me-2"></i>Ne jamais dépasser la limite de <strong>90 personnes</strong>.</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <ul class="list-unstyled text-muted small mb-0">
+                                            <li class="mb-2"><i class="fa fa-shield-alt text-danger me-2"></i><strong>Protection du matériel :</strong> toute dégradation constatée sera facturée au Preneur au prix du marché pour remplacement.</li>
+                                            <li class="mb-2"><i class="fa fa-code-branch text-danger me-2"></i>Toute installation de logiciel tiers doit être préalablement validée par l'agent technique.</li>
+                                            <li><i class="fa fa-broom text-danger me-2"></i>Restitution des locaux dans un état de propreté irréprochable.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Article 5 : Responsabilités & Modalités -->
+                        <div class="col-12">
+                            <div class="p-4 bg-white rounded-3 border shadow-sm">
+                                <h5 class="fw-bold text-danger mb-3"><i class="fa fa-handshake me-2"></i>5. Responsabilités, Tarifs & Signature</h5>
+                                <p class="text-muted small mb-2">
+                                    La Salle du Numérique décline toute responsabilité en cas de perte ou de vol d'objets personnels appartenant aux participants. Le Preneur est garant de la discipline de son groupe durant toute la période d'occupation.
+                                </p>
+                                <p class="text-muted small mb-0">
+                                    Le contrat est établi en deux exemplaires originaux munis de la mention manuscrite « Lu et approuvé ».
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Formulaire direct de demande de réservation -->
+                    <div class="mt-5 p-4 p-md-5 bg-white rounded-3 border shadow-sm">
+                        <div class="text-center mb-4">
+                            <span class="badge bg-danger px-3 py-2 text-uppercase mb-2">Formulaire de réservation</span>
+                            <h4 class="fw-bold mb-1" style="color: #1a1a1a;">Faire une demande de réservation de la salle</h4>
+                            <p class="text-muted small mb-0">Remplissez ce formulaire sans quitter la page pour transmettre votre demande à la Direction de la SNU.</p>
+                        </div>
+
+                        <div id="reservationAlertSuccess" class="alert alert-success d-none mb-3" role="alert">
+                            <i class="fa fa-check-circle me-2"></i><strong>Demande transmise avec succès !</strong> La Direction de la Salle du Numérique étudiera votre demande et vous contactera dans les plus brefs délais.
+                        </div>
+                        <div id="reservationAlertError" class="alert alert-danger d-none mb-3" role="alert"></div>
+
+                        <form id="reservationForm">
+                            <!-- Honeypot -->
+                            <input type="text" name="website" style="display:none !important;" tabindex="-1" autocomplete="off">
+
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold small text-dark" for="resOrg">Organisation / Structure / Faculté <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="resOrg" name="organization" placeholder="Ex: Faculté des Sciences, Entreprise X" required minlength="2">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold small text-dark" for="resRep">Nom du Responsable <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="resRep" name="representative" placeholder="Nom et prénom du représentant" required minlength="2">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold small text-dark" for="resPhone">Téléphone / WhatsApp <span class="text-danger">*</span></label>
+                                    <input type="tel" class="form-control" id="resPhone" name="phone" placeholder="+243 ..." required minlength="7">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold small text-dark" for="resEmail">Email de contact <span class="text-danger">*</span></label>
+                                    <input type="email" class="form-control" id="resEmail" name="email" placeholder="contact@domaine.com" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label fw-bold small text-dark" for="resDate">Date souhaitée <span class="text-danger">*</span></label>
+                                    <input type="date" class="form-control" id="resDate" name="date" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label fw-bold small text-dark" for="resParticipants">Nombre de participants attendus <span class="text-danger">*</span></label>
+                                    <input type="number" class="form-control" id="resParticipants" name="participants" min="1" max="90" placeholder="Max 90" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label fw-bold small text-dark" for="resType">Nature de l'activité <span class="text-danger">*</span></label>
+                                    <select class="form-select" id="resType" name="type" required>
+                                        <option value="Conférence">Conférence académique</option>
+                                        <option value="Atelier de Formation">Atelier de formation</option>
+                                        <option value="Soutenance">Soutenance de mémoire / thèse</option>
+                                        <option value="Séminaire">Séminaire professionnel</option>
+                                        <option value="Hackathon / Projet Tech">Hackathon / Projet Tech</option>
+                                        <option value="Autre événement">Autre événement</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label fw-bold small text-dark" for="resDetails">Détails, horaires et besoins matériels spécifiques <span class="text-danger">*</span></label>
+                                    <textarea class="form-control" id="resDetails" name="details" rows="3" placeholder="Précisez les créneaux horaires, le nombre d'ordinateurs requis et toute demande particulière..." required minlength="10"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="resAgree" required>
+                                        <label class="form-check-label small text-muted" for="resAgree">
+                                            J'ai lu et j'accepte l'ensemble des conditions d'utilisation énoncées dans le contrat officiel de la Salle du Numérique UNILU.
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-12 mt-3">
+                                    <button type="submit" id="resSubmitBtn" class="btn btn-primary w-100 py-3 fw-bold fs-5 shadow-sm">
+                                        <i class="fa fa-paper-plane me-2"></i>Soumettre la demande de réservation
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="modal-footer bg-white border-top py-3 px-4 d-flex flex-wrap justify-content-between gap-2">
+                    <div>
+                        <a href="Contrat_SNU.docx" download class="btn btn-outline-danger btn-sm fw-bold">
+                            <i class="fa fa-download me-1"></i>Télécharger le Contrat (DOCX)
+                        </a>
+                        <button type="button" class="btn btn-outline-secondary btn-sm ms-2" onclick="window.print();">
+                            <i class="fa fa-print me-1"></i>Imprimer
+                        </button>
+                    </div>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════════════════════════════════
+         MODAL D'INSCRIPTION RAPIDE À LA FORMATION (Sans quitter la page)
+    ════════════════════════════════════════════════════════════════════════ -->
+    <div class="modal fade" id="formationModal" tabindex="-1" aria-labelledby="formationModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content shadow-lg border-0" style="border-radius: 16px; overflow: hidden;">
+                <div class="modal-header py-3 px-4 text-white" style="background: #d10000;">
+                    <div class="d-flex align-items-center">
+                        <i class="fa fa-graduation-cap fs-2 me-3"></i>
+                        <div>
+                            <h5 class="modal-title fw-bold text-white mb-0" id="formationModalLabel">Inscription à la Formation</h5>
+                            <small class="text-white-50">Salle du Numérique — Université de Lubumbashi</small>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                </div>
+
+                <div class="modal-body p-4 p-md-5" style="background: #ffffff;">
+                    <div id="formationAlertSuccess" class="alert alert-success d-none mb-3" role="alert">
+                        <i class="fa fa-check-circle me-2"></i><strong>Inscription enregistrée avec succès !</strong> Notre équipe vous contactera sous 24h ouvrées pour confirmer votre place et votre horaire.
+                    </div>
+                    <div id="formationAlertError" class="alert alert-danger d-none mb-3" role="alert"></div>
+
+                    <form id="formationRegistrationForm">
+                        <input type="text" name="website" style="display:none !important;" tabindex="-1" autocomplete="off">
+
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label class="form-label fw-bold text-dark small" for="modalFormationSelect">Formation souhaitée <span class="text-danger">*</span></label>
+                                <select class="form-select form-select-lg py-2" id="modalFormationSelect" name="formation" required>
+                                    <option value="" disabled selected>-- Choisissez votre formation --</option>
+                                    <option value="Bureautique (Microsoft 365)">Bureautique (Microsoft 365 — Word, Excel, PowerPoint)</option>
+                                    <option value="Initiation aux Outils d'Intelligence Artificielle">Initiation aux Outils d'IA (ChatGPT, Gemini, etc.)</option>
+                                    <option value="Les Bases du Design Numérique">Les Bases du Design Numérique (Canva, Photoshop)</option>
+                                    <option value="Les Bases de Windows & Informatique">Les Bases de Windows & Informatique générale</option>
+                                    <option value="Module Word Avancé">Module Spécifique : Word Avancé (Mise en page de mémoire, TFC)</option>
+                                    <option value="Module Excel Avancé">Module Spécifique : Excel & Analyse de données</option>
+                                    <option value="Module PowerPoint Professionnel">Module Spécifique : PowerPoint & Présentations</option>
+                                    <option value="Module Base de Données Access">Module Spécifique : Base de données Access</option>
+                                    <option value="Autre formation personnalisée">Autre formation personnalisée</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold text-dark small" for="modalNomApprenant">Nom complet (Nom & Prénom) <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="modalNomApprenant" name="name" placeholder="Ex: Kahozi Juniors" required minlength="2">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold text-dark small" for="modalPhoneApprenant">Numéro WhatsApp / Téléphone <span class="text-danger">*</span></label>
+                                <input type="tel" class="form-control" id="modalPhoneApprenant" name="phone" placeholder="+243 ..." required minlength="7">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold text-dark small" for="modalEmailApprenant">Adresse Email <span class="text-danger">*</span></label>
+                                <input type="email" class="form-control" id="modalEmailApprenant" name="email" placeholder="nom@exemple.com" required>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold text-dark small" for="modalStatutApprenant">Statut</label>
+                                <select class="form-select" id="modalStatutApprenant" name="statut">
+                                    <option value="Étudiant UNILU">Étudiant UNILU</option>
+                                    <option value="Enseignant / Chercheur">Enseignant / Chercheur UNILU</option>
+                                    <option value="Personnel Administratif">Personnel Administratif</option>
+                                    <option value="Professionnel externe">Professionnel externe</option>
+                                    <option value="Autre">Autre</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold text-dark small" for="modalCreneauApprenant">Créneau préféré</label>
+                                <select class="form-select" id="modalCreneauApprenant" name="creneau">
+                                    <option value="Matinée (08h30 - 11h30)">Matinée (08h30 — 11h30)</option>
+                                    <option value="Après-midi (12h00 - 15h00)">Après-midi (12h00 — 15h00)</option>
+                                    <option value="Soirée (15h30 - 18h00)">Soirée (15h30 — 18h00)</option>
+                                    <option value="Samedi Intensif">Samedi Intensif (08h30 — 13h30)</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold text-dark small" for="modalFaculteApprenant">Faculté / Promotion</label>
+                                <input type="text" class="form-control" id="modalFaculteApprenant" name="faculte" placeholder="Ex: Droit, L2">
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label fw-bold text-dark small" for="modalRemarquesApprenant">Remarques ou attentes particulières (optionnel)</label>
+                                <textarea class="form-control" id="modalRemarquesApprenant" name="remarques" rows="2" placeholder="Précisez vos objectifs ou toute information utile..."></textarea>
+                            </div>
+
+                            <div class="col-12 mt-4">
+                                <button type="submit" id="modalSubmitBtn" class="btn btn-primary w-100 py-3 fw-bold fs-5 shadow-sm">
+                                    <i class="fa fa-paper-plane me-2"></i>Confirmer mon inscription
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Claudia Speak Mini Panel -->
     <div id="claudiaSpeakModal">
         <div class="cmodal-head">
@@ -710,6 +1170,7 @@
         window.CLAUDIA_BACKEND_URL = 'https://salle-unilu-backend.onrender.com';
     </script>
     <!-- Template Javascript -->
+    <script src="js/theme-toggle.js"></script>
     <script src="js/site-content.js"></script>
     <script src="js/main.js"></script>
 </body>

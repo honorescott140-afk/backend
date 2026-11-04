@@ -41,6 +41,7 @@
 </head>
 
 <body class="tech-bg">
+    <a class="skip-link" href="#main-content">Aller au contenu principal</a>
     <!-- Spinner Start -->
     <div id="spinner"
         class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -64,13 +65,16 @@
                     </div>
                 </a>
                 <button type="button" class="navbar-toggler border-0 p-2" data-bs-toggle="collapse"
-                    data-bs-target="#navbarCollapse" aria-label="Menu de navigation">
+                    data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Menu de navigation">
                     <i class="fa fa-bars text-white fs-4"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto align-items-lg-center py-2 py-lg-0">
                         <a href="index.html" class="nav-item nav-link px-3">Accueil</a>
-                        <a href="project.html" class="nav-item nav-link px-3">La Salle</a>
+                        <a href="services.html" class="nav-item nav-link px-3">Services</a>
+                        <a href="formations.html" class="nav-item nav-link px-3">Formations</a>
+                        <a href="actualites.html" class="nav-item nav-link px-3">Actualités</a>
+                        <a href="project.html" class="nav-item nav-link px-3">En savoir plus</a>
                         <a href="contact.html" class="nav-item nav-link active px-3">Contact</a>
                         <div class="ms-lg-3 my-2 my-lg-0">
                             <button id="themeToggleBtn" class="theme-toggle-btn" title="Basculer Mode Sombre / Mode Clair">
@@ -385,6 +389,7 @@
     </style>
 
 
+    <main id="main-content">
     <!-- Contact & Map Section Start -->
     <div class="container-fluid py-5">
         <div class="container py-5">
@@ -409,7 +414,7 @@
                     <div class="row g-3">
                         <!-- Facebook 1 -->
                         <div class="col-sm-6">
-                            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
+                            <a href="https://www.facebook.com/unilu.ac.cd" data-cms-href="general.facebook_unilu" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
                                 <div class="p-3 border rounded shadow-sm bg-white d-flex align-items-center h-100 contact-link-card"
                                     style="transition: all 0.3s ease;">
                                     <i class="fab fa-facebook text-primary fs-3 me-3"
@@ -425,7 +430,7 @@
                         </div>
                         <!-- Facebook 2 -->
                         <div class="col-sm-6">
-                            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
+                            <a href="https://www.facebook.com" data-cms-href="general.facebook_snu" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
                                 <div class="p-3 border rounded shadow-sm bg-white d-flex align-items-center h-100 contact-link-card"
                                     style="transition: all 0.3s ease;">
                                     <i class="fab fa-facebook-f text-primary fs-3 me-3"
@@ -440,7 +445,7 @@
                         </div>
                         <!-- Email -->
                         <div class="col-sm-6">
-                            <a href="mailto:snunilu@unilu.ac.cd" class="text-decoration-none">
+                            <a href="mailto:numerique@SNU.ac.cd" class="text-decoration-none">
                                 <div class="p-3 border rounded shadow-sm bg-white d-flex align-items-center h-100 contact-link-card"
                                     style="transition: all 0.3s ease;">
                                     <i class="fa fa-envelope text-danger fs-3 me-3"
@@ -448,7 +453,7 @@
                                     <div>
                                         <small class="text-muted d-block" style="font-size: 0.75rem;">Email
                                             Officiel</small>
-                                        <strong style="color: #333; font-size: 0.85rem;">snunilu@unilu.ac.cd</strong>
+                                        <strong style="color: #333; font-size: 0.85rem;">numerique@SNU.ac.cd</strong>
                                     </div>
                                 </div>
                             </a>
@@ -486,38 +491,39 @@
                         </div>
 
                         <form id="contactForm" class="needs-validation" novalidate>
+                            <div class="d-none" aria-hidden="true"><label for="website">Ne pas remplir</label><input type="text" id="website" name="website" tabindex="-1" autocomplete="off"></div>
                             <div class="row g-3">
                                 <div class="col-12">
                                     <div class="form-floating">
                                         <input type="text" class="form-control" id="contactName"
-                                            placeholder="Nom complet" required>
+                                            placeholder=" " required>
                                         <label for="contactName">Nom complet</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
                                         <input type="email" class="form-control" id="contactEmail"
-                                            placeholder="Adresse e-mail" required>
+                                            placeholder=" " required>
                                         <label for="contactEmail">Adresse e-mail</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="tel" class="form-control" id="contactPhone" placeholder="Téléphone"
+                                        <input type="tel" class="form-control" id="contactPhone" placeholder=" "
                                             required>
                                         <label for="contactPhone">Téléphone</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="contactSubject" placeholder="Objet"
+                                        <input type="text" class="form-control" id="contactSubject" placeholder=" "
                                             required>
                                         <label for="contactSubject">Objet</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-floating">
-                                        <textarea class="form-control" placeholder="Votre message" id="contactMessage"
+                                        <textarea class="form-control" placeholder=" " id="contactMessage"
                                             style="height: 150px;" required></textarea>
                                         <label for="contactMessage">Votre message</label>
                                     </div>
@@ -559,7 +565,7 @@
                 </div>
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.3s">
                     <div class="border rounded p-2 bg-white shadow-sm">
-                        <iframe
+                        <iframe id="uniluMap" data-fallback-map="-11.6033,27.4691"
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d247.89!2d27.4691!3d-11.6033!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTHCsDM2JzEnMTEuOCJTIiAyN8KwMjgnMDguOCJF!5e0!3m2!1sfr!2scd!4v1718812345678"
                             width="100%" height="380" style="border:0; border-radius: 6px;" allowfullscreen=""
                             loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -579,6 +585,8 @@
 
 
 
+
+    </main>
 
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-white-50 footer pt-5">
@@ -851,6 +859,107 @@
     </div>
 
 
+    <!-- ════════════════════════════════════════════════════════════════════════
+         MODAL D'INSCRIPTION RAPIDE À LA FORMATION (Sans quitter la page)
+    ════════════════════════════════════════════════════════════════════════ -->
+    <div class="modal fade" id="formationModal" tabindex="-1" aria-labelledby="formationModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content shadow-lg border-0" style="border-radius: 16px; overflow: hidden;">
+                <div class="modal-header py-3 px-4 text-white" style="background: #d10000;">
+                    <div class="d-flex align-items-center">
+                        <i class="fa fa-graduation-cap fs-2 me-3"></i>
+                        <div>
+                            <h5 class="modal-title fw-bold text-white mb-0" id="formationModalLabel">Inscription à la Formation</h5>
+                            <small class="text-white-50">Salle du Numérique — Université de Lubumbashi</small>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                </div>
+
+                <div class="modal-body p-4 p-md-5" style="background: #ffffff;">
+                    <div id="formationAlertSuccess" class="alert alert-success d-none mb-3" role="alert">
+                        <i class="fa fa-check-circle me-2"></i><strong>Inscription enregistrée avec succès !</strong> Notre équipe vous contactera sous 24h ouvrées pour confirmer votre place et votre horaire.
+                    </div>
+                    <div id="formationAlertError" class="alert alert-danger d-none mb-3" role="alert"></div>
+
+                    <form id="formationRegistrationForm">
+                        <input type="text" name="website" style="display:none !important;" tabindex="-1" autocomplete="off">
+
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label class="form-label fw-bold text-dark small" for="modalFormationSelect">Formation souhaitée <span class="text-danger">*</span></label>
+                                <select class="form-select form-select-lg py-2" id="modalFormationSelect" name="formation" required>
+                                    <option value="" disabled selected>-- Choisissez votre formation --</option>
+                                    <option value="Bureautique (Microsoft 365)">Bureautique (Microsoft 365 — Word, Excel, PowerPoint)</option>
+                                    <option value="Initiation aux Outils d'Intelligence Artificielle">Initiation aux Outils d'IA (ChatGPT, Gemini, etc.)</option>
+                                    <option value="Les Bases du Design Numérique">Les Bases du Design Numérique (Canva, Photoshop)</option>
+                                    <option value="Les Bases de Windows & Informatique">Les Bases de Windows & Informatique générale</option>
+                                    <option value="Module Word Avancé">Module Spécifique : Word Avancé (Mise en page de mémoire, TFC)</option>
+                                    <option value="Module Excel Avancé">Module Spécifique : Excel & Analyse de données</option>
+                                    <option value="Module PowerPoint Professionnel">Module Spécifique : PowerPoint & Présentations</option>
+                                    <option value="Module Base de Données Access">Module Spécifique : Base de données Access</option>
+                                    <option value="Autre formation personnalisée">Autre formation personnalisée</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold text-dark small" for="modalNomApprenant">Nom complet (Nom & Prénom) <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="modalNomApprenant" name="name" placeholder="Ex: Kahozi Juniors" required minlength="2">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold text-dark small" for="modalPhoneApprenant">Numéro WhatsApp / Téléphone <span class="text-danger">*</span></label>
+                                <input type="tel" class="form-control" id="modalPhoneApprenant" name="phone" placeholder="+243 ..." required minlength="7">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold text-dark small" for="modalEmailApprenant">Adresse Email <span class="text-danger">*</span></label>
+                                <input type="email" class="form-control" id="modalEmailApprenant" name="email" placeholder="nom@exemple.com" required>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold text-dark small" for="modalStatutApprenant">Statut</label>
+                                <select class="form-select" id="modalStatutApprenant" name="statut">
+                                    <option value="Étudiant UNILU">Étudiant UNILU</option>
+                                    <option value="Enseignant / Chercheur">Enseignant / Chercheur UNILU</option>
+                                    <option value="Personnel Administratif">Personnel Administratif</option>
+                                    <option value="Professionnel externe">Professionnel externe</option>
+                                    <option value="Autre">Autre</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold text-dark small" for="modalCreneauApprenant">Créneau préféré</label>
+                                <select class="form-select" id="modalCreneauApprenant" name="creneau">
+                                    <option value="Matinée (08h30 - 11h30)">Matinée (08h30 — 11h30)</option>
+                                    <option value="Après-midi (12h00 - 15h00)">Après-midi (12h00 — 15h00)</option>
+                                    <option value="Soirée (15h30 - 18h00)">Soirée (15h30 — 18h00)</option>
+                                    <option value="Samedi Intensif">Samedi Intensif (08h30 — 13h30)</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold text-dark small" for="modalFaculteApprenant">Faculté / Promotion</label>
+                                <input type="text" class="form-control" id="modalFaculteApprenant" name="faculte" placeholder="Ex: Droit, L2">
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label fw-bold text-dark small" for="modalRemarquesApprenant">Remarques ou attentes particulières (optionnel)</label>
+                                <textarea class="form-control" id="modalRemarquesApprenant" name="remarques" rows="2" placeholder="Précisez vos objectifs ou toute information utile..."></textarea>
+                            </div>
+
+                            <div class="col-12 mt-4">
+                                <button type="submit" id="modalSubmitBtn" class="btn btn-primary w-100 py-3 fw-bold fs-5 shadow-sm">
+                                    <i class="fa fa-paper-plane me-2"></i>Confirmer mon inscription
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- JavaScript Libraries -->
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
@@ -863,6 +972,7 @@
         window.CLAUDIA_BACKEND_URL = 'https://salle-unilu-backend.onrender.com';
     </script>
     <!-- Template Javascript -->
+    <script src="js/theme-toggle.js"></script>
     <script src="js/site-content.js"></script>
     <script src="js/main.js"></script>
 </body>
