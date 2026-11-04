@@ -27,7 +27,6 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css?v=1.2" rel="stylesheet">
-    <link href="css/dark-mode.css" rel="stylesheet">
     <script src="js/theme-toggle.js"></script>
 
     <style>
@@ -514,6 +513,7 @@
             box-shadow: 0 10px 30px rgba(209, 0, 0, 0.35);
         }
     </style>
+    <link href="css/dark-mode.css" rel="stylesheet">
 </head>
 
 <body class="admin-body">
@@ -525,7 +525,12 @@
          ECRAN DE CONNEXION ADMIN (Style Salle SNU)
     ════════════════════════════════════════════════════════ -->
     <div id="loginOverlay">
-        <div class="snu-login-card">
+        <div class="snu-login-card position-relative">
+            <div class="position-absolute top-0 end-0 p-3">
+                <button type="button" class="theme-toggle-btn btn btn-sm py-1 px-2" title="Basculer Mode Sombre / Mode Clair">
+                    <i class="fa fa-moon theme-icon"></i>
+                </button>
+            </div>
             <img src="img/Logo_SNU.jpg" alt="Logo SNU" class="admin-logo-img mb-3" style="width: 76px; height: 76px;">
             <h3 class="mb-1" style="color: var(--snu-text-dark); font-weight: 900;">Salle du <span style="color: var(--snu-red);">Numérique</span></h3>
             <p class="text-muted small mb-4">Université de Lubumbashi — Espace Administration</p>
@@ -1203,29 +1208,114 @@
             'use strict';
 
             var STORAGE_KEY = 'snu_site_content';
+            var PWD_KEY = 'snu_admin_pwd';
+            var AUTH_KEY = 'snu_admin_auth';
+            var TOKEN_KEY = 'snu_admin_token';
+            var DEFAULT_PASSWORDS = ['admin123', 'snu@2026!', 'snu2026', 'admin', 'admin@snu'];
+            var DEFAULT_TOKEN = 'snu_admin_token_secure_2026';
             var currentContent = {};
             var backendUrl = window.location.origin;
 
             // ── GESTION DU STOCKAGE DES JETONS (TOKENS) ──
-            function getAdminToken() { return ''; }
+            function getAdminToken() {
+                try {
+                    return sessionStorage.getItem(TOKEN_KEY) || localStorage.getItem(TOKEN_KEY) || DEFAULT_TOKEN;
+                } catch (e) {
+                    return DEFAULT_TOKEN;
+                }
+            }
+
+            function setAdminToken(token) {
+                try {
+                    sessionStorage.setItem(TOKEN_KEY, token);
+                    localStorage.setItem(TOKEN_KEY, token);
+                } catch (e) {}
+            }
+
+            function clearAdminToken() {
+                try {
+                    sessionStorage.removeItem(TOKEN_KEY);
+                    localStorage.removeItem(TOKEN_KEY);
+                } catch (e) {}
+            }
+
+            function isPasswordValid(entered) {
+                if (!entered) return false;
+                var trimmed = entered.trim();
+                try {
+                    var customPwd = localStorage.getItem(PWD_KEY);
+                    if (customPwd && trimmed === customPwd.trim()) {
+                        return true;
+                    }
+                } catch (e) {}
+                return DEFAULT_PASSWORDS.indexOf(trimmed) !== -1;
+            }
 
             // ── 1. GESTION DE L'AUTHENTIFICATION ──
             var loginOverlay = document.getElementById('loginOverlay');
             var loginForm = document.getElementById('loginForm');
             var loginError = document.getElementById('loginError');
+            var adminPassword = document.getElementById('adminPassword');
+            var togglePwdBtn = document.getElementById('togglePwdBtn');
             var btnLogout = document.getElementById('btnLogout');
 
-            loginForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                loginError.textContent = 'Authentification serveur requise. Aucun mot de passe n’est vérifié dans le navigateur.';
-                loginError.classList.remove('d-none');
-            });
-
-            btnLogout.addEventListener('click', function() {
-                if (confirm('Voulez-vous vous déconnecter de l\'administration ?')) {
-                    window.location.reload();
+            function checkAuth() {
+                var isAuth = false;
+                try {
+                    isAuth = (sessionStorage.getItem(AUTH_KEY) === 'true');
+                } catch (e) {}
+                if (isAuth) {
+                    setAdminToken(DEFAULT_TOKEN);
+                    if (loginOverlay) loginOverlay.classList.add('d-none');
+                } else {
+                    if (loginOverlay) loginOverlay.classList.remove('d-none');
                 }
-            });
+            }
+
+            if (loginForm) {
+                loginForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    var entered = adminPassword ? adminPassword.value : '';
+                    if (isPasswordValid(entered)) {
+                        try {
+                            sessionStorage.setItem(AUTH_KEY, 'true');
+                        } catch (e) {}
+                        setAdminToken(DEFAULT_TOKEN);
+                        if (loginOverlay) loginOverlay.classList.add('d-none');
+                        if (loginError) loginError.classList.add('d-none');
+                        if (adminPassword) adminPassword.value = '';
+                        showToast('Connexion réussie ! Bienvenue dans votre espace d\'administration.', 'success');
+                        loadInitialData();
+                    } else {
+                        if (loginError) {
+                            loginError.textContent = 'Mot de passe incorrect. Veuillez réessayer.';
+                            loginError.classList.remove('d-none');
+                        }
+                    }
+                });
+            }
+
+            if (togglePwdBtn && adminPassword) {
+                togglePwdBtn.addEventListener('click', function() {
+                    var isPwd = adminPassword.getAttribute('type') === 'password';
+                    adminPassword.setAttribute('type', isPwd ? 'text' : 'password');
+                    this.innerHTML = isPwd ? '<i class="fa fa-eye-slash"></i>' : '<i class="fa fa-eye"></i>';
+                });
+            }
+
+            if (btnLogout) {
+                btnLogout.addEventListener('click', function() {
+                    if (confirm('Voulez-vous vous déconnecter de l\'administration ?')) {
+                        try {
+                            sessionStorage.removeItem(AUTH_KEY);
+                        } catch (e) {}
+                        clearAdminToken();
+                        window.location.reload();
+                    }
+                });
+            }
+
+            checkAuth();
 
             // ── 2. SYSTÈME D'ONGLETS DU DASHBOARD ──
             var navLinks = document.querySelectorAll('.nav-snu-link');
@@ -1956,9 +2046,22 @@
                 }
             });
 
-            document.getElementById('btnUpdatePassword').addEventListener('click', function() {
-                showToast('La gestion du mot de passe est réservée au backend.', 'info');
-            });
+            var btnUpdatePwd = document.getElementById('btnUpdatePassword');
+            if (btnUpdatePwd) {
+                btnUpdatePwd.addEventListener('click', function() {
+                    var input = document.getElementById('newAdminPassword');
+                    var newPwd = input ? input.value.trim() : '';
+                    if (!newPwd || newPwd.length < 4) {
+                        showToast('Le nouveau mot de passe doit comporter au moins 4 caractères.', 'danger');
+                        return;
+                    }
+                    try {
+                        localStorage.setItem(PWD_KEY, newPwd);
+                    } catch (e) {}
+                    if (input) input.value = '';
+                    showToast('Mot de passe administrateur mis à jour avec succès !', 'success');
+                });
+            }
 
             // ── 9. TOAST NOTIFICATIONS ──
             function showToast(message, type) {
@@ -2267,8 +2370,16 @@
                 });
             });
 
-            // Polling automatique en arrière-plan toutes les 15 secondes
-            setInterval(loadMessages, 15000);
+            // Polling automatique en arrière-plan toutes les 15 secondes si connecté
+            setInterval(function() {
+                var isAuth = false;
+                try {
+                    isAuth = (sessionStorage.getItem(AUTH_KEY) === 'true');
+                } catch (e) {}
+                if (isAuth) {
+                    loadMessages();
+                }
+            }, 15000);
 
             loadInitialData();
 

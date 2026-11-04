@@ -1,16 +1,23 @@
 /**
- * CLAUDIA SNU - Système Unifié Mode Sombre Professionnel (True Black & Blaze Red)
- * Spécifique Salle de Technologie UNILU
+ * CLAUDIA SNU - Système Unifié Thème Officiel (Rouge & Blanc) & Mode Sombre (Black & Rouge Braise)
+ * Mode par défaut : mode sombre équilibré. Le mode clair conserve le thème officiel.
  */
 (function () {
     'use strict';
+
+    if (window.__SNU_THEME_TOGGLE_INITIALIZED__) {
+        return;
+    }
+    window.__SNU_THEME_TOGGLE_INITIALIZED__ = true;
 
     var STORAGE_KEY = 'snu_theme';
 
     // 1. Détection du thème sauvegardé ou par défaut
     function getStoredTheme() {
-        var saved = localStorage.getItem(STORAGE_KEY);
-        if (saved === 'dark' || saved === 'light') return saved;
+        try {
+            var saved = localStorage.getItem(STORAGE_KEY);
+            if (saved === 'dark' || saved === 'light') return saved;
+        } catch (e) {}
         return 'dark';
     }
 
@@ -23,11 +30,15 @@
         if (isDark) {
             root.setAttribute('data-bs-theme', 'dark');
             root.setAttribute('data-theme', 'dark');
-            if (body) body.classList.add('dark-mode');
+            if (body) {
+                body.classList.add('dark-mode');
+            }
         } else {
             root.setAttribute('data-bs-theme', 'light');
             root.setAttribute('data-theme', 'light');
-            if (body) body.classList.remove('dark-mode');
+            if (body) {
+                body.classList.remove('dark-mode');
+            }
         }
 
         // Mettre à jour tous les boutons de toggle sur la page
@@ -43,7 +54,7 @@
                 if (text) {
                     text.textContent = 'Mode Clair';
                 }
-                btn.setAttribute('title', 'Passer en mode clair');
+                btn.setAttribute('title', 'Passer au thème clair (Rouge & Blanc)');
             } else {
                 if (icon) {
                     icon.className = 'fa fa-moon me-1 theme-icon';
@@ -51,27 +62,43 @@
                 if (text) {
                     text.textContent = 'Mode Sombre';
                 }
-                btn.setAttribute('title', 'Passer en mode sombre');
+                btn.setAttribute('title', 'Passer au mode sombre');
             }
         });
     }
 
-    // 3. Bascule du thème
+    // 3. Bascule du thème avec verrouillage anti-rebond
+    var isToggling = false;
     function toggleTheme() {
-        var current = (document.documentElement.getAttribute('data-theme') === 'dark' || (document.body && document.body.classList.contains('dark-mode'))) ? 'dark' : 'light';
-        var next = (current === 'dark') ? 'light' : 'dark';
+        if (isToggling) return;
+        isToggling = true;
         try {
-            localStorage.setItem(STORAGE_KEY, next);
-        } catch (e) {}
-        applyTheme(next);
+            var current = (
+                document.documentElement.getAttribute('data-theme') === 'dark' ||
+                (document.body && document.body.classList.contains('dark-mode'))
+            ) ? 'dark' : 'light';
+            var next = (current === 'dark') ? 'light' : 'dark';
+            try {
+                localStorage.setItem(STORAGE_KEY, next);
+            } catch (e) {}
+            applyTheme(next);
+        } finally {
+            setTimeout(function () {
+                isToggling = false;
+            }, 120);
+        }
     }
 
     // Application précoce (évite le flash blanc)
     var initialTheme = getStoredTheme();
     document.documentElement.setAttribute('data-theme', initialTheme);
     document.documentElement.setAttribute('data-bs-theme', initialTheme);
-    if (initialTheme === 'dark' && document.body) {
-        document.body.classList.add('dark-mode');
+    if (document.body) {
+        if (initialTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+        } else {
+            document.body.classList.remove('dark-mode');
+        }
     }
 
     // Initialisation après chargement du DOM
@@ -82,6 +109,7 @@
             var target = e.target.closest('.theme-toggle-btn, #themeToggleBtn, #adminThemeToggleBtn');
             if (target) {
                 e.preventDefault();
+                e.stopPropagation();
                 toggleTheme();
             }
         });

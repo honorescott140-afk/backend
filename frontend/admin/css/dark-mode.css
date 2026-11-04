@@ -213,34 +213,42 @@ body.dark-mode .footer .btn-square:hover {
 }
 
 /* ─── 8. ESPACE ADMINISTRATION EN VRAI NOIR & ROUGE BRAISE ─── */
+html[data-theme="dark"] body.admin-body,
 body.admin-body.dark-mode {
     background: #000000 !important;
     color: #EDEDED !important;
 }
 
+html[data-theme="dark"] .admin-header-bar,
 body.admin-body.dark-mode .admin-header-bar {
     background: #080808 !important;
     border-bottom: 2px solid var(--blaze-red) !important;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.9), 0 1px 12px var(--blaze-glow) !important;
 }
 
+html[data-theme="dark"] .admin-sidebar,
 body.admin-body.dark-mode .admin-sidebar {
     background: var(--black-surface) !important;
     border-right: 1px solid var(--black-border) !important;
 }
 
+html[data-theme="dark"] .sidebar-section-title,
 body.admin-body.dark-mode .sidebar-section-title {
     color: #FF4D4D !important;
 }
 
+html[data-theme="dark"] .sidebar-section-title::after,
 body.admin-body.dark-mode .sidebar-section-title::after {
     background: rgba(255, 77, 77, 0.25) !important;
 }
 
+html[data-theme="dark"] .nav-snu-link,
 body.admin-body.dark-mode .nav-snu-link {
     color: #B0B0B0 !important;
 }
 
+html[data-theme="dark"] .nav-snu-link:hover,
+html[data-theme="dark"] .nav-snu-link.active,
 body.admin-body.dark-mode .nav-snu-link:hover,
 body.admin-body.dark-mode .nav-snu-link.active {
     background: linear-gradient(90deg, rgba(155, 17, 30, 0.35) 0%, rgba(155, 17, 30, 0.05) 100%) !important;
@@ -248,54 +256,96 @@ body.admin-body.dark-mode .nav-snu-link.active {
     border-left: 3px solid var(--blaze-red) !important;
 }
 
+html[data-theme="dark"] .nav-snu-link i,
 body.admin-body.dark-mode .nav-snu-link i {
     color: #FF4D4D !important;
 }
 
+html[data-theme="dark"] .admin-content-area,
 body.admin-body.dark-mode .admin-content-area {
     background: #000000 !important;
 }
 
+html[data-theme="dark"] .admin-card,
 body.admin-body.dark-mode .admin-card {
     background: var(--black-card) !important;
     border: 1px solid var(--black-border) !important;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.9) !important;
 }
 
+html[data-theme="dark"] .admin-card-header,
 body.admin-body.dark-mode .admin-card-header {
     border-bottom: 1px solid var(--black-border) !important;
     background: #0A0A0A !important;
 }
 
+html[data-theme="dark"] .admin-card-title,
 body.admin-body.dark-mode .admin-card-title {
     color: #FFFFFF !important;
 }
 
+html[data-theme="dark"] .snu-login-card,
 body.admin-body.dark-mode .snu-login-card {
     background: var(--black-card) !important;
     border: 1px solid var(--black-border) !important;
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 25px var(--blaze-glow) !important;
+    color: #EDEDED !important;
 }
 
+html[data-theme="dark"] .snu-login-card h3,
+body.admin-body.dark-mode .snu-login-card h3 {
+    color: #FFFFFF !important;
+}
+
+html[data-theme="dark"] .snu-login-card p,
+body.admin-body.dark-mode .snu-login-card p {
+    color: #AAAAAA !important;
+}
+
+html[data-theme="dark"] .snu-login-card label,
+body.admin-body.dark-mode .snu-login-card label {
+    color: #EDEDED !important;
+}
+
+html[data-theme="dark"] .snu-login-card .input-group-text,
+body.admin-body.dark-mode .snu-login-card .input-group-text {
+    background-color: var(--black-input) !important;
+    border-color: var(--black-border) !important;
+    color: #EDEDED !important;
+}
+
+html[data-theme="dark"] .snu-login-card .form-control,
+body.admin-body.dark-mode .snu-login-card .form-control {
+    background-color: var(--black-input) !important;
+    border-color: var(--black-border) !important;
+    color: #FFFFFF !important;
+}
+
+html[data-theme="dark"] .snu-login-card::before,
 body.admin-body.dark-mode .snu-login-card::before {
     background: linear-gradient(90deg, var(--blaze-red-light), var(--blaze-red)) !important;
 }
 
+html[data-theme="dark"] #loginOverlay::before,
 body.admin-body.dark-mode #loginOverlay::before {
     background: rgba(0, 0, 0, 0.94) !important;
 }
 
+html[data-theme="dark"] .list-group-item,
 body.admin-body.dark-mode .list-group-item {
     background-color: var(--black-card) !important;
     border-color: var(--black-border) !important;
     color: #EDEDED !important;
 }
 
+html[data-theme="dark"] .table,
 body.admin-body.dark-mode .table {
     color: #EDEDED !important;
     border-color: var(--black-border) !important;
 }
 
+html[data-theme="dark"] .table td,
+html[data-theme="dark"] .table th,
 body.admin-body.dark-mode .table td,
 body.admin-body.dark-mode .table th {
     background-color: transparent !important;
