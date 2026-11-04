@@ -8,25 +8,70 @@ import os
 import sys
 import json
 import time
+import mimetypes
+import hmac
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 import urllib.parse
 
 PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 8080
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 
-FRONTEND_DIR = os.path.join(ROOT_DIR, "frontend")
-ADMIN_DIR = os.path.join(FRONTEND_DIR, "admin")
-DATABASE_DIR = os.path.join(ROOT_DIR, "database")
-DB_FILE = os.path.join(DATABASE_DIR, "content.json")
-FRONTEND_DB_FILE = os.path.join(FRONTEND_DIR, "data", "content.json")
-MESSAGES_FILE = os.path.join(DATABASE_DIR, "messages.json")
-FRONTEND_MESSAGES_FILE = os.path.join(FRONTEND_DIR, "data", "messages.json")
-UPLOAD_DIR = os.path.join(FRONTEND_DIR, "img", "uploads")
-ADMIN_UPLOAD_DIR = os.path.join(ADMIN_DIR, "img", "uploads")
+# Détection intelligente des dossiers (compatible structure racine ou dossier frontend)
+if os.path.exists(os.path.join(ROOT_DIR, "index.html")):
+    FRONTEND_DIR = ROOT_DIR
+elif os.path.exists(os.path.join(ROOT_DIR, "frontend", "index.html")):
+    FRONTEND_DIR = os.path.join(ROOT_DIR, "frontend")
+else:
+    FRONTEND_DIR = ROOT_DIR
 
+if os.path.exists(os.path.join(ROOT_DIR, "admin")):
+    ADMIN_DIR = os.path.join(ROOT_DIR, "admin")
+elif os.path.exists(os.path.join(FRONTEND_DIR, "admin")):
+    ADMIN_DIR = os.path.join(FRONTEND_DIR, "admin")
+else:
+    ADMIN_DIR = os.path.join(ROOT_DIR, "admin")
+
+# Données & uploads
+if os.path.exists(os.path.join(ROOT_DIR, "data")):
+    DATA_DIR = os.path.join(ROOT_DIR, "data")
+elif os.path.exists(os.path.join(ROOT_DIR, "database")):
+    DATA_DIR = os.path.join(ROOT_DIR, "database")
+else:
+    DATA_DIR = os.path.join(ROOT_DIR, "data")
+
+DB_FILE = os.path.join(DATA_DIR, "content.json")
+MESSAGES_FILE = os.path.join(DATA_DIR, "messages.json")
+UPLOAD_DIR = os.path.join(ROOT_DIR, "img", "uploads")
+ADMIN_UPLOAD_DIR = os.path.join(ADMIN_DIR, "img", "uploads")
+ADMIN_TOKEN = os.environ.get("SNU_ADMIN_TOKEN", "").strip()
+
+os.makedirs(DATA_DIR, exist_ok=True)
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 os.makedirs(ADMIN_UPLOAD_DIR, exist_ok=True)
-os.makedirs(DATABASE_DIR, exist_ok=True)
+
+
+def admin_authorized(handler):
+    """Autorisation backend uniquement; aucun secret n'est fourni au frontend."""
+    if not ADMIN_TOKEN:
+        handler.send_response(503)
+        handler.send_header("Content-Type", "application/json; charset=utf-8")
+        handler.end_headers()
+        handler.wfile.write(b'{"success": false, "error": "Administration non configuree"}')
+        return False
+
+    received = handler.headers.get("X-Admin-Token", "")
+    if not received:
+        auth = handler.headers.get("Authorization", "")
+        if auth.startswith("Bearer "):
+            received = auth[7:].strip()
+
+    if not received or not hmac.compare_digest(received, ADMIN_TOKEN):
+        handler.send_response(401)
+        handler.send_header("Content-Type", "application/json; charset=utf-8")
+        handler.end_headers()
+        handler.wfile.write(b'{"success": false, "error": "Authentification requise"}')
+        return False
+    return True
 
 
 class ClaudiaUnifiedHandler(SimpleHTTPRequestHandler):
@@ -45,72 +90,99 @@ class ClaudiaUnifiedHandler(SimpleHTTPRequestHandler):
         self.send_response(200)
         self.end_headers()
 
+    def do_HEAD(self):
+        self.do_GET()
+
     def do_GET(self):
         parsed = urllib.parse.urlparse(self.path)
         path = parsed.path
 
-        # 1. API CMS : Lecture des données
+        # 1. API Statut
+        if path in ("/claudia/status", "/api/status"):
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json; charset=utf-8")
+            self.end_headers()
+            self.wfile.write(b'{"status": "online", "claudia": "active", "service": "SNU Web Unified"}')
+            return
+
+        # 2. API CMS : Lecture des données
         if path == "/api/content":
             self.send_response(200)
             self.send_header("Content-Type", "application/json; charset=utf-8")
             self.end_headers()
-            data_file = DB_FILE if os.path.exists(DB_FILE) else FRONTEND_DB_FILE
-            if os.path.exists(data_file):
-                with open(data_file, "rb") as f:
-                    self.wfile.write(f.read())
+            if os.path.exists(DB_FILE):
+                try:
+                    with open(DB_FILE, "r", encoding="utf-8") as f:
+                        raw_data = json.load(f)
+                    # Compatible à la fois avec le format direct et le format {success, data}
+                    res = json.dumps({"success": True, "data": raw_data, **raw_data}, ensure_ascii=False)
+                    self.wfile.write(res.encode("utf-8"))
+                except Exception as e:
+                    self.wfile.write(json.dumps({"error": str(e)}).encode("utf-8"))
             else:
                 self.wfile.write(b'{"error": "content.json not found"}')
             return
 
-        # 2. API CMS : Liste des images
+        # 3. API CMS : Liste des images
         if path == "/api/images":
             self.send_response(200)
             self.send_header("Content-Type", "application/json; charset=utf-8")
             self.end_headers()
-            images = []
-            img_dir = os.path.join(FRONTEND_DIR, "img")
-            if os.path.exists(img_dir):
-                for root, dirs, files in os.walk(img_dir):
-                    for f in files:
-                        if f.lower().endswith(('.png', '.jpg', '.jpeg', '.gif', '.webp', '.svg')):
-                            rel = os.path.relpath(os.path.join(root, f), FRONTEND_DIR).replace("\\", "/")
-                            images.append(rel)
-            res = json.dumps({"success": True, "images": sorted(images)})
+            images = set()
+            for check_dir in [os.path.join(ROOT_DIR, "img"), os.path.join(ADMIN_DIR, "img")]:
+                if os.path.exists(check_dir):
+                    for root, dirs, files in os.walk(check_dir):
+                        for f in files:
+                            if f.lower().endswith(('.png', '.jpg', '.jpeg', '.gif', '.webp', '.svg')):
+                                rel = os.path.relpath(os.path.join(root, f), ROOT_DIR).replace("\\", "/")
+                                images.add(rel)
+            res = json.dumps({"success": True, "images": sorted(list(images))})
             self.wfile.write(res.encode("utf-8"))
             return
 
-        # 3. API Messagerie : Récupération des messages
+        # 4. API Messagerie : Récupération des messages
         if path == "/api/messages":
+            if not admin_authorized(self):
+                return
             self.send_response(200)
             self.send_header("Content-Type", "application/json; charset=utf-8")
             self.end_headers()
-            msg_file = MESSAGES_FILE if os.path.exists(MESSAGES_FILE) else FRONTEND_MESSAGES_FILE
-            if os.path.exists(msg_file):
-                with open(msg_file, "rb") as f:
+            if os.path.exists(MESSAGES_FILE):
+                with open(MESSAGES_FILE, "rb") as f:
                     self.wfile.write(f.read())
             else:
                 self.wfile.write(b'[]')
             return
 
-        # 4. Routage /admin -> redirection automatique vers /admin/
-        if path == "/admin":
-            self.send_response(301)
+        # 5. Routage Administration : /admin, /admi, /admin/, etc.
+        # Tolérance aux fautes de frappe et variantes (/admin, /admi, /admi/, /admin.html, /admi.html, /administration)
+        admin_aliases = (
+            "/admin",
+            "/admi",
+            "/admi/",
+            "/admin.html",
+            "/admi.html",
+            "/administration",
+            "/administration/"
+        )
+        if path in admin_aliases:
+            self.send_response(302)
             self.send_header("Location", "/admin/")
             self.end_headers()
             return
 
-        # 4. Routage /admin/ ou fichiers admin
-        if path.startswith("/admin/") or path == "/admin.html":
-            if path == "/admin/" or path == "/admin.html":
+        # 6. Fichiers de l'espace administration (/admin/...)
+        if path.startswith("/admin/"):
+            rel = path[len("/admin/"):]
+            rel = os.path.normpath(rel).lstrip("/\\")
+            if ".." in rel:
+                self.send_response(403)
+                self.end_headers()
+                return
+
+            if not rel or rel in ("index.html", "admin.html"):
                 admin_file = os.path.join(ADMIN_DIR, "index.html")
             else:
-                rel = path[len("/admin/"):]
-                # Sécurité : bloquer les traversées de chemin (path traversal)
-                rel = os.path.normpath(rel).lstrip("/\\")
-                if ".." in rel:
-                    self.send_response(403)
-                    self.end_headers()
-                    return
                 admin_file = os.path.join(ADMIN_DIR, rel)
 
             if os.path.exists(admin_file) and os.path.isfile(admin_file):
@@ -118,22 +190,32 @@ class ClaudiaUnifiedHandler(SimpleHTTPRequestHandler):
             elif os.path.exists(os.path.join(admin_file, "index.html")):
                 return self.serve_custom_file(os.path.join(admin_file, "index.html"))
 
-        # 5. Routage par défaut : Fichiers du frontend (Site public)
+        # 7. Routage Frontend (Site Public)
         rel_path = path.lstrip("/")
         if not rel_path:
             rel_path = "index.html"
-        # Sécurité : bloquer les traversées de chemin
         rel_path = os.path.normpath(rel_path).lstrip("/\\")
         if ".." in rel_path:
             self.send_response(403)
             self.end_headers()
             return
+
         site_file = os.path.join(FRONTEND_DIR, rel_path)
+
+        # Support des URLs sans extension .html (ex: /project, /contact)
+        if not os.path.exists(site_file) and not os.path.splitext(site_file)[1]:
+            html_candidate = site_file + ".html"
+            if os.path.exists(html_candidate):
+                site_file = html_candidate
 
         if os.path.exists(site_file) and os.path.isfile(site_file):
             return self.serve_custom_file(site_file)
 
-        super().do_GET()
+        # 8. Fallback 404
+        self.send_response(404)
+        self.send_header("Content-Type", "text/html; charset=utf-8")
+        self.end_headers()
+        self.wfile.write(b"<h1>404 - Fichier non trouve</h1><p><a href='/'>Retour a l'accueil</a> | <a href='/admin/'>Espace Administration</a></p>")
 
     def do_POST(self):
         parsed = urllib.parse.urlparse(self.path)
@@ -141,23 +223,21 @@ class ClaudiaUnifiedHandler(SimpleHTTPRequestHandler):
 
         # 1. Sauvegarde CMS : /api/content
         if path == "/api/content":
+            if not admin_authorized(self):
+                return
             try:
                 content_len = int(self.headers.get("Content-Length", 0))
                 body = self.rfile.read(content_len)
                 new_data = json.loads(body.decode("utf-8"))
 
-                # Sauvegarde 1 : Database centrale
+                # Sauvegarde dans la base centrale
                 with open(DB_FILE, "w", encoding="utf-8") as f:
-                    json.dump(new_data, f, ensure_ascii=False, indent=2)
-
-                # Sauvegarde 2 : Frontend data
-                with open(FRONTEND_DB_FILE, "w", encoding="utf-8") as f:
                     json.dump(new_data, f, ensure_ascii=False, indent=2)
 
                 self.send_response(200)
                 self.send_header("Content-Type", "application/json; charset=utf-8")
                 self.end_headers()
-                self.wfile.write(b'{"success": true, "message": "Contenu enregistre et synchronise !"}')
+                self.wfile.write(b'{"success": true, "message": "Contenu enregistre avec succes !"}')
             except Exception as e:
                 self.send_response(500)
                 self.send_header("Content-Type", "application/json; charset=utf-8")
@@ -166,8 +246,10 @@ class ClaudiaUnifiedHandler(SimpleHTTPRequestHandler):
                 self.wfile.write(err.encode("utf-8"))
             return
 
-        # 2. Upload de photos : /api/upload
+        # 2. Upload d'images : /api/upload
         if path == "/api/upload":
+            if not admin_authorized(self):
+                return
             try:
                 content_type = self.headers.get("Content-Type", "")
                 if "multipart/form-data" not in content_type:
@@ -184,12 +266,11 @@ class ClaudiaUnifiedHandler(SimpleHTTPRequestHandler):
                 filename = None
                 file_bytes = None
 
+                import re
                 for part in parts:
                     if b'filename="' in part:
                         headers_part, content_part = part.split(b"\r\n\r\n", 1)
                         content_part = content_part.rstrip(b"\r\n")
-                        # Extraire le nom de fichier
-                        import re
                         m = re.search(rb'filename="([^"]+)"', headers_part)
                         if m:
                             orig_name = m.group(1).decode("utf-8", errors="ignore")
@@ -200,11 +281,17 @@ class ClaudiaUnifiedHandler(SimpleHTTPRequestHandler):
 
                 if filename and file_bytes:
                     target1 = os.path.join(UPLOAD_DIR, filename)
-                    target2 = os.path.join(ADMIN_UPLOAD_DIR, filename)
                     with open(target1, "wb") as f:
                         f.write(file_bytes)
-                    with open(target2, "wb") as f:
-                        f.write(file_bytes)
+
+                    # Si admin/img/uploads n'est pas un symlink, écrire aussi dedans
+                    target2 = os.path.join(ADMIN_UPLOAD_DIR, filename)
+                    if not os.path.islink(ADMIN_UPLOAD_DIR) and os.path.abspath(target1) != os.path.abspath(target2):
+                        try:
+                            with open(target2, "wb") as f:
+                                f.write(file_bytes)
+                        except Exception:
+                            pass
 
                     rel_path = f"img/uploads/{filename}"
                     self.send_response(200)
@@ -225,7 +312,7 @@ class ClaudiaUnifiedHandler(SimpleHTTPRequestHandler):
                 self.wfile.write(err.encode("utf-8"))
                 return
 
-        # 3. API Messagerie : Envoi d'un message depuis le formulaire
+        # 3. API Messagerie : Envoi d'un message
         if path == "/api/messages":
             try:
                 content_len = int(self.headers.get("Content-Length", 0))
@@ -249,7 +336,7 @@ class ClaudiaUnifiedHandler(SimpleHTTPRequestHandler):
                     except Exception:
                         messages = []
 
-                now_str = time.strftime("%d/%m/%Y à %H:%M")
+                now_str = time.strftime("%d/%m/%Y a %H:%M")
                 new_msg = {
                     "id": f"msg_{int(time.time())}_{int(time.time() * 1000) % 10000}",
                     "name": sanitize(data.get("name", "Visiteur")),
@@ -267,14 +354,10 @@ class ClaudiaUnifiedHandler(SimpleHTTPRequestHandler):
                 with open(MESSAGES_FILE, "w", encoding="utf-8") as f:
                     json.dump(messages, f, ensure_ascii=False, indent=2)
 
-                if os.path.exists(os.path.dirname(FRONTEND_MESSAGES_FILE)):
-                    with open(FRONTEND_MESSAGES_FILE, "w", encoding="utf-8") as f:
-                        json.dump(messages, f, ensure_ascii=False, indent=2)
-
                 self.send_response(200)
                 self.send_header("Content-Type", "application/json; charset=utf-8")
                 self.end_headers()
-                res = json.dumps({"success": True, "message": "Message envoyé avec succès !", "data": new_msg})
+                res = json.dumps({"success": True, "message": "Message envoye avec succes !", "data": new_msg})
                 self.wfile.write(res.encode("utf-8"))
             except Exception as e:
                 self.send_response(500)
@@ -286,6 +369,8 @@ class ClaudiaUnifiedHandler(SimpleHTTPRequestHandler):
 
         # 4. API Messagerie : Marquer un message comme lu
         if path == "/api/messages/read":
+            if not admin_authorized(self):
+                return
             try:
                 content_len = int(self.headers.get("Content-Length", 0))
                 body = self.rfile.read(content_len)
@@ -305,10 +390,6 @@ class ClaudiaUnifiedHandler(SimpleHTTPRequestHandler):
                 with open(MESSAGES_FILE, "w", encoding="utf-8") as f:
                     json.dump(messages, f, ensure_ascii=False, indent=2)
 
-                if os.path.exists(os.path.dirname(FRONTEND_MESSAGES_FILE)):
-                    with open(FRONTEND_MESSAGES_FILE, "w", encoding="utf-8") as f:
-                        json.dump(messages, f, ensure_ascii=False, indent=2)
-
                 self.send_response(200)
                 self.send_header("Content-Type", "application/json; charset=utf-8")
                 self.end_headers()
@@ -320,6 +401,8 @@ class ClaudiaUnifiedHandler(SimpleHTTPRequestHandler):
 
         # 5. API Messagerie : Supprimer un message
         if path == "/api/messages/delete":
+            if not admin_authorized(self):
+                return
             try:
                 content_len = int(self.headers.get("Content-Length", 0))
                 body = self.rfile.read(content_len)
@@ -336,10 +419,6 @@ class ClaudiaUnifiedHandler(SimpleHTTPRequestHandler):
                 with open(MESSAGES_FILE, "w", encoding="utf-8") as f:
                     json.dump(messages, f, ensure_ascii=False, indent=2)
 
-                if os.path.exists(os.path.dirname(FRONTEND_MESSAGES_FILE)):
-                    with open(FRONTEND_MESSAGES_FILE, "w", encoding="utf-8") as f:
-                        json.dump(messages, f, ensure_ascii=False, indent=2)
-
                 self.send_response(200)
                 self.send_header("Content-Type", "application/json; charset=utf-8")
                 self.end_headers()
@@ -354,6 +433,26 @@ class ClaudiaUnifiedHandler(SimpleHTTPRequestHandler):
 
     def serve_custom_file(self, filepath):
         ctype = self.guess_type(filepath)
+        # Précisions pour types courants
+        ext = os.path.splitext(filepath)[1].lower()
+        custom_types = {
+            ".js": "application/javascript; charset=utf-8",
+            ".css": "text/css; charset=utf-8",
+            ".json": "application/json; charset=utf-8",
+            ".woff": "font/woff",
+            ".woff2": "font/woff2",
+            ".ttf": "font/ttf",
+            ".svg": "image/svg+xml",
+            ".png": "image/png",
+            ".jpg": "image/jpeg",
+            ".jpeg": "image/jpeg",
+            ".webp": "image/webp",
+            ".ico": "image/x-icon",
+            ".html": "text/html; charset=utf-8"
+        }
+        if ext in custom_types:
+            ctype = custom_types[ext]
+
         try:
             with open(filepath, "rb") as f:
                 content = f.read()
@@ -371,17 +470,18 @@ def run():
     os.chdir(ROOT_DIR)
     server_address = ("0.0.0.0", PORT)
     httpd = HTTPServer(server_address, ClaudiaUnifiedHandler)
-    print("\n" + "═" * 60)
+    print("\n" + "=" * 60)
     print("  CLAUDIA SNU — SERVEUR WEB ACTIF (Port " + str(PORT) + ")")
-    print("═" * 60)
-    print(f"  🌐 Site Utilisateur (Public) : http://localhost:{PORT}")
-    print(f"  ⚙️ Espace Administration     : http://localhost:{PORT}/admin")
-    print("═" * 60)
-    print("  Appuyez sur Ctrl+C pour arrêter le serveur.\n")
+    print("=" * 60)
+    print(f"  * Site Public (Utilisateur) : http://localhost:{PORT}")
+    print(f"  * Espace Administration      : http://localhost:{PORT}/admin")
+    print(f"                                (ou /admi, /admin/)")
+    print("=" * 60)
+    print("  Serveur pret. Appuyez sur Ctrl+C pour arreter.\n")
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:
-        print("\nArrêt du serveur...")
+        print("\nArret du serveur...")
         httpd.server_close()
 
 

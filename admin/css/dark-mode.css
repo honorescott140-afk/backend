@@ -1,0 +1,341 @@
+/* ══════════════════════════════════════════════════════════════
+   SALLE DU NUMÉRIQUE UNILU — VRAI MODE SOMBRE PROFESSIONNEL (OLED BLACK)
+   Spécification : 
+   - Partout où il y a du Blanc ➔ devient du Vrai Noir (True Black #000000 / #0a0a0a)
+   - Tout le Rouge vif ➔ devient du Rouge Braise / Blaze (#8B0000 / #9B111E / #b31414)
+   ══════════════════════════════════════════════════════════════ */
+
+:root {
+    --blaze-red: #9B111E;
+    --blaze-red-dark: #700606;
+    --blaze-red-light: #C52222;
+    --blaze-glow: rgba(155, 17, 30, 0.45);
+    --true-black: #000000;
+    --black-surface: #0A0A0A;
+    --black-card: #0F0F0F;
+    --black-card-hover: #161616;
+    --black-border: #222222;
+    --black-input: #050505;
+}
+
+/* ─── 1. STRUCTURE GLOBALE EN VRAI NOIR ─── */
+html[data-theme="dark"],
+body.dark-mode {
+    background-color: #000000 !important;
+    color: #EDEDED !important;
+}
+
+body.dark-mode * {
+    scrollbar-color: #444444 #0a0a0a;
+}
+
+body.dark-mode .bg-light,
+body.dark-mode .bg-white,
+body.dark-mode .container-fluid:not(.sticky-top):not(.hero-header),
+body.dark-mode .container {
+    background-color: transparent !important;
+}
+
+/* Arrière-plan technologique en mode sombre */
+body.dark-mode.tech-bg::before,
+body.dark-mode .tech-bg::before {
+    background: rgba(0, 0, 0, 0.95) !important;
+}
+
+body.dark-mode .tech-bg-canvas {
+    opacity: 0.12 !important;
+    filter: invert(1) brightness(0.7);
+}
+
+/* ─── 2. NAVBAR WIDTH MAX & DESIGN ROUGE BRAISE / NOIR ─── */
+body.dark-mode .sticky-top,
+body.dark-mode .container-fluid.sticky-top,
+body.dark-mode .snu-navbar {
+    background: #080808 !important;
+    border-bottom: 2px solid var(--blaze-red) !important;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.8), 0 1px 12px var(--blaze-glow) !important;
+}
+
+body.dark-mode .navbar-collapse {
+    background: #0A0A0A !important;
+    border: 1px solid var(--black-border) !important;
+}
+
+@media (max-width: 991.98px) {
+    body.dark-mode .navbar-collapse {
+        background: #0A0A0A !important;
+        border-top: 2px solid var(--blaze-red) !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.95) !important;
+    }
+    body.dark-mode .navbar .navbar-nav .nav-link {
+        border-bottom: 1px solid #1a1a1a !important;
+        color: #EDEDED !important;
+    }
+}
+
+body.dark-mode .navbar .navbar-nav .nav-link {
+    color: #D1D5DB !important;
+}
+
+body.dark-mode .navbar .navbar-nav .nav-link:hover,
+body.dark-mode .navbar .navbar-nav .nav-link.active {
+    color: #FFFFFF !important;
+    border-bottom-color: var(--blaze-red-light) !important;
+}
+
+/* ─── 3. CARTES, PANNEAUX, SERVICES, ÉQUIPE EN NOIR PROFOND ─── */
+body.dark-mode .service-card,
+body.dark-mode .snu-team-card,
+body.dark-mode .testimonial-item,
+body.dark-mode .contact-link-card,
+body.dark-mode .hero-feat-card,
+body.dark-mode .tech-zone-card,
+body.dark-mode .card,
+body.dark-mode .modal-content,
+body.dark-mode .form-panel {
+    background-color: var(--black-card) !important;
+    border: 1px solid var(--black-border) !important;
+    color: #EDEDED !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.85) !important;
+}
+
+body.dark-mode .service-card:hover,
+body.dark-mode .contact-link-card:hover,
+body.dark-mode .tech-zone-card:hover {
+    background-color: var(--black-card-hover) !important;
+    border-color: var(--blaze-red) !important;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.95), 0 0 15px var(--blaze-glow) !important;
+}
+
+/* ─── 4. TYPOGRAPHIE & COULEURS DU ROUGE BRAISE ─── */
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6 {
+    color: #FFFFFF !important;
+}
+
+body.dark-mode p,
+body.dark-mode span:not(.badge):not(.btn *):not(.text-primary):not(.text-danger) {
+    color: #CCCCCC;
+}
+
+body.dark-mode .text-muted,
+body.dark-mode .text-dark {
+    color: #999999 !important;
+}
+
+/* Remplacement du rouge vif par le rouge braise sur les textes */
+body.dark-mode .text-danger,
+body.dark-mode .text-primary,
+body.dark-mode .navbar-brand span {
+    color: #FF3B3B !important;
+    text-shadow: 0 0 10px rgba(255, 59, 59, 0.25);
+}
+
+/* ─── 5. BOUTONS EN ROUGE BRAISE (BLAZE RED) ─── */
+body.dark-mode .btn-primary,
+body.dark-mode .btn-danger,
+body.dark-mode .btn-inscrire,
+body.dark-mode .btn-save-master {
+    background: linear-gradient(135deg, var(--blaze-red-light) 0%, var(--blaze-red-dark) 100%) !important;
+    border: 1px solid var(--blaze-red-light) !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 4px 18px var(--blaze-glow) !important;
+    font-weight: 700;
+}
+
+body.dark-mode .btn-primary:hover,
+body.dark-mode .btn-danger:hover,
+body.dark-mode .btn-inscrire:hover,
+body.dark-mode .btn-save-master:hover {
+    background: linear-gradient(135deg, #D42626 0%, var(--blaze-red) 100%) !important;
+    border-color: #FF4D4D !important;
+    box-shadow: 0 6px 24px rgba(212, 38, 38, 0.6) !important;
+    transform: translateY(-2px);
+}
+
+body.dark-mode .btn-outline-primary,
+body.dark-mode .btn-outline-danger {
+    border-color: var(--blaze-red) !important;
+    color: #FF4D4D !important;
+    background: transparent !important;
+}
+
+body.dark-mode .btn-outline-primary:hover,
+body.dark-mode .btn-outline-danger:hover {
+    background: var(--blaze-red) !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 4px 15px var(--blaze-glow) !important;
+}
+
+/* ─── 6. FORMULAIRES & INPUTS EN NOIR ABSOLU ─── */
+body.dark-mode .form-control,
+body.dark-mode .form-select,
+body.dark-mode .input-group-text {
+    background-color: var(--black-input) !important;
+    border: 1px solid var(--black-border) !important;
+    color: #FFFFFF !important;
+}
+
+body.dark-mode .form-control:focus,
+body.dark-mode .form-select:focus {
+    background-color: #000000 !important;
+    border-color: var(--blaze-red) !important;
+    box-shadow: 0 0 0 0.25rem rgba(155, 17, 30, 0.35) !important;
+    color: #FFFFFF !important;
+}
+
+body.dark-mode .form-control::placeholder {
+    color: #555555 !important;
+}
+
+/* ─── 7. FOOTER EN VRAI NOIR AVEC ACCENTS BRAISE ─── */
+body.dark-mode .footer,
+body.dark-mode .bg-dark,
+body.dark-mode footer {
+    background-color: #030303 !important;
+    border-top: 2px solid var(--blaze-red) !important;
+}
+
+body.dark-mode .footer .btn-square {
+    background: #111111 !important;
+    border: 1px solid var(--black-border) !important;
+    color: #EDEDED !important;
+}
+
+body.dark-mode .footer .btn-square:hover {
+    background: var(--blaze-red) !important;
+    border-color: var(--blaze-red) !important;
+    color: #FFFFFF !important;
+}
+
+/* ─── 8. ESPACE ADMINISTRATION EN VRAI NOIR & ROUGE BRAISE ─── */
+body.admin-body.dark-mode {
+    background: #000000 !important;
+    color: #EDEDED !important;
+}
+
+body.admin-body.dark-mode .admin-header-bar {
+    background: #080808 !important;
+    border-bottom: 2px solid var(--blaze-red) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.9), 0 1px 12px var(--blaze-glow) !important;
+}
+
+body.admin-body.dark-mode .admin-sidebar {
+    background: var(--black-surface) !important;
+    border-right: 1px solid var(--black-border) !important;
+}
+
+body.admin-body.dark-mode .sidebar-section-title {
+    color: #FF4D4D !important;
+}
+
+body.admin-body.dark-mode .sidebar-section-title::after {
+    background: rgba(255, 77, 77, 0.25) !important;
+}
+
+body.admin-body.dark-mode .nav-snu-link {
+    color: #B0B0B0 !important;
+}
+
+body.admin-body.dark-mode .nav-snu-link:hover,
+body.admin-body.dark-mode .nav-snu-link.active {
+    background: linear-gradient(90deg, rgba(155, 17, 30, 0.35) 0%, rgba(155, 17, 30, 0.05) 100%) !important;
+    color: #FFFFFF !important;
+    border-left: 3px solid var(--blaze-red) !important;
+}
+
+body.admin-body.dark-mode .nav-snu-link i {
+    color: #FF4D4D !important;
+}
+
+body.admin-body.dark-mode .admin-content-area {
+    background: #000000 !important;
+}
+
+body.admin-body.dark-mode .admin-card {
+    background: var(--black-card) !important;
+    border: 1px solid var(--black-border) !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.9) !important;
+}
+
+body.admin-body.dark-mode .admin-card-header {
+    border-bottom: 1px solid var(--black-border) !important;
+    background: #0A0A0A !important;
+}
+
+body.admin-body.dark-mode .admin-card-title {
+    color: #FFFFFF !important;
+}
+
+body.admin-body.dark-mode .snu-login-card {
+    background: var(--black-card) !important;
+    border: 1px solid var(--black-border) !important;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 25px var(--blaze-glow) !important;
+}
+
+body.admin-body.dark-mode .snu-login-card::before {
+    background: linear-gradient(90deg, var(--blaze-red-light), var(--blaze-red)) !important;
+}
+
+body.admin-body.dark-mode #loginOverlay::before {
+    background: rgba(0, 0, 0, 0.94) !important;
+}
+
+body.admin-body.dark-mode .list-group-item {
+    background-color: var(--black-card) !important;
+    border-color: var(--black-border) !important;
+    color: #EDEDED !important;
+}
+
+body.admin-body.dark-mode .table {
+    color: #EDEDED !important;
+    border-color: var(--black-border) !important;
+}
+
+body.admin-body.dark-mode .table td,
+body.admin-body.dark-mode .table th {
+    background-color: transparent !important;
+    border-color: var(--black-border) !important;
+    color: #EDEDED !important;
+}
+
+/* ─── 9. BOUTON TOGGLE THÈME HAUTE DÉFINITION ─── */
+.theme-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 1.5px solid rgba(255, 255, 255, 0.75);
+    border-radius: 24px;
+    padding: 7px 16px;
+    background: rgba(0, 0, 0, 0.35);
+    color: #FFFFFF !important;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    user-select: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.theme-toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: #FFFFFF;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .theme-toggle-btn {
+    border-color: var(--blaze-red);
+    background: #111111;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6), 0 0 10px var(--blaze-glow);
+}
+
+body.dark-mode .theme-toggle-btn:hover {
+    background: #1A1A1A;
+    border-color: var(--blaze-red-light);
+}

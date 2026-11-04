@@ -1,0 +1,1219 @@
+/* ══════════════════════════════════════════════════════════════
+   SALLE DU NUMÉRIQUE UNILU — VRAI MODE SOMBRE PROFESSIONNEL (OLED BLACK)
+   Spécification : 
+   - Partout où il y a du Blanc ➔ devient du Vrai Noir (True Black #000000 / #0a0a0a)
+   - Tout le Rouge vif ➔ devient du Rouge Braise / Blaze (#8B0000 / #9B111E / #b31414)
+   ══════════════════════════════════════════════════════════════ */
+
+:root {
+    --blaze-red: #9B111E;
+    --blaze-red-dark: #700606;
+    --blaze-red-light: #C52222;
+    --blaze-glow: rgba(155, 17, 30, 0.45);
+    --true-black: #000000;
+    --black-surface: #0A0A0A;
+    --black-card: #0F0F0F;
+    --black-card-hover: #161616;
+    --black-border: #222222;
+    --black-input: #050505;
+}
+
+/* ─── 1. STRUCTURE GLOBALE EN VRAI NOIR ─── */
+html[data-theme="dark"],
+body.dark-mode {
+    background-color: #000000 !important;
+    color: #EDEDED !important;
+}
+
+body.dark-mode * {
+    scrollbar-color: #444444 #0a0a0a;
+}
+
+body.dark-mode .bg-light,
+body.dark-mode .bg-white,
+body.dark-mode .container-fluid:not(.sticky-top):not(.hero-header),
+body.dark-mode .container {
+    background-color: transparent !important;
+}
+
+/* Arrière-plan technologique en mode sombre */
+body.dark-mode.tech-bg::before,
+body.dark-mode .tech-bg::before {
+    background: rgba(0, 0, 0, 0.95) !important;
+}
+
+body.dark-mode .tech-bg-canvas {
+    opacity: 0.12 !important;
+    filter: invert(1) brightness(0.7);
+}
+
+/* ─── 2. NAVBAR WIDTH MAX & DESIGN ROUGE BRAISE / NOIR ─── */
+body.dark-mode .sticky-top,
+body.dark-mode .container-fluid.sticky-top,
+body.dark-mode .snu-navbar {
+    background: #080808 !important;
+    border-bottom: 2px solid var(--blaze-red) !important;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.8), 0 1px 12px var(--blaze-glow) !important;
+}
+
+body.dark-mode .navbar-collapse {
+    background: #0A0A0A !important;
+    border: 1px solid var(--black-border) !important;
+}
+
+@media (max-width: 991.98px) {
+    body.dark-mode .navbar-collapse {
+        background: #0A0A0A !important;
+        border-top: 2px solid var(--blaze-red) !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.95) !important;
+    }
+    body.dark-mode .navbar .navbar-nav .nav-link {
+        border-bottom: 1px solid #1a1a1a !important;
+        color: #EDEDED !important;
+    }
+}
+
+/* Ajustements finaux mobile : logo et nom à gauche, hamburger à droite. */
+.snu-navbar .navbar {
+    min-height: 68px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.snu-navbar .navbar-brand {
+    min-width: 0;
+    flex: 1 1 auto;
+    margin-right: 8px;
+    overflow: hidden;
+}
+
+.snu-navbar .navbar-brand > div {
+    min-width: 0;
+    overflow: hidden;
+}
+
+.snu-navbar .navbar-title,
+.snu-navbar .navbar-brand .text-white-50 {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.snu-navbar .navbar-toggler {
+    flex: 0 0 44px;
+    width: 44px;
+    height: 44px;
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, .55) !important;
+    border-radius: 8px;
+}
+
+@media (max-width: 991.98px) {
+    .snu-navbar .navbar-collapse {
+        flex-basis: 100%;
+        width: 100%;
+        margin-top: 10px !important;
+        padding: 10px !important;
+    }
+
+    .snu-navbar .navbar-nav {
+        width: 100%;
+        margin-left: 0 !important;
+        align-items: stretch !important;
+    }
+
+    .snu-navbar .navbar-nav .nav-link,
+    .snu-navbar .navbar-nav .theme-toggle-btn {
+        width: 100%;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        margin-left: 0 !important;
+    }
+}
+
+@media (max-width: 420px) {
+    .snu-navbar .container-fluid {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+
+    .snu-navbar .navbar-brand img {
+        width: 42px !important;
+        height: 42px !important;
+        margin-right: 8px !important;
+    }
+
+    .snu-navbar .navbar-title {
+        font-size: 1rem !important;
+        letter-spacing: 0 !important;
+    }
+
+    .snu-navbar .navbar-brand .text-white-50 {
+        font-size: .58rem !important;
+        letter-spacing: .5px !important;
+    }
+
+    .snu-navbar .navbar-toggler {
+        flex-basis: 42px;
+        width: 42px;
+        height: 42px;
+    }
+}
+
+@media (max-width: 340px) {
+    .snu-navbar .navbar-brand .text-white-50 {
+        display: none;
+    }
+
+    .snu-navbar .navbar-title {
+        font-size: .94rem !important;
+    }
+}
+
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+img,
+svg,
+video,
+iframe {
+    max-width: 100%;
+}
+
+/* Le mode sombre conserve une barre noire, y compris lorsque le menu est ouvert. */
+html[data-theme="dark"] .snu-navbar,
+html[data-theme="dark"] .snu-navbar .navbar-collapse,
+html[data-theme="dark"] .snu-navbar .navbar,
+html[data-theme="dark"] .snu-navbar > .container-fluid,
+body.dark-mode .snu-navbar,
+body.dark-mode .snu-navbar .navbar-collapse,
+body.dark-mode .snu-navbar .navbar,
+body.dark-mode .snu-navbar > .container-fluid {
+    background: #000000 !important;
+    background-image: none !important;
+}
+
+/* Sections .container-fluid.py-5 : largeur contenue et contenu lisible sur mobile. */
+@media (max-width: 575.98px) {
+    .container-fluid.py-5 {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+    }
+
+    .container-fluid.py-5 > .container {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    .container-fluid.py-5 .row {
+        width: 100%;
+        max-width: 100%;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    .container-fluid.py-5 .row > * {
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    .container-fluid.py-5 h1,
+    .container-fluid.py-5 h2,
+    .container-fluid.py-5 h3,
+    .container-fluid.py-5 h4,
+    .container-fluid.py-5 h5,
+    .container-fluid.py-5 h6,
+    .container-fluid.py-5 p,
+    .container-fluid.py-5 .small {
+        max-width: 100%;
+        overflow-wrap: anywhere;
+        word-break: normal;
+    }
+
+    .container-fluid.py-5 .text-center {
+        text-align: center !important;
+    }
+
+    .container-fluid.py-5 .service-card,
+    .container-fluid.py-5 .formation-card,
+    .container-fluid.py-5 .hero-feat-card,
+    .container-fluid.py-5 .snu-team-card,
+    .container-fluid.py-5 .testimonial-item {
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    /* Accueil : chaque bloc reste contenu et centré sur petit téléphone. */
+    .snu-about-section > .container,
+    .snu-feature-section > .container,
+    .snu-team-section > .container {
+        text-align: center;
+    }
+
+    .snu-about-section .row,
+    .snu-feature-section .row,
+    .snu-team-section .row {
+        justify-content: center !important;
+        align-items: center;
+    }
+
+    .snu-about-section .row.g-2 > .col-6 {
+        flex: 0 0 100%;
+        width: 100%;
+        max-width: 340px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+
+    .snu-about-section .row.g-2 img {
+        display: block;
+        width: 100% !important;
+        max-width: 340px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .snu-about-section .row.g-2 .bg-primary {
+        width: 100%;
+        min-height: 60px;
+        height: auto !important;
+        padding: 10px 12px !important;
+        text-align: center !important;
+        overflow-wrap: anywhere;
+    }
+
+    .snu-about-section .row.g-2 h4,
+    .snu-about-section h1,
+    .snu-about-section p,
+    .snu-about-section h6,
+    .snu-feature-section h1,
+    .snu-feature-section h4,
+    .snu-feature-section p,
+    .snu-team-section h1,
+    .snu-team-section p,
+    .snu-team-section .snu-name,
+    .snu-team-section .snu-role {
+        width: 100%;
+        max-width: 100%;
+        text-align: center !important;
+        overflow-wrap: anywhere;
+        word-break: normal;
+    }
+
+    .snu-about-section .row.g-3 > [class*="col-"],
+    .snu-feature-section .row > [class*="col-"],
+    .snu-team-section .row > [class*="col-"] {
+        width: 100%;
+        max-width: 360px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+
+    .snu-about-section .d-flex.align-items-center.mt-5 {
+        justify-content: center !important;
+    }
+
+    .snu-team-section .snu-team-card,
+    .snu-team-section .snu-img-wrap,
+    .snu-team-section .snu-info {
+        width: 100%;
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .snu-team-section .snu-img-wrap {
+        height: 280px;
+    }
+}
+
+/* L'équipe respecte aussi le thème sombre de la page d'accueil. */
+body.dark-mode .snu-team-section,
+body.dark-mode .snu-team-section .snu-team-card,
+body.dark-mode .snu-team-section .snu-info {
+    background: #000000 !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode .snu-team-section .snu-name,
+body.dark-mode .snu-team-section h1,
+body.dark-mode .snu-team-section p {
+    color: #ffffff !important;
+}
+
+/* Navigation responsive : marque à gauche, hamburger à droite, menu centré. */
+.snu-navbar .navbar {
+    min-height: 68px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.snu-navbar .navbar-brand {
+    min-width: 0;
+    flex: 1 1 auto;
+    margin-right: 8px;
+    overflow: hidden;
+}
+
+.snu-navbar .navbar-brand img {
+    flex: 0 0 auto;
+}
+
+.snu-navbar .navbar-brand > div {
+    min-width: 0;
+    overflow: hidden;
+}
+
+.snu-navbar .navbar-title,
+.snu-navbar .navbar-brand .text-white-50 {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.snu-navbar .navbar-toggler {
+    flex: 0 0 44px;
+    width: 44px;
+    height: 44px;
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, .5) !important;
+    border-radius: 8px;
+}
+
+@media (max-width: 991.98px) {
+    .snu-navbar .navbar-collapse {
+        flex-basis: 100%;
+        width: 100%;
+        margin-top: 10px !important;
+        padding: 10px !important;
+    }
+
+    .snu-navbar .navbar-nav {
+        width: 100%;
+        margin-left: 0 !important;
+        align-items: stretch !important;
+    }
+
+    .snu-navbar .navbar-nav .nav-link,
+    .snu-navbar .navbar-nav .theme-toggle-btn {
+        width: 100%;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        margin-left: 0 !important;
+    }
+}
+
+@media (max-width: 420px) {
+    .snu-navbar .container-fluid {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+
+    .snu-navbar .navbar-brand img {
+        width: 42px !important;
+        height: 42px !important;
+        margin-right: 8px !important;
+    }
+
+    .snu-navbar .navbar-title {
+        font-size: 1rem !important;
+        letter-spacing: 0 !important;
+    }
+
+    .snu-navbar .navbar-brand .text-white-50 {
+        font-size: .58rem !important;
+        letter-spacing: .5px !important;
+    }
+
+    .snu-navbar .navbar-toggler {
+        flex-basis: 42px;
+        width: 42px;
+        height: 42px;
+    }
+}
+
+@media (max-width: 340px) {
+    .snu-navbar .navbar-brand .text-white-50 {
+        display: none;
+    }
+
+    .snu-navbar .navbar-title {
+        font-size: .94rem !important;
+    }
+}
+
+/* Évite les débordements horizontaux dans les sections et les formulaires. */
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+img,
+svg,
+video,
+iframe {
+    max-width: 100%;
+}
+
+/* Demande SNU : navbar noire en mode sombre, sans rouge dans la barre. */
+html[data-theme="dark"] .sticky-top,
+html[data-theme="dark"] .container-fluid.sticky-top,
+body.dark-mode .sticky-top,
+body.dark-mode .container-fluid.sticky-top,
+body.dark-mode .snu-navbar,
+body.dark-mode .sticky-top .navbar-collapse {
+    background: #000000 !important;
+    background-image: none !important;
+    border-bottom-color: rgba(255, 255, 255, .3) !important;
+}
+
+body.dark-mode .sticky-top .navbar-collapse {
+    border-color: rgba(255, 255, 255, .22) !important;
+}
+
+body.dark-mode .sticky-top .navbar .navbar-nav .nav-link:hover,
+body.dark-mode .sticky-top .navbar .navbar-nav .nav-link.active,
+body.dark-mode .sticky-top .theme-toggle-btn:hover,
+body.dark-mode .sticky-top .theme-toggle-btn:focus-visible {
+    background: rgba(255, 255, 255, .12) !important;
+    color: #ffffff !important;
+    border-bottom-color: #ffffff !important;
+}
+
+/* Le fond conserve son image et son cadrage sur mobile sans débordement. */
+@media (max-width: 767.98px) {
+    html,
+    body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    body.tech-bg {
+        background-attachment: scroll !important;
+        background-position: center top !important;
+        background-size: cover !important;
+        background-repeat: no-repeat !important;
+    }
+}
+
+body.dark-mode .navbar .navbar-nav .nav-link {
+    color: #D1D5DB !important;
+}
+
+body.dark-mode .navbar .navbar-nav .nav-link:hover,
+body.dark-mode .navbar .navbar-nav .nav-link.active {
+    color: #FFFFFF !important;
+    border-bottom-color: var(--blaze-red-light) !important;
+}
+
+/* ─── 3. CARTES, PANNEAUX, SERVICES, ÉQUIPE EN NOIR PROFOND ─── */
+body.dark-mode .service-card,
+body.dark-mode .snu-team-card,
+body.dark-mode .testimonial-item,
+body.dark-mode .contact-link-card,
+body.dark-mode .hero-feat-card,
+body.dark-mode .tech-zone-card,
+body.dark-mode .card,
+body.dark-mode .modal-content,
+body.dark-mode .form-panel {
+    background-color: var(--black-card) !important;
+    border: 1px solid var(--black-border) !important;
+    color: #EDEDED !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.85) !important;
+}
+
+body.dark-mode .service-card:hover,
+body.dark-mode .contact-link-card:hover,
+body.dark-mode .tech-zone-card:hover {
+    background-color: var(--black-card-hover) !important;
+    border-color: var(--blaze-red) !important;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.95), 0 0 15px var(--blaze-glow) !important;
+}
+
+/* ─── 4. TYPOGRAPHIE & COULEURS DU ROUGE BRAISE ─── */
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6 {
+    color: #FFFFFF !important;
+}
+
+body.dark-mode p,
+body.dark-mode span:not(.badge):not(.btn *):not(.text-primary):not(.text-danger) {
+    color: #CCCCCC;
+}
+
+body.dark-mode .text-muted,
+body.dark-mode .text-dark {
+    color: #999999 !important;
+}
+
+/* Remplacement du rouge vif par le rouge braise sur les textes */
+body.dark-mode .text-danger,
+body.dark-mode .text-primary,
+body.dark-mode .navbar-brand span {
+    color: #FF3B3B !important;
+    text-shadow: 0 0 10px rgba(255, 59, 59, 0.25);
+}
+
+/* ─── 5. BOUTONS EN ROUGE BRAISE (BLAZE RED) ─── */
+body.dark-mode .btn-primary,
+body.dark-mode .btn-danger,
+body.dark-mode .btn-inscrire,
+body.dark-mode .btn-save-master {
+    background: linear-gradient(135deg, var(--blaze-red-light) 0%, var(--blaze-red-dark) 100%) !important;
+    border: 1px solid var(--blaze-red-light) !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 4px 18px var(--blaze-glow) !important;
+    font-weight: 700;
+}
+
+body.dark-mode .btn-primary:hover,
+body.dark-mode .btn-danger:hover,
+body.dark-mode .btn-inscrire:hover,
+body.dark-mode .btn-save-master:hover {
+    background: linear-gradient(135deg, #D42626 0%, var(--blaze-red) 100%) !important;
+    border-color: #FF4D4D !important;
+    box-shadow: 0 6px 24px rgba(212, 38, 38, 0.6) !important;
+    transform: translateY(-2px);
+}
+
+body.dark-mode .btn-outline-primary,
+body.dark-mode .btn-outline-danger {
+    border-color: var(--blaze-red) !important;
+    color: #FF4D4D !important;
+    background: transparent !important;
+}
+
+body.dark-mode .btn-outline-primary:hover,
+body.dark-mode .btn-outline-danger:hover {
+    background: var(--blaze-red) !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 4px 15px var(--blaze-glow) !important;
+}
+
+/* ─── 6. FORMULAIRES & INPUTS EN NOIR ABSOLU ─── */
+body.dark-mode .form-control,
+body.dark-mode .form-select,
+body.dark-mode .input-group-text {
+    background-color: var(--black-input) !important;
+    border: 1px solid var(--black-border) !important;
+    color: #FFFFFF !important;
+}
+
+body.dark-mode .form-control:focus,
+body.dark-mode .form-select:focus {
+    background-color: #000000 !important;
+    border-color: var(--blaze-red) !important;
+    box-shadow: 0 0 0 0.25rem rgba(155, 17, 30, 0.35) !important;
+    color: #FFFFFF !important;
+}
+
+body.dark-mode .form-control::placeholder {
+    color: #555555 !important;
+}
+
+/* ─── 7. FOOTER EN VRAI NOIR AVEC ACCENTS BRAISE ─── */
+body.dark-mode .footer,
+body.dark-mode .bg-dark,
+body.dark-mode footer {
+    background-color: #030303 !important;
+    border-top: 2px solid var(--blaze-red) !important;
+}
+
+body.dark-mode .footer .btn-square {
+    background: #111111 !important;
+    border: 1px solid var(--black-border) !important;
+    color: #EDEDED !important;
+}
+
+body.dark-mode .footer .btn-square:hover {
+    background: var(--blaze-red) !important;
+    border-color: var(--blaze-red) !important;
+    color: #FFFFFF !important;
+}
+
+/* ─── 8. ESPACE ADMINISTRATION EN VRAI NOIR & ROUGE BRAISE ─── */
+body.admin-body.dark-mode {
+    background: #000000 !important;
+    color: #EDEDED !important;
+}
+
+body.admin-body.dark-mode .admin-header-bar {
+    background: #080808 !important;
+    border-bottom: 2px solid var(--blaze-red) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.9), 0 1px 12px var(--blaze-glow) !important;
+}
+
+body.admin-body.dark-mode .admin-sidebar {
+    background: var(--black-surface) !important;
+    border-right: 1px solid var(--black-border) !important;
+}
+
+body.admin-body.dark-mode .sidebar-section-title {
+    color: #FF4D4D !important;
+}
+
+body.admin-body.dark-mode .sidebar-section-title::after {
+    background: rgba(255, 77, 77, 0.25) !important;
+}
+
+body.admin-body.dark-mode .nav-snu-link {
+    color: #B0B0B0 !important;
+}
+
+body.admin-body.dark-mode .nav-snu-link:hover,
+body.admin-body.dark-mode .nav-snu-link.active {
+    background: linear-gradient(90deg, rgba(155, 17, 30, 0.35) 0%, rgba(155, 17, 30, 0.05) 100%) !important;
+    color: #FFFFFF !important;
+    border-left: 3px solid var(--blaze-red) !important;
+}
+
+body.admin-body.dark-mode .nav-snu-link i {
+    color: #FF4D4D !important;
+}
+
+body.admin-body.dark-mode .admin-content-area {
+    background: #000000 !important;
+}
+
+body.admin-body.dark-mode .admin-card {
+    background: var(--black-card) !important;
+    border: 1px solid var(--black-border) !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.9) !important;
+}
+
+body.admin-body.dark-mode .admin-card-header {
+    border-bottom: 1px solid var(--black-border) !important;
+    background: #0A0A0A !important;
+}
+
+body.admin-body.dark-mode .admin-card-title {
+    color: #FFFFFF !important;
+}
+
+body.admin-body.dark-mode .snu-login-card {
+    background: var(--black-card) !important;
+    border: 1px solid var(--black-border) !important;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 25px var(--blaze-glow) !important;
+}
+
+body.admin-body.dark-mode .snu-login-card::before {
+    background: linear-gradient(90deg, var(--blaze-red-light), var(--blaze-red)) !important;
+}
+
+body.admin-body.dark-mode #loginOverlay::before {
+    background: rgba(0, 0, 0, 0.94) !important;
+}
+
+body.admin-body.dark-mode .list-group-item {
+    background-color: var(--black-card) !important;
+    border-color: var(--black-border) !important;
+    color: #EDEDED !important;
+}
+
+body.admin-body.dark-mode .table {
+    color: #EDEDED !important;
+    border-color: var(--black-border) !important;
+}
+
+body.admin-body.dark-mode .table td,
+body.admin-body.dark-mode .table th {
+    background-color: transparent !important;
+    border-color: var(--black-border) !important;
+    color: #EDEDED !important;
+}
+
+/* ─── 9. BOUTON TOGGLE THÈME HAUTE DÉFINITION ─── */
+.theme-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 1.5px solid rgba(255, 255, 255, 0.75);
+    border-radius: 24px;
+    padding: 7px 16px;
+    background: rgba(0, 0, 0, 0.35);
+    color: #FFFFFF !important;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    user-select: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.theme-toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: #FFFFFF;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .theme-toggle-btn {
+    border-color: var(--blaze-red);
+    background: #111111;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6), 0 0 10px var(--blaze-glow);
+}
+
+body.dark-mode .theme-toggle-btn:hover {
+    background: #1A1A1A;
+    border-color: var(--blaze-red-light);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SNU — Ajustement final du thème sombre du site public
+   Palette sobre : texte blanc, surfaces anthracite et rouge bordeaux.
+   Ces règles passent volontairement après Bootstrap et les styles inline
+   afin que toutes les pages publiques restent cohérentes.
+   ══════════════════════════════════════════════════════════════ */
+:root {
+    --snu-dark-bg: #111315;
+    --snu-dark-surface: #191c20;
+    --snu-dark-surface-alt: #20242a;
+    --snu-dark-border: #343941;
+    --snu-dark-text: #ffffff;
+    --snu-dark-muted: #ffffff;
+    --snu-soft-red: #b84d58;
+    --snu-soft-red-dark: #8f3741;
+    --snu-soft-red-wash: rgba(184, 77, 88, .16);
+}
+
+body.dark-mode,
+body.dark-mode main {
+    background-color: var(--snu-dark-bg) !important;
+    color: var(--snu-dark-text) !important;
+}
+
+body.dark-mode::before,
+body.dark-mode.tech-bg::before,
+body.dark-mode .tech-bg::before {
+    background: rgba(17, 19, 21, .94) !important;
+}
+
+/* Lisibilité : le contenu textuel reste blanc dans tout le site. */
+body.dark-mode,
+body.dark-mode p,
+body.dark-mode li,
+body.dark-mode label,
+body.dark-mode small,
+body.dark-mode strong,
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6,
+body.dark-mode .text-muted,
+body.dark-mode .text-secondary,
+body.dark-mode .text-dark,
+body.dark-mode .text-body,
+body.dark-mode .text-white-50,
+body.dark-mode .form-label,
+body.dark-mode .form-floating > label {
+    color: var(--snu-dark-text) !important;
+}
+
+body.dark-mode a:not(.btn),
+body.dark-mode .nav-link,
+body.dark-mode .btn-link {
+    color: var(--snu-dark-text) !important;
+}
+
+/* Surfaces claires forcées par Bootstrap ou par les pages HTML. */
+body.dark-mode .bg-white,
+body.dark-mode .bg-light,
+body.dark-mode .modal-content,
+body.dark-mode .modal-body,
+body.dark-mode .modal-footer,
+body.dark-mode .card,
+body.dark-mode .hero-feat-card,
+body.dark-mode .service-card,
+body.dark-mode .formation-card,
+body.dark-mode .snu-team-card,
+body.dark-mode .testimonial-item,
+body.dark-mode .contact-link-card,
+body.dark-mode #registrationFichePrint,
+body.dark-mode .alert-light {
+    background-color: var(--snu-dark-surface) !important;
+    color: var(--snu-dark-text) !important;
+    border-color: var(--snu-dark-border) !important;
+}
+
+body.dark-mode .container-fluid:not(.sticky-top),
+body.dark-mode .container,
+body.dark-mode .hero-header {
+    background-color: transparent !important;
+}
+
+body.dark-mode .service-card:hover,
+body.dark-mode .formation-card:hover,
+body.dark-mode .hero-feat-card:hover,
+body.dark-mode .snu-team-card:hover,
+body.dark-mode .contact-link-card:hover {
+    background-color: var(--snu-dark-surface-alt) !important;
+    border-color: var(--snu-soft-red) !important;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, .28) !important;
+}
+
+/* Rouge plus doux : il sert d'accent, jamais de grande nappe agressive. */
+body.dark-mode .text-primary,
+body.dark-mode .text-danger,
+body.dark-mode [style*="#d10000"],
+body.dark-mode [style*="#D10000"],
+body.dark-mode [style*="color: red"],
+body.dark-mode [style*="color:red"] {
+    color: var(--snu-soft-red) !important;
+}
+
+body.dark-mode .bg-primary,
+body.dark-mode .bg-danger,
+body.dark-mode .modal-header,
+body.dark-mode .formation-badge {
+    background: var(--snu-soft-red-dark) !important;
+}
+
+body.dark-mode .btn-primary,
+body.dark-mode .btn-danger,
+body.dark-mode .btn-inscrire,
+body.dark-mode .cm-mic-btn {
+    background: var(--snu-soft-red) !important;
+    border-color: var(--snu-soft-red) !important;
+    color: #ffffff !important;
+    box-shadow: 0 3px 12px rgba(184, 77, 88, .22) !important;
+}
+
+body.dark-mode .btn-primary:hover,
+body.dark-mode .btn-danger:hover,
+body.dark-mode .btn-inscrire:hover,
+body.dark-mode .cm-mic-btn:hover {
+    background: #c15b65 !important;
+    border-color: #c15b65 !important;
+    box-shadow: 0 5px 16px rgba(184, 77, 88, .3) !important;
+}
+
+body.dark-mode .btn-outline-primary,
+body.dark-mode .btn-outline-danger {
+    color: #e18a92 !important;
+    border-color: var(--snu-soft-red) !important;
+}
+
+body.dark-mode .btn-outline-primary:hover,
+body.dark-mode .btn-outline-danger:hover {
+    background: var(--snu-soft-red-wash) !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode .form-control,
+body.dark-mode .form-select,
+body.dark-mode textarea,
+body.dark-mode input,
+body.dark-mode select {
+    background-color: #121417 !important;
+    color: #ffffff !important;
+    border-color: var(--snu-dark-border) !important;
+}
+
+body.dark-mode .form-control::placeholder,
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+    color: #d5d8dc !important;
+    opacity: .8;
+}
+
+body.dark-mode .form-control:focus,
+body.dark-mode .form-select:focus,
+body.dark-mode input:focus,
+body.dark-mode textarea:focus {
+    border-color: var(--snu-soft-red) !important;
+    box-shadow: 0 0 0 .2rem rgba(184, 77, 88, .24) !important;
+}
+
+body.dark-mode .footer,
+body.dark-mode footer,
+body.dark-mode .bg-dark {
+    background: #0d0f11 !important;
+    color: #ffffff !important;
+    border-top-color: var(--snu-dark-border) !important;
+}
+
+body.dark-mode .footer p,
+body.dark-mode .footer a,
+body.dark-mode .footer .text-white-50 {
+    color: #ffffff !important;
+}
+
+body.dark-mode .testimonial-item {
+    box-shadow: 0 12px 32px rgba(0, 0, 0, .28) !important;
+}
+
+body.dark-mode .testimonial-text h3,
+body.dark-mode .testimonial-text h5,
+body.dark-mode .testimonial-text p,
+body.dark-mode .testimonial-text span.text-primary {
+    color: #ffffff !important;
+}
+
+body.dark-mode #claudiaSpeakModal,
+body.dark-mode #claudiaSpeakModal .cm-bubble,
+body.dark-mode #claudiaSpeakModal .cm-controls {
+    background: var(--snu-dark-surface) !important;
+    color: #ffffff !important;
+    border-color: var(--snu-dark-border) !important;
+}
+
+body.dark-mode #claudiaSpeakModal .cm-bubble,
+body.dark-mode #claudiaSpeakModal input {
+    color: #ffffff !important;
+}
+
+body.dark-mode #claudiaSpeakModal .cm-hint,
+body.dark-mode #claudiaSpeakModal .cmodal-body p {
+    color: #ffffff !important;
+}
+
+body.dark-mode .border,
+body.dark-mode .border-top,
+body.dark-mode .border-bottom,
+body.dark-mode .border-start,
+body.dark-mode .border-end {
+    border-color: var(--snu-dark-border) !important;
+}
+
+body.dark-mode .spinner-grow,
+body.dark-mode .progress-bar {
+    background-color: var(--snu-soft-red) !important;
+}
+
+/* Page Contact : ses composants ont leurs propres styles inline. */
+body.dark-mode #snu-hero-contact {
+    background: var(--snu-dark-bg) !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode #snu-hero-contact .snu-shape {
+    background: var(--snu-soft-red) !important;
+    opacity: .12 !important;
+}
+
+body.dark-mode #snu-hero-contact .snu-word--big {
+    color: var(--snu-soft-red) !important;
+}
+
+body.dark-mode #snu-hero-contact .snu-word--sub,
+body.dark-mode #snu-hero-contact .snu-row-label,
+body.dark-mode #snu-hero-contact .snu-row-value,
+body.dark-mode #snu-hero-contact .snu-row {
+    color: #ffffff !important;
+}
+
+body.dark-mode #snu-hero-contact .snu-card {
+    background: var(--snu-soft-red-dark) !important;
+    box-shadow: 0 16px 34px rgba(0, 0, 0, .3) !important;
+}
+
+body.dark-mode #snu-hero-contact .snu-separator {
+    background: rgba(255, 255, 255, .24) !important;
+}
+
+body.dark-mode #snu-hero-contact + .container-fluid,
+body.dark-mode #snu-hero-contact ~ .container-fluid {
+    color: #ffffff !important;
+}
+
+/* Le fond technologique reste visible et stable sur petits écrans. */
+@media (max-width: 767.98px) {
+    body.tech-bg {
+        background-attachment: scroll !important;
+        background-position: center top !important;
+        background-size: cover !important;
+    }
+
+    body.dark-mode.tech-bg::before {
+        background: rgba(17, 19, 21, .95) !important;
+    }
+
+    body.dark-mode .navbar-collapse {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    body.dark-mode #snu-hero-contact {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+    }
+
+    body.dark-mode #snu-hero-contact .snu-card,
+    body.dark-mode #snu-hero-contact .snu-row-value {
+        max-width: 100%;
+    }
+}
+
+body.dark-mode #spinner {
+    background: var(--snu-dark-bg) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body.dark-mode *,
+    body.dark-mode *::before,
+    body.dark-mode *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   NAVIGATION UNIFIÉE — une seule teinte de rouge par thème
+   Clair : rouge officiel SNU. Sombre : rouge bordeaux SNU.
+   ══════════════════════════════════════════════════════════════ */
+:root {
+    --snu-light-red: #d10000;
+    --snu-dark-red: #8f3741;
+}
+
+/* Mode clair : la barre et ses contrôles restent entièrement rouges. */
+html[data-theme="light"] .sticky-top,
+html[data-theme="light"] .container-fluid.sticky-top,
+body:not(.dark-mode) .sticky-top,
+body:not(.dark-mode) .container-fluid.sticky-top {
+    background: var(--snu-light-red) !important;
+    border-bottom-color: rgba(255, 255, 255, .35) !important;
+}
+
+html[data-theme="light"] .sticky-top .navbar-collapse,
+body:not(.dark-mode) .sticky-top .navbar-collapse {
+    background: var(--snu-light-red) !important;
+}
+
+/* Mode sombre : même structure, avec une seule teinte bordeaux. */
+html[data-theme="dark"] .sticky-top,
+html[data-theme="dark"] .container-fluid.sticky-top,
+body.dark-mode .sticky-top,
+body.dark-mode .container-fluid.sticky-top,
+body.dark-mode .snu-navbar {
+    background: #000000 !important;
+    background-image: none !important;
+    border-bottom-color: rgba(255, 255, 255, .35) !important;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, .28) !important;
+}
+
+html[data-theme="dark"] .sticky-top .navbar-collapse,
+body.dark-mode .sticky-top .navbar-collapse {
+    background: #000000 !important;
+    border-color: rgba(255, 255, 255, .25) !important;
+}
+
+/* Navigation, marque et bouton de thème : texte blanc sur rouge. */
+html[data-theme="light"] .sticky-top .navbar-brand,
+html[data-theme="light"] .sticky-top .nav-link,
+html[data-theme="light"] .sticky-top .theme-toggle-btn,
+body:not(.dark-mode) .sticky-top .navbar-brand,
+body:not(.dark-mode) .sticky-top .nav-link,
+body:not(.dark-mode) .sticky-top .theme-toggle-btn,
+html[data-theme="dark"] .sticky-top .navbar-brand,
+html[data-theme="dark"] .sticky-top .nav-link,
+html[data-theme="dark"] .sticky-top .theme-toggle-btn,
+body.dark-mode .sticky-top .navbar-brand,
+body.dark-mode .sticky-top .nav-link,
+body.dark-mode .sticky-top .theme-toggle-btn {
+    color: #ffffff !important;
+}
+
+.sticky-top .theme-toggle-btn {
+    background: rgba(255, 255, 255, .12) !important;
+    border-color: rgba(255, 255, 255, .75) !important;
+    box-shadow: none !important;
+}
+
+.sticky-top .theme-toggle-btn:hover,
+.sticky-top .theme-toggle-btn:focus-visible {
+    background: rgba(255, 255, 255, .22) !important;
+    border-color: #ffffff !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode .sticky-top .navbar .navbar-nav .nav-link:hover,
+body.dark-mode .sticky-top .navbar .navbar-nav .nav-link.active,
+body:not(.dark-mode) .sticky-top .navbar .navbar-nav .nav-link:hover,
+body:not(.dark-mode) .sticky-top .navbar .navbar-nav .nav-link.active {
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, .12) !important;
+    border-bottom-color: #ffffff !important;
+}
+
+/* Le contenu des blocs de navigation reste blanc, y compris sur mobile. */
+@media (max-width: 991.98px) {
+    html[data-theme="light"] .sticky-top .navbar-collapse,
+    body:not(.dark-mode) .sticky-top .navbar-collapse,
+    html[data-theme="dark"] .sticky-top .navbar-collapse,
+    body.dark-mode .sticky-top .navbar-collapse {
+        background: var(--snu-light-red) !important;
+    }
+
+    html[data-theme="dark"] .sticky-top .navbar-collapse,
+    body.dark-mode .sticky-top .navbar-collapse {
+        background: #000000 !important;
+    }
+
+    .sticky-top .navbar-nav .nav-link,
+    .sticky-top .navbar-nav .theme-toggle-btn {
+        color: #ffffff !important;
+    }
+}
+
+/* Priorité finale pour le menu mobile et le fond sombre. */
+@media (max-width: 991.98px) {
+    .snu-navbar .navbar-collapse {
+        flex-basis: 100%;
+        width: 100%;
+    }
+
+    .snu-navbar .navbar-nav .nav-link,
+    .snu-navbar .navbar-nav .theme-toggle-btn {
+        width: 100%;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+}
+
+html[data-theme="dark"] .snu-navbar,
+html[data-theme="dark"] .snu-navbar .navbar-collapse,
+body.dark-mode .snu-navbar,
+body.dark-mode .snu-navbar .navbar-collapse {
+    background: #000000 !important;
+    background-image: none !important;
+}

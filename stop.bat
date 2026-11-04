@@ -1,10 +1,7 @@
 @echo off
-REM ════════════════════════════════════════════════════════════
-REM Arret du serveur — Salle du Numerique UNILU
-REM ════════════════════════════════════════════════════════════
-echo Arret du serveur SNU sur le port 8080...
-for /f "tokens=5" %%a in ('netstat -aon ^| findstr :8080') do (
-    taskkill /f /pid %%a 2>nul
-)
-echo Serveur arrete.
-pause
+set PORT=8080
+if not "%1"=="" set PORT=%1
+echo Arret du serveur sur le port %PORT%...
+for /f "tokens=5" %%a in ('netstat -aon ^| findstr ":%PORT%" ^| findstr "LISTENING"') do taskkill /F /PID %%a 2>nul
+echo Termine.
+

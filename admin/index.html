@@ -2,6 +2,7 @@
 <html lang="fr">
 
 <head>
+    <base href="/admin/">
     <meta charset="utf-8">
     <title>Administration — Salle du Numérique UNILU</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -26,6 +27,8 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css?v=1.2" rel="stylesheet">
+    <link href="css/dark-mode.css" rel="stylesheet">
+    <script src="js/theme-toggle.js"></script>
 
     <style>
         :root {
@@ -566,6 +569,11 @@
 
                 <!-- Boutons d'Action Header -->
                 <div class="d-flex align-items-center gap-2">
+                    <!-- Bouton Mode Sombre -->
+                    <button id="adminThemeToggleBtn" class="theme-toggle-btn" title="Basculer Mode Sombre / Mode Clair">
+                        <i class="fa fa-moon me-1 theme-icon"></i> <span class="theme-text d-none d-sm-inline">Mode Sombre</span>
+                    </button>
+
                     <!-- Bouton Voir le Site Public -->
                     <a href="/" target="_blank" class="btn btn-view-site d-flex align-items-center" title="Ouvrir le site utilisateur">
                         <i class="fa fa-external-link-alt me-2"></i> Voir le Site Utilisateur
@@ -1195,78 +1203,29 @@
             'use strict';
 
             var STORAGE_KEY = 'snu_site_content';
-            var PWD_KEY = 'snu_admin_pwd';
-            var AUTH_KEY = 'snu_admin_auth';
-            var TOKEN_KEY = 'snu_admin_token';
-            var DEFAULT_PWD = 'snu@2026!';
             var currentContent = {};
             var backendUrl = window.location.origin;
 
             // ── GESTION DU STOCKAGE DES JETONS (TOKENS) ──
-            function getAdminToken() {
-                return sessionStorage.getItem(TOKEN_KEY) || localStorage.getItem(TOKEN_KEY) || '';
-            }
-
-            function setAdminToken(token) {
-                sessionStorage.setItem(TOKEN_KEY, token);
-                localStorage.setItem(TOKEN_KEY, token);
-            }
-
-            function clearAdminToken() {
-                sessionStorage.removeItem(TOKEN_KEY);
-                localStorage.removeItem(TOKEN_KEY);
-            }
+            function getAdminToken() { return ''; }
 
             // ── 1. GESTION DE L'AUTHENTIFICATION ──
             var loginOverlay = document.getElementById('loginOverlay');
             var loginForm = document.getElementById('loginForm');
             var loginError = document.getElementById('loginError');
-            var adminPassword = document.getElementById('adminPassword');
-            var togglePwdBtn = document.getElementById('togglePwdBtn');
             var btnLogout = document.getElementById('btnLogout');
-
-            function getStoredPassword() {
-                return localStorage.getItem(PWD_KEY) || DEFAULT_PWD;
-            }
-
-            function checkAuth() {
-                if (sessionStorage.getItem(AUTH_KEY) === 'true' && getAdminToken()) {
-                    loginOverlay.classList.add('d-none');
-                } else {
-                    loginOverlay.classList.remove('d-none');
-                }
-            }
 
             loginForm.addEventListener('submit', function(e) {
                 e.preventDefault();
-                var entered = adminPassword.value.trim();
-                if (entered === getStoredPassword()) {
-                    sessionStorage.setItem(AUTH_KEY, 'true');
-                    var token = 'snu_token_' + btoa(Date.now() + '_' + Math.random().toString(36).substring(2, 10));
-                    setAdminToken(token);
-                    loginOverlay.classList.add('d-none');
-                    loginError.classList.add('d-none');
-                    showToast('Bienvenue dans votre espace d\'administration ! (Jeton session activé)', 'success');
-                } else {
-                    loginError.classList.remove('d-none');
-                }
-            });
-
-            togglePwdBtn.addEventListener('click', function() {
-                var type = adminPassword.getAttribute('type') === 'password' ? 'text' : 'password';
-                adminPassword.setAttribute('type', type);
-                this.innerHTML = type === 'password' ? '<i class="fa fa-eye"></i>' : '<i class="fa fa-eye-slash"></i>';
+                loginError.textContent = 'Authentification serveur requise. Aucun mot de passe n’est vérifié dans le navigateur.';
+                loginError.classList.remove('d-none');
             });
 
             btnLogout.addEventListener('click', function() {
                 if (confirm('Voulez-vous vous déconnecter de l\'administration ?')) {
-                    sessionStorage.removeItem(AUTH_KEY);
-                    clearAdminToken();
                     window.location.reload();
                 }
             });
-
-            checkAuth();
 
             // ── 2. SYSTÈME D'ONGLETS DU DASHBOARD ──
             var navLinks = document.querySelectorAll('.nav-snu-link');
@@ -1998,14 +1957,7 @@
             });
 
             document.getElementById('btnUpdatePassword').addEventListener('click', function() {
-                var newPwd = document.getElementById('newAdminPassword').value.trim();
-                if (newPwd.length < 4) {
-                    alert('Le mot de passe doit comporter au moins 4 caractères.');
-                    return;
-                }
-                localStorage.setItem(PWD_KEY, newPwd);
-                document.getElementById('newAdminPassword').value = '';
-                showToast('Mot de passe administrateur modifié avec succès !', 'success');
+                showToast('La gestion du mot de passe est réservée au backend.', 'info');
             });
 
             // ── 9. TOAST NOTIFICATIONS ──

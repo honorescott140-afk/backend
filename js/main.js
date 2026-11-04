@@ -71,27 +71,27 @@
         var reply = "";
 
         if (q.includes("formation") || q.includes("cours") || q.includes("module") || q.includes("apprendre") || q.includes("bases")) {
-            reply = "📚 **Nos formations principales :**\n" +
+            reply = "<i class='fa fa-graduation-cap text-danger me-2'></i>**Nos formations principales :**\n" +
                 "• **Les Bases de Windows**\n" +
                 "• **Bureautique (Microsoft 365)**\n" +
                 "• **Initiation aux outils d'IA** (ChatGPT, Gemini, etc.)\n" +
                 "• **Les Bases du Design**\n\n" +
                 "Modules spécifiques : *Word, Excel, Access, PowerPoint, Publisher, SharePoint.*\n\n" +
-                "👉 Pour réserver votre place, cliquez sur le bouton rouge **'S'inscrire'** sur la page !";
+                "<i class='fa fa-arrow-right text-danger me-1'></i> Pour réserver votre place, cliquez sur le bouton rouge **'S'inscrire'** sur la page !";
         } else if (q.includes("adresse") || q.includes("lieu") || q.includes("ou") || q.includes("trouver") || q.includes("unilu") || q.includes("salle") || q.includes("sociales") || q.includes("wazia") || q.includes("kazadi")) {
-            reply = "📍 **Notre Adresse officielle :**\n" +
+            reply = "<i class='fa fa-map-marker-alt text-danger me-2'></i>**Notre Adresse officielle :**\n" +
                 "Université de Lubumbashi (UNILU), Faculté des Sciences Sociales.\n\n" +
                 "**Réf :** Auditoire WAZIA, juste à côté de la chaire de Sociologie du Prof KAZADI KINDU.\n\n" +
-                "🗺️ **Google Maps :** <a href='https://maps.app.goo.gl/9PGNyMNYEFEz272T8' target='_blank' class='text-danger fw-bold'>Cliquez ici pour l'itinéraire</a>";
+                "<i class='fa fa-map text-primary me-1'></i> **Google Maps :** <a href='https://maps.app.goo.gl/9PGNyMNYEFEz272T8' target='_blank' class='text-danger fw-bold'>Cliquez ici pour l'itinéraire</a>";
         } else if (q.includes("inscrire") || q.includes("inscription") || q.includes("formulaire") || q.includes("fiche") || q.includes("participer")) {
-            reply = "✍️ **Comment s'inscrire :**\n" +
+            reply = "<i class='fa fa-edit text-danger me-2'></i>**Comment s'inscrire :**\n" +
                 "C'est très rapide ! Fermez cette fenêtre de chat et cliquez sur n'importe quel bouton rouge **'S'inscrire'** ou **'S'inscrire maintenant'** sur notre site pour remplir le formulaire officiel.";
         } else {
-            reply = "🤖 Je suis **Claudia**, votre assistante virtuelle.\n\n" +
+            reply = "<i class='fa fa-robot text-danger me-2'></i>Je suis **Claudia**, votre assistante virtuelle.\n\n" +
                 "Pour toute autre question ou pour parler à un conseiller de la Salle du Numérique :\n" +
-                "📞 **WhatsApp :** <a href='https://wa.me/243972147721' target='_blank' class='text-danger fw-bold'>+243 972 147 721</a>\n" +
-                "✉️ **E-mail :** snunilu@unilu.ac.cd\n" +
-                "📍 Ou venez nous voir à la Faculté des Sciences Sociales !";
+                "<i class='fab fa-whatsapp text-success me-1'></i> **WhatsApp :** <a href='https://wa.me/243972147721' target='_blank' class='text-danger fw-bold'>+243 972 147 721</a>\n" +
+                "<i class='fa fa-envelope text-primary me-1'></i> **E-mail :** snunilu@unilu.ac.cd\n" +
+                "<i class='fa fa-map-pin text-danger me-1'></i> Ou venez nous voir à la Faculté des Sciences Sociales !";
         }
 
         // Simuler un léger temps de réponse pour plus de réalisme
@@ -617,7 +617,7 @@
                 const downloadOk = triggerDownload(doc, fileName);
 
                 if (downloadOk) {
-                    setStatus('Téléchargement terminé ✓', 'fa-check-circle', '#22c55e', 70);
+                    setStatus('Téléchargement terminé', 'fa-check-circle', '#22c55e', 70);
                 } else {
                     setStatus('Échec du téléchargement automatique', 'fa-exclamation-triangle', '#ef4444', 70);
                 }
@@ -663,7 +663,7 @@
                     console.warn("Ouverture automatique bloquée par le navigateur :", e);
                 }
 
-                setStatus('Opération terminée ✓', 'fa-check-circle', '#22c55e', 100);
+                setStatus('Opération terminée', 'fa-check-circle', '#22c55e', 100);
                 await sleep(500);
 
                 $('#waStatusBox').addClass('d-none');
@@ -1097,7 +1097,7 @@
         claudiaLoopActive = false;
         setClaudiaState('idle');
         var textEl = document.getElementById('claudiaSpeakText');
-        if (textEl) textEl.innerHTML = 'Conversation terminée. Cliquez sur 🎤 pour recommencer.';
+        if (textEl) textEl.innerHTML = 'Conversation terminée. Cliquez sur <i class="fa fa-microphone"></i> pour recommencer.';
     }
 
     // ─── Vérification backend ───────────────────────────────
@@ -1216,6 +1216,37 @@
             }
         }
     });
+
+    // ─── Raccourci direct vers l'espace Administration (/admin ou /admi) ───
+    (function initAdminShortcuts() {
+        // Redirection si l'URL porte #admin, #admi, ?admin ou ?admi
+        var hash = (window.location.hash || '').toLowerCase();
+        var search = (window.location.search || '').toLowerCase();
+        if (hash === '#admin' || hash === '#admi' || search.indexOf('admin') !== -1 || search.indexOf('admi') !== -1) {
+            window.location.href = '/admin/';
+            return;
+        }
+
+        // Frappe clavier rapide : si l'utilisateur tape "/admin" ou "/admi" sur la page
+        var typedBuffer = '';
+        var resetTimer = null;
+        document.addEventListener('keydown', function (e) {
+            var tag = document.activeElement ? document.activeElement.tagName : '';
+            if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+
+            clearTimeout(resetTimer);
+            typedBuffer += e.key.toLowerCase();
+            if (typedBuffer.length > 10) typedBuffer = typedBuffer.slice(-10);
+
+            if (typedBuffer.endsWith('/admin') || typedBuffer.endsWith('/admi')) {
+                window.location.href = '/admin/';
+            }
+
+            resetTimer = setTimeout(function () {
+                typedBuffer = '';
+            }, 2000);
+        });
+    })();
 
     // ─── Vérification initiale (silencieuse) ───────────────
     setTimeout(function () { checkClaudiaBackend(false); }, 1500);
