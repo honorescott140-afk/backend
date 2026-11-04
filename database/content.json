@@ -16,6 +16,9 @@
   "hero": {
     "main_title": "INNOVER AUJOURD'HUI",
     "subtitle_accent": "INSPIRER DEMAIN",
+    "description": "Un espace universitaire dédié à la formation, à la recherche et à l'innovation numérique.",
+    "btn_text": "En savoir plus",
+    "btn_link": "project.html",
     "slides": [
       "img/Salle1.jpg",
       "img/Salle2.jpg",
@@ -238,7 +241,10 @@
       "img/project-3.jpg",
       "img/project-2.jpg",
       "img/Salle2.jpg"
-    ]
+    ],
+    "reservation_title": "Réservation & Utilisation de la Salle",
+    "reservation_desc": "Vous organisez une conférence, une soutenance, un séminaire académique, un atelier de formation ou un hackathon ? La Salle du Numérique est mise à votre disposition selon un cadre contractuel clair et transparent garantissant des équipements professionnels et un accompagnement dédié.",
+    "reservation_capacity": "Jusqu'à 90 participants"
   },
   "contact_page": {
     "title": "Nous sommes à votre écoute",

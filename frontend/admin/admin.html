@@ -607,28 +607,30 @@
 
         <!-- Sidebar Blanche & Rouge -->
         <aside class="admin-sidebar">
-            <div class="sidebar-section-title">Sections du Site</div>
+            <div class="sidebar-section-title">Pages du Site</div>
             <nav class="nav flex-column" id="adminNav">
-                <a class="nav-snu-link active" href="#tab-hero" data-tab="tab-hero">
-                    <i class="fa fa-home"></i> Contenu Accueil
+                <a class="nav-snu-link active" href="#tab-accueil" data-tab="tab-accueil">
+                    <i class="fa fa-home"></i> Accueil
                 </a>
-                <a class="nav-snu-link" href="#tab-about" data-tab="tab-about">
-                    <i class="fa fa-info-circle"></i> À Propos &amp; Atouts
+                <a class="nav-snu-link" href="#tab-news" data-tab="tab-news">
+                    <i class="fa fa-newspaper"></i> Actualités
                 </a>
-                <a class="nav-snu-link" href="#tab-directeur" data-tab="tab-directeur">
-                    <i class="fa fa-user-tie"></i> Mot du Directeur
-                </a>
-                <a class="nav-snu-link" href="#tab-team" data-tab="tab-team">
-                    <i class="fa fa-users"></i> Équipe de Gestion
+                <a class="nav-snu-link" href="#tab-ensavoirplus" data-tab="tab-ensavoirplus">
+                    <i class="fa fa-info-circle"></i> En savoir plus
                 </a>
                 <a class="nav-snu-link" href="#tab-services" data-tab="tab-services">
-                    <i class="fa fa-desktop"></i> Nos Services
+                    <i class="fa fa-desktop"></i> Services
                 </a>
                 <a class="nav-snu-link" href="#tab-formations" data-tab="tab-formations">
                     <i class="fa fa-graduation-cap"></i> Formations
                 </a>
-                <a class="nav-snu-link" href="#tab-salle" data-tab="tab-salle">
-                    <i class="fa fa-building"></i> Page "La Salle"
+                <a class="nav-snu-link" href="#tab-contact" data-tab="tab-contact">
+                    <i class="fa fa-envelope-open-text"></i> Contact
+                </a>
+
+                <div class="sidebar-section-title mt-2">Équipe &amp; Avis</div>
+                <a class="nav-snu-link" href="#tab-team" data-tab="tab-team">
+                    <i class="fa fa-users"></i> Équipe de Gestion
                 </a>
                 <a class="nav-snu-link" href="#tab-testimonials" data-tab="tab-testimonials">
                     <i class="fa fa-comments"></i> Témoignages
@@ -636,9 +638,10 @@
                 <a class="nav-snu-link" href="#tab-media" data-tab="tab-media">
                     <i class="fa fa-photo-video"></i> Médiathèque Photos
                 </a>
-                <div class="sidebar-section-title mt-2">Communication</div>
+
+                <div class="sidebar-section-title mt-2">Administration</div>
                 <a class="nav-snu-link d-flex align-items-center justify-content-between" href="#tab-messages" data-tab="tab-messages" id="navLinkMessages">
-                    <span><i class="fa fa-envelope me-2"></i> Messagerie</span>
+                    <span><i class="fa fa-inbox me-2"></i> Messagerie</span>
                     <span id="badgeUnreadMessages" class="badge rounded-pill bg-danger d-none">0</span>
                 </a>
                 <a class="nav-snu-link" href="#tab-settings" data-tab="tab-settings">
@@ -650,22 +653,34 @@
         <!-- Zone de Contenu -->
         <main class="admin-content-pane">
 
-            <!-- ── TAB 1 : CONTENU ACCUEIL (HERO & SLOGANS) ── -->
-            <div class="tab-pane-admin" id="tab-hero">
-                <div class="admin-card">
-                    <div class="admin-card-header">
-                        <h4 class="admin-card-title"><i class="fa fa-home"></i> Contenu Accueil</h4>
+            <!-- ── TAB 1 : ACCUEIL (HERO, CAROUSEL, À PROPOS & STATS) ── -->
+            <div class="tab-pane-admin" id="tab-accueil">
+                <div class="admin-card mb-4">
+                    <div class="admin-card-header d-flex align-items-center justify-content-between">
+                        <h4 class="admin-card-title mb-0"><i class="fa fa-home"></i> Page d'Accueil — Bannière Principale &amp; Carrousel</h4>
                         <button class="btn btn-sm btn-snu-red btn-save-section"><i class="fa fa-save me-1"></i> Sauvegarder</button>
                     </div>
 
                     <div class="row g-4 mb-4">
                         <div class="col-md-6">
-                            <label class="form-label">Titre Principal (Ligne 1 - Blanc)</label>
-                            <input type="text" class="form-control" data-bind="hero.main_title">
+                            <label class="form-label fw-bold">Titre Principal (Ligne 1 - Blanc)</label>
+                            <input type="text" class="form-control" data-bind="hero.main_title" placeholder="Ex: INNOVER AUJOURD'HUI">
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label">Sous-titre Accent (Ligne 2 - Rouge)</label>
-                            <input type="text" class="form-control" data-bind="hero.subtitle_accent">
+                            <label class="form-label fw-bold">Sous-titre Accent (Ligne 2 - Rouge)</label>
+                            <input type="text" class="form-control" data-bind="hero.subtitle_accent" placeholder="Ex: INSPIRER DEMAIN">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label fw-bold">Description de bienvenue de l'Accueil</label>
+                            <textarea class="form-control" rows="2" data-bind="hero.description" placeholder="Un espace universitaire dédié à la formation, à la recherche et à l’innovation numérique."></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Texte du bouton d'action</label>
+                            <input type="text" class="form-control" data-bind="hero.btn_text" placeholder="Ex: En savoir plus">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Lien du bouton d'action</label>
+                            <input type="text" class="form-control" data-bind="hero.btn_link" placeholder="Ex: project.html">
                         </div>
                     </div>
 
@@ -674,7 +689,7 @@
                         <!-- Slide 1 -->
                         <div class="col-md-4">
                             <div class="p-3 border rounded-3 bg-light">
-                                <label class="form-label d-block">Photo Slide 1</label>
+                                <label class="form-label d-block fw-bold small">Photo Slide 1</label>
                                 <div class="img-preview-box">
                                     <img id="preview_hero_slide_0" src="img/Salle1.jpg" alt="Slide 1">
                                 </div>
@@ -689,7 +704,7 @@
                         <!-- Slide 2 -->
                         <div class="col-md-4">
                             <div class="p-3 border rounded-3 bg-light">
-                                <label class="form-label d-block">Photo Slide 2</label>
+                                <label class="form-label d-block fw-bold small">Photo Slide 2</label>
                                 <div class="img-preview-box">
                                     <img id="preview_hero_slide_1" src="img/Salle2.jpg" alt="Slide 2">
                                 </div>
@@ -704,7 +719,7 @@
                         <!-- Slide 3 -->
                         <div class="col-md-4">
                             <div class="p-3 border rounded-3 bg-light">
-                                <label class="form-label d-block">Photo Slide 3</label>
+                                <label class="form-label d-block fw-bold small">Photo Slide 3</label>
                                 <div class="img-preview-box">
                                     <img id="preview_hero_slide_2" src="img/Salle3.jpg" alt="Slide 3">
                                 </div>
@@ -718,149 +733,312 @@
                     </div>
 
                     <h5 class="fw-bold mb-3 border-bottom pb-2" style="color: var(--snu-blue);">Les 3 Atouts Rapides (Sous la bannière)</h5>
-                    <div class="row g-3">
+                    <div class="row g-3 mb-4">
                         <div class="col-md-4">
-                            <label class="form-label">Atout 1</label>
+                            <label class="form-label small fw-bold">Atout 1</label>
                             <input type="text" class="form-control" data-bind="hero.feat_1_title">
                         </div>
                         <div class="col-md-4">
-                            <label class="form-label">Atout 2</label>
+                            <label class="form-label small fw-bold">Atout 2</label>
                             <input type="text" class="form-control" data-bind="hero.feat_2_title">
                         </div>
                         <div class="col-md-4">
-                            <label class="form-label">Atout 3</label>
+                            <label class="form-label small fw-bold">Atout 3</label>
                             <input type="text" class="form-control" data-bind="hero.feat_3_title">
                         </div>
                     </div>
-                </div>
-            </div>
 
-
-            <!-- ── TAB 4 : À PROPOS & ATOUTS ── -->
-            <div class="tab-pane-admin d-none" id="tab-about">
-                <div class="admin-card">
-                    <div class="admin-card-header">
-                        <h4 class="admin-card-title"><i class="fa fa-info-circle"></i> Section À Propos &amp; Pourquoi Nous Choisir</h4>
-                        <button class="btn btn-sm btn-snu-red btn-save-section"><i class="fa fa-save me-1"></i> Sauvegarder</button>
-                    </div>
-
+                    <h5 class="fw-bold mb-3 border-bottom pb-2" style="color: var(--snu-blue);">Section Présentation &amp; Découverte de l'Accueil</h5>
                     <div class="row g-3 mb-4">
                         <div class="col-md-6">
-                            <label class="form-label">Titre (Préfixe)</label>
+                            <label class="form-label small fw-bold">Titre (Préfixe)</label>
                             <input type="text" class="form-control" data-bind="about.title_prefix">
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label">Titre (Accentué en rouge)</label>
+                            <label class="form-label small fw-bold">Titre (Surbrillance Rouge)</label>
                             <input type="text" class="form-control" data-bind="about.title_highlight">
                         </div>
                         <div class="col-12">
-                            <label class="form-label">Paragraphe 1</label>
+                            <label class="form-label small fw-bold">Paragraphe de présentation 1</label>
                             <textarea class="form-control" rows="3" data-bind="about.p1"></textarea>
                         </div>
                         <div class="col-12">
-                            <label class="form-label">Paragraphe 2</label>
+                            <label class="form-label small fw-bold">Paragraphe de présentation 2</label>
                             <textarea class="form-control" rows="3" data-bind="about.p2"></textarea>
                         </div>
                     </div>
 
-                    <h5 class="fw-bold mb-3 border-bottom pb-2" style="color: var(--snu-blue);">Photos de la Section À Propos</h5>
                     <div class="row g-4 mb-4">
                         <div class="col-md-6">
                             <div class="p-3 border rounded-3 bg-light">
-                                <label class="form-label d-block">Photo 1 (Salle du Numérique)</label>
+                                <label class="form-label d-block fw-bold small">Photo Illustrative 1</label>
                                 <div class="img-preview-box">
                                     <img id="preview_about_img1" src="img/about-1.jpg" alt="About 1">
                                 </div>
-                                <input type="text" class="form-control form-control-sm mb-2" data-bind="about.img1">
+                                <input type="text" class="form-control form-control-sm mb-2" data-bind="about.img1" id="input_about_img1">
                                 <label class="btn btn-sm btn-snu-outline-red w-100">
-                                    <i class="fa fa-upload me-1"></i> Remplacer cette photo
+                                    <i class="fa fa-camera me-1"></i> Remplacer la photo 1
                                     <input type="file" class="d-none img-file-input" data-target="about.img1" data-preview="preview_about_img1" accept="image/*">
                                 </label>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="p-3 border rounded-3 bg-light">
-                                <label class="form-label d-block">Photo 2 (Université de Lubumbashi)</label>
+                                <label class="form-label d-block fw-bold small">Photo Illustrative 2</label>
                                 <div class="img-preview-box">
                                     <img id="preview_about_img2" src="img/about-2.jpg" alt="About 2">
                                 </div>
-                                <input type="text" class="form-control form-control-sm mb-2" data-bind="about.img2">
+                                <input type="text" class="form-control form-control-sm mb-2" data-bind="about.img2" id="input_about_img2">
                                 <label class="btn btn-sm btn-snu-outline-red w-100">
-                                    <i class="fa fa-upload me-1"></i> Remplacer cette photo
+                                    <i class="fa fa-camera me-1"></i> Remplacer la photo 2
                                     <input type="file" class="d-none img-file-input" data-target="about.img2" data-preview="preview_about_img2" accept="image/*">
                                 </label>
                             </div>
                         </div>
                     </div>
 
-                    <h5 class="fw-bold mb-3 border-bottom pb-2" style="color: var(--snu-blue);">Points Clés (Cases à cocher)</h5>
+                    <h5 class="fw-bold mb-3 border-bottom pb-2" style="color: var(--snu-blue);">Chiffres Clés / Statistiques de l'Accueil</h5>
                     <div class="row g-3">
-                        <div class="col-md-4">
-                            <input type="text" class="form-control" data-bind="about.points.0" placeholder="Point 1">
+                        <div class="col-md-3">
+                            <label class="form-label small fw-bold">Statistique Postes PC</label>
+                            <input type="text" class="form-control" data-bind="salle_page.stat_pc" placeholder="100+">
                         </div>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control" data-bind="about.points.1" placeholder="Point 2">
+                        <div class="col-md-3">
+                            <label class="form-label small fw-bold">Libellé Postes PC</label>
+                            <input type="text" class="form-control" data-bind="salle_page.stat_pc_label" placeholder="Postes PC Disponibles">
                         </div>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control" data-bind="about.points.2" placeholder="Point 3">
+                        <div class="col-md-3">
+                            <label class="form-label small fw-bold">Statistique Zones</label>
+                            <input type="text" class="form-control" data-bind="salle_page.stat_zones" placeholder="2">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label small fw-bold">Libellé Zones</label>
+                            <input type="text" class="form-control" data-bind="salle_page.stat_zones_label" placeholder="Zones Spécialisées">
                         </div>
                     </div>
                 </div>
             </div>
 
 
-            <!-- ── TAB 5 : MOT DU DIRECTEUR ── -->
-            <div class="tab-pane-admin d-none" id="tab-directeur">
-                <div class="admin-card">
-                    <div class="admin-card-header">
-                        <h4 class="admin-card-title"><i class="fa fa-user-tie"></i> Mot de Bienvenue du Directeur</h4>
+            <!-- ── TAB 2 : ACTUALITÉS (AJOUT, MODIFICATION & SUPPRESSION) ── -->
+            <div class="tab-pane-admin d-none" id="tab-news">
+                <div class="admin-card mb-4">
+                    <div class="admin-card-header d-flex align-items-center justify-content-between">
+                        <h4 class="admin-card-title mb-0"><i class="fa fa-newspaper"></i> Gestion des Actualités</h4>
                         <button class="btn btn-sm btn-snu-red btn-save-section"><i class="fa fa-save me-1"></i> Sauvegarder</button>
                     </div>
 
-                    <div class="row g-4">
-                        <!-- Photo du directeur -->
+                    <!-- Formulaire d'ajout rapide -->
+                    <div class="p-4 mb-4 border rounded-3 bg-light">
+                        <h5 class="fw-bold mb-3" style="color: var(--snu-red);"><i class="fa fa-plus-circle me-2"></i> Ajouter une nouvelle actualité</h5>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold small">Titre de l'actualité <span class="text-danger">*</span></label>
+                                <input type="text" id="newNewsTitle" class="form-control" placeholder="Ex: Nouveau module de formation disponible">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label fw-bold small">Catégorie</label>
+                                <input type="text" id="newNewsCategory" class="form-control" placeholder="Ex: Ateliers, Formations, Salle du Numérique">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label fw-bold small">Date d'affichage</label>
+                                <input type="text" id="newNewsDate" class="form-control" placeholder="Ex: 05 Nov 2026, À venir">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-bold small">Résumé / Description de l'actualité <span class="text-danger">*</span></label>
+                                <textarea id="newNewsExcerpt" class="form-control" rows="2" placeholder="Décrivez brièvement l'actualité ou l'annonce..."></textarea>
+                            </div>
+                            <div class="col-md-8">
+                                <label class="form-label fw-bold small">Photo de l'actualité</label>
+                                <div class="input-group">
+                                    <input type="text" id="newNewsImg" class="form-control" placeholder="img/Salle1.jpg" value="img/Salle1.jpg">
+                                    <label class="btn btn-outline-secondary">
+                                        <i class="fa fa-upload me-1"></i> Choisir une photo
+                                        <input type="file" id="newNewsFile" class="d-none" accept="image/*">
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 d-flex align-items-center">
+                                <div class="img-preview-box me-3" style="width: 80px; height: 50px; overflow: hidden; border-radius: 6px; border: 1px solid #ccc; flex-shrink: 0;">
+                                    <img id="newNewsPreview" src="img/Salle1.jpg" alt="Aperçu" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <button type="button" id="btnAddNews" class="btn btn-snu-red w-100 py-2 fw-bold">
+                                    <i class="fa fa-plus me-1"></i> Publier l'actualité
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Liste des actualités existantes -->
+                    <h5 class="fw-bold mb-3 border-bottom pb-2" style="color: var(--snu-blue);">Actualités Publiées (<span id="newsCountBadge">0</span>)</h5>
+                    <div id="newsListContainer" class="row g-4">
+                        <!-- Rempli dynamiquement en JS -->
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ── TAB 3 : EN SAVOIR PLUS (PAGE LA SALLE & DIRECTION) ── -->
+            <div class="tab-pane-admin d-none" id="tab-ensavoirplus">
+                <div class="admin-card mb-4">
+                    <div class="admin-card-header d-flex align-items-center justify-content-between">
+                        <h4 class="admin-card-title mb-0"><i class="fa fa-info-circle"></i> Page "En savoir plus" (La Salle &amp; Direction)</h4>
+                        <button class="btn btn-sm btn-snu-red btn-save-section"><i class="fa fa-save me-1"></i> Sauvegarder</button>
+                    </div>
+
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-12">
+                            <label class="form-label fw-bold">Titre de la Bannière "En savoir plus"</label>
+                            <input type="text" class="form-control" data-bind="salle_page.hero_title" placeholder="En savoir plus">
+                        </div>
+                    </div>
+
+                    <h5 class="fw-bold mb-3 border-bottom pb-2" style="color: var(--snu-blue);"><i class="fa fa-user-tie me-2"></i> Mot de Bienvenue du Directeur (Direction SNU)</h5>
+                    <div class="row g-4 mb-4">
                         <div class="col-md-4">
                             <div class="p-3 border rounded-3 bg-light text-center">
-                                <label class="form-label d-block">Photo Officielle du Directeur</label>
+                                <label class="form-label d-block fw-bold small">Photo Officielle du Directeur</label>
                                 <div class="img-preview-box" style="height: 250px;">
                                     <img id="preview_dir_photo" src="img/Dr roger .jpeg" alt="Directeur">
                                 </div>
-                                <input type="text" class="form-control form-control-sm mb-2 text-center" data-bind="directeur.photo">
+                                <input type="text" class="form-control form-control-sm mb-2 text-center" data-bind="directeur.photo" id="input_dir_photo">
                                 <label class="btn btn-sm btn-snu-red w-100">
                                     <i class="fa fa-camera me-1"></i> Charger une nouvelle photo
                                     <input type="file" class="d-none img-file-input" data-target="directeur.photo" data-preview="preview_dir_photo" accept="image/*">
                                 </label>
                             </div>
                         </div>
-
-                        <!-- Textes du message -->
                         <div class="col-md-8">
                             <div class="row g-3">
                                 <div class="col-md-6">
-                                    <label class="form-label">Nom du Directeur</label>
-                                    <input type="text" class="form-control" data-bind="directeur.name">
+                                    <label class="form-label fw-bold small">Nom complet du Directeur</label>
+                                    <input type="text" class="form-control" data-bind="directeur.name" placeholder="CT ROGER">
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label">Titre / Fonction</label>
-                                    <input type="text" class="form-control" data-bind="directeur.role">
+                                    <label class="form-label fw-bold small">Titre / Fonction</label>
+                                    <input type="text" class="form-control" data-bind="directeur.role" placeholder="Directeur de la Salle du Numérique">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold small">Slogan / Kicker</label>
+                                    <input type="text" class="form-control" data-bind="directeur.subtitle" placeholder="Message du Directeur">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold small">Préfixe Titre</label>
+                                    <input type="text" class="form-control" data-bind="directeur.title_prefix" placeholder="Mot de bienvenue du">
                                 </div>
                                 <div class="col-12">
-                                    <label class="form-label">Phrase d'introduction (Lead)</label>
-                                    <input type="text" class="form-control" data-bind="directeur.lead">
+                                    <label class="form-label fw-bold small">Phrase d'introduction (Lead)</label>
+                                    <input type="text" class="form-control" data-bind="directeur.lead" placeholder="Chers visiteurs, chers apprenants...">
                                 </div>
                                 <div class="col-12">
-                                    <label class="form-label">Paragraphe 1</label>
-                                    <textarea class="form-control" rows="3" data-bind="directeur.p1"></textarea>
+                                    <label class="form-label fw-bold small">Citation Phare en Exergue</label>
+                                    <input type="text" class="form-control" data-bind="directeur.p3" placeholder="Innover aujourd'hui pour inspirer demain.">
                                 </div>
                                 <div class="col-12">
-                                    <label class="form-label">Paragraphe 2</label>
-                                    <textarea class="form-control" rows="3" data-bind="directeur.p2"></textarea>
+                                    <label class="form-label fw-bold small">Paragraphe 1</label>
+                                    <textarea class="form-control" rows="2" data-bind="directeur.p1"></textarea>
                                 </div>
                                 <div class="col-12">
-                                    <label class="form-label">Paragraphe 3 (Vision &amp; Invitation)</label>
-                                    <textarea class="form-control" rows="3" data-bind="directeur.p3"></textarea>
+                                    <label class="form-label fw-bold small">Paragraphe 2</label>
+                                    <textarea class="form-control" rows="2" data-bind="directeur.p2"></textarea>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+
+                    <h5 class="fw-bold mb-3 border-bottom pb-2" style="color: var(--snu-blue);"><i class="fa fa-microchip me-2"></i> Présentation Technologique de la Salle</h5>
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-4">
+                            <label class="form-label small fw-bold">Titre (Préfixe)</label>
+                            <input type="text" class="form-control" data-bind="salle_page.intro_title_prefix" placeholder="Un Espace">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label small fw-bold">Titre (Surbrillance Rouge)</label>
+                            <input type="text" class="form-control" data-bind="salle_page.intro_title_highlight" placeholder="Technologique">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label small fw-bold">Titre (Suffixe)</label>
+                            <input type="text" class="form-control" data-bind="salle_page.intro_title_suffix" placeholder="de Référence">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label small fw-bold">Paragraphe descriptif 1</label>
+                            <textarea class="form-control" rows="2" data-bind="salle_page.intro_p1"></textarea>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label small fw-bold">Paragraphe descriptif 2</label>
+                            <textarea class="form-control" rows="2" data-bind="salle_page.intro_p2"></textarea>
+                        </div>
+                    </div>
+
+                    <h5 class="fw-bold mb-3 border-bottom pb-2" style="color: var(--snu-blue);"><i class="fa fa-images me-2"></i> Galerie Photos "En savoir plus"</h5>
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-3">
+                            <div class="p-2 border rounded-3 bg-light text-center">
+                                <label class="form-label d-block small mb-1 fw-bold">Photo 1</label>
+                                <div class="img-preview-box" style="height: 110px;">
+                                    <img id="preview_salle_0" src="img/Salle1.jpg">
+                                </div>
+                                <input type="text" class="form-control form-control-sm mb-1" data-bind="salle_page.gallery.0">
+                                <label class="btn btn-sm btn-snu-outline-red w-100">
+                                    <i class="fa fa-upload"></i> Changer
+                                    <input type="file" class="d-none img-file-input" data-target="salle_page.gallery.0" data-preview="preview_salle_0" accept="image/*">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="p-2 border rounded-3 bg-light text-center">
+                                <label class="form-label d-block small mb-1 fw-bold">Photo 2</label>
+                                <div class="img-preview-box" style="height: 110px;">
+                                    <img id="preview_salle_1" src="img/project-3.jpg">
+                                </div>
+                                <input type="text" class="form-control form-control-sm mb-1" data-bind="salle_page.gallery.1">
+                                <label class="btn btn-sm btn-snu-outline-red w-100">
+                                    <i class="fa fa-upload"></i> Changer
+                                    <input type="file" class="d-none img-file-input" data-target="salle_page.gallery.1" data-preview="preview_salle_1" accept="image/*">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="p-2 border rounded-3 bg-light text-center">
+                                <label class="form-label d-block small mb-1 fw-bold">Photo 3</label>
+                                <div class="img-preview-box" style="height: 110px;">
+                                    <img id="preview_salle_2" src="img/project-2.jpg">
+                                </div>
+                                <input type="text" class="form-control form-control-sm mb-1" data-bind="salle_page.gallery.2">
+                                <label class="btn btn-sm btn-snu-outline-red w-100">
+                                    <i class="fa fa-upload"></i> Changer
+                                    <input type="file" class="d-none img-file-input" data-target="salle_page.gallery.2" data-preview="preview_salle_2" accept="image/*">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="p-2 border rounded-3 bg-light text-center">
+                                <label class="form-label d-block small mb-1 fw-bold">Photo 4</label>
+                                <div class="img-preview-box" style="height: 110px;">
+                                    <img id="preview_salle_3" src="img/Salle2.jpg">
+                                </div>
+                                <input type="text" class="form-control form-control-sm mb-1" data-bind="salle_page.gallery.3">
+                                <label class="btn btn-sm btn-snu-outline-red w-100">
+                                    <i class="fa fa-upload"></i> Changer
+                                    <input type="file" class="d-none img-file-input" data-target="salle_page.gallery.3" data-preview="preview_salle_3" accept="image/*">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h5 class="fw-bold mb-3 border-bottom pb-2" style="color: var(--snu-blue);"><i class="fa fa-file-signature me-2"></i> Réservation &amp; Mise à Disposition de la Salle</h5>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold">Titre de la section</label>
+                            <input type="text" class="form-control" data-bind="salle_page.reservation_title" placeholder="Réservation & Utilisation de la Salle">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold">Capacité autorisée</label>
+                            <input type="text" class="form-control" data-bind="salle_page.reservation_capacity" placeholder="Jusqu'à 90 participants">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label small fw-bold">Description des conditions officielles</label>
+                            <textarea class="form-control" rows="2" data-bind="salle_page.reservation_desc"></textarea>
                         </div>
                     </div>
                 </div>
@@ -938,94 +1116,75 @@
             </div>
 
 
-            <!-- ── TAB 9 : PAGE "LA SALLE" (project.html) ── -->
-            <div class="tab-pane-admin d-none" id="tab-salle">
-                <div class="admin-card">
-                    <div class="admin-card-header">
-                        <h4 class="admin-card-title"><i class="fa fa-building"></i> Page "La Salle" (Présentation, Chiffres &amp; Photos)</h4>
+            <!-- ── TAB 6 : CONTACT & COORDONNÉES DU SITE ── -->
+            <div class="tab-pane-admin d-none" id="tab-contact">
+                <div class="admin-card mb-4">
+                    <div class="admin-card-header d-flex align-items-center justify-content-between">
+                        <h4 class="admin-card-title mb-0"><i class="fa fa-envelope-open-text"></i> Page Contact &amp; Coordonnées Officielles</h4>
                         <button class="btn btn-sm btn-snu-red btn-save-section"><i class="fa fa-save me-1"></i> Sauvegarder</button>
                     </div>
 
+                    <h5 class="fw-bold mb-3 border-bottom pb-2" style="color: var(--snu-blue);"><i class="fa fa-pencil-alt me-2"></i> Textes d'En-tête de la Page Contact</h5>
                     <div class="row g-3 mb-4">
-                        <div class="col-md-6">
-                            <label class="form-label">Titre de la bannière</label>
-                            <input type="text" class="form-control" data-bind="salle_page.hero_title">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Sous-titre d'introduction</label>
-                            <input type="text" class="form-control" data-bind="salle_page.intro_title_highlight">
+                        <div class="col-12">
+                            <label class="form-label fw-bold small">Titre de la section</label>
+                            <input type="text" class="form-control" data-bind="contact_page.title" placeholder="Nous sommes à votre écoute">
                         </div>
                         <div class="col-12">
-                            <label class="form-label">Paragraphe 1</label>
-                            <textarea class="form-control" rows="3" data-bind="salle_page.intro_p1"></textarea>
+                            <label class="form-label fw-bold small">Paragraphe 1</label>
+                            <textarea class="form-control" rows="2" data-bind="contact_page.p1"></textarea>
                         </div>
                         <div class="col-12">
-                            <label class="form-label">Paragraphe 2</label>
-                            <textarea class="form-control" rows="3" data-bind="salle_page.intro_p2"></textarea>
+                            <label class="form-label fw-bold small">Paragraphe 2</label>
+                            <textarea class="form-control" rows="2" data-bind="contact_page.p2"></textarea>
                         </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Statistique Postes PC</label>
-                            <input type="text" class="form-control" data-bind="salle_page.stat_pc">
+                        <div class="col-12">
+                            <label class="form-label fw-bold small">Paragraphe 3</label>
+                            <textarea class="form-control" rows="2" data-bind="contact_page.p3"></textarea>
                         </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Statistique Zones Spécialisées</label>
-                            <input type="text" class="form-control" data-bind="salle_page.stat_zones">
+                        <div class="col-12">
+                            <label class="form-label fw-bold small">Slogan de clôture</label>
+                            <input type="text" class="form-control" data-bind="contact_page.slogan" placeholder="Ensemble, innovons aujourd'hui pour inspirer demain.">
                         </div>
                     </div>
 
-                    <h5 class="fw-bold mb-3 border-bottom pb-2" style="color: var(--snu-blue);">Galerie Photos de la Salle</h5>
+                    <h5 class="fw-bold mb-3 border-bottom pb-2" style="color: var(--snu-blue);"><i class="fa fa-phone-alt me-2"></i> Coordonnées Directes (Téléphone, WhatsApp &amp; Email)</h5>
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold small"><i class="fa fa-phone text-danger me-1"></i> Téléphone d'appel</label>
+                            <input type="text" class="form-control" data-bind="general.phone" placeholder="+243 972 147 721">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold small"><i class="fab fa-whatsapp text-success me-1"></i> Numéro WhatsApp</label>
+                            <input type="text" class="form-control" data-bind="general.whatsapp" placeholder="+243 972 147 721">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold small"><i class="fa fa-envelope text-primary me-1"></i> Email officiel</label>
+                            <input type="email" class="form-control" data-bind="general.email" placeholder="numerique@SNU.ac.cd">
+                        </div>
+                    </div>
+
+                    <h5 class="fw-bold mb-3 border-bottom pb-2" style="color: var(--snu-blue);"><i class="fa fa-map-marked-alt me-2"></i> Localisation, Horaires &amp; Réseaux Sociaux</h5>
                     <div class="row g-3">
-                        <div class="col-md-3">
-                            <div class="p-2 border rounded-3 bg-light text-center">
-                                <label class="form-label d-block small mb-1">Photo 1</label>
-                                <div class="img-preview-box" style="height: 110px;">
-                                    <img id="preview_salle_0" src="img/Salle1.jpg">
-                                </div>
-                                <input type="text" class="form-control form-control-sm mb-1" data-bind="salle_page.gallery.0">
-                                <label class="btn btn-sm btn-snu-outline-red w-100">
-                                    <i class="fa fa-upload"></i> Changer
-                                    <input type="file" class="d-none img-file-input" data-target="salle_page.gallery.0" data-preview="preview_salle_0" accept="image/*">
-                                </label>
-                            </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold small"><i class="fa fa-map-marker-alt text-danger me-1"></i> Adresse physique complète</label>
+                            <input type="text" class="form-control" data-bind="general.address" placeholder="Fac. Sciences Sociales, UNILU — Auditoire WAZIA, Lubumbashi, RDC">
                         </div>
-                        <div class="col-md-3">
-                            <div class="p-2 border rounded-3 bg-light text-center">
-                                <label class="form-label d-block small mb-1">Photo 2</label>
-                                <div class="img-preview-box" style="height: 110px;">
-                                    <img id="preview_salle_1" src="img/project-3.jpg">
-                                </div>
-                                <input type="text" class="form-control form-control-sm mb-1" data-bind="salle_page.gallery.1">
-                                <label class="btn btn-sm btn-snu-outline-red w-100">
-                                    <i class="fa fa-upload"></i> Changer
-                                    <input type="file" class="d-none img-file-input" data-target="salle_page.gallery.1" data-preview="preview_salle_1" accept="image/*">
-                                </label>
-                            </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold small"><i class="fa fa-clock text-warning me-1"></i> Horaires d'ouverture</label>
+                            <input type="text" class="form-control" data-bind="general.opening_hours" placeholder="Lundi au Vendredi : 8h00 à 17h00 | Samedi : 8h00 à 13h00">
                         </div>
-                        <div class="col-md-3">
-                            <div class="p-2 border rounded-3 bg-light text-center">
-                                <label class="form-label d-block small mb-1">Photo 3</label>
-                                <div class="img-preview-box" style="height: 110px;">
-                                    <img id="preview_salle_2" src="img/project-2.jpg">
-                                </div>
-                                <input type="text" class="form-control form-control-sm mb-1" data-bind="salle_page.gallery.2">
-                                <label class="btn btn-sm btn-snu-outline-red w-100">
-                                    <i class="fa fa-upload"></i> Changer
-                                    <input type="file" class="d-none img-file-input" data-target="salle_page.gallery.2" data-preview="preview_salle_2" accept="image/*">
-                                </label>
-                            </div>
+                        <div class="col-md-12">
+                            <label class="form-label fw-bold small"><i class="fa fa-map text-info me-1"></i> Lien Google Maps</label>
+                            <input type="text" class="form-control" data-bind="general.maps_url" placeholder="https://maps.app.goo.gl/...">
                         </div>
-                        <div class="col-md-3">
-                            <div class="p-2 border rounded-3 bg-light text-center">
-                                <label class="form-label d-block small mb-1">Photo 4</label>
-                                <div class="img-preview-box" style="height: 110px;">
-                                    <img id="preview_salle_3" src="img/Salle2.jpg">
-                                </div>
-                                <input type="text" class="form-control form-control-sm mb-1" data-bind="salle_page.gallery.3">
-                                <label class="btn btn-sm btn-snu-outline-red w-100">
-                                    <i class="fa fa-upload"></i> Changer
-                                    <input type="file" class="d-none img-file-input" data-target="salle_page.gallery.3" data-preview="preview_salle_3" accept="image/*">
-                                </label>
-                            </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold small"><i class="fab fa-facebook text-primary me-1"></i> Lien Page Facebook UNILU</label>
+                            <input type="text" class="form-control" data-bind="general.facebook_unilu" placeholder="https://www.facebook.com/unilu.ac.cd">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold small"><i class="fab fa-facebook text-primary me-1"></i> Lien Page Facebook SNU</label>
+                            <input type="text" class="form-control" data-bind="general.facebook_snu" placeholder="https://www.facebook.com">
                         </div>
                     </div>
                 </div>
@@ -1414,7 +1573,8 @@
                     });
                 }
 
-                // Remplir les listes dynamiques (Team, Services, Formations, Témoignages)
+                // Remplir les listes dynamiques (News, Team, Services, Formations, Témoignages)
+                renderNewsList();
                 renderTeamList();
                 renderServicesList();
                 renderFormationsLists();
@@ -1463,6 +1623,211 @@
                         }
                         loadMessages();
                     });
+            }
+
+            // ── GESTION DES ACTUALITÉS (AJOUT, MODIFICATION, SUPPRESSION) ──
+            function renderNewsList() {
+                var container = document.getElementById('newsListContainer');
+                var badge = document.getElementById('newsCountBadge');
+                if (!container) return;
+                container.innerHTML = '';
+
+                if (!currentContent.news) {
+                    currentContent.news = { items: [] };
+                }
+                if (!currentContent.news.items) {
+                    currentContent.news.items = [];
+                }
+
+                if (badge) {
+                    badge.textContent = currentContent.news.items.length;
+                }
+
+                if (currentContent.news.items.length === 0) {
+                    container.innerHTML = '<div class="col-12"><div class="alert alert-info text-center py-4 mb-0"><i class="fa fa-info-circle me-2"></i> Aucune actualité publiée pour le moment. Utilisez le formulaire ci-dessus pour en ajouter une.</div></div>';
+                    return;
+                }
+
+                currentContent.news.items.forEach(function(item, idx) {
+                    var col = document.createElement('div');
+                    col.className = 'col-lg-6';
+                    col.innerHTML = `
+                        <div class="p-3 border rounded-3 bg-light shadow-sm h-100 d-flex flex-column justify-content-between position-relative">
+                            <div>
+                                <div class="d-flex align-items-center justify-content-between mb-3 border-bottom pb-2">
+                                    <span class="badge bg-danger">Actualité #${idx + 1}</span>
+                                    <button type="button" class="btn btn-sm btn-outline-danger btn-delete-news py-0 px-2" data-index="${idx}" title="Supprimer cette actualité">
+                                        <i class="fa fa-trash me-1"></i> Supprimer
+                                    </button>
+                                </div>
+                                <div class="row g-2 mb-2">
+                                    <div class="col-sm-4 text-center">
+                                        <div class="img-preview-box mb-2" style="height: 110px; background: #fff; border-radius: 8px; overflow: hidden; border: 1px solid #e0e0e0; display: flex; align-items: center; justify-content: center;">
+                                            <img id="preview_news_${idx}" src="${item.img || 'img/Salle1.jpg'}" alt="Photo" style="max-height: 100%; max-width: 100%; object-fit: cover;">
+                                        </div>
+                                        <label class="btn btn-sm btn-snu-outline-red w-100 py-1" style="font-size: 0.75rem;">
+                                            <i class="fa fa-camera me-1"></i> Changer photo
+                                            <input type="file" class="d-none news-file-input" data-index="${idx}" accept="image/*">
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <div class="mb-2">
+                                            <label class="form-label small mb-1 fw-bold">Titre</label>
+                                            <input type="text" class="form-control form-control-sm news-title-input" data-index="${idx}" value="${escapeHtml(item.title || '')}">
+                                        </div>
+                                        <div class="row g-2 mb-2">
+                                            <div class="col-6">
+                                                <label class="form-label small mb-1">Catégorie</label>
+                                                <input type="text" class="form-control form-control-sm news-cat-input" data-index="${idx}" value="${escapeHtml(item.category || '')}">
+                                            </div>
+                                            <div class="col-6">
+                                                <label class="form-label small mb-1">Date</label>
+                                                <input type="text" class="form-control form-control-sm news-date-input" data-index="${idx}" value="${escapeHtml(item.date || '')}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label small mb-1 fw-bold">Résumé / Extrait</label>
+                                    <textarea class="form-control form-control-sm news-excerpt-input" rows="2" data-index="${idx}">${escapeHtml(item.excerpt || '')}</textarea>
+                                </div>
+                                <div class="mb-1">
+                                    <label class="form-label small mb-1">Chemin image</label>
+                                    <input type="text" class="form-control form-control-sm news-img-input" id="input_news_img_${idx}" data-index="${idx}" value="${escapeHtml(item.img || '')}">
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(col);
+                });
+
+                container.querySelectorAll('.news-title-input').forEach(function(inp) {
+                    inp.addEventListener('input', function() {
+                        var i = parseInt(this.getAttribute('data-index'), 10);
+                        if (currentContent.news.items[i]) currentContent.news.items[i].title = this.value;
+                    });
+                });
+                container.querySelectorAll('.news-cat-input').forEach(function(inp) {
+                    inp.addEventListener('input', function() {
+                        var i = parseInt(this.getAttribute('data-index'), 10);
+                        if (currentContent.news.items[i]) currentContent.news.items[i].category = this.value;
+                    });
+                });
+                container.querySelectorAll('.news-date-input').forEach(function(inp) {
+                    inp.addEventListener('input', function() {
+                        var i = parseInt(this.getAttribute('data-index'), 10);
+                        if (currentContent.news.items[i]) currentContent.news.items[i].date = this.value;
+                    });
+                });
+                container.querySelectorAll('.news-excerpt-input').forEach(function(inp) {
+                    inp.addEventListener('input', function() {
+                        var i = parseInt(this.getAttribute('data-index'), 10);
+                        if (currentContent.news.items[i]) currentContent.news.items[i].excerpt = this.value;
+                    });
+                });
+                container.querySelectorAll('.news-img-input').forEach(function(inp) {
+                    inp.addEventListener('input', function() {
+                        var i = parseInt(this.getAttribute('data-index'), 10);
+                        if (currentContent.news.items[i]) currentContent.news.items[i].img = this.value;
+                        var prev = document.getElementById('preview_news_' + i);
+                        if (prev) prev.src = this.value;
+                    });
+                });
+
+                container.querySelectorAll('.news-file-input').forEach(function(fileInp) {
+                    fileInp.addEventListener('change', function() {
+                        var i = parseInt(this.getAttribute('data-index'), 10);
+                        var file = this.files[0];
+                        if (!file) return;
+                        uploadImage(file, function(newSrc) {
+                            if (currentContent.news.items[i]) currentContent.news.items[i].img = newSrc;
+                            var prev = document.getElementById('preview_news_' + i);
+                            if (prev) prev.src = newSrc;
+                            var textInp = document.getElementById('input_news_img_' + i);
+                            if (textInp) textInp.value = newSrc;
+                            showToast('Photo de l\'actualité mise à jour !', 'success');
+                        });
+                    });
+                });
+
+                container.querySelectorAll('.btn-delete-news').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        var i = parseInt(this.getAttribute('data-index'), 10);
+                        var item = currentContent.news.items[i];
+                        var title = (item && item.title) ? `"${item.title}"` : 'cette actualité';
+                        if (confirm('Êtes-vous sûr de vouloir supprimer ' + title + ' ?')) {
+                            currentContent.news.items.splice(i, 1);
+                            renderNewsList();
+                            showToast('Actualité supprimée. N\'oubliez pas d\'enregistrer les modifications.', 'warning');
+                        }
+                    });
+                });
+            }
+
+            // Gestion de l'ajout d'une actualité
+            var btnAddNews = document.getElementById('btnAddNews');
+            if (btnAddNews) {
+                btnAddNews.addEventListener('click', function() {
+                    var titleInp = document.getElementById('newNewsTitle');
+                    var catInp = document.getElementById('newNewsCategory');
+                    var dateInp = document.getElementById('newNewsDate');
+                    var excerptInp = document.getElementById('newNewsExcerpt');
+                    var imgInp = document.getElementById('newNewsImg');
+
+                    var title = titleInp ? titleInp.value.trim() : '';
+                    var category = catInp ? catInp.value.trim() : 'Salle du Numérique';
+                    var date = dateInp ? dateInp.value.trim() : 'À venir';
+                    var excerpt = excerptInp ? excerptInp.value.trim() : '';
+                    var img = imgInp ? imgInp.value.trim() : 'img/Salle1.jpg';
+
+                    if (!title) {
+                        showToast('Veuillez entrer un titre pour la nouvelle actualité.', 'danger');
+                        if (titleInp) titleInp.focus();
+                        return;
+                    }
+
+                    if (!currentContent.news) {
+                        currentContent.news = { items: [] };
+                    }
+                    if (!currentContent.news.items) {
+                        currentContent.news.items = [];
+                    }
+
+                    var newId = 'news_' + Date.now();
+                    var newItem = {
+                        id: newId,
+                        category: category || 'Salle du Numérique',
+                        title: title,
+                        date: date || 'À venir',
+                        excerpt: excerpt || '',
+                        img: img || 'img/Salle1.jpg'
+                    };
+
+                    currentContent.news.items.unshift(newItem);
+                    renderNewsList();
+
+                    if (titleInp) titleInp.value = '';
+                    if (excerptInp) excerptInp.value = '';
+                    if (dateInp) dateInp.value = '';
+                    if (catInp) catInp.value = '';
+
+                    showToast('Nouvelle actualité ajoutée ! N\'oubliez pas d\'enregistrer.', 'success');
+                });
+            }
+
+            var newNewsFile = document.getElementById('newNewsFile');
+            if (newNewsFile) {
+                newNewsFile.addEventListener('change', function() {
+                    var file = this.files[0];
+                    if (!file) return;
+                    uploadImage(file, function(newSrc) {
+                        var imgInp = document.getElementById('newNewsImg');
+                        var prev = document.getElementById('newNewsPreview');
+                        if (imgInp) imgInp.value = newSrc;
+                        if (prev) prev.src = newSrc;
+                        showToast('Photo uploadée pour la nouvelle actualité !', 'success');
+                    });
+                });
             }
 
             // ── 4. RENDU DES LISTES DYNAMIQUES ──
