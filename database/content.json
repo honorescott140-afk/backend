@@ -16,9 +16,6 @@
   "hero": {
     "main_title": "INNOVER AUJOURD'HUI",
     "subtitle_accent": "INSPIRER DEMAIN",
-    "description": "Un espace universitaire dédié à la formation, à la recherche et à l'innovation numérique.",
-    "btn_text": "En savoir plus",
-    "btn_link": "project.html",
     "slides": [
       "img/Salle1.jpg",
       "img/Salle2.jpg",
@@ -47,15 +44,16 @@
     ]
   },
   "directeur": {
-    "subtitle": "Message du Directeur",
-    "title_prefix": "Mot de bienvenue du",
+    "subtitle": "",
+    "title_prefix": "",
+    "title_highlight": "CT ROGER",
     "name": "CT ROGER",
     "role": "Directeur de la Salle du Numérique (SNU)",
-    "photo": "img/dr-roger.jpeg",
+    "photo": "img/Dr roger .jpeg",
     "lead": "Chers visiteurs, chers apprenants,",
-    "p1": "La Salle du Numérique accompagne la communauté universitaire dans l'apprentissage, la recherche et l'innovation.",
-    "p2": "Notre priorité est de proposer un environnement accessible, pratique et professionnel pour développer les compétences numériques.",
-    "p3": "Innover aujourd'hui pour inspirer demain."
+    "p1": "C'est avec un grand plaisir que je vous accueille au sein de la Salle du Numérique. Dans un monde en constante évolution, notre engagement est de former des femmes et des hommes capables de créer, d'innover et d'apporter des solutions concrètes aux défis de notre époque.",
+    "p2": "Au-delà des compétences techniques, nous cultivons la créativité, l'esprit d'initiative et la confiance en soi — des qualités essentielles pour transformer les idées en opportunités réelles. Chaque apprenant est encouragé à développer son potentiel et à devenir un acteur du changement dans sa communauté.",
+    "p3": "Notre vision est simple : Innover aujourd'hui pour inspirer demain. Je vous invite à rejoindre cette aventure où l'apprentissage, l'innovation et l'excellence se rencontrent pour bâtir ensemble l'avenir."
   },
   "team": {
     "subtitle": "Notre Équipe",
@@ -66,7 +64,7 @@
       {
         "id": "member_1",
         "name": "Mme Rachel",
-        "role": "Secrétaire de la Salle",
+        "role": "Secrétaire Administif et Financier ",
         "img": "img/Rachel.PNG"
       },
       {
@@ -102,8 +100,8 @@
       {
         "id": "srv_1",
         "icon": "fa fa-desktop",
-        "title": "Postes informatiques",
-        "desc": "Accédez à des postes de travail performants et modernes pour vos travaux pratiques et recherches académiques."
+        "title": "100 Ordinateurs Disponibles",
+        "desc": "Accédez à l'un de nos 100 postes de travail performants et modernes pour vos travaux pratiques et recherches académiques."
       },
       {
         "id": "srv_2",
@@ -222,6 +220,12 @@
         "icon": "fa fa-cloud",
         "title": "Microsoft SharePoint",
         "desc": "Gestion de portails d'information d'équipe, espaces documentaires et collaboration en nuage."
+      },
+      {
+        "id": "mod_7",
+        "icon": "far fa-file-alt",
+        "title": "Initiation à l'utilisation des IA",
+        "desc": "Description pratique du module de formation."
       }
     ]
   },
@@ -244,7 +248,48 @@
     ],
     "reservation_title": "Réservation & Utilisation de la Salle",
     "reservation_desc": "Vous organisez une conférence, une soutenance, un séminaire académique, un atelier de formation ou un hackathon ? La Salle du Numérique est mise à votre disposition selon un cadre contractuel clair et transparent garantissant des équipements professionnels et un accompagnement dédié.",
-    "reservation_capacity": "Jusqu'à 90 participants"
+    "reservation_capacity": "Jusqu'à 90 participants",
+    "infra_title_prefix": "Infrastructure &",
+    "infra_title_highlight": "Équipements",
+    "infrastructure": [
+      {
+        "icon": "fa-wifi",
+        "title": "Fibre Dédiée",
+        "desc": "Connexion Internet haut débit via fibre optique dédiée pour vos recherches."
+      },
+      {
+        "icon": "fa-bolt",
+        "title": "Énergie 24h/7",
+        "desc": "Alimentation sécurisée par onduleurs industriels et relais solaire permanent."
+      },
+      {
+        "icon": "fa-snowflake",
+        "title": "Climatisation",
+        "desc": "Locaux climatisés assurant un confort optimal et la longévité des machines."
+      },
+      {
+        "icon": "fa-headset",
+        "title": "Support Technique",
+        "desc": "Des assistants techniques qualifiés présents pour vous guider en continu."
+      }
+    ],
+    "galerie_lieu_title_prefix": "Galerie",
+    "galerie_lieu_title_highlight": "Photos",
+    "galerie_lieu_title_suffix": "du Lieu",
+    "galerie_lieu": [
+      {
+        "img": "img/Salle1.jpg",
+        "caption": "Postes Individuels"
+      },
+      {
+        "img": "img/Salle2.jpg",
+        "caption": "Zone Lab & IoT"
+      },
+      {
+        "img": "img/Salle3.jpg",
+        "caption": "Espace d'Études Principal"
+      }
+    ]
   },
   "contact_page": {
     "title": "Nous sommes à votre écoute",
@@ -309,6 +354,27 @@
         "title": "Une expérience enrichissante",
         "text": "Les formations en Microsoft 365 et Design m'ont permis d'améliorer considérablement mes compétences professionnelles. J'apprécie particulièrement la pédagogie des formateurs, l'ambiance conviviale et les espaces de travail modernes qui favorisent l'apprentissage et les échanges entre étudiants.",
         "img": "img/testimonial-3.jpeg"
+      }
+    ]
+  },
+  "why_choose_us": {
+    "title_prefix": "Pourquoi Nous",
+    "title_highlight": "Choisir",
+    "cards": [
+      {
+        "icon": "fa fa-desktop",
+        "title": "Matériel de pointe",
+        "desc": "Accédez à des ordinateurs performants adaptés aux besoins de programmation, de modélisation et de recherche universitaire."
+      },
+      {
+        "icon": "fa fa-wifi",
+        "title": "Connexion Internet 5G",
+        "desc": "Bénéficiez d'une connexion internet 5G ultra-rapide, stable et à haut débit pour vos recherches en ligne, streaming éducatif."
+      },
+      {
+        "icon": "fa fa-credit-card",
+        "title": "Abonnements Mensuels",
+        "desc": "Profitez de nos abonnements mensuels accessibles à tous et bénéficiez d'un accès privilégié à nos équipements numériques."
       }
     ]
   }

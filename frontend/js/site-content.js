@@ -54,6 +54,21 @@
             }
         });
 
+        // 4. Icônes avec [data-cms-icon]
+        var iconEls = document.querySelectorAll('[data-cms-icon]');
+        iconEls.forEach(function (el) {
+            var key = el.getAttribute('data-cms-icon');
+            var val = getNestedValue(data, key);
+            if (val) {
+                // Conserver les classes utilitaires (ex: fa-3x, text-primary, mb-3)
+                var currentClasses = Array.from(el.classList).filter(function(c) {
+                    return !c.startsWith('fa-') || ['fa-3x', 'fa-2x', 'fa-lg', 'fa-sm'].indexOf(c) !== -1;
+                });
+                var iconName = val.startsWith('fa-') ? val : ('fa-' + val);
+                el.className = 'fa ' + iconName + ' ' + currentClasses.join(' ');
+            }
+        });
+
         // 4. Carrousel Hero (si présent)
         if (data.hero && data.hero.slides && data.hero.slides.length) {
             var heroImgs = document.querySelectorAll('.header-carousel img');

@@ -1027,7 +1027,7 @@
                     </div>
 
                     <h5 class="fw-bold mb-3 border-bottom pb-2" style="color: var(--snu-blue);"><i class="fa fa-file-signature me-2"></i> Réservation &amp; Mise à Disposition de la Salle</h5>
-                    <div class="row g-3">
+                    <div class="row g-3 mb-4">
                         <div class="col-md-6">
                             <label class="form-label small fw-bold">Titre de la section</label>
                             <input type="text" class="form-control" data-bind="salle_page.reservation_title" placeholder="Réservation & Utilisation de la Salle">
@@ -1039,6 +1039,151 @@
                         <div class="col-12">
                             <label class="form-label small fw-bold">Description des conditions officielles</label>
                             <textarea class="form-control" rows="2" data-bind="salle_page.reservation_desc"></textarea>
+                        </div>
+                    </div>
+
+                    <h5 class="fw-bold mb-3 border-bottom pb-2" style="color: var(--snu-blue);"><i class="fa fa-server me-2"></i> Infrastructure &amp; Équipements</h5>
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold">Titre principal (Préfixe)</label>
+                            <input type="text" class="form-control" data-bind="salle_page.infra_title_prefix" placeholder="Infrastructure &">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold">Titre (Surbrillance Rouge)</label>
+                            <input type="text" class="form-control" data-bind="salle_page.infra_title_highlight" placeholder="Équipements">
+                        </div>
+                    </div>
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6 col-lg-3">
+                            <div class="p-3 border rounded-3 bg-light h-100">
+                                <label class="form-label small fw-bold text-danger"><i class="fa fa-cog me-1"></i> Équipement 1</label>
+                                <div class="mb-2">
+                                    <label class="form-label small mb-1">Icône FontAwesome</label>
+                                    <input type="text" class="form-control form-control-sm" data-bind="salle_page.infrastructure.0.icon" placeholder="fa-wifi">
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label small mb-1">Titre</label>
+                                    <input type="text" class="form-control form-control-sm fw-bold" data-bind="salle_page.infrastructure.0.title" placeholder="Fibre Dédiée">
+                                </div>
+                                <div>
+                                    <label class="form-label small mb-1">Description</label>
+                                    <textarea class="form-control form-control-sm" rows="3" data-bind="salle_page.infrastructure.0.desc"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="p-3 border rounded-3 bg-light h-100">
+                                <label class="form-label small fw-bold text-danger"><i class="fa fa-cog me-1"></i> Équipement 2</label>
+                                <div class="mb-2">
+                                    <label class="form-label small mb-1">Icône FontAwesome</label>
+                                    <input type="text" class="form-control form-control-sm" data-bind="salle_page.infrastructure.1.icon" placeholder="fa-bolt">
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label small mb-1">Titre</label>
+                                    <input type="text" class="form-control form-control-sm fw-bold" data-bind="salle_page.infrastructure.1.title" placeholder="Énergie 24h/7">
+                                </div>
+                                <div>
+                                    <label class="form-label small mb-1">Description</label>
+                                    <textarea class="form-control form-control-sm" rows="3" data-bind="salle_page.infrastructure.1.desc"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="p-3 border rounded-3 bg-light h-100">
+                                <label class="form-label small fw-bold text-danger"><i class="fa fa-cog me-1"></i> Équipement 3</label>
+                                <div class="mb-2">
+                                    <label class="form-label small mb-1">Icône FontAwesome</label>
+                                    <input type="text" class="form-control form-control-sm" data-bind="salle_page.infrastructure.2.icon" placeholder="fa-snowflake">
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label small mb-1">Titre</label>
+                                    <input type="text" class="form-control form-control-sm fw-bold" data-bind="salle_page.infrastructure.2.title" placeholder="Climatisation">
+                                </div>
+                                <div>
+                                    <label class="form-label small mb-1">Description</label>
+                                    <textarea class="form-control form-control-sm" rows="3" data-bind="salle_page.infrastructure.2.desc"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="p-3 border rounded-3 bg-light h-100">
+                                <label class="form-label small fw-bold text-danger"><i class="fa fa-cog me-1"></i> Équipement 4</label>
+                                <div class="mb-2">
+                                    <label class="form-label small mb-1">Icône FontAwesome</label>
+                                    <input type="text" class="form-control form-control-sm" data-bind="salle_page.infrastructure.3.icon" placeholder="fa-headset">
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label small mb-1">Titre</label>
+                                    <input type="text" class="form-control form-control-sm fw-bold" data-bind="salle_page.infrastructure.3.title" placeholder="Support Technique">
+                                </div>
+                                <div>
+                                    <label class="form-label small mb-1">Description</label>
+                                    <textarea class="form-control form-control-sm" rows="3" data-bind="salle_page.infrastructure.3.desc"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h5 class="fw-bold mb-3 border-bottom pb-2" style="color: var(--snu-blue);"><i class="fa fa-images me-2"></i> Galerie Photos du Lieu</h5>
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-4">
+                            <label class="form-label small fw-bold">Titre (Préfixe)</label>
+                            <input type="text" class="form-control" data-bind="salle_page.galerie_lieu_title_prefix" placeholder="Galerie">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label small fw-bold">Titre (Surbrillance Rouge)</label>
+                            <input type="text" class="form-control" data-bind="salle_page.galerie_lieu_title_highlight" placeholder="Photos">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label small fw-bold">Titre (Suffixe)</label>
+                            <input type="text" class="form-control" data-bind="salle_page.galerie_lieu_title_suffix" placeholder="du Lieu">
+                        </div>
+                    </div>
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-4">
+                            <div class="p-3 border rounded-3 bg-light text-center h-100">
+                                <label class="form-label d-block small mb-1 fw-bold">Photo 1 &amp; Légende</label>
+                                <div class="img-preview-box mb-2" style="height: 150px;">
+                                    <img id="preview_galerie_lieu_0" src="img/Salle1.jpg" alt="Lieu 1" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <input type="text" class="form-control form-control-sm mb-2" data-bind="salle_page.galerie_lieu.0.img" placeholder="img/Salle1.jpg">
+                                <label class="btn btn-sm btn-snu-outline-red w-100 mb-2">
+                                    <i class="fa fa-upload me-1"></i> Téléverser photo 1
+                                    <input type="file" class="d-none img-file-input" data-target="salle_page.galerie_lieu.0.img" data-preview="preview_galerie_lieu_0" accept="image/*">
+                                </label>
+                                <label class="form-label small mb-1 text-start d-block fw-bold">Légende (Texte sur l'image)</label>
+                                <input type="text" class="form-control form-control-sm" data-bind="salle_page.galerie_lieu.0.caption" placeholder="Postes Individuels">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-3 border rounded-3 bg-light text-center h-100">
+                                <label class="form-label d-block small mb-1 fw-bold">Photo 2 &amp; Légende</label>
+                                <div class="img-preview-box mb-2" style="height: 150px;">
+                                    <img id="preview_galerie_lieu_1" src="img/Salle2.jpg" alt="Lieu 2" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <input type="text" class="form-control form-control-sm mb-2" data-bind="salle_page.galerie_lieu.1.img" placeholder="img/Salle2.jpg">
+                                <label class="btn btn-sm btn-snu-outline-red w-100 mb-2">
+                                    <i class="fa fa-upload me-1"></i> Téléverser photo 2
+                                    <input type="file" class="d-none img-file-input" data-target="salle_page.galerie_lieu.1.img" data-preview="preview_galerie_lieu_1" accept="image/*">
+                                </label>
+                                <label class="form-label small mb-1 text-start d-block fw-bold">Légende (Texte sur l'image)</label>
+                                <input type="text" class="form-control form-control-sm" data-bind="salle_page.galerie_lieu.1.caption" placeholder="Zone Lab & IoT">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-3 border rounded-3 bg-light text-center h-100">
+                                <label class="form-label d-block small mb-1 fw-bold">Photo 3 &amp; Légende</label>
+                                <div class="img-preview-box mb-2" style="height: 150px;">
+                                    <img id="preview_galerie_lieu_2" src="img/Salle3.jpg" alt="Lieu 3" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <input type="text" class="form-control form-control-sm mb-2" data-bind="salle_page.galerie_lieu.2.img" placeholder="img/Salle3.jpg">
+                                <label class="btn btn-sm btn-snu-outline-red w-100 mb-2">
+                                    <i class="fa fa-upload me-1"></i> Téléverser photo 3
+                                    <input type="file" class="d-none img-file-input" data-target="salle_page.galerie_lieu.2.img" data-preview="preview_galerie_lieu_2" accept="image/*">
+                                </label>
+                                <label class="form-label small mb-1 text-start d-block fw-bold">Légende (Texte sur l'image)</label>
+                                <input type="text" class="form-control form-control-sm" data-bind="salle_page.galerie_lieu.2.caption" placeholder="Espace d'Études Principal">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1570,6 +1715,12 @@
                     currentContent.salle_page.gallery.forEach(function(src, i) {
                         var img = document.getElementById('preview_salle_' + i);
                         if (img && src) img.src = src;
+                    });
+                }
+                if (currentContent.salle_page && currentContent.salle_page.galerie_lieu) {
+                    currentContent.salle_page.galerie_lieu.forEach(function(item, i) {
+                        var img = document.getElementById('preview_galerie_lieu_' + i);
+                        if (img && item && item.img) img.src = item.img;
                     });
                 }
 
