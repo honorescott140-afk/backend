@@ -1836,12 +1836,28 @@ main [style*="white-space: nowrap"] {
     }
 }
 
-/* Support Dark Mode pour le panneau mobile de l'admin */
-body.admin-body.dark-mode .admin-mobile-subbar {
-    background: #0f0f0f !important;
+/* Support Dark Mode pour la barre d'onglets mobile de l'admin */
+body.admin-body.dark-mode .admin-mobile-tabs {
+    background: #0a0a0a !important;
     border-color: #222222 !important;
 }
 
-body.admin-body.dark-mode #mobileActiveTabLabel {
+body.admin-body.dark-mode .mobile-tab-pill {
+    background: #141414 !important;
+    color: #e0e0e0 !important;
+    border-color: #2a2a2a !important;
+}
+
+body.admin-body.dark-mode .mobile-tab-pill i {
+    color: var(--blaze-red-light) !important;
+}
+
+body.admin-body.dark-mode .mobile-tab-pill.active {
+    background: var(--blaze-red) !important;
+    color: #ffffff !important;
+    border-color: var(--blaze-red) !important;
+}
+
+body.admin-body.dark-mode .mobile-tab-pill.active i {
     color: #ffffff !important;
 }
