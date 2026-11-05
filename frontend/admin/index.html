@@ -1890,7 +1890,16 @@
                         var i = parseInt(this.getAttribute('data-index'), 10);
                         var file = this.files[0];
                         if (!file) return;
-                        uploadImage(file, function(newSrc) {
+
+                        // Aperçu immédiat
+                        var reader = new FileReader();
+                        reader.onload = function(e) {
+                            var prev = document.getElementById('preview_news_' + i);
+                            if (prev) prev.src = e.target.result;
+                        };
+                        reader.readAsDataURL(file);
+
+                        handleImageUpload(file, function(newSrc) {
                             if (currentContent.news.items[i]) currentContent.news.items[i].img = newSrc;
                             var prev = document.getElementById('preview_news_' + i);
                             if (prev) prev.src = newSrc;
@@ -1961,6 +1970,11 @@
                     if (excerptInp) excerptInp.value = '';
                     if (dateInp) dateInp.value = '';
                     if (catInp) catInp.value = '';
+                    if (imgInp) imgInp.value = 'img/Salle1.jpg';
+                    var prev = document.getElementById('newNewsPreview');
+                    if (prev) prev.src = 'img/Salle1.jpg';
+                    var newFileInp = document.getElementById('newNewsFile');
+                    if (newFileInp) newFileInp.value = '';
 
                     showToast('Nouvelle actualité ajoutée ! N\'oubliez pas d\'enregistrer.', 'success');
                 });
@@ -1971,13 +1985,33 @@
                 newNewsFile.addEventListener('change', function() {
                     var file = this.files[0];
                     if (!file) return;
-                    uploadImage(file, function(newSrc) {
+
+                    // Aperçu immédiat en local
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        var prev = document.getElementById('newNewsPreview');
+                        if (prev) prev.src = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+
+                    // Téléversement vers le serveur
+                    handleImageUpload(file, function(newSrc) {
                         var imgInp = document.getElementById('newNewsImg');
                         var prev = document.getElementById('newNewsPreview');
                         if (imgInp) imgInp.value = newSrc;
                         if (prev) prev.src = newSrc;
                         showToast('Photo uploadée pour la nouvelle actualité !', 'success');
                     });
+                });
+            }
+
+            var newNewsImg = document.getElementById('newNewsImg');
+            if (newNewsImg) {
+                newNewsImg.addEventListener('input', function() {
+                    var prev = document.getElementById('newNewsPreview');
+                    if (prev && this.value.trim()) {
+                        prev.src = this.value.trim();
+                    }
                 });
             }
 
@@ -2397,6 +2431,7 @@
 
             // ── 5. GESTION DES UPLOADS D'IMAGES ──
             function handleImageUpload(file, callback) {
+                if (!file) return;
                 var formData = new FormData();
                 formData.append('image', file);
 
@@ -2429,6 +2464,8 @@
                     reader.readAsDataURL(file);
                 });
             }
+            var uploadImage = handleImageUpload;
+            window.uploadImage = handleImageUpload;
 
             document.querySelectorAll('.img-file-input').forEach(function(inp) {
                 inp.addEventListener('change', function(e) {
