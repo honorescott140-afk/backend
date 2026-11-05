@@ -1836,28 +1836,28 @@ main [style*="white-space: nowrap"] {
     }
 }
 
-/* Support Dark Mode pour la barre d'onglets mobile de l'admin */
-body.admin-body.dark-mode .admin-mobile-tabs {
-    background: #0a0a0a !important;
+/* Support Dark Mode pour le menu des 3 points de l'admin */
+body.admin-body.dark-mode .three-dots-dropdown-panel {
+    background: #0f0f0f !important;
     border-color: #222222 !important;
+    color: #ffffff !important;
 }
 
-body.admin-body.dark-mode .mobile-tab-pill {
-    background: #141414 !important;
-    color: #e0e0e0 !important;
-    border-color: #2a2a2a !important;
+body.admin-body.dark-mode .three-dots-item {
+    color: #eaeaea !important;
 }
 
-body.admin-body.dark-mode .mobile-tab-pill i {
+body.admin-body.dark-mode .three-dots-item:hover {
+    background: #1a1a1a !important;
     color: var(--blaze-red-light) !important;
 }
 
-body.admin-body.dark-mode .mobile-tab-pill.active {
+body.admin-body.dark-mode .three-dots-item.active {
     background: var(--blaze-red) !important;
     color: #ffffff !important;
-    border-color: var(--blaze-red) !important;
 }
 
-body.admin-body.dark-mode .mobile-tab-pill.active i {
-    color: #ffffff !important;
+body.admin-body.dark-mode .three-dots-dropdown-panel .bg-light {
+    background: #141414 !important;
+    border-color: #222222 !important;
 }

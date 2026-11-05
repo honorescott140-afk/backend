@@ -272,7 +272,7 @@
         }
 
         /* ════════════════════════════════════════════════════════
-           OPTIMISATION RESPONSIVE & MOBILE (TIROIR & BARRE PILLS)
+           MENU DÉROULANT DES 3 POINTS (TOUS LES ONGLETS)
         ════════════════════════════════════════════════════════ */
         html, body.admin-body {
             width: 100%;
@@ -280,77 +280,118 @@
             overflow-x: hidden !important;
         }
 
-        .admin-sidebar-backdrop {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.55);
-            backdrop-filter: blur(3px);
-            z-index: 1045;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.25s ease;
-        }
-
-        .admin-sidebar-backdrop.show {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        /* Barre d'onglets mobile défilable horizontalement */
-        .admin-mobile-tabs {
-            display: flex;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-            white-space: nowrap;
-            background: #ffffff;
-            border-bottom: 1.5px solid var(--snu-border);
-            padding: 8px 12px;
-            gap: 8px;
-            position: sticky;
-            top: 50px;
-            z-index: 1025;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            max-width: 100vw;
-        }
-
-        .admin-mobile-tabs::-webkit-scrollbar {
-            display: none;
-        }
-
-        .mobile-tab-pill {
+        .btn-three-dots {
+            background: rgba(255, 255, 255, 0.18);
+            color: #ffffff !important;
+            border: 1.5px solid rgba(255, 255, 255, 0.45);
+            border-radius: 8px;
+            padding: 6px 12px;
             display: inline-flex;
             align-items: center;
-            padding: 7px 15px;
-            border-radius: 20px;
-            background: #f1f5f9;
-            color: var(--snu-blue);
-            font-size: 0.82rem;
-            font-weight: 700;
-            text-decoration: none;
-            flex-shrink: 0;
+            justify-content: center;
+            font-size: 1.15rem;
+            cursor: pointer;
             transition: all 0.2s ease;
-            border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
-        .mobile-tab-pill i {
-            margin-right: 6px;
-            font-size: 0.85rem;
+        .btn-three-dots:hover, .btn-three-dots:focus {
+            background: #ffffff;
+            color: var(--snu-red) !important;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+        }
+
+        .three-dots-dropdown-panel {
+            position: fixed;
+            top: 60px;
+            right: 12px;
+            width: 300px;
+            max-width: calc(100vw - 24px);
+            max-height: calc(100vh - 80px);
+            background: #ffffff;
+            border-radius: 14px;
+            box-shadow: 0 16px 45px rgba(0, 0, 0, 0.28);
+            border: 1.5px solid rgba(209, 0, 0, 0.15);
+            z-index: 1060;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-12px) scale(0.95);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+
+        .three-dots-dropdown-panel.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .three-dots-menu-scrollable {
+            overflow-y: auto;
+            flex: 1;
+            padding: 8px 10px;
+        }
+
+        .three-dots-section-title {
+            color: var(--snu-red);
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 8px 10px 4px 10px;
+        }
+
+        .three-dots-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 14px;
+            border-radius: 8px;
+            color: var(--snu-blue);
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.15s ease;
+            margin-bottom: 2px;
+        }
+
+        .three-dots-item i {
+            width: 24px;
+            font-size: 1.05rem;
+            margin-right: 10px;
+            color: var(--snu-red);
+            text-align: center;
+            transition: all 0.15s ease;
+        }
+
+        .three-dots-item:hover {
+            background: rgba(209, 0, 0, 0.08);
             color: var(--snu-red);
         }
 
-        .mobile-tab-pill.active {
+        .three-dots-item.active {
             background: var(--snu-red) !important;
             color: #ffffff !important;
-            box-shadow: 0 4px 12px rgba(209, 0, 0, 0.25);
-            border-color: var(--snu-red) !important;
         }
 
-        .mobile-tab-pill.active i {
+        .three-dots-item.active i {
             color: #ffffff !important;
+        }
+
+        .three-dots-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(2px);
+            z-index: 1055;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s ease;
+        }
+
+        .three-dots-backdrop.show {
+            opacity: 1;
+            visibility: visible;
         }
 
         @media (max-width: 991.98px) {
@@ -362,7 +403,7 @@
             }
 
             .admin-header-bar {
-                padding: 7px 0;
+                padding: 6px 0;
             }
 
             .admin-logo-img {
@@ -394,23 +435,9 @@
                 max-width: 100vw;
             }
 
-            /* Sidebar transformée en Drawer Offcanvas sur Mobile */
+            /* Sur mobile, la sidebar fixe est masquée au profit exclusif du menu des 3 points */
             .admin-sidebar {
-                position: fixed;
-                top: 0;
-                left: -310px;
-                width: 290px;
-                height: 100vh;
-                z-index: 1050;
-                background: #ffffff;
-                box-shadow: 6px 0 25px rgba(0, 0, 0, 0.25);
-                transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                overflow-y: auto;
-                padding: 16px 0 30px 0;
-            }
-
-            .admin-sidebar.show {
-                left: 0;
+                display: none !important;
             }
 
             .admin-content-pane {
@@ -472,7 +499,7 @@
             }
 
             .admin-brand-text {
-                font-size: 0.9rem;
+                font-size: 0.88rem;
                 max-width: 120px;
             }
 
@@ -483,17 +510,6 @@
 
             .btn-logout-header {
                 padding: 5px 8px;
-            }
-
-            .admin-mobile-tabs {
-                top: 44px;
-                padding: 6px 8px;
-                gap: 6px;
-            }
-
-            .mobile-tab-pill {
-                padding: 5px 12px;
-                font-size: 0.78rem;
             }
         }
 
@@ -764,15 +780,15 @@
     <!-- ════════════════════════════════════════════════════════
          TOP BAR DE NAVIGATION (Style Navbar Officielle SNU)
     ════════════════════════════════════════════════════════ -->
+    <!-- ════════════════════════════════════════════════════════
+         TOP BAR DE NAVIGATION (Style Navbar Officielle SNU)
+    ════════════════════════════════════════════════════════ -->
     <header class="admin-header-bar">
         <div class="container-fluid px-2 px-md-3">
             <div class="d-flex align-items-center justify-content-between flex-nowrap" style="min-width: 0;">
                 
-                <!-- Hamburger Menu Mobile + Logo & Titre SNU -->
+                <!-- Logo & Titre SNU -->
                 <div class="d-flex align-items-center flex-nowrap" style="min-width: 0;">
-                    <button id="btnMobileNavToggle" class="btn btn-sm btn-outline-light d-lg-none me-2 px-2 py-1 flex-shrink-0" aria-label="Menu de navigation" title="Ouvrir le menu complet">
-                        <i class="fa fa-bars fs-5"></i>
-                    </button>
                     <img src="img/Logo_SNU.jpg" alt="Logo SNU" class="admin-logo-img flex-shrink-0">
                     <div style="min-width: 0;">
                         <h1 class="admin-brand-text mb-0 text-truncate">Salle du Numérique</h1>
@@ -780,11 +796,11 @@
                     </div>
                 </div>
 
-                <!-- Boutons d'Action Header -->
-                <div class="d-flex align-items-center gap-1 flex-shrink-0 ms-2">
-                    <!-- Bouton Mode Sombre -->
-                    <button id="adminThemeToggleBtn" class="theme-toggle-btn btn-sm px-2 py-1" title="Basculer Mode Sombre / Mode Clair">
-                        <i class="fa fa-moon theme-icon"></i> <span class="theme-text d-none d-md-inline ms-1">Mode Sombre</span>
+                <!-- Actions Header + BOUTON 3 POINTS (MENU DE TOUS LES ONGLETS) -->
+                <div class="d-flex align-items-center gap-1 gap-sm-2 flex-shrink-0 ms-2">
+                    <!-- Bouton Enregistrer Tout (Blanc et Rouge) -->
+                    <button id="btnSaveAll" class="btn btn-save-master d-flex align-items-center px-2 px-sm-3 py-1" title="Enregistrer toutes les modifications">
+                        <i class="fa fa-save"></i> <span class="d-none d-sm-inline ms-1">Enregistrer</span>
                     </button>
 
                     <!-- Bouton Voir le Site Public -->
@@ -792,14 +808,19 @@
                         <i class="fa fa-external-link-alt"></i> <span class="d-none d-md-inline ms-1">Site</span>
                     </a>
 
-                    <!-- Bouton Enregistrer Tout (Blanc et Rouge) -->
-                    <button id="btnSaveAll" class="btn btn-save-master d-flex align-items-center px-2 px-sm-3 py-1" title="Enregistrer toutes les modifications">
-                        <i class="fa fa-save"></i> <span class="d-none d-sm-inline ms-1">Enregistrer</span>
+                    <!-- Bouton Mode Sombre -->
+                    <button id="adminThemeToggleBtn" class="theme-toggle-btn btn-sm px-2 py-1" title="Basculer Mode Sombre / Mode Clair">
+                        <i class="fa fa-moon theme-icon"></i> <span class="theme-text d-none d-md-inline ms-1">Mode Sombre</span>
                     </button>
 
-                    <!-- Déconnexion -->
-                    <button id="btnLogout" class="btn btn-logout-header px-2 py-1" title="Se déconnecter">
+                    <!-- Déconnexion (Desktop) -->
+                    <button id="btnLogout" class="btn btn-logout-header d-none d-sm-inline-flex px-2 py-1" title="Se déconnecter">
                         <i class="fa fa-power-off"></i>
+                    </button>
+
+                    <!-- LES 3 POINTS (ACCÈS À TOUS LES ONGLETS DU SITE SANS DÉFILEMENT) -->
+                    <button id="btnThreeDotsMenu" class="btn-three-dots ms-1" title="Tous les onglets" aria-label="Menu des onglets">
+                        <i class="fa fa-ellipsis-v"></i>
                     </button>
                 </div>
 
@@ -807,23 +828,74 @@
         </div>
     </header>
 
-    <!-- Barre d'onglets mobile défilable horizontalement (Pills) -->
-    <nav class="admin-mobile-tabs d-lg-none" id="adminMobileTabsNav">
-        <a href="#tab-accueil" class="mobile-tab-pill active" data-tab="tab-accueil"><i class="fa fa-home"></i> Accueil</a>
-        <a href="#tab-news" class="mobile-tab-pill" data-tab="tab-news"><i class="fa fa-newspaper"></i> Actualités</a>
-        <a href="#tab-ensavoirplus" class="mobile-tab-pill" data-tab="tab-ensavoirplus"><i class="fa fa-info-circle"></i> En savoir plus</a>
-        <a href="#tab-services" class="mobile-tab-pill" data-tab="tab-services"><i class="fa fa-desktop"></i> Services</a>
-        <a href="#tab-formations" class="mobile-tab-pill" data-tab="tab-formations"><i class="fa fa-graduation-cap"></i> Formations</a>
-        <a href="#tab-contact" class="mobile-tab-pill" data-tab="tab-contact"><i class="fa fa-envelope-open-text"></i> Contact</a>
-        <a href="#tab-team" class="mobile-tab-pill" data-tab="tab-team"><i class="fa fa-users"></i> Équipe</a>
-        <a href="#tab-testimonials" class="mobile-tab-pill" data-tab="tab-testimonials"><i class="fa fa-comments"></i> Avis</a>
-        <a href="#tab-media" class="mobile-tab-pill" data-tab="tab-media"><i class="fa fa-photo-video"></i> Photos</a>
-        <a href="#tab-messages" class="mobile-tab-pill" data-tab="tab-messages"><i class="fa fa-inbox"></i> Messages</a>
-        <a href="#tab-settings" class="mobile-tab-pill" data-tab="tab-settings"><i class="fa fa-cog"></i> Paramètres</a>
-    </nav>
+    <!-- ════════════════════════════════════════════════════════
+         MENU DÉROULANT DES 3 POINTS (TOUS LES ONGLETS SANS DÉFILEMENT)
+    ════════════════════════════════════════════════════════ -->
+    <div id="threeDotsTabsMenu" class="three-dots-dropdown-panel">
+        <div class="p-3 border-bottom d-flex align-items-center justify-content-between bg-light">
+            <div class="d-flex align-items-center">
+                <i class="fa fa-th-large text-danger me-2"></i>
+                <strong class="text-dark small">Navigation du Site</strong>
+            </div>
+            <button type="button" id="btnCloseThreeDotsMenu" class="btn btn-sm btn-outline-secondary py-0 px-2" aria-label="Fermer">
+                <i class="fa fa-times"></i>
+            </button>
+        </div>
 
-    <!-- Backdrop pour fermer le menu mobile en cliquant à côté -->
-    <div id="adminSidebarBackdrop" class="admin-sidebar-backdrop d-lg-none"></div>
+        <div class="three-dots-menu-scrollable">
+            <div class="three-dots-section-title">Pages du Site</div>
+            <a href="#tab-accueil" class="three-dots-item active" data-tab="tab-accueil">
+                <i class="fa fa-home"></i> Accueil
+            </a>
+            <a href="#tab-news" class="three-dots-item" data-tab="tab-news">
+                <i class="fa fa-newspaper"></i> Actualités
+            </a>
+            <a href="#tab-ensavoirplus" class="three-dots-item" data-tab="tab-ensavoirplus">
+                <i class="fa fa-info-circle"></i> En savoir plus
+            </a>
+            <a href="#tab-services" class="three-dots-item" data-tab="tab-services">
+                <i class="fa fa-desktop"></i> Services
+            </a>
+            <a href="#tab-formations" class="three-dots-item" data-tab="tab-formations">
+                <i class="fa fa-graduation-cap"></i> Formations
+            </a>
+            <a href="#tab-contact" class="three-dots-item" data-tab="tab-contact">
+                <i class="fa fa-envelope-open-text"></i> Contact
+            </a>
+
+            <div class="three-dots-section-title mt-2">Équipe &amp; Avis</div>
+            <a href="#tab-team" class="three-dots-item" data-tab="tab-team">
+                <i class="fa fa-users"></i> Équipe de Gestion
+            </a>
+            <a href="#tab-testimonials" class="three-dots-item" data-tab="tab-testimonials">
+                <i class="fa fa-comments"></i> Témoignages
+            </a>
+            <a href="#tab-media" class="three-dots-item" data-tab="tab-media">
+                <i class="fa fa-photo-video"></i> Médiathèque Photos
+            </a>
+
+            <div class="three-dots-section-title mt-2">Administration</div>
+            <a href="#tab-messages" class="three-dots-item d-flex align-items-center justify-content-between" data-tab="tab-messages">
+                <span><i class="fa fa-inbox me-2"></i> Messagerie</span>
+                <span id="badgeThreeDotsMessages" class="badge rounded-pill bg-danger d-none">0</span>
+            </a>
+            <a href="#tab-settings" class="three-dots-item" data-tab="tab-settings">
+                <i class="fa fa-cog"></i> Paramètres
+            </a>
+        </div>
+
+        <div class="p-2 border-top bg-light">
+            <button type="button" class="btn btn-sm btn-snu-red w-100 py-2 fw-bold" id="btnSaveThreeDots">
+                <i class="fa fa-save me-1"></i> Enregistrer Tout
+            </button>
+            <button type="button" class="btn btn-sm btn-outline-danger w-100 mt-2 py-1" id="btnLogoutThreeDots">
+                <i class="fa fa-power-off me-1"></i> Déconnexion
+            </button>
+        </div>
+    </div>
+
+    <!-- Backdrop pour fermer le menu des 3 points en cliquant dehors -->
+    <div id="threeDotsBackdrop" class="three-dots-backdrop"></div>
 
     <!-- Bouton Flottant Sauvegarde Rapide sur Mobile -->
     <button id="btnSaveMobileFab" class="btn btn-snu-red shadow-lg d-lg-none position-fixed" style="bottom: 20px; right: 20px; z-index: 1035; border-radius: 50px; padding: 12px 22px; font-weight: 800; font-size: 0.95rem; display: flex; align-items: center; gap: 8px;">
@@ -1862,39 +1934,57 @@
 
             checkAuth();
 
-            // ── GESTION DU TIROIR MOBILE (DRAWER) ──
-            var adminSidebar = document.getElementById('adminSidebar');
-            var adminBackdrop = document.getElementById('adminSidebarBackdrop');
+            // ── GESTION DU MENU DÉROULANT DES 3 POINTS (TOUS LES ONGLETS) ──
+            var threeDotsMenu = document.getElementById('threeDotsTabsMenu');
+            var threeDotsBackdrop = document.getElementById('threeDotsBackdrop');
+            var btnThreeDots = document.getElementById('btnThreeDotsMenu');
+            var btnCloseThreeDots = document.getElementById('btnCloseThreeDotsMenu');
 
-            function openMobileSidebar() {
-                if (adminSidebar) adminSidebar.classList.add('show');
-                if (adminBackdrop) adminBackdrop.classList.add('show');
-                document.body.style.overflow = 'hidden';
+            function openThreeDotsMenu() {
+                if (threeDotsMenu) threeDotsMenu.classList.add('show');
+                if (threeDotsBackdrop) threeDotsBackdrop.classList.add('show');
             }
 
-            function closeMobileSidebar() {
-                if (adminSidebar) adminSidebar.classList.remove('show');
-                if (adminBackdrop) adminBackdrop.classList.remove('show');
-                document.body.style.overflow = '';
+            function closeThreeDotsMenu() {
+                if (threeDotsMenu) threeDotsMenu.classList.remove('show');
+                if (threeDotsBackdrop) threeDotsBackdrop.classList.remove('show');
             }
 
-            var btnMobileNavToggle = document.getElementById('btnMobileNavToggle');
-            if (btnMobileNavToggle) {
-                btnMobileNavToggle.addEventListener('click', openMobileSidebar);
+            if (btnThreeDots) {
+                btnThreeDots.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    if (threeDotsMenu && threeDotsMenu.classList.contains('show')) {
+                        closeThreeDotsMenu();
+                    } else {
+                        openThreeDotsMenu();
+                    }
+                });
             }
 
-            var btnOpenDrawer = document.getElementById('btnOpenDrawer');
-            if (btnOpenDrawer) {
-                btnOpenDrawer.addEventListener('click', openMobileSidebar);
+            if (btnCloseThreeDots) {
+                btnCloseThreeDots.addEventListener('click', closeThreeDotsMenu);
             }
 
-            var btnCloseSidebar = document.getElementById('btnCloseSidebar');
-            if (btnCloseSidebar) {
-                btnCloseSidebar.addEventListener('click', closeMobileSidebar);
+            if (threeDotsBackdrop) {
+                threeDotsBackdrop.addEventListener('click', closeThreeDotsMenu);
             }
 
-            if (adminBackdrop) {
-                adminBackdrop.addEventListener('click', closeMobileSidebar);
+            var btnSaveThreeDots = document.getElementById('btnSaveThreeDots');
+            if (btnSaveThreeDots) {
+                btnSaveThreeDots.addEventListener('click', function() {
+                    closeThreeDotsMenu();
+                    var master = document.getElementById('btnSaveAll');
+                    if (master) master.click();
+                });
+            }
+
+            var btnLogoutThreeDots = document.getElementById('btnLogoutThreeDots');
+            if (btnLogoutThreeDots) {
+                btnLogoutThreeDots.addEventListener('click', function() {
+                    closeThreeDotsMenu();
+                    var masterLogout = document.getElementById('btnLogout');
+                    if (masterLogout) masterLogout.click();
+                });
             }
 
             // Bouton flottant mobile pour enregistrement direct
@@ -1908,7 +1998,7 @@
 
             // ── 2. SYSTÈME D'ONGLETS DU DASHBOARD ──
             var navLinks = document.querySelectorAll('.nav-snu-link');
-            var mobilePills = document.querySelectorAll('.mobile-tab-pill');
+            var threeDotsItems = document.querySelectorAll('.three-dots-item');
             var tabPanes = document.querySelectorAll('.tab-pane-admin');
 
             function switchTab(targetId) {
@@ -1920,14 +2010,11 @@
                     }
                 });
 
-                mobilePills.forEach(function(p) {
-                    if (p.getAttribute('data-tab') === targetId) {
-                        p.classList.add('active');
-                        try {
-                            p.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-                        } catch(e) {}
+                threeDotsItems.forEach(function(item) {
+                    if (item.getAttribute('data-tab') === targetId) {
+                        item.classList.add('active');
                     } else {
-                        p.classList.remove('active');
+                        item.classList.remove('active');
                     }
                 });
 
@@ -1939,15 +2026,13 @@
                     }
                 });
 
-                // Fermer le tiroir mobile si ouvert
-                closeMobileSidebar();
+                // Fermer le menu des 3 points après sélection
+                closeThreeDotsMenu();
 
                 // Faire défiler en haut du contenu
                 var contentPane = document.querySelector('.admin-content-pane');
                 if (contentPane) contentPane.scrollTop = 0;
-                if (window.innerWidth < 992) {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                }
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
 
             navLinks.forEach(function(link) {
@@ -1959,8 +2044,8 @@
                 });
             });
 
-            mobilePills.forEach(function(pill) {
-                pill.addEventListener('click', function(e) {
+            threeDotsItems.forEach(function(item) {
+                item.addEventListener('click', function(e) {
                     e.preventDefault();
                     var targetId = this.getAttribute('data-tab');
                     window.location.hash = targetId;
@@ -3026,6 +3111,16 @@
                         badgeUnread.classList.remove('d-none');
                     } else {
                         badgeUnread.classList.add('d-none');
+                    }
+                }
+
+                var badgeThreeDots = document.getElementById('badgeThreeDotsMessages');
+                if (badgeThreeDots) {
+                    if (unread > 0) {
+                        badgeThreeDots.textContent = unread;
+                        badgeThreeDots.classList.remove('d-none');
+                    } else {
+                        badgeThreeDots.classList.add('d-none');
                     }
                 }
 
