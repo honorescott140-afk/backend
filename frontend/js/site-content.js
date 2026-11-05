@@ -230,6 +230,27 @@
             }
         }
 
+        // 8b. Équipe de la Salle du Numérique
+        if (data.team && data.team.members && data.team.members.length) {
+            var teamContainer = document.getElementById('teamContainer') || document.querySelector('.snu-team-section .row');
+            if (teamContainer) {
+                teamContainer.innerHTML = '';
+                data.team.members.forEach(function (m) {
+                    var col = document.createElement('div');
+                    col.className = 'col-sm-6 col-lg-4';
+                    col.innerHTML = `
+                        <article class="snu-team-card h-100">
+                            <div class="snu-img-wrap"><img src="${m.img || 'img/Logo_SNU.jpg'}" alt="${m.name || 'Membre de l\'équipe'}, ${m.role || 'Fonction'}"></div>
+                            <div class="snu-info">
+                                <div class="snu-name">${m.name || ''}</div>
+                                <div class="snu-role">${m.role || ''}</div>
+                            </div>
+                        </article>`;
+                    teamContainer.appendChild(col);
+                });
+            }
+        }
+
         // 9. Témoignages (Ce que pensent nos apprenants)
         if (data.testimonials) {
             var tTitle = document.querySelector('[data-cms="testimonials.main_title"]');
@@ -238,21 +259,51 @@
             if (tSub && data.testimonials.subtitle) tSub.innerHTML = data.testimonials.subtitle;
 
             if (data.testimonials.items && data.testimonials.items.length) {
-                var testItems = document.querySelectorAll('.testimonial-item');
-                data.testimonials.items.forEach(function (t, idx) {
-                    var item = testItems[idx];
-                    if (!item) return;
-                    var img = item.querySelector('img');
-                    var h3 = item.querySelector('h3');
-                    var p = item.querySelector('p');
-                    var h5 = item.querySelector('h5');
-                    var span = item.querySelector('span.text-primary') || item.querySelector('.testimonial-text span');
-                    if (img && t.img) img.setAttribute('src', t.img);
-                    if (h3 && t.title) h3.textContent = t.title;
-                    if (p && t.text) p.textContent = t.text;
-                    if (h5 && t.name) h5.textContent = t.name;
-                    if (span && t.role) span.textContent = t.role;
-                });
+                var testCarousel = document.querySelector('.testimonial-carousel');
+                if (testCarousel) {
+                    var $carousel = window.jQuery ? window.jQuery(testCarousel) : null;
+                    if ($carousel && $carousel.data('owl.carousel')) {
+                        try {
+                            $carousel.trigger('destroy.owl.carousel');
+                            $carousel.find('.owl-stage-outer').children().unwrap();
+                            $carousel.removeClass('owl-center owl-loaded owl-text-select-on');
+                        } catch(e) {}
+                    }
+                    testCarousel.innerHTML = '';
+                    data.testimonials.items.forEach(function (t) {
+                        var itemDiv = document.createElement('div');
+                        itemDiv.className = 'testimonial-item';
+                        itemDiv.innerHTML = `
+                            <div class="row g-5 align-items-center">
+                                <div class="col-md-6">
+                                    <div class="testimonial-img">
+                                        <img class="img-fluid" src="${t.img || 'img/testimonial-1.jpeg'}" alt="${t.name || ''}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="testimonial-text pb-5 pb-md-0">
+                                        <h3>${t.title || ''}</h3>
+                                        <p>${t.text || ''}</p>
+                                        <h5 class="mb-0">${t.name || ''}</h5>
+                                        <span class="text-primary">${t.role || ''}</span>
+                                    </div>
+                                </div>
+                            </div>`;
+                        testCarousel.appendChild(itemDiv);
+                    });
+                    if ($carousel && typeof $carousel.owlCarousel === 'function') {
+                        $carousel.owlCarousel({
+                            items: 1,
+                            autoplay: true,
+                            smartSpeed: 1000,
+                            animateIn: 'fadeIn',
+                            animateOut: 'fadeOut',
+                            dots: true,
+                            loop: data.testimonials.items.length > 1,
+                            nav: false
+                        });
+                    }
+                }
             }
         }
     }

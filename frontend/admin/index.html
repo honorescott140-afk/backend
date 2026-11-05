@@ -1232,9 +1232,14 @@
             <!-- ── TAB 6 : ÉQUIPE DE GESTION ── -->
             <div class="tab-pane-admin d-none" id="tab-team">
                 <div class="admin-card">
-                    <div class="admin-card-header">
+                    <div class="admin-card-header flex-wrap gap-2">
                         <h4 class="admin-card-title"><i class="fa fa-users"></i> Membres de l'Équipe de Gestion</h4>
-                        <button class="btn btn-sm btn-snu-red btn-save-section"><i class="fa fa-save me-1"></i> Sauvegarder</button>
+                        <div class="d-flex gap-2">
+                            <button type="button" class="btn btn-sm btn-snu-blue" id="btnAddTeamMember">
+                                <i class="fa fa-user-plus me-1"></i> Ajouter un Membre
+                            </button>
+                            <button class="btn btn-sm btn-snu-red btn-save-section"><i class="fa fa-save me-1"></i> Sauvegarder</button>
+                        </div>
                     </div>
 
                     <div id="teamMembersList" class="row g-4">
@@ -1378,9 +1383,14 @@
             <!-- ── TAB : TÉMOIGNAGES (CE QUE PENSENT NOS APPRENANTS) ── -->
             <div class="tab-pane-admin d-none" id="tab-testimonials">
                 <div class="admin-card">
-                    <div class="admin-card-header">
+                    <div class="admin-card-header flex-wrap gap-2">
                         <h4 class="admin-card-title"><i class="fa fa-comments"></i> Ce que pensent nos apprenants (Témoignages)</h4>
-                        <button class="btn btn-sm btn-snu-red btn-save-section"><i class="fa fa-save me-1"></i> Sauvegarder</button>
+                        <div class="d-flex gap-2">
+                            <button type="button" class="btn btn-sm btn-snu-blue" id="btnAddTestimonial">
+                                <i class="fa fa-plus-circle me-1"></i> Ajouter un Témoignage
+                            </button>
+                            <button class="btn btn-sm btn-snu-red btn-save-section"><i class="fa fa-save me-1"></i> Sauvegarder</button>
+                        </div>
                     </div>
 
                     <div class="row g-3 mb-4">
@@ -1394,7 +1404,7 @@
                         </div>
                     </div>
 
-                    <h5 class="fw-bold mb-3 border-bottom pb-2" style="color: var(--snu-blue);">Les 3 Témoignages (Carrousel Déroulant)</h5>
+                    <h5 class="fw-bold mb-3 border-bottom pb-2" style="color: var(--snu-blue);">Liste des Témoignages (Carrousel Déroulant)</h5>
                     <div id="testimonialsList" class="row g-4">
                         <!-- Rempli dynamiquement en JS -->
                     </div>
@@ -2085,23 +2095,31 @@
                     var col = document.createElement('div');
                     col.className = 'col-md-4 col-sm-6';
                     col.innerHTML = `
-                        <div class="p-3 border rounded-3 bg-light text-center h-100">
-                            <div class="img-preview-box" style="height: 180px;">
-                                <img id="preview_team_${idx}" src="${m.img}" alt="${m.name}">
+                        <div class="p-3 border rounded-3 bg-light text-center h-100 shadow-sm d-flex flex-column justify-content-between">
+                            <div>
+                                <div class="d-flex align-items-center justify-content-between mb-2 pb-2 border-bottom">
+                                    <span class="badge bg-danger"><i class="fa fa-user me-1"></i> Membre #${idx + 1}</span>
+                                    <button type="button" class="btn btn-sm btn-outline-danger team-delete-btn" data-index="${idx}" title="Supprimer ce membre">
+                                        <i class="fa fa-trash me-1"></i> Supprimer
+                                    </button>
+                                </div>
+                                <div class="img-preview-box mb-2" style="height: 180px;">
+                                    <img id="preview_team_${idx}" src="${m.img || 'img/Logo_SNU.jpg'}" alt="${m.name || 'Membre'}">
+                                </div>
+                                <div class="mb-2 text-start">
+                                    <label class="form-label small fw-bold">Nom du membre</label>
+                                    <input type="text" class="form-control form-control-sm team-name-input" data-index="${idx}" value="${m.name || ''}" placeholder="Ex: Mr Jean Dupont">
+                                </div>
+                                <div class="mb-2 text-start">
+                                    <label class="form-label small fw-bold">Rôle / Fonction</label>
+                                    <input type="text" class="form-control form-control-sm team-role-input" data-index="${idx}" value="${m.role || ''}" placeholder="Ex: Resp. des Formations">
+                                </div>
+                                <div class="mb-2 text-start">
+                                    <label class="form-label small fw-bold">Chemin de l'image</label>
+                                    <input type="text" class="form-control form-control-sm team-img-input" data-index="${idx}" value="${m.img || ''}">
+                                </div>
                             </div>
-                            <div class="mb-2 text-start">
-                                <label class="form-label small">Nom du membre</label>
-                                <input type="text" class="form-control form-control-sm team-name-input" data-index="${idx}" value="${m.name}">
-                            </div>
-                            <div class="mb-2 text-start">
-                                <label class="form-label small">Rôle / Fonction</label>
-                                <input type="text" class="form-control form-control-sm team-role-input" data-index="${idx}" value="${m.role}">
-                            </div>
-                            <div class="mb-2 text-start">
-                                <label class="form-label small">Chemin de l'image</label>
-                                <input type="text" class="form-control form-control-sm team-img-input" data-index="${idx}" value="${m.img}">
-                            </div>
-                            <label class="btn btn-sm btn-snu-outline-red w-100">
+                            <label class="btn btn-sm btn-snu-outline-red w-100 mt-2">
                                 <i class="fa fa-camera me-1"></i> Remplacer la photo
                                 <input type="file" class="d-none team-file-input" data-index="${idx}" accept="image/*">
                             </label>
@@ -2126,7 +2144,8 @@
                     inp.addEventListener('input', function() {
                         var i = this.getAttribute('data-index');
                         currentContent.team.members[i].img = this.value;
-                        document.getElementById('preview_team_' + i).src = this.value;
+                        var prev = document.getElementById('preview_team_' + i);
+                        if (prev) prev.src = this.value;
                     });
                 });
                 container.querySelectorAll('.team-file-input').forEach(function(inp) {
@@ -2135,11 +2154,41 @@
                         if (e.target.files && e.target.files[0]) {
                             handleImageUpload(e.target.files[0], function(newSrc) {
                                 currentContent.team.members[i].img = newSrc;
-                                container.querySelector(`.team-img-input[data-index="${i}"]`).value = newSrc;
-                                document.getElementById('preview_team_' + i).src = newSrc;
+                                var textInp = container.querySelector(`.team-img-input[data-index="${i}"]`);
+                                if (textInp) textInp.value = newSrc;
+                                var prev = document.getElementById('preview_team_' + i);
+                                if (prev) prev.src = newSrc;
+                                showToast('Photo du membre mise à jour !', 'success');
                             });
                         }
                     });
+                });
+                container.querySelectorAll('.team-delete-btn').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        var i = parseInt(this.getAttribute('data-index'), 10);
+                        var memberName = (currentContent.team.members[i] && currentContent.team.members[i].name) ? currentContent.team.members[i].name : 'ce membre';
+                        if (confirm('Êtes-vous sûr de vouloir supprimer ' + memberName + ' de l\'équipe ?')) {
+                            currentContent.team.members.splice(i, 1);
+                            renderTeamList();
+                            showToast('Membre retiré de l\'équipe. N\'oubliez pas d\'enregistrer.', 'info');
+                        }
+                    });
+                });
+            }
+
+            var btnAddTeamMember = document.getElementById('btnAddTeamMember');
+            if (btnAddTeamMember) {
+                btnAddTeamMember.addEventListener('click', function() {
+                    if (!currentContent.team) currentContent.team = { members: [] };
+                    if (!currentContent.team.members) currentContent.team.members = [];
+                    currentContent.team.members.push({
+                        id: 'member_' + Date.now(),
+                        name: 'Nouveau Membre',
+                        role: 'Fonction / Poste',
+                        img: 'img/Logo_SNU.jpg'
+                    });
+                    renderTeamList();
+                    showToast('Nouveau membre ajouté à l\'équipe ! N\'oubliez pas d\'enregistrer.', 'success');
                 });
             }
 
@@ -2405,35 +2454,37 @@
                         <div class="p-3 border rounded-3 bg-light h-100 shadow-sm d-flex flex-column justify-content-between">
                             <div>
                                 <div class="d-flex align-items-center justify-content-between mb-3 border-bottom pb-2">
-                                    <span class="badge bg-danger">Avis #${idx + 1}</span>
-                                    <span class="small fw-bold text-muted">${m.name || 'Apprenant'}</span>
+                                    <span class="badge bg-danger"><i class="fa fa-comment-dots me-1"></i> Avis #${idx + 1}</span>
+                                    <button type="button" class="btn btn-sm btn-outline-danger testi-delete-btn" data-index="${idx}" title="Supprimer ce témoignage">
+                                        <i class="fa fa-trash me-1"></i> Supprimer
+                                    </button>
                                 </div>
                                 <div class="img-preview-box mb-2" style="height: 140px; background: #fff; border-radius: 8px; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 1px solid #e0e0e0;">
-                                    <img id="preview_testi_${idx}" src="${m.img}" alt="${m.name}" style="max-height: 100%; max-width: 100%; object-fit: cover;">
+                                    <img id="preview_testi_${idx}" src="${m.img || 'img/testimonial-1.jpeg'}" alt="${m.name || 'Apprenant'}" style="max-height: 100%; max-width: 100%; object-fit: cover;">
                                 </div>
                                 <div class="mb-2">
-                                    <label class="form-label small mb-1">Chemin de la photo</label>
-                                    <input type="text" class="form-control form-control-sm testi-img-input" data-index="${idx}" value="${m.img}">
+                                    <label class="form-label small mb-1 fw-bold">Chemin de la photo</label>
+                                    <input type="text" class="form-control form-control-sm testi-img-input" data-index="${idx}" value="${m.img || ''}">
                                 </div>
                                 <label class="btn btn-sm btn-snu-outline-red w-100 mb-3">
                                     <i class="fa fa-camera me-1"></i> Remplacer la photo
                                     <input type="file" class="d-none testi-file-input" data-index="${idx}" accept="image/*">
                                 </label>
                                 <div class="mb-2">
-                                    <label class="form-label small mb-1">Nom complet de l'apprenant</label>
-                                    <input type="text" class="form-control form-control-sm testi-name-input" data-index="${idx}" value="${m.name}" placeholder="Nom et prénom">
+                                    <label class="form-label small mb-1 fw-bold">Nom complet de l'apprenant</label>
+                                    <input type="text" class="form-control form-control-sm testi-name-input" data-index="${idx}" value="${m.name || ''}" placeholder="Nom et prénom">
                                 </div>
                                 <div class="mb-2">
-                                    <label class="form-label small mb-1">Rôle / Statut</label>
-                                    <input type="text" class="form-control form-control-sm testi-role-input" data-index="${idx}" value="${m.role}" placeholder="Ex: Étudiante en Informatique">
+                                    <label class="form-label small mb-1 fw-bold">Rôle / Statut</label>
+                                    <input type="text" class="form-control form-control-sm testi-role-input" data-index="${idx}" value="${m.role || ''}" placeholder="Ex: Étudiante en Informatique">
                                 </div>
                                 <div class="mb-2">
-                                    <label class="form-label small mb-1">Titre de l'avis</label>
-                                    <input type="text" class="form-control form-control-sm testi-title-input" data-index="${idx}" value="${m.title}" placeholder="Ex: Une formation qui change tout !">
+                                    <label class="form-label small mb-1 fw-bold">Titre de l'avis</label>
+                                    <input type="text" class="form-control form-control-sm testi-title-input" data-index="${idx}" value="${m.title || ''}" placeholder="Ex: Une formation qui change tout !">
                                 </div>
                                 <div class="mb-2">
-                                    <label class="form-label small mb-1">Texte du témoignage</label>
-                                    <textarea class="form-control form-control-sm testi-text-input" rows="4" data-index="${idx}" placeholder="Commentaire...">${m.text}</textarea>
+                                    <label class="form-label small mb-1 fw-bold">Texte du témoignage</label>
+                                    <textarea class="form-control form-control-sm testi-text-input" rows="4" data-index="${idx}" placeholder="Commentaire...">${m.text || ''}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -2483,9 +2534,39 @@
                                 if (imgInp) imgInp.value = newSrc;
                                 var prev = document.getElementById('preview_testi_' + i);
                                 if (prev) prev.src = newSrc;
+                                showToast('Photo du témoignage mise à jour !', 'success');
                             });
                         }
                     });
+                });
+                container.querySelectorAll('.testi-delete-btn').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        var i = parseInt(this.getAttribute('data-index'), 10);
+                        var author = (currentContent.testimonials.items[i] && currentContent.testimonials.items[i].name) ? currentContent.testimonials.items[i].name : 'cet apprenant';
+                        if (confirm('Êtes-vous sûr de vouloir supprimer le témoignage de ' + author + ' ?')) {
+                            currentContent.testimonials.items.splice(i, 1);
+                            renderTestimonialsList();
+                            showToast('Témoignage supprimé avec succès. N\'oubliez pas d\'enregistrer.', 'info');
+                        }
+                    });
+                });
+            }
+
+            var btnAddTestimonial = document.getElementById('btnAddTestimonial');
+            if (btnAddTestimonial) {
+                btnAddTestimonial.addEventListener('click', function() {
+                    if (!currentContent.testimonials) currentContent.testimonials = { items: [] };
+                    if (!currentContent.testimonials.items) currentContent.testimonials.items = [];
+                    currentContent.testimonials.items.push({
+                        id: 'testi_' + Date.now(),
+                        name: 'Nouvel Apprenant',
+                        role: 'Étudiant / Professionnel',
+                        title: 'Titre de l\'avis',
+                        text: 'Partagez ici l\'avis ou l\'expérience vécue à la Salle du Numérique.',
+                        img: 'img/testimonial-1.jpeg'
+                    });
+                    renderTestimonialsList();
+                    showToast('Nouveau témoignage ajouté ! N\'oubliez pas d\'enregistrer.', 'success');
                 });
             }
 
