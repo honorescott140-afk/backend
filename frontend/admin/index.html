@@ -274,7 +274,9 @@
         @media (max-width: 991.98px) {
             body.admin-body {
                 height: auto;
-                overflow: auto;
+                min-height: 100vh;
+                overflow-x: hidden;
+                overflow-y: auto;
             }
             .admin-main-wrapper {
                 flex-direction: column;
@@ -282,14 +284,67 @@
                 overflow: visible;
             }
             .admin-sidebar {
-                width: 100%;
-                height: auto;
+                display: none !important;
             }
             .admin-content-pane {
                 height: auto;
                 overflow: visible;
-                padding: 20px 16px;
+                padding: 16px 12px;
+                width: 100%;
             }
+            .admin-header-bar .navbar-collapse {
+                background: #b50000;
+                padding: 14px 16px !important;
+                border-radius: 12px !important;
+                margin-top: 10px !important;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+                max-height: 80vh;
+                overflow-y: auto;
+            }
+            .admin-header-bar .navbar-nav .nav-link {
+                color: #ffffff !important;
+                padding: 11px 14px !important;
+                border-radius: 8px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+                font-weight: 600;
+                font-size: 0.92rem;
+                display: flex;
+                align-items: center;
+                transition: all 0.2s ease;
+            }
+            .admin-header-bar .navbar-nav .nav-link:hover,
+            .admin-header-bar .navbar-nav .nav-link.active {
+                background: rgba(255, 255, 255, 0.2) !important;
+                border-bottom: 1px solid #ffffff !important;
+                color: #ffffff !important;
+            }
+            .admin-header-bar .navbar-nav .nav-link i {
+                width: 24px;
+                text-align: center;
+            }
+            .admin-brand-text {
+                font-size: 1.15rem !important;
+            }
+            .admin-logo-img {
+                height: 44px;
+                width: 44px;
+                margin-right: 10px;
+            }
+        }
+
+        body.dark-mode .admin-header-bar .navbar-collapse {
+            background: #0A0A0A !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            border-top: 2px solid var(--blaze-red, #d10000) !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.95) !important;
+        }
+        body.dark-mode .admin-header-bar .navbar-nav .nav-link {
+            border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+        }
+        body.dark-mode .admin-header-bar .navbar-nav .nav-link:hover,
+        body.dark-mode .admin-header-bar .navbar-nav .nav-link.active {
+            background: rgba(209, 0, 0, 0.3) !important;
+            border-bottom: 1px solid var(--blaze-red, #d10000) !important;
         }
 
         /* Cartes Style SNU */
@@ -557,23 +612,23 @@
 
 
     <!-- ════════════════════════════════════════════════════════
-         TOP BAR DE NAVIGATION (Style Navbar Officielle SNU)
+         TOP BAR DE NAVIGATION (Modèle Navbar Officielle SNU)
     ════════════════════════════════════════════════════════ -->
-    <header class="admin-header-bar">
-        <div class="container-fluid px-4">
-            <div class="d-flex align-items-center justify-content-between">
+    <header class="container-fluid sticky-top snu-navbar admin-header-bar p-0">
+        <div class="container-fluid px-3 px-lg-4">
+            <nav class="navbar navbar-expand-lg navbar-dark border-0 py-2">
                 
                 <!-- Logo & Titre SNU -->
-                <div class="d-flex align-items-center">
+                <a href="/admin/" class="navbar-brand d-flex align-items-center text-decoration-none">
                     <img src="img/Logo_SNU.jpg" alt="Logo SNU" class="admin-logo-img">
-                    <div>
-                        <h1 class="admin-brand-text">Salle du Numérique</h1>
-                        <span class="admin-badge-pill">Administration</span>
+                    <div class="d-flex flex-column">
+                        <span class="admin-brand-text navbar-title fw-bold text-white mb-0">Salle du Numérique</span>
+                        <span class="admin-badge-pill align-self-start">Administration</span>
                     </div>
-                </div>
+                </a>
 
-                <!-- Boutons d'Action Header -->
-                <div class="d-flex align-items-center gap-2">
+                <!-- Actions Header Desktop (Masqué sur mobile, visible >= 992px) -->
+                <div class="d-none d-lg-flex align-items-center gap-2 ms-auto">
                     <!-- Bouton Mode Sombre -->
                     <button id="adminThemeToggleBtn" class="theme-toggle-btn" title="Basculer Mode Sombre / Mode Clair">
                         <i class="fa fa-moon me-1 theme-icon"></i> <span class="theme-text d-none d-sm-inline">Mode Sombre</span>
@@ -595,7 +650,80 @@
                     </button>
                 </div>
 
-            </div>
+                <!-- Actions Header Mobile : Bouton Enregistrer rapide + Hamburger exact du site (< 992px) -->
+                <div class="d-flex d-lg-none align-items-center gap-2 ms-auto">
+                    <button id="btnSaveAllMobileHeader" class="btn btn-save-master py-1 px-3 d-flex align-items-center" title="Enregistrer Tout" style="font-size: 0.82rem;">
+                        <i class="fa fa-save me-1"></i> <span>Enregistrer</span>
+                    </button>
+                    <button type="button" class="navbar-toggler border-0 p-2" data-bs-toggle="collapse"
+                        data-bs-target="#adminNavbarCollapse" aria-controls="adminNavbarCollapse" aria-expanded="false"
+                        aria-label="Menu de navigation">
+                        <i class="fa fa-bars text-white fs-4"></i>
+                    </button>
+                </div>
+
+                <!-- Menu Déroulant Mobile EXACTEMENT comme sur le site public -->
+                <div class="collapse navbar-collapse d-lg-none w-100" id="adminNavbarCollapse">
+                    <div class="navbar-nav py-2" id="adminNavMobile">
+                        <div class="text-white-50 text-uppercase fw-bold px-3 pt-2 pb-1" style="font-size: 0.72rem; letter-spacing: 1.5px;">Pages du Site</div>
+                        <a href="#tab-accueil" class="nav-item nav-link nav-snu-link active px-3" data-tab="tab-accueil">
+                            <i class="fa fa-home me-2"></i> Accueil
+                        </a>
+                        <a href="#tab-news" class="nav-item nav-link nav-snu-link px-3" data-tab="tab-news">
+                            <i class="fa fa-newspaper me-2"></i> Actualités
+                        </a>
+                        <a href="#tab-ensavoirplus" class="nav-item nav-link nav-snu-link px-3" data-tab="tab-ensavoirplus">
+                            <i class="fa fa-info-circle me-2"></i> En savoir plus
+                        </a>
+                        <a href="#tab-services" class="nav-item nav-link nav-snu-link px-3" data-tab="tab-services">
+                            <i class="fa fa-desktop me-2"></i> Services
+                        </a>
+                        <a href="#tab-formations" class="nav-item nav-link nav-snu-link px-3" data-tab="tab-formations">
+                            <i class="fa fa-graduation-cap me-2"></i> Formations
+                        </a>
+                        <a href="#tab-contact" class="nav-item nav-link nav-snu-link px-3" data-tab="tab-contact">
+                            <i class="fa fa-envelope-open-text me-2"></i> Contact
+                        </a>
+
+                        <div class="text-white-50 text-uppercase fw-bold px-3 pt-3 pb-1" style="font-size: 0.72rem; letter-spacing: 1.5px;">Équipe &amp; Avis</div>
+                        <a href="#tab-team" class="nav-item nav-link nav-snu-link px-3" data-tab="tab-team">
+                            <i class="fa fa-users me-2"></i> Équipe de Gestion
+                        </a>
+                        <a href="#tab-testimonials" class="nav-item nav-link nav-snu-link px-3" data-tab="tab-testimonials">
+                            <i class="fa fa-comments me-2"></i> Témoignages
+                        </a>
+                        <a href="#tab-media" class="nav-item nav-link nav-snu-link px-3" data-tab="tab-media">
+                            <i class="fa fa-photo-video me-2"></i> Médiathèque Photos
+                        </a>
+
+                        <div class="text-white-50 text-uppercase fw-bold px-3 pt-3 pb-1" style="font-size: 0.72rem; letter-spacing: 1.5px;">Administration</div>
+                        <a href="#tab-messages" class="nav-item nav-link nav-snu-link px-3 d-flex align-items-center justify-content-between" data-tab="tab-messages">
+                            <span><i class="fa fa-inbox me-2"></i> Messagerie</span>
+                            <span id="badgeUnreadMessagesMobile" class="badge rounded-pill bg-white text-danger d-none">0</span>
+                        </a>
+                        <a href="#tab-settings" class="nav-item nav-link nav-snu-link px-3" data-tab="tab-settings">
+                            <i class="fa fa-cog me-2"></i> Paramètres
+                        </a>
+
+                        <div class="border-top border-white-10 my-3"></div>
+                        <div class="d-flex flex-column gap-2 px-2 pb-2">
+                            <button type="button" class="btn btn-save-master w-100 py-2 d-flex align-items-center justify-content-center" id="btnSaveAllMobileMenu">
+                                <i class="fa fa-save me-2"></i> Enregistrer Tout
+                            </button>
+                            <a href="/" target="_blank" class="btn btn-outline-light w-100 py-2 d-flex align-items-center justify-content-center">
+                                <i class="fa fa-external-link-alt me-2"></i> Voir le Site Utilisateur
+                            </a>
+                            <button type="button" class="theme-toggle-btn w-100 py-2 d-flex align-items-center justify-content-center" id="adminThemeToggleBtnMobile">
+                                <i class="fa fa-moon me-2 theme-icon"></i> <span class="theme-text">Mode Sombre</span>
+                            </button>
+                            <button type="button" class="btn btn-light text-danger fw-bold w-100 py-2 d-flex align-items-center justify-content-center" id="btnLogoutMobile">
+                                <i class="fa fa-power-off me-2"></i> Déconnexion
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </nav>
         </div>
     </header>
 
@@ -1607,8 +1735,13 @@
                 });
             }
 
-            if (btnLogout) {
-                btnLogout.addEventListener('click', function() {
+            var logoutButtons = [
+                document.getElementById('btnLogout'),
+                document.getElementById('btnLogoutMobile')
+            ].filter(Boolean);
+
+            logoutButtons.forEach(function(btn) {
+                btn.addEventListener('click', function() {
                     if (confirm('Voulez-vous vous déconnecter de l\'administration ?')) {
                         try {
                             sessionStorage.removeItem(AUTH_KEY);
@@ -1617,7 +1750,7 @@
                         window.location.reload();
                     }
                 });
-            }
+            });
 
             checkAuth();
 
@@ -1647,8 +1780,24 @@
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
                     var targetId = this.getAttribute('data-tab');
+                    if (!targetId) return;
                     window.location.hash = targetId;
                     switchTab(targetId);
+
+                    // Fermeture automatique du menu déroulant mobile après sélection (comme sur le site public)
+                    var collapseEl = document.getElementById('adminNavbarCollapse');
+                    if (collapseEl && collapseEl.classList.contains('show')) {
+                        try {
+                            var bsCollapse = bootstrap.Collapse.getInstance(collapseEl) || new bootstrap.Collapse(collapseEl, { toggle: false });
+                            bsCollapse.hide();
+                        } catch (err) {
+                            collapseEl.classList.remove('show');
+                        }
+                    }
+
+                    if (window.innerWidth < 992) {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
                 });
             });
 
@@ -2510,11 +2659,19 @@
             });
 
             // ── 6. SAUVEGARDE GLOBALE ──
+            var saveButtons = [
+                document.getElementById('btnSaveAll'),
+                document.getElementById('btnSaveAllMobileHeader'),
+                document.getElementById('btnSaveAllMobileMenu')
+            ].filter(Boolean);
+
             function saveAllChanges() {
-                var saveBtn = document.getElementById('btnSaveAll');
-                var originalHtml = saveBtn.innerHTML;
-                saveBtn.innerHTML = '<i class="fa fa-spinner fa-spin me-2"></i> Enregistrement...';
-                saveBtn.disabled = true;
+                var originalHtmlMap = new Map();
+                saveButtons.forEach(function(btn) {
+                    originalHtmlMap.set(btn, btn.innerHTML);
+                    btn.innerHTML = '<i class="fa fa-spinner fa-spin me-1"></i> Sauvegarde...';
+                    btn.disabled = true;
+                });
 
                 var jsonStr = JSON.stringify(currentContent);
                 localStorage.setItem(STORAGE_KEY, jsonStr);
@@ -2539,12 +2696,16 @@
                     showToast('Modifications enregistrées localement !', 'success');
                 })
                 .finally(function() {
-                    saveBtn.innerHTML = originalHtml;
-                    saveBtn.disabled = false;
+                    saveButtons.forEach(function(btn) {
+                        btn.innerHTML = originalHtmlMap.get(btn) || '<i class="fa fa-save me-2"></i> Enregistrer Tout';
+                        btn.disabled = false;
+                    });
                 });
             }
 
-            document.getElementById('btnSaveAll').addEventListener('click', saveAllChanges);
+            saveButtons.forEach(function(btn) {
+                btn.addEventListener('click', saveAllChanges);
+            });
             document.querySelectorAll('.btn-save-section').forEach(function(btn) {
                 btn.addEventListener('click', saveAllChanges);
             });
@@ -2720,14 +2881,17 @@
                 if (statUnread) statUnread.textContent = unread;
                 if (statRead) statRead.textContent = read;
 
-                if (badgeUnread) {
-                    if (unread > 0) {
-                        badgeUnread.textContent = unread;
-                        badgeUnread.classList.remove('d-none');
-                    } else {
-                        badgeUnread.classList.add('d-none');
+                ['badgeUnreadMessages', 'badgeUnreadMessagesMobile'].forEach(function(id) {
+                    var b = document.getElementById(id);
+                    if (b) {
+                        if (unread > 0) {
+                            b.textContent = unread;
+                            b.classList.remove('d-none');
+                        } else {
+                            b.classList.add('d-none');
+                        }
                     }
-                }
+                });
 
                 var lastUpdated = document.getElementById('messagesLastUpdated');
                 if (lastUpdated) {
