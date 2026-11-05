@@ -362,22 +362,26 @@ def get_local_hour(data: dict) -> int:
 
 
 # ══════════════════════════════════════════════════════════════
-#   APPLICATION FLASK — Sans JWT, CORS ouvert
+#   APPLICATION FLASK — Configuration CORS Universelle
 # ══════════════════════════════════════════════════════════════
 app = Flask(__name__)
 
+# Activation de Flask-CORS pour toutes les origines (salle-du-numerique.org, localhost, Render)
 CORS(app, resources={
-    r"/claudia/*": {
+    r"/*": {
         "origins": "*",
-        "methods": ["GET", "POST", "OPTIONS"],
-        "allow_headers": ["Content-Type"]
-    },
-    r"/api/*": {
-        "origins": "*",
-        "methods": ["GET", "POST", "OPTIONS"],
-        "allow_headers": ["Content-Type", "Authorization", "X-Admin-Token", "X-Admin-Key"]
+        "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+        "allow_headers": ["Content-Type", "Authorization", "X-Admin-Token", "X-Admin-Key", "X-Requested-With", "Accept"],
+        "expose_headers": ["Content-Type", "Authorization", "X-Admin-Token"]
     }
 })
+
+@app.after_request
+def add_cors_headers(response):
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS, PATCH"
+    response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization, X-Admin-Token, X-Admin-Key, X-Requested-With, Accept"
+    return response
 
 
 # ── Route : /claudia/ask ────────────────────────────────────
@@ -425,8 +429,10 @@ def claudia_ask():
 
 
 # ── Route : /claudia/status ─────────────────────────────────
-@app.route("/claudia/status", methods=["GET"])
+@app.route("/claudia/status", methods=["GET", "OPTIONS"])
 def claudia_status():
+    if request.method == "OPTIONS":
+        return jsonify({}), 200
     session_id = get_session_id(request)
     with _rate_lock:
         entry = _rate_store.get(session_id)
@@ -616,8 +622,10 @@ def api_upload():
     else:
         return jsonify({"success": False, "error": "Format de fichier non autorisé"}), 400
 
-@app.route("/api/images", methods=["GET"])
+@app.route("/api/images", methods=["GET", "OPTIONS"])
 def api_images():
+    if request.method == "OPTIONS":
+        return jsonify({}), 200
     images = set()
     img_dir = os.path.join(FRONTEND_DIR, "img")
     if os.path.exists(img_dir):

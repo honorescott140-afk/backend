@@ -23,3 +23,4 @@ EXPOSE 5050
 
 # Lancement résilient compatible Render et local
 CMD ["sh", "-c", "gunicorn --bind 0.0.0.0:${PORT:-5050} --workers 2 --timeout 120 --chdir backend app:app"]
+

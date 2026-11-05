@@ -2,10 +2,25 @@
  * CLAUDIA SNU - Site Content Dynamic Synchronization
  * Permet de synchroniser les textes et images du site public avec les modifications effectuées depuis l'espace Admin.
  */
+window.API_URL = window.API_URL || "https://backend-eueq.onrender.com";
+
 (function () {
     'use strict';
 
     var STORAGE_KEY = 'snu_site_content';
+
+    function resolveMediaUrl(url) {
+        if (!url) return '';
+        if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:') || url.startsWith('blob:')) {
+            return url;
+        }
+        var clean = url.replace(/^\//, '');
+        if (clean.startsWith('img/uploads/') && !window.location.origin.includes('localhost') && !window.location.origin.includes('127.0.0.1')) {
+            var backend = (window.API_URL || 'https://backend-eueq.onrender.com').replace(/\/$/, '');
+            return backend + '/' + clean;
+        }
+        return url;
+    }
 
     function getNestedValue(obj, path) {
         if (!obj || !path) return null;
@@ -40,7 +55,7 @@
             var key = el.getAttribute('data-cms-img');
             var val = getNestedValue(data, key);
             if (val) {
-                el.setAttribute('src', val);
+                el.setAttribute('src', resolveMediaUrl(val));
             }
         });
 
@@ -75,7 +90,7 @@
             if (heroImgs.length) {
                 data.hero.slides.forEach(function (src, idx) {
                     if (heroImgs[idx]) {
-                        heroImgs[idx].setAttribute('src', src);
+                        heroImgs[idx].setAttribute('src', resolveMediaUrl(src));
                     }
                 });
             }
@@ -90,7 +105,7 @@
                 var img = card.querySelector('img');
                 var name = card.querySelector('.snu-name');
                 var role = card.querySelector('.snu-role');
-                if (img && m.img) img.setAttribute('src', m.img);
+                if (img && m.img) img.setAttribute('src', resolveMediaUrl(m.img));
                 if (name && m.name) name.textContent = m.name;
                 if (role && m.role) role.textContent = m.role;
             });
@@ -218,7 +233,7 @@
                     col.className = 'col-md-6 col-lg-4';
                     col.innerHTML = `
                         <article class="news-card h-100">
-                            <img src="${item.img || 'img/Salle1.jpg'}" alt="${item.title || 'Actualité de la Salle du Numérique'}" class="news-card-img">
+                            <img src="${resolveMediaUrl(item.img || 'img/Salle1.jpg')}" alt="${item.title || 'Actualité de la Salle du Numérique'}" class="news-card-img">
                             <div class="p-4">
                                 <div class="small text-danger fw-bold mb-2">${item.category || 'Actualité'} · ${item.date || ''}</div>
                                 <h3 class="h5">${item.title || ''}</h3>
@@ -240,7 +255,7 @@
                     col.className = 'col-sm-6 col-lg-4';
                     col.innerHTML = `
                         <article class="snu-team-card h-100">
-                            <div class="snu-img-wrap"><img src="${m.img || 'img/Logo_SNU.jpg'}" alt="${m.name || 'Membre de l\'équipe'}, ${m.role || 'Fonction'}"></div>
+                            <div class="snu-img-wrap"><img src="${resolveMediaUrl(m.img || 'img/Logo_SNU.jpg')}" alt="${m.name || 'Membre de l\'équipe'}, ${m.role || 'Fonction'}"></div>
                             <div class="snu-info">
                                 <div class="snu-name">${m.name || ''}</div>
                                 <div class="snu-role">${m.role || ''}</div>
@@ -277,7 +292,7 @@
                             <div class="row g-5 align-items-center">
                                 <div class="col-md-6">
                                     <div class="testimonial-img">
-                                        <img class="img-fluid" src="${t.img || 'img/testimonial-1.jpeg'}" alt="${t.name || ''}">
+                                        <img class="img-fluid" src="${resolveMediaUrl(t.img || 'img/testimonial-1.jpeg')}" alt="${t.name || ''}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -488,24 +503,48 @@
             applySiteContent(localData);
         }
 
-        // Priorité 2 : fichier data/content.json sur le serveur
-        fetch('data/content.json?v=' + new Date().getTime())
+        // Priorité 2 : API distante (Render) si en ligne sur salle-du-numerique.org, sinon fichier local data/content.json
+        var backendUrl = (window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1'))
+            ? ''
+            : (window.API_URL || 'https://backend-eueq.onrender.com');
+
+        var primaryUrl = backendUrl ? (backendUrl + '/api/content?v=' + Date.now()) : ('data/content.json?v=' + Date.now());
+
+        function fetchFallback() {
+            fetch('data/content.json?v=' + Date.now())
+                .then(function (res) {
+                    if (!res.ok) throw new Error('Status ' + res.status);
+                    return res.json();
+                })
+                .then(function (fallbackData) {
+                    if (!localData) {
+                        applySiteContent(fallbackData);
+                    } else {
+                        var merged = Object.assign({}, fallbackData, localData);
+                        applySiteContent(merged);
+                    }
+                })
+                .catch(function () {});
+        }
+
+        fetch(primaryUrl)
             .then(function (res) {
                 if (!res.ok) throw new Error('Status ' + res.status);
                 return res.json();
             })
-            .then(function (serverData) {
-                // Si aucune modification locale, utiliser les données du serveur
+            .then(function (json) {
+                var serverData = (json && json.data) ? json.data : json;
                 if (!localData) {
                     applySiteContent(serverData);
                 } else {
-                    // Si localData existe, on l'applique mais on s'assure que les nouveaux champs serveur sont pris en compte
                     var merged = Object.assign({}, serverData, localData);
                     applySiteContent(merged);
                 }
             })
-            .catch(function (err) {
-                // Si content.json n'est pas dispo (ex: CORS file://), localData fait l'affaire
+            .catch(function () {
+                if (backendUrl) {
+                    fetchFallback();
+                }
             });
     }
 

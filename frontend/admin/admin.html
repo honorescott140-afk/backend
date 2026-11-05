@@ -1569,6 +1569,16 @@
             var currentContent = {};
             var backendUrl = (window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? window.location.origin : (window.API_URL || 'https://backend-eueq.onrender.com');
 
+            function resolveAdminMedia(src) {
+                if (!src) return '';
+                if (src.startsWith('http://') || src.startsWith('https://') || src.startsWith('data:') || src.startsWith('blob:')) return src;
+                var clean = src.replace(/^\//, '');
+                if (clean.startsWith('img/uploads/') && backendUrl && !backendUrl.includes('localhost') && !backendUrl.includes('127.0.0.1')) {
+                    return backendUrl.replace(/\/$/, '') + '/' + clean;
+                }
+                return src;
+            }
+
             // ── GESTION DU STOCKAGE DES JETONS (TOKENS) ──
             function getAdminToken() {
                 try {
@@ -1755,26 +1765,26 @@
                 if (currentContent.hero && currentContent.hero.slides) {
                     currentContent.hero.slides.forEach(function(src, i) {
                         var img = document.getElementById('preview_hero_slide_' + i);
-                        if (img && src) img.src = src;
+                        if (img && src) img.src = resolveAdminMedia(src);
                     });
                 }
                 if (currentContent.about) {
-                    if (currentContent.about.img1) document.getElementById('preview_about_img1').src = currentContent.about.img1;
-                    if (currentContent.about.img2) document.getElementById('preview_about_img2').src = currentContent.about.img2;
+                    if (currentContent.about.img1) document.getElementById('preview_about_img1').src = resolveAdminMedia(currentContent.about.img1);
+                    if (currentContent.about.img2) document.getElementById('preview_about_img2').src = resolveAdminMedia(currentContent.about.img2);
                 }
                 if (currentContent.directeur && currentContent.directeur.photo) {
-                    document.getElementById('preview_dir_photo').src = currentContent.directeur.photo;
+                    document.getElementById('preview_dir_photo').src = resolveAdminMedia(currentContent.directeur.photo);
                 }
                 if (currentContent.salle_page && currentContent.salle_page.gallery) {
                     currentContent.salle_page.gallery.forEach(function(src, i) {
                         var img = document.getElementById('preview_salle_' + i);
-                        if (img && src) img.src = src;
+                        if (img && src) img.src = resolveAdminMedia(src);
                     });
                 }
                 if (currentContent.salle_page && currentContent.salle_page.galerie_lieu) {
                     currentContent.salle_page.galerie_lieu.forEach(function(item, i) {
                         var img = document.getElementById('preview_galerie_lieu_' + i);
-                        if (img && item && item.img) img.src = item.img;
+                        if (img && item && item.img) img.src = resolveAdminMedia(item.img);
                     });
                 }
 
@@ -1884,7 +1894,7 @@
                                 <div class="row g-2 mb-2">
                                     <div class="col-sm-4 text-center">
                                         <div class="img-preview-box mb-2" style="height: 110px; background: #fff; border-radius: 8px; overflow: hidden; border: 1px solid #e0e0e0; display: flex; align-items: center; justify-content: center;">
-                                            <img id="preview_news_${idx}" src="${item.img || 'img/Salle1.jpg'}" alt="Photo" style="max-height: 100%; max-width: 100%; object-fit: cover;">
+                                            <img id="preview_news_${idx}" src="${resolveAdminMedia(item.img || 'img/Salle1.jpg')}" alt="Photo" style="max-height: 100%; max-width: 100%; object-fit: cover;">
                                         </div>
                                         <label class="btn btn-sm btn-snu-outline-red w-100 py-1" style="font-size: 0.75rem;">
                                             <i class="fa fa-camera me-1"></i> Changer photo
@@ -2104,7 +2114,7 @@
                                     </button>
                                 </div>
                                 <div class="img-preview-box mb-2" style="height: 180px;">
-                                    <img id="preview_team_${idx}" src="${m.img || 'img/Logo_SNU.jpg'}" alt="${m.name || 'Membre'}">
+                                    <img id="preview_team_${idx}" src="${resolveAdminMedia(m.img || 'img/Logo_SNU.jpg')}" alt="${m.name || 'Membre'}">
                                 </div>
                                 <div class="mb-2 text-start">
                                     <label class="form-label small fw-bold">Nom du membre</label>
@@ -2460,7 +2470,7 @@
                                     </button>
                                 </div>
                                 <div class="img-preview-box mb-2" style="height: 140px; background: #fff; border-radius: 8px; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 1px solid #e0e0e0;">
-                                    <img id="preview_testi_${idx}" src="${m.img || 'img/testimonial-1.jpeg'}" alt="${m.name || 'Apprenant'}" style="max-height: 100%; max-width: 100%; object-fit: cover;">
+                                    <img id="preview_testi_${idx}" src="${resolveAdminMedia(m.img || 'img/testimonial-1.jpeg')}" alt="${m.name || 'Apprenant'}" style="max-height: 100%; max-width: 100%; object-fit: cover;">
                                 </div>
                                 <div class="mb-2">
                                     <label class="form-label small mb-1 fw-bold">Chemin de la photo</label>
