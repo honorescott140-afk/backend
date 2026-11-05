@@ -292,6 +292,24 @@
             }
         }
 
+        @media (max-width: 767.98px) {
+            .admin-logo-img {
+                height: 44px;
+                width: 44px;
+                margin-right: 10px;
+            }
+            .admin-brand-text {
+                font-size: 1.15rem;
+            }
+            .admin-badge-pill {
+                font-size: 0.68rem;
+                padding: 1px 8px;
+            }
+            .admin-header-bar {
+                padding: 8px 0;
+            }
+        }
+
         /* Cartes Style SNU */
         .admin-card {
             background: #ffffff;
@@ -560,20 +578,21 @@
          TOP BAR DE NAVIGATION (Style Navbar Officielle SNU)
     ════════════════════════════════════════════════════════ -->
     <header class="admin-header-bar">
-        <div class="container-fluid px-4">
+        <div class="container-fluid px-3 px-sm-4">
+            <!-- Ligne 1 : Logo, Titre & Actions (Desktop / Mobile) -->
             <div class="d-flex align-items-center justify-content-between">
                 
                 <!-- Logo & Titre SNU -->
                 <div class="d-flex align-items-center">
                     <img src="img/Logo_SNU.jpg" alt="Logo SNU" class="admin-logo-img">
                     <div>
-                        <h1 class="admin-brand-text">Salle du Numérique</h1>
+                        <h1 class="admin-brand-text mb-0">Salle du Numérique</h1>
                         <span class="admin-badge-pill">Administration</span>
                     </div>
                 </div>
 
-                <!-- Boutons d'Action Header -->
-                <div class="d-flex align-items-center gap-2">
+                <!-- Boutons d'Action Header (Desktop >= 768px) -->
+                <div class="d-none d-md-flex align-items-center gap-2">
                     <!-- Bouton Mode Sombre -->
                     <button id="adminThemeToggleBtn" class="theme-toggle-btn" title="Basculer Mode Sombre / Mode Clair">
                         <i class="fa fa-moon me-1 theme-icon"></i> <span class="theme-text d-none d-sm-inline">Mode Sombre</span>
@@ -595,6 +614,26 @@
                     </button>
                 </div>
 
+                <!-- Boutons d'Accès Rapide Mobile (< 768px) : Thème & Déconnexion -->
+                <div class="d-flex d-md-none align-items-center gap-2">
+                    <button id="adminThemeToggleBtnMobile" class="theme-toggle-btn btn btn-sm py-1 px-2" title="Basculer Mode Sombre / Mode Clair">
+                        <i class="fa fa-moon theme-icon"></i>
+                    </button>
+                    <button id="btnLogoutMobile" class="btn btn-logout-header btn-sm py-1 px-2" title="Se déconnecter">
+                        <i class="fa fa-power-off"></i>
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- Ligne 2 Mobile (< 768px) : "Enregistrer Tout" et "Voir le Site" 100% visibles et faciles à toucher -->
+            <div class="d-flex d-md-none align-items-center gap-2 pt-2 mt-2" style="border-top: 1px solid rgba(255, 255, 255, 0.2);">
+                <button id="btnSaveAllMobile" class="btn btn-save-master flex-fill py-2 d-flex align-items-center justify-content-center fw-bold" style="font-size: 0.88rem;">
+                    <i class="fa fa-save me-2"></i> Enregistrer Tout
+                </button>
+                <a href="/" target="_blank" class="btn btn-view-site flex-fill py-2 d-flex align-items-center justify-content-center fw-bold" style="font-size: 0.88rem;">
+                    <i class="fa fa-external-link-alt me-2"></i> Voir le Site
+                </a>
             </div>
         </div>
     </header>
@@ -1607,8 +1646,13 @@
                 });
             }
 
-            if (btnLogout) {
-                btnLogout.addEventListener('click', function() {
+            var logoutButtons = [
+                document.getElementById('btnLogout'),
+                document.getElementById('btnLogoutMobile')
+            ].filter(Boolean);
+
+            logoutButtons.forEach(function(btn) {
+                btn.addEventListener('click', function() {
                     if (confirm('Voulez-vous vous déconnecter de l\'administration ?')) {
                         try {
                             sessionStorage.removeItem(AUTH_KEY);
@@ -1617,7 +1661,7 @@
                         window.location.reload();
                     }
                 });
-            }
+            });
 
             checkAuth();
 
@@ -2510,11 +2554,18 @@
             });
 
             // ── 6. SAUVEGARDE GLOBALE ──
+            var saveButtons = [
+                document.getElementById('btnSaveAll'),
+                document.getElementById('btnSaveAllMobile')
+            ].filter(Boolean);
+
             function saveAllChanges() {
-                var saveBtn = document.getElementById('btnSaveAll');
-                var originalHtml = saveBtn.innerHTML;
-                saveBtn.innerHTML = '<i class="fa fa-spinner fa-spin me-2"></i> Enregistrement...';
-                saveBtn.disabled = true;
+                var originalHtmlMap = new Map();
+                saveButtons.forEach(function(btn) {
+                    originalHtmlMap.set(btn, btn.innerHTML);
+                    btn.innerHTML = '<i class="fa fa-spinner fa-spin me-1"></i> Sauvegarde...';
+                    btn.disabled = true;
+                });
 
                 var jsonStr = JSON.stringify(currentContent);
                 localStorage.setItem(STORAGE_KEY, jsonStr);
@@ -2539,12 +2590,16 @@
                     showToast('Modifications enregistrées localement !', 'success');
                 })
                 .finally(function() {
-                    saveBtn.innerHTML = originalHtml;
-                    saveBtn.disabled = false;
+                    saveButtons.forEach(function(btn) {
+                        btn.innerHTML = originalHtmlMap.get(btn) || '<i class="fa fa-save me-2"></i> Enregistrer Tout';
+                        btn.disabled = false;
+                    });
                 });
             }
 
-            document.getElementById('btnSaveAll').addEventListener('click', saveAllChanges);
+            saveButtons.forEach(function(btn) {
+                btn.addEventListener('click', saveAllChanges);
+            });
             document.querySelectorAll('.btn-save-section').forEach(function(btn) {
                 btn.addEventListener('click', saveAllChanges);
             });
