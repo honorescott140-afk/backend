@@ -271,24 +271,134 @@
             background: rgba(209, 0, 0, 0.5);
         }
 
+        /* ════════════════════════════════════════════════════════
+           OPTIMISATION RESPONSIVE & MOBILE (TIROIR & ERGONOMIE)
+        ════════════════════════════════════════════════════════ */
+        .admin-sidebar-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(3px);
+            z-index: 1045;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.25s ease;
+        }
+
+        .admin-sidebar-backdrop.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
         @media (max-width: 991.98px) {
             body.admin-body {
                 height: auto;
-                overflow: auto;
+                min-height: 100vh;
+                overflow-x: hidden;
+                overflow-y: auto;
             }
+
+            .admin-header-bar {
+                padding: 8px 0;
+            }
+
+            .admin-logo-img {
+                height: 40px;
+                width: 40px;
+                margin-right: 8px;
+            }
+
+            .admin-brand-text {
+                font-size: 1.05rem;
+                letter-spacing: -0.3px;
+            }
+
+            .admin-badge-pill {
+                font-size: 0.65rem;
+                padding: 1px 7px;
+            }
+
             .admin-main-wrapper {
                 flex-direction: column;
                 height: auto;
                 overflow: visible;
             }
+
+            /* Sidebar transformée en Drawer Offcanvas sur Mobile */
             .admin-sidebar {
-                width: 100%;
-                height: auto;
+                position: fixed;
+                top: 0;
+                left: -310px;
+                width: 290px;
+                height: 100vh;
+                z-index: 1050;
+                background: #ffffff;
+                box-shadow: 6px 0 25px rgba(0, 0, 0, 0.25);
+                transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                overflow-y: auto;
+                padding: 16px 0 30px 0;
             }
+
+            .admin-sidebar.show {
+                left: 0;
+            }
+
             .admin-content-pane {
                 height: auto;
                 overflow: visible;
-                padding: 20px 16px;
+                padding: 14px 10px 85px 10px; /* Espace pour le bouton d'enregistrement flottant */
+            }
+
+            .admin-card {
+                padding: 16px 12px;
+                margin-bottom: 16px;
+                border-radius: 12px;
+            }
+
+            .admin-card-header {
+                flex-direction: column;
+                align-items: flex-start !important;
+                gap: 10px;
+            }
+
+            .admin-card-header .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .admin-card-title {
+                font-size: 1.15rem;
+                line-height: 1.3;
+            }
+
+            /* Évite le zoom automatique invasif sur mobile */
+            .form-control, .form-select, textarea {
+                font-size: 16px !important;
+            }
+
+            .snu-login-card {
+                padding: 26px 18px;
+                margin: 10px auto;
+                width: 100%;
+                max-width: 380px;
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .admin-brand-text {
+                font-size: 0.95rem;
+            }
+
+            .btn-view-site, .btn-save-master {
+                padding: 5px 9px;
+                font-size: 0.78rem;
+            }
+
+            .btn-logout-header {
+                padding: 5px 9px;
             }
         }
 
@@ -560,37 +670,40 @@
          TOP BAR DE NAVIGATION (Style Navbar Officielle SNU)
     ════════════════════════════════════════════════════════ -->
     <header class="admin-header-bar">
-        <div class="container-fluid px-4">
+        <div class="container-fluid px-2 px-md-4">
             <div class="d-flex align-items-center justify-content-between">
                 
-                <!-- Logo & Titre SNU -->
+                <!-- Hamburger Menu Mobile + Logo & Titre SNU -->
                 <div class="d-flex align-items-center">
+                    <button id="btnMobileNavToggle" class="btn btn-sm btn-outline-light d-lg-none me-2 px-2 py-1" aria-label="Menu de navigation" title="Ouvrir le menu">
+                        <i class="fa fa-bars fs-5"></i>
+                    </button>
                     <img src="img/Logo_SNU.jpg" alt="Logo SNU" class="admin-logo-img">
                     <div>
-                        <h1 class="admin-brand-text">Salle du Numérique</h1>
-                        <span class="admin-badge-pill">Administration</span>
+                        <h1 class="admin-brand-text mb-0">Salle du Numérique</h1>
+                        <span class="admin-badge-pill d-none d-sm-inline-block">Administration</span>
                     </div>
                 </div>
 
                 <!-- Boutons d'Action Header -->
-                <div class="d-flex align-items-center gap-2">
+                <div class="d-flex align-items-center gap-1 gap-sm-2">
                     <!-- Bouton Mode Sombre -->
-                    <button id="adminThemeToggleBtn" class="theme-toggle-btn" title="Basculer Mode Sombre / Mode Clair">
-                        <i class="fa fa-moon me-1 theme-icon"></i> <span class="theme-text d-none d-sm-inline">Mode Sombre</span>
+                    <button id="adminThemeToggleBtn" class="theme-toggle-btn btn-sm px-2 py-1" title="Basculer Mode Sombre / Mode Clair">
+                        <i class="fa fa-moon theme-icon"></i> <span class="theme-text d-none d-md-inline ms-1">Mode Sombre</span>
                     </button>
 
                     <!-- Bouton Voir le Site Public -->
-                    <a href="/" target="_blank" class="btn btn-view-site d-flex align-items-center" title="Ouvrir le site utilisateur">
-                        <i class="fa fa-external-link-alt me-2"></i> Voir le Site Utilisateur
+                    <a href="/" target="_blank" class="btn btn-view-site d-flex align-items-center px-2 px-sm-3 py-1" title="Ouvrir le site utilisateur">
+                        <i class="fa fa-external-link-alt"></i> <span class="d-none d-sm-inline ms-1">Site</span>
                     </a>
 
                     <!-- Bouton Enregistrer Tout (Blanc et Rouge) -->
-                    <button id="btnSaveAll" class="btn btn-save-master d-flex align-items-center">
-                        <i class="fa fa-save me-2"></i> Enregistrer Tout
+                    <button id="btnSaveAll" class="btn btn-save-master d-flex align-items-center px-2 px-sm-3 py-1">
+                        <i class="fa fa-save"></i> <span class="d-none d-sm-inline ms-1">Enregistrer</span>
                     </button>
 
                     <!-- Déconnexion -->
-                    <button id="btnLogout" class="btn btn-logout-header" title="Se déconnecter">
+                    <button id="btnLogout" class="btn btn-logout-header px-2 py-1" title="Se déconnecter">
                         <i class="fa fa-power-off"></i>
                     </button>
                 </div>
@@ -599,14 +712,41 @@
         </div>
     </header>
 
+    <!-- Sous-barre mobile avec indicateur d'onglet et raccourci pour changer -->
+    <div class="admin-mobile-subbar d-lg-none d-flex align-items-center justify-content-between px-3 py-2 bg-white border-bottom shadow-sm position-sticky" style="top: 0; z-index: 1020;">
+        <div class="d-flex align-items-center gap-2 overflow-hidden">
+            <span class="badge bg-danger">Page</span>
+            <span id="mobileActiveTabLabel" class="fw-bold text-dark small text-truncate">Accueil</span>
+        </div>
+        <button id="btnOpenDrawer" class="btn btn-sm btn-outline-danger py-1 px-2 fw-bold small d-flex align-items-center">
+            <i class="fa fa-th-large me-1"></i> Changer d'onglet
+        </button>
+    </div>
+
+    <!-- Backdrop pour fermer le menu mobile en cliquant à côté -->
+    <div id="adminSidebarBackdrop" class="admin-sidebar-backdrop d-lg-none"></div>
+
+    <!-- Bouton Flottant Sauvegarde Rapide sur Mobile -->
+    <button id="btnSaveMobileFab" class="btn btn-snu-red shadow-lg d-lg-none position-fixed" style="bottom: 20px; right: 20px; z-index: 1035; border-radius: 50px; padding: 12px 22px; font-weight: 800; font-size: 0.95rem; display: flex; align-items: center; gap: 8px;">
+        <i class="fa fa-save"></i> Enregistrer
+    </button>
 
     <!-- ════════════════════════════════════════════════════════
          CORPS DU DASHBOARD (Sidebar Blanche + Contenu)
     ════════════════════════════════════════════════════════ -->
     <div class="admin-main-wrapper">
 
-        <!-- Sidebar Blanche & Rouge -->
-        <aside class="admin-sidebar">
+        <!-- Sidebar Blanche & Rouge (avec en-tête mobile de fermeture) -->
+        <aside class="admin-sidebar" id="adminSidebar">
+            <div class="d-flex align-items-center justify-content-between px-3 pb-3 mb-2 border-bottom d-lg-none">
+                <div class="d-flex align-items-center">
+                    <img src="img/Logo_SNU.jpg" alt="Logo" style="width: 32px; height: 32px; border-radius: 50%;" class="me-2">
+                    <strong class="text-danger small">Navigation SNU</strong>
+                </div>
+                <button type="button" id="btnCloseSidebar" class="btn btn-sm btn-light border py-1 px-2" aria-label="Fermer le menu">
+                    <i class="fa fa-times me-1"></i> Fermer
+                </button>
+            </div>
             <div class="sidebar-section-title">Pages du Site</div>
             <nav class="nav flex-column" id="adminNav">
                 <a class="nav-snu-link active" href="#tab-accueil" data-tab="tab-accueil">
@@ -1621,14 +1761,62 @@
 
             checkAuth();
 
+            // ── GESTION DU TIROIR MOBILE (DRAWER) ──
+            var adminSidebar = document.getElementById('adminSidebar');
+            var adminBackdrop = document.getElementById('adminSidebarBackdrop');
+
+            function openMobileSidebar() {
+                if (adminSidebar) adminSidebar.classList.add('show');
+                if (adminBackdrop) adminBackdrop.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeMobileSidebar() {
+                if (adminSidebar) adminSidebar.classList.remove('show');
+                if (adminBackdrop) adminBackdrop.classList.remove('show');
+                document.body.style.overflow = '';
+            }
+
+            var btnMobileNavToggle = document.getElementById('btnMobileNavToggle');
+            if (btnMobileNavToggle) {
+                btnMobileNavToggle.addEventListener('click', openMobileSidebar);
+            }
+
+            var btnOpenDrawer = document.getElementById('btnOpenDrawer');
+            if (btnOpenDrawer) {
+                btnOpenDrawer.addEventListener('click', openMobileSidebar);
+            }
+
+            var btnCloseSidebar = document.getElementById('btnCloseSidebar');
+            if (btnCloseSidebar) {
+                btnCloseSidebar.addEventListener('click', closeMobileSidebar);
+            }
+
+            if (adminBackdrop) {
+                adminBackdrop.addEventListener('click', closeMobileSidebar);
+            }
+
+            // Bouton flottant mobile pour enregistrement direct
+            var btnSaveMobileFab = document.getElementById('btnSaveMobileFab');
+            if (btnSaveMobileFab) {
+                btnSaveMobileFab.addEventListener('click', function() {
+                    var master = document.getElementById('btnSaveAll');
+                    if (master) master.click();
+                });
+            }
+
             // ── 2. SYSTÈME D'ONGLETS DU DASHBOARD ──
             var navLinks = document.querySelectorAll('.nav-snu-link');
             var tabPanes = document.querySelectorAll('.tab-pane-admin');
 
             function switchTab(targetId) {
+                var activeLabel = 'Accueil';
                 navLinks.forEach(function(l) {
                     if (l.getAttribute('data-tab') === targetId) {
                         l.classList.add('active');
+                        var clone = l.cloneNode(true);
+                        clone.querySelectorAll('i, .badge').forEach(function(el) { el.remove(); });
+                        activeLabel = clone.textContent.trim();
                     } else {
                         l.classList.remove('active');
                     }
@@ -1641,6 +1829,22 @@
                         pane.classList.add('d-none');
                     }
                 });
+
+                // Mettre à jour l'indicateur d'onglet mobile
+                var mobileLabel = document.getElementById('mobileActiveTabLabel');
+                if (mobileLabel) {
+                    mobileLabel.textContent = activeLabel;
+                }
+
+                // Fermer le tiroir mobile si ouvert
+                closeMobileSidebar();
+
+                // Faire défiler en haut du contenu
+                var contentPane = document.querySelector('.admin-content-pane');
+                if (contentPane) contentPane.scrollTop = 0;
+                if (window.innerWidth < 992) {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
             }
 
             navLinks.forEach(function(link) {

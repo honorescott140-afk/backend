@@ -49,7 +49,7 @@
     "title_highlight": "CT ROGER",
     "name": "CT ROGER",
     "role": "Directeur de la Salle du Numérique (SNU)",
-    "photo": "img/Dr roger .jpeg",
+    "photo": "img/uploads/upload_1793869399_Capturedécrandu2026-11-0413-52-58.png",
     "lead": "Chers visiteurs, chers apprenants,",
     "p1": "C'est avec un grand plaisir que je vous accueille au sein de la Salle du Numérique. Dans un monde en constante évolution, notre engagement est de former des femmes et des hommes capables de créer, d'innover et d'apporter des solutions concrètes aux défis de notre époque.",
     "p2": "Au-delà des compétences techniques, nous cultivons la créativité, l'esprit d'initiative et la confiance en soi — des qualités essentielles pour transformer les idées en opportunités réelles. Chaque apprenant est encouragé à développer son potentiel et à devenir un acteur du changement dans sa communauté.",
@@ -245,50 +245,6 @@
       "img/project-3.jpg",
       "img/project-2.jpg",
       "img/Salle2.jpg"
-    ],
-    "reservation_title": "Réservation & Utilisation de la Salle",
-    "reservation_desc": "Vous organisez une conférence, une soutenance, un séminaire académique, un atelier de formation ou un hackathon ? La Salle du Numérique est mise à votre disposition selon un cadre contractuel clair et transparent garantissant des équipements professionnels et un accompagnement dédié.",
-    "reservation_capacity": "Jusqu'à 90 participants",
-    "infra_title_prefix": "Infrastructure &",
-    "infra_title_highlight": "Équipements",
-    "infrastructure": [
-      {
-        "icon": "fa-wifi",
-        "title": "Fibre Dédiée",
-        "desc": "Connexion Internet haut débit via fibre optique dédiée pour vos recherches."
-      },
-      {
-        "icon": "fa-bolt",
-        "title": "Énergie 24h/7",
-        "desc": "Alimentation sécurisée par onduleurs industriels et relais solaire permanent."
-      },
-      {
-        "icon": "fa-snowflake",
-        "title": "Climatisation",
-        "desc": "Locaux climatisés assurant un confort optimal et la longévité des machines."
-      },
-      {
-        "icon": "fa-headset",
-        "title": "Support Technique",
-        "desc": "Des assistants techniques qualifiés présents pour vous guider en continu."
-      }
-    ],
-    "galerie_lieu_title_prefix": "Galerie",
-    "galerie_lieu_title_highlight": "Photos",
-    "galerie_lieu_title_suffix": "du Lieu",
-    "galerie_lieu": [
-      {
-        "img": "img/Salle1.jpg",
-        "caption": "Postes Individuels"
-      },
-      {
-        "img": "img/Salle2.jpg",
-        "caption": "Zone Lab & IoT"
-      },
-      {
-        "img": "img/Salle3.jpg",
-        "caption": "Espace d'Études Principal"
-      }
     ]
   },
   "contact_page": {
@@ -300,6 +256,14 @@
   },
   "news": {
     "items": [
+      {
+        "id": "news_1793867534989",
+        "category": "formation",
+        "title": "salle",
+        "date": "À venir",
+        "excerpt": "ok",
+        "img": "img/Salle1.jpg"
+      },
       {
         "id": "news_1",
         "category": "Salle du Numérique",
