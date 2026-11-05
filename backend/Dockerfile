@@ -18,7 +18,8 @@ RUN chown -R claudia_user:claudia_user /app
 USER claudia_user
 
 # Port d'écoute
+ENV PORT=5050
 EXPOSE 5050
 
-# Lancement en production avec Gunicorn (robuste et multi-workers)
-CMD ["gunicorn", "--bind", "0.0.0.0:5050", "--workers", "2", "--timeout", "120", "app:app"]
+# Lancement en production avec Gunicorn compatible Render ($PORT)
+CMD ["sh", "-c", "gunicorn --bind 0.0.0.0:${PORT:-5050} --workers 2 --timeout 120 app:app"]
