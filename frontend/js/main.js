@@ -1,3 +1,6 @@
+const API_URL = "https://backend-eueq.onrender.com";
+window.API_URL = API_URL;
+
 (function ($) {
     "use strict";
 
@@ -776,7 +779,8 @@
         $('#formationAlertSuccess').addClass('d-none');
         $('#formationAlertError').addClass('d-none');
 
-        fetch('/api/messages', {
+        var apiUrl = (window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? '/api/messages' : (API_URL + '/api/messages');
+        fetch(apiUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
@@ -840,7 +844,8 @@
         $('#reservationAlertSuccess').addClass('d-none');
         $('#reservationAlertError').addClass('d-none');
 
-        fetch('/api/messages', {
+        var apiUrl = (window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? '/api/messages' : (API_URL + '/api/messages');
+        fetch(apiUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
@@ -887,7 +892,8 @@
         msgData.website = $('#website').val().trim();
 
         // Envoi sécurisé au serveur
-        fetch('/api/messages', {
+        var apiUrl = (window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? '/api/messages' : (API_URL + '/api/messages');
+        fetch(apiUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(msgData)
@@ -982,7 +988,7 @@
     // Lancer au chargement
     makeFaviconCircular();
 
-    var CLAUDIA_BACKEND = (window.CLAUDIA_BACKEND_URL || 'https://salle-unilu-backend.onrender.com').replace(/\/$/, '');
+    var CLAUDIA_BACKEND = (window.CLAUDIA_BACKEND_URL || API_URL).replace(/\/$/, '');
     var CLAUDIA_API = CLAUDIA_BACKEND + '/claudia/ask';
     var CLAUDIA_STATUS_API = CLAUDIA_BACKEND + '/claudia/status';
 

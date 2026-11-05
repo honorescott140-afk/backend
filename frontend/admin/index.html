@@ -1567,7 +1567,7 @@
             var DEFAULT_PASSWORDS = ['admin123', 'snu@2026!', 'snu2026', 'admin', 'admin@snu'];
             var DEFAULT_TOKEN = 'snu_admin_token_secure_2026';
             var currentContent = {};
-            var backendUrl = window.location.origin;
+            var backendUrl = (window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? window.location.origin : (window.API_URL || 'https://backend-eueq.onrender.com');
 
             // ── GESTION DU STOCKAGE DES JETONS (TOKENS) ──
             function getAdminToken() {

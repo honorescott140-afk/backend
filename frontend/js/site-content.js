@@ -447,7 +447,8 @@
             submit.innerHTML = '<i class="fa fa-spinner fa-spin me-2"></i>Transmission...';
             document.getElementById('moduleRequestSuccess').classList.add('d-none');
             document.getElementById('moduleRequestError').classList.add('d-none');
-            fetch('/api/messages', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
+            var apiUrl = (window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? '/api/messages' : ((window.API_URL || 'https://backend-eueq.onrender.com') + '/api/messages');
+            fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
                 .then(function (response) {
                     return response.text().then(function (text) {
                         var data;
