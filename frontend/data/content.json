@@ -245,6 +245,50 @@
       "img/project-3.jpg",
       "img/project-2.jpg",
       "img/Salle2.jpg"
+    ],
+    "reservation_title": "Réservation & Utilisation de la Salle",
+    "reservation_desc": "Vous organisez une conférence, une soutenance, un séminaire académique, un atelier de formation ou un hackathon ? La Salle du Numérique est mise à votre disposition selon un cadre contractuel clair et transparent garantissant des équipements professionnels et un accompagnement dédié.",
+    "reservation_capacity": "Jusqu'à 90 participants",
+    "infra_title_prefix": "Infrastructure &",
+    "infra_title_highlight": "Équipements",
+    "infrastructure": [
+      {
+        "icon": "fa-wifi",
+        "title": "Fibre Dédiée",
+        "desc": "Connexion Internet haut débit via fibre optique dédiée pour vos recherches."
+      },
+      {
+        "icon": "fa-bolt",
+        "title": "Énergie 24h/7",
+        "desc": "Alimentation sécurisée par onduleurs industriels et relais solaire permanent."
+      },
+      {
+        "icon": "fa-snowflake",
+        "title": "Climatisation",
+        "desc": "Locaux climatisés assurant un confort optimal et la longévité des machines."
+      },
+      {
+        "icon": "fa-headset",
+        "title": "Support Technique",
+        "desc": "Des assistants techniques qualifiés présents pour vous guider en continu."
+      }
+    ],
+    "galerie_lieu_title_prefix": "Galerie",
+    "galerie_lieu_title_highlight": "Photos",
+    "galerie_lieu_title_suffix": "du Lieu",
+    "galerie_lieu": [
+      {
+        "img": "img/Salle1.jpg",
+        "caption": "Postes Individuels"
+      },
+      {
+        "img": "img/Salle2.jpg",
+        "caption": "Zone Lab & IoT"
+      },
+      {
+        "img": "img/Salle3.jpg",
+        "caption": "Espace d'Études Principal"
+      }
     ]
   },
   "contact_page": {

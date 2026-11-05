@@ -271,245 +271,24 @@
             background: rgba(209, 0, 0, 0.5);
         }
 
-        /* ════════════════════════════════════════════════════════
-           MENU DÉROULANT DES 3 POINTS (TOUS LES ONGLETS)
-        ════════════════════════════════════════════════════════ */
-        html, body.admin-body {
-            width: 100%;
-            max-width: 100vw;
-            overflow-x: hidden !important;
-        }
-
-        .btn-three-dots {
-            background: rgba(255, 255, 255, 0.18);
-            color: #ffffff !important;
-            border: 1.5px solid rgba(255, 255, 255, 0.45);
-            border-radius: 8px;
-            padding: 6px 12px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.15rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .btn-three-dots:hover, .btn-three-dots:focus {
-            background: #ffffff;
-            color: var(--snu-red) !important;
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
-        }
-
-        .three-dots-dropdown-panel {
-            position: fixed;
-            top: 60px;
-            right: 12px;
-            width: 300px;
-            max-width: calc(100vw - 24px);
-            max-height: calc(100vh - 80px);
-            background: #ffffff;
-            border-radius: 14px;
-            box-shadow: 0 16px 45px rgba(0, 0, 0, 0.28);
-            border: 1.5px solid rgba(209, 0, 0, 0.15);
-            z-index: 1060;
-            display: flex;
-            flex-direction: column;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-12px) scale(0.95);
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-            overflow: hidden;
-        }
-
-        .three-dots-dropdown-panel.show {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0) scale(1);
-        }
-
-        .three-dots-menu-scrollable {
-            overflow-y: auto;
-            flex: 1;
-            padding: 8px 10px;
-        }
-
-        .three-dots-section-title {
-            color: var(--snu-red);
-            font-size: 0.72rem;
-            font-weight: 800;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            padding: 8px 10px 4px 10px;
-        }
-
-        .three-dots-item {
-            display: flex;
-            align-items: center;
-            padding: 10px 14px;
-            border-radius: 8px;
-            color: var(--snu-blue);
-            font-weight: 700;
-            font-size: 0.9rem;
-            text-decoration: none;
-            transition: all 0.15s ease;
-            margin-bottom: 2px;
-        }
-
-        .three-dots-item i {
-            width: 24px;
-            font-size: 1.05rem;
-            margin-right: 10px;
-            color: var(--snu-red);
-            text-align: center;
-            transition: all 0.15s ease;
-        }
-
-        .three-dots-item:hover {
-            background: rgba(209, 0, 0, 0.08);
-            color: var(--snu-red);
-        }
-
-        .three-dots-item.active {
-            background: var(--snu-red) !important;
-            color: #ffffff !important;
-        }
-
-        .three-dots-item.active i {
-            color: #ffffff !important;
-        }
-
-        .three-dots-backdrop {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(2px);
-            z-index: 1055;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.2s ease;
-        }
-
-        .three-dots-backdrop.show {
-            opacity: 1;
-            visibility: visible;
-        }
-
         @media (max-width: 991.98px) {
             body.admin-body {
                 height: auto;
-                min-height: 100vh;
-                overflow-x: hidden !important;
-                overflow-y: auto;
+                overflow: auto;
             }
-
-            .admin-header-bar {
-                padding: 6px 0;
-            }
-
-            .admin-logo-img {
-                height: 36px;
-                width: 36px;
-                margin-right: 8px;
-            }
-
-            .admin-brand-text {
-                font-size: 1rem;
-                letter-spacing: -0.3px;
-                max-width: 150px;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-
-            .admin-badge-pill {
-                font-size: 0.65rem;
-                padding: 1px 7px;
-            }
-
             .admin-main-wrapper {
                 flex-direction: column;
                 height: auto;
-                overflow-x: hidden !important;
-                overflow-y: visible;
-                width: 100%;
-                max-width: 100vw;
+                overflow: visible;
             }
-
-            /* Sur mobile, la sidebar fixe est masquée au profit exclusif du menu des 3 points */
             .admin-sidebar {
-                display: none !important;
+                width: 100%;
+                height: auto;
             }
-
             .admin-content-pane {
                 height: auto;
-                overflow-x: hidden !important;
-                overflow-y: visible;
-                padding: 14px 10px 85px 10px; /* Espace pour le bouton d'enregistrement flottant */
-                width: 100%;
-                max-width: 100vw;
-            }
-
-            .admin-card {
-                padding: 16px 12px;
-                margin-bottom: 16px;
-                border-radius: 12px;
-                width: 100%;
-                max-width: 100%;
-                overflow-x: hidden;
-            }
-
-            .admin-card-header {
-                flex-direction: column;
-                align-items: stretch !important;
-                gap: 10px;
-            }
-
-            .admin-card-header .btn {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .admin-card-title {
-                font-size: 1.15rem;
-                line-height: 1.3;
-            }
-
-            /* Évite le zoom automatique invasif sur mobile */
-            .form-control, .form-select, textarea {
-                font-size: 16px !important;
-            }
-
-            .snu-login-card {
-                padding: 26px 18px;
-                margin: 10px auto;
-                width: 100%;
-                max-width: 380px;
-            }
-        }
-
-        @media (max-width: 575.98px) {
-            .admin-header-bar {
-                padding: 5px 0;
-            }
-
-            .admin-logo-img {
-                height: 32px;
-                width: 32px;
-                margin-right: 6px;
-            }
-
-            .admin-brand-text {
-                font-size: 0.88rem;
-                max-width: 120px;
-            }
-
-            .btn-view-site, .btn-save-master {
-                padding: 5px 8px;
-                font-size: 0.75rem;
-            }
-
-            .btn-logout-header {
-                padding: 5px 8px;
+                overflow: visible;
+                padding: 20px 16px;
             }
         }
 
@@ -780,47 +559,39 @@
     <!-- ════════════════════════════════════════════════════════
          TOP BAR DE NAVIGATION (Style Navbar Officielle SNU)
     ════════════════════════════════════════════════════════ -->
-    <!-- ════════════════════════════════════════════════════════
-         TOP BAR DE NAVIGATION (Style Navbar Officielle SNU)
-    ════════════════════════════════════════════════════════ -->
     <header class="admin-header-bar">
-        <div class="container-fluid px-2 px-md-3">
-            <div class="d-flex align-items-center justify-content-between flex-nowrap" style="min-width: 0;">
+        <div class="container-fluid px-4">
+            <div class="d-flex align-items-center justify-content-between">
                 
                 <!-- Logo & Titre SNU -->
-                <div class="d-flex align-items-center flex-nowrap" style="min-width: 0;">
-                    <img src="img/Logo_SNU.jpg" alt="Logo SNU" class="admin-logo-img flex-shrink-0">
-                    <div style="min-width: 0;">
-                        <h1 class="admin-brand-text mb-0 text-truncate">Salle du Numérique</h1>
-                        <span class="admin-badge-pill d-none d-sm-inline-block">Administration</span>
+                <div class="d-flex align-items-center">
+                    <img src="img/Logo_SNU.jpg" alt="Logo SNU" class="admin-logo-img">
+                    <div>
+                        <h1 class="admin-brand-text">Salle du Numérique</h1>
+                        <span class="admin-badge-pill">Administration</span>
                     </div>
                 </div>
 
-                <!-- Actions Header + BOUTON 3 POINTS (MENU DE TOUS LES ONGLETS) -->
-                <div class="d-flex align-items-center gap-1 gap-sm-2 flex-shrink-0 ms-2">
-                    <!-- Bouton Enregistrer Tout (Blanc et Rouge) -->
-                    <button id="btnSaveAll" class="btn btn-save-master d-flex align-items-center px-2 px-sm-3 py-1" title="Enregistrer toutes les modifications">
-                        <i class="fa fa-save"></i> <span class="d-none d-sm-inline ms-1">Enregistrer</span>
+                <!-- Boutons d'Action Header -->
+                <div class="d-flex align-items-center gap-2">
+                    <!-- Bouton Mode Sombre -->
+                    <button id="adminThemeToggleBtn" class="theme-toggle-btn" title="Basculer Mode Sombre / Mode Clair">
+                        <i class="fa fa-moon me-1 theme-icon"></i> <span class="theme-text d-none d-sm-inline">Mode Sombre</span>
                     </button>
 
                     <!-- Bouton Voir le Site Public -->
-                    <a href="/" target="_blank" class="btn btn-view-site d-flex align-items-center px-2 py-1" title="Ouvrir le site utilisateur">
-                        <i class="fa fa-external-link-alt"></i> <span class="d-none d-md-inline ms-1">Site</span>
+                    <a href="/" target="_blank" class="btn btn-view-site d-flex align-items-center" title="Ouvrir le site utilisateur">
+                        <i class="fa fa-external-link-alt me-2"></i> Voir le Site Utilisateur
                     </a>
 
-                    <!-- Bouton Mode Sombre -->
-                    <button id="adminThemeToggleBtn" class="theme-toggle-btn btn-sm px-2 py-1" title="Basculer Mode Sombre / Mode Clair">
-                        <i class="fa fa-moon theme-icon"></i> <span class="theme-text d-none d-md-inline ms-1">Mode Sombre</span>
+                    <!-- Bouton Enregistrer Tout (Blanc et Rouge) -->
+                    <button id="btnSaveAll" class="btn btn-save-master d-flex align-items-center">
+                        <i class="fa fa-save me-2"></i> Enregistrer Tout
                     </button>
 
-                    <!-- Déconnexion (Desktop) -->
-                    <button id="btnLogout" class="btn btn-logout-header d-none d-sm-inline-flex px-2 py-1" title="Se déconnecter">
+                    <!-- Déconnexion -->
+                    <button id="btnLogout" class="btn btn-logout-header" title="Se déconnecter">
                         <i class="fa fa-power-off"></i>
-                    </button>
-
-                    <!-- LES 3 POINTS (ACCÈS À TOUS LES ONGLETS DU SITE SANS DÉFILEMENT) -->
-                    <button id="btnThreeDotsMenu" class="btn-three-dots ms-1" title="Tous les onglets" aria-label="Menu des onglets">
-                        <i class="fa fa-ellipsis-v"></i>
                     </button>
                 </div>
 
@@ -828,96 +599,14 @@
         </div>
     </header>
 
-    <!-- ════════════════════════════════════════════════════════
-         MENU DÉROULANT DES 3 POINTS (TOUS LES ONGLETS SANS DÉFILEMENT)
-    ════════════════════════════════════════════════════════ -->
-    <div id="threeDotsTabsMenu" class="three-dots-dropdown-panel">
-        <div class="p-3 border-bottom d-flex align-items-center justify-content-between bg-light">
-            <div class="d-flex align-items-center">
-                <i class="fa fa-th-large text-danger me-2"></i>
-                <strong class="text-dark small">Navigation du Site</strong>
-            </div>
-            <button type="button" id="btnCloseThreeDotsMenu" class="btn btn-sm btn-outline-secondary py-0 px-2" aria-label="Fermer">
-                <i class="fa fa-times"></i>
-            </button>
-        </div>
-
-        <div class="three-dots-menu-scrollable">
-            <div class="three-dots-section-title">Pages du Site</div>
-            <a href="#tab-accueil" class="three-dots-item active" data-tab="tab-accueil">
-                <i class="fa fa-home"></i> Accueil
-            </a>
-            <a href="#tab-news" class="three-dots-item" data-tab="tab-news">
-                <i class="fa fa-newspaper"></i> Actualités
-            </a>
-            <a href="#tab-ensavoirplus" class="three-dots-item" data-tab="tab-ensavoirplus">
-                <i class="fa fa-info-circle"></i> En savoir plus
-            </a>
-            <a href="#tab-services" class="three-dots-item" data-tab="tab-services">
-                <i class="fa fa-desktop"></i> Services
-            </a>
-            <a href="#tab-formations" class="three-dots-item" data-tab="tab-formations">
-                <i class="fa fa-graduation-cap"></i> Formations
-            </a>
-            <a href="#tab-contact" class="three-dots-item" data-tab="tab-contact">
-                <i class="fa fa-envelope-open-text"></i> Contact
-            </a>
-
-            <div class="three-dots-section-title mt-2">Équipe &amp; Avis</div>
-            <a href="#tab-team" class="three-dots-item" data-tab="tab-team">
-                <i class="fa fa-users"></i> Équipe de Gestion
-            </a>
-            <a href="#tab-testimonials" class="three-dots-item" data-tab="tab-testimonials">
-                <i class="fa fa-comments"></i> Témoignages
-            </a>
-            <a href="#tab-media" class="three-dots-item" data-tab="tab-media">
-                <i class="fa fa-photo-video"></i> Médiathèque Photos
-            </a>
-
-            <div class="three-dots-section-title mt-2">Administration</div>
-            <a href="#tab-messages" class="three-dots-item d-flex align-items-center justify-content-between" data-tab="tab-messages">
-                <span><i class="fa fa-inbox me-2"></i> Messagerie</span>
-                <span id="badgeThreeDotsMessages" class="badge rounded-pill bg-danger d-none">0</span>
-            </a>
-            <a href="#tab-settings" class="three-dots-item" data-tab="tab-settings">
-                <i class="fa fa-cog"></i> Paramètres
-            </a>
-        </div>
-
-        <div class="p-2 border-top bg-light">
-            <button type="button" class="btn btn-sm btn-snu-red w-100 py-2 fw-bold" id="btnSaveThreeDots">
-                <i class="fa fa-save me-1"></i> Enregistrer Tout
-            </button>
-            <button type="button" class="btn btn-sm btn-outline-danger w-100 mt-2 py-1" id="btnLogoutThreeDots">
-                <i class="fa fa-power-off me-1"></i> Déconnexion
-            </button>
-        </div>
-    </div>
-
-    <!-- Backdrop pour fermer le menu des 3 points en cliquant dehors -->
-    <div id="threeDotsBackdrop" class="three-dots-backdrop"></div>
-
-    <!-- Bouton Flottant Sauvegarde Rapide sur Mobile -->
-    <button id="btnSaveMobileFab" class="btn btn-snu-red shadow-lg d-lg-none position-fixed" style="bottom: 20px; right: 20px; z-index: 1035; border-radius: 50px; padding: 12px 22px; font-weight: 800; font-size: 0.95rem; display: flex; align-items: center; gap: 8px;">
-        <i class="fa fa-save"></i> Enregistrer
-    </button>
 
     <!-- ════════════════════════════════════════════════════════
          CORPS DU DASHBOARD (Sidebar Blanche + Contenu)
     ════════════════════════════════════════════════════════ -->
     <div class="admin-main-wrapper">
 
-        <!-- Sidebar Blanche & Rouge (avec en-tête mobile de fermeture) -->
-        <aside class="admin-sidebar" id="adminSidebar">
-            <div class="d-flex align-items-center justify-content-between px-3 pb-3 mb-2 border-bottom d-lg-none">
-                <div class="d-flex align-items-center">
-                    <img src="img/Logo_SNU.jpg" alt="Logo" style="width: 32px; height: 32px; border-radius: 50%;" class="me-2">
-                    <strong class="text-danger small">Navigation SNU</strong>
-                </div>
-                <button type="button" id="btnCloseSidebar" class="btn btn-sm btn-light border py-1 px-2" aria-label="Fermer le menu">
-                    <i class="fa fa-times me-1"></i> Fermer
-                </button>
-            </div>
+        <!-- Sidebar Blanche & Rouge -->
+        <aside class="admin-sidebar">
             <div class="sidebar-section-title">Pages du Site</div>
             <nav class="nav flex-column" id="adminNav">
                 <a class="nav-snu-link active" href="#tab-accueil" data-tab="tab-accueil">
@@ -1140,18 +829,18 @@
                     </div>
 
                     <!-- Formulaire d'ajout rapide -->
-                    <div class="p-3 p-md-4 mb-4 border rounded-3 bg-light">
+                    <div class="p-4 mb-4 border rounded-3 bg-light">
                         <h5 class="fw-bold mb-3" style="color: var(--snu-red);"><i class="fa fa-plus-circle me-2"></i> Ajouter une nouvelle actualité</h5>
                         <div class="row g-3">
-                            <div class="col-12 col-md-6">
+                            <div class="col-md-6">
                                 <label class="form-label fw-bold small">Titre de l'actualité <span class="text-danger">*</span></label>
                                 <input type="text" id="newNewsTitle" class="form-control" placeholder="Ex: Nouveau module de formation disponible">
                             </div>
-                            <div class="col-6 col-md-3">
+                            <div class="col-md-3">
                                 <label class="form-label fw-bold small">Catégorie</label>
-                                <input type="text" id="newNewsCategory" class="form-control" placeholder="Ex: Ateliers, Formations">
+                                <input type="text" id="newNewsCategory" class="form-control" placeholder="Ex: Ateliers, Formations, Salle du Numérique">
                             </div>
-                            <div class="col-6 col-md-3">
+                            <div class="col-md-3">
                                 <label class="form-label fw-bold small">Date d'affichage</label>
                                 <input type="text" id="newNewsDate" class="form-control" placeholder="Ex: 05 Nov 2026, À venir">
                             </div>
@@ -1159,24 +848,22 @@
                                 <label class="form-label fw-bold small">Résumé / Description de l'actualité <span class="text-danger">*</span></label>
                                 <textarea id="newNewsExcerpt" class="form-control" rows="2" placeholder="Décrivez brièvement l'actualité ou l'annonce..."></textarea>
                             </div>
-                            <div class="col-12 col-md-8">
+                            <div class="col-md-8">
                                 <label class="form-label fw-bold small">Photo de l'actualité</label>
-                                <div class="d-flex align-items-center gap-2">
-                                    <div class="img-preview-box mb-0" style="width: 72px; height: 44px; overflow: hidden; border-radius: 6px; border: 1px solid #ccc; flex-shrink: 0;">
-                                        <img id="newNewsPreview" src="img/Salle1.jpg" alt="Aperçu" style="width: 100%; height: 100%; object-fit: cover;">
-                                    </div>
-                                    <div class="input-group flex-grow-1">
-                                        <input type="text" id="newNewsImg" class="form-control form-control-sm" placeholder="img/Salle1.jpg" value="img/Salle1.jpg">
-                                        <label class="btn btn-outline-secondary btn-sm">
-                                            <i class="fa fa-upload me-1"></i> <span class="d-none d-sm-inline">Choisir </span>photo
-                                            <input type="file" id="newNewsFile" class="d-none" accept="image/*">
-                                        </label>
-                                    </div>
+                                <div class="input-group">
+                                    <input type="text" id="newNewsImg" class="form-control" placeholder="img/Salle1.jpg" value="img/Salle1.jpg">
+                                    <label class="btn btn-outline-secondary">
+                                        <i class="fa fa-upload me-1"></i> Choisir une photo
+                                        <input type="file" id="newNewsFile" class="d-none" accept="image/*">
+                                    </label>
                                 </div>
                             </div>
-                            <div class="col-12 col-md-4 d-flex align-items-end">
-                                <button type="button" id="btnAddNews" class="btn btn-snu-red w-100 py-2 fw-bold shadow-sm">
-                                    <i class="fa fa-plus-circle me-1"></i> Publier l'actualité
+                            <div class="col-md-4 d-flex align-items-center">
+                                <div class="img-preview-box me-3" style="width: 80px; height: 50px; overflow: hidden; border-radius: 6px; border: 1px solid #ccc; flex-shrink: 0;">
+                                    <img id="newNewsPreview" src="img/Salle1.jpg" alt="Aperçu" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <button type="button" id="btnAddNews" class="btn btn-snu-red w-100 py-2 fw-bold">
+                                    <i class="fa fa-plus me-1"></i> Publier l'actualité
                                 </button>
                             </div>
                         </div>
@@ -1934,71 +1621,8 @@
 
             checkAuth();
 
-            // ── GESTION DU MENU DÉROULANT DES 3 POINTS (TOUS LES ONGLETS) ──
-            var threeDotsMenu = document.getElementById('threeDotsTabsMenu');
-            var threeDotsBackdrop = document.getElementById('threeDotsBackdrop');
-            var btnThreeDots = document.getElementById('btnThreeDotsMenu');
-            var btnCloseThreeDots = document.getElementById('btnCloseThreeDotsMenu');
-
-            function openThreeDotsMenu() {
-                if (threeDotsMenu) threeDotsMenu.classList.add('show');
-                if (threeDotsBackdrop) threeDotsBackdrop.classList.add('show');
-            }
-
-            function closeThreeDotsMenu() {
-                if (threeDotsMenu) threeDotsMenu.classList.remove('show');
-                if (threeDotsBackdrop) threeDotsBackdrop.classList.remove('show');
-            }
-
-            if (btnThreeDots) {
-                btnThreeDots.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    if (threeDotsMenu && threeDotsMenu.classList.contains('show')) {
-                        closeThreeDotsMenu();
-                    } else {
-                        openThreeDotsMenu();
-                    }
-                });
-            }
-
-            if (btnCloseThreeDots) {
-                btnCloseThreeDots.addEventListener('click', closeThreeDotsMenu);
-            }
-
-            if (threeDotsBackdrop) {
-                threeDotsBackdrop.addEventListener('click', closeThreeDotsMenu);
-            }
-
-            var btnSaveThreeDots = document.getElementById('btnSaveThreeDots');
-            if (btnSaveThreeDots) {
-                btnSaveThreeDots.addEventListener('click', function() {
-                    closeThreeDotsMenu();
-                    var master = document.getElementById('btnSaveAll');
-                    if (master) master.click();
-                });
-            }
-
-            var btnLogoutThreeDots = document.getElementById('btnLogoutThreeDots');
-            if (btnLogoutThreeDots) {
-                btnLogoutThreeDots.addEventListener('click', function() {
-                    closeThreeDotsMenu();
-                    var masterLogout = document.getElementById('btnLogout');
-                    if (masterLogout) masterLogout.click();
-                });
-            }
-
-            // Bouton flottant mobile pour enregistrement direct
-            var btnSaveMobileFab = document.getElementById('btnSaveMobileFab');
-            if (btnSaveMobileFab) {
-                btnSaveMobileFab.addEventListener('click', function() {
-                    var master = document.getElementById('btnSaveAll');
-                    if (master) master.click();
-                });
-            }
-
             // ── 2. SYSTÈME D'ONGLETS DU DASHBOARD ──
             var navLinks = document.querySelectorAll('.nav-snu-link');
-            var threeDotsItems = document.querySelectorAll('.three-dots-item');
             var tabPanes = document.querySelectorAll('.tab-pane-admin');
 
             function switchTab(targetId) {
@@ -2010,14 +1634,6 @@
                     }
                 });
 
-                threeDotsItems.forEach(function(item) {
-                    if (item.getAttribute('data-tab') === targetId) {
-                        item.classList.add('active');
-                    } else {
-                        item.classList.remove('active');
-                    }
-                });
-
                 tabPanes.forEach(function(pane) {
                     if (pane.id === targetId) {
                         pane.classList.remove('d-none');
@@ -2025,27 +1641,10 @@
                         pane.classList.add('d-none');
                     }
                 });
-
-                // Fermer le menu des 3 points après sélection
-                closeThreeDotsMenu();
-
-                // Faire défiler en haut du contenu
-                var contentPane = document.querySelector('.admin-content-pane');
-                if (contentPane) contentPane.scrollTop = 0;
-                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
 
             navLinks.forEach(function(link) {
                 link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    var targetId = this.getAttribute('data-tab');
-                    window.location.hash = targetId;
-                    switchTab(targetId);
-                });
-            });
-
-            threeDotsItems.forEach(function(item) {
-                item.addEventListener('click', function(e) {
                     e.preventDefault();
                     var targetId = this.getAttribute('data-tab');
                     window.location.hash = targetId;
@@ -2154,11 +1753,27 @@
                     .then(function(data) {
                         currentContent = data;
 
+                        function deepMerge(target, source) {
+                            for (var key in source) {
+                                if (source.hasOwnProperty(key)) {
+                                    if (source[key] && typeof source[key] === 'object' && !Array.isArray(source[key])) {
+                                        if (!target[key] || typeof target[key] !== 'object' || Array.isArray(target[key])) {
+                                            target[key] = {};
+                                        }
+                                        deepMerge(target[key], source[key]);
+                                    } else {
+                                        target[key] = source[key];
+                                    }
+                                }
+                            }
+                            return target;
+                        }
+
                         var localRaw = localStorage.getItem(STORAGE_KEY);
                         if (localRaw) {
                             try {
                                 var localData = JSON.parse(localRaw);
-                                currentContent = Object.assign({}, currentContent, localData);
+                                deepMerge(currentContent, localData);
                             } catch(e) {}
                         }
 
@@ -2213,16 +1828,16 @@
                                     </button>
                                 </div>
                                 <div class="row g-2 mb-2">
-                                    <div class="col-12 col-sm-4 text-center mb-2 mb-sm-0">
-                                        <div class="img-preview-box mb-2" style="height: 120px; background: #fff; border-radius: 8px; overflow: hidden; border: 1px solid #e0e0e0; display: flex; align-items: center; justify-content: center;">
-                                            <img id="preview_news_${idx}" src="${item.img || 'img/Salle1.jpg'}" alt="Photo" style="width: 100%; height: 100%; object-fit: cover;">
+                                    <div class="col-sm-4 text-center">
+                                        <div class="img-preview-box mb-2" style="height: 110px; background: #fff; border-radius: 8px; overflow: hidden; border: 1px solid #e0e0e0; display: flex; align-items: center; justify-content: center;">
+                                            <img id="preview_news_${idx}" src="${item.img || 'img/Salle1.jpg'}" alt="Photo" style="max-height: 100%; max-width: 100%; object-fit: cover;">
                                         </div>
-                                        <label class="btn btn-sm btn-snu-outline-red w-100 py-1" style="font-size: 0.78rem;">
+                                        <label class="btn btn-sm btn-snu-outline-red w-100 py-1" style="font-size: 0.75rem;">
                                             <i class="fa fa-camera me-1"></i> Changer photo
                                             <input type="file" class="d-none news-file-input" data-index="${idx}" accept="image/*">
                                         </label>
                                     </div>
-                                    <div class="col-12 col-sm-8">
+                                    <div class="col-sm-8">
                                         <div class="mb-2">
                                             <label class="form-label small mb-1 fw-bold">Titre</label>
                                             <input type="text" class="form-control form-control-sm news-title-input" data-index="${idx}" value="${escapeHtml(item.title || '')}">
@@ -3111,16 +2726,6 @@
                         badgeUnread.classList.remove('d-none');
                     } else {
                         badgeUnread.classList.add('d-none');
-                    }
-                }
-
-                var badgeThreeDots = document.getElementById('badgeThreeDotsMessages');
-                if (badgeThreeDots) {
-                    if (unread > 0) {
-                        badgeThreeDots.textContent = unread;
-                        badgeThreeDots.classList.remove('d-none');
-                    } else {
-                        badgeThreeDots.classList.add('d-none');
                     }
                 }
 
