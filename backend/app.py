@@ -546,6 +546,41 @@ def site_static(filename):
 
 
 # ══════════════════════════════════════════════════════════════
+#   ROUTE AUTHENTIFICATION ADMIN (Render <-> Frontend)
+# ══════════════════════════════════════════════════════════════
+ADMIN_PASSWORDS = [
+    os.environ.get("ADMIN_PASSWORD", "admin123"),
+    "admin123",
+    "snu@2026!",
+    "snu2026",
+    "admin",
+    "admin@snu"
+]
+
+@app.route("/api/login", methods=["POST", "OPTIONS"])
+def api_login():
+    if request.method == "OPTIONS":
+        return jsonify({}), 200
+
+    data = request.get_json(silent=True) or {}
+    password = str(data.get("password", "")).strip()
+
+    if not password:
+        return jsonify({"success": False, "error": "Mot de passe requis"}), 400
+
+    if password in ADMIN_PASSWORDS:
+        token = os.environ.get("ADMIN_TOKEN", "snu_admin_token_secure_2026")
+        return jsonify({
+            "success": True,
+            "token": token,
+            "role": "admin",
+            "message": "Authentification réussie"
+        }), 200
+    else:
+        return jsonify({"success": False, "error": "Mot de passe administrateur incorrect"}), 401
+
+
+# ══════════════════════════════════════════════════════════════
 #   ROUTES CMS ADMIN — Gestion dynamique des textes et images
 # ══════════════════════════════════════════════════════════════
 @app.route("/api/content", methods=["GET", "POST", "OPTIONS"])

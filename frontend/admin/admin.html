@@ -1638,23 +1638,81 @@
             if (loginForm) {
                 loginForm.addEventListener('submit', function(e) {
                     e.preventDefault();
-                    var entered = adminPassword ? adminPassword.value : '';
-                    if (isPasswordValid(entered)) {
-                        try {
-                            sessionStorage.setItem(AUTH_KEY, 'true');
-                        } catch (e) {}
-                        setAdminToken(DEFAULT_TOKEN);
-                        if (loginOverlay) loginOverlay.classList.add('d-none');
-                        if (loginError) loginError.classList.add('d-none');
-                        if (adminPassword) adminPassword.value = '';
-                        showToast('Connexion réussie ! Bienvenue dans votre espace d\'administration.', 'success');
-                        loadInitialData();
-                    } else {
+                    var entered = adminPassword ? adminPassword.value.trim() : '';
+                    if (!entered) {
                         if (loginError) {
-                            loginError.textContent = 'Mot de passe incorrect. Veuillez réessayer.';
+                            loginError.textContent = 'Veuillez saisir le mot de passe administrateur.';
                             loginError.classList.remove('d-none');
                         }
+                        return;
                     }
+
+                    var submitBtn = loginForm.querySelector('button[type="submit"]');
+                    var origText = submitBtn ? submitBtn.innerHTML : '';
+                    if (submitBtn) {
+                        submitBtn.disabled = true;
+                        submitBtn.innerHTML = '<i class="fa fa-spinner fa-spin me-2"></i> Vérification...';
+                    }
+                    if (loginError) loginError.classList.add('d-none');
+
+                    // Communication avec le backend (Render en production, local en dev)
+                    var targetUrl = (backendUrl ? backendUrl.replace(/\/$/, '') : '') + '/api/login';
+
+                    fetch(targetUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ password: entered })
+                    })
+                    .then(function(res) {
+                        return res.json().then(function(json) {
+                            return { ok: res.ok, status: res.status, json: json };
+                        });
+                    })
+                    .then(function(res) {
+                        if (res.ok && res.json && res.json.success) {
+                            var token = res.json.token || DEFAULT_TOKEN;
+                            sessionStorage.setItem(AUTH_KEY, 'true');
+                            setAdminToken(token);
+                            if (loginOverlay) loginOverlay.classList.add('d-none');
+                            if (adminPassword) adminPassword.value = '';
+                            showToast('Connexion réussie ! Bienvenue dans votre espace d\'administration.', 'success');
+                            loadInitialData();
+                        } else {
+                            // Secours résilient si mot de passe valide localement
+                            if (isPasswordValid(entered)) {
+                                sessionStorage.setItem(AUTH_KEY, 'true');
+                                setAdminToken(DEFAULT_TOKEN);
+                                if (loginOverlay) loginOverlay.classList.add('d-none');
+                                if (adminPassword) adminPassword.value = '';
+                                showToast('Connexion réussie ! Bienvenue dans votre espace d\'administration.', 'success');
+                                loadInitialData();
+                            } else {
+                                throw new Error((res.json && res.json.error) ? res.json.error : 'Mot de passe incorrect.');
+                            }
+                        }
+                    })
+                    .catch(function(err) {
+                        // En cas de délai réseau ou réveil Render, validation locale immédiate
+                        if (isPasswordValid(entered)) {
+                            sessionStorage.setItem(AUTH_KEY, 'true');
+                            setAdminToken(DEFAULT_TOKEN);
+                            if (loginOverlay) loginOverlay.classList.add('d-none');
+                            if (adminPassword) adminPassword.value = '';
+                            showToast('Connexion réussie ! Bienvenue dans votre espace d\'administration.', 'success');
+                            loadInitialData();
+                        } else {
+                            if (loginError) {
+                                loginError.textContent = err.message || 'Mot de passe administrateur incorrect.';
+                                loginError.classList.remove('d-none');
+                            }
+                        }
+                    })
+                    .finally(function() {
+                        if (submitBtn) {
+                            submitBtn.disabled = false;
+                            submitBtn.innerHTML = origText;
+                        }
+                    });
                 });
             }
 

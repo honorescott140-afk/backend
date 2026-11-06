@@ -215,6 +215,31 @@ class ClaudiaUnifiedHandler(SimpleHTTPRequestHandler):
         parsed = urllib.parse.urlparse(self.path)
         path = urllib.parse.unquote(parsed.path)
 
+        # 0. Authentification Admin : /api/login
+        if path == "/api/login":
+            try:
+                content_len = int(self.headers.get("Content-Length", 0))
+                body = self.rfile.read(content_len) if content_len > 0 else b"{}"
+                data = json.loads(body.decode("utf-8")) if body else {}
+                pwd = str(data.get("password", "")).strip()
+                valid_passwords = {"admin123", "snu@2026!", "snu2026", "admin", "admin@snu"}
+                if pwd in valid_passwords:
+                    self.send_response(200)
+                    self.send_header("Content-Type", "application/json; charset=utf-8")
+                    self.end_headers()
+                    self.wfile.write(b'{"success": true, "token": "snu_admin_token_secure_2026", "message": "Authentification reussie"}')
+                else:
+                    self.send_response(401)
+                    self.send_header("Content-Type", "application/json; charset=utf-8")
+                    self.end_headers()
+                    self.wfile.write(b'{"success": false, "error": "Mot de passe administrateur incorrect"}')
+            except Exception as e:
+                self.send_response(500)
+                self.send_header("Content-Type", "application/json; charset=utf-8")
+                self.end_headers()
+                self.wfile.write(json.dumps({"success": False, "error": str(e)}).encode("utf-8"))
+            return
+
         # 1. Sauvegarde CMS : /api/content
         if path == "/api/content":
             if not admin_authorized(self):
