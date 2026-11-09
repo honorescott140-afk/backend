@@ -1,2 +1,49 @@
 [build]
   publish = "frontend"
+
+[[redirects]]
+  from = "/admin"
+  to = "/admin/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/admi"
+  to = "/admin/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/services"
+  to = "/services.html"
+  status = 200
+
+[[redirects]]
+  from = "/formations"
+  to = "/formations.html"
+  status = 200
+
+[[redirects]]
+  from = "/actualites"
+  to = "/actualites.html"
+  status = 200
+
+[[redirects]]
+  from = "/contact"
+  to = "/contact.html"
+  status = 200
+
+[[redirects]]
+  from = "/project"
+  to = "/project.html"
+  status = 200
+
+[[redirects]]
+  from = "/api/*"
+  to = "https://backend-eueq.onrender.com/api/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/claudia/*"
+  to = "https://backend-eueq.onrender.com/claudia/:splat"
+  status = 200
+  force = true

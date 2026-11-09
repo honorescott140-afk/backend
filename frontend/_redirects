@@ -1,0 +1,9 @@
+/admin /admin/index.html 200
+/admi /admin/index.html 200
+/services /services.html 200
+/formations /formations.html 200
+/actualites /actualites.html 200
+/contact /contact.html 200
+/project /project.html 200
+/api/* https://backend-eueq.onrender.com/api/:splat 200!
+/claudia/* https://backend-eueq.onrender.com/claudia/:splat 200!
