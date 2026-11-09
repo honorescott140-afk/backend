@@ -75,37 +75,24 @@
     <!-- Navbar End -->
 
     <main id="main-content">
-        <!-- Hero Header -->
-        <section class="container-fluid pb-5 bg-primary hero-header">
-            <div class="container py-5">
-                <div class="row align-items-center g-4">
-                    <div class="col-lg-8 text-center text-lg-start">
-                        <h1 class="display-1 mb-3" style="font-size:clamp(2.6rem,6vw,4.5rem);font-weight:900;color:#d10000 !important;">Formations</h1>
-                        <p class="lead text-dark mb-0">Des compétences numériques directement utiles pour vos études, votre travail et vos projets.</p>
-                    </div>
-                    <div class="col-lg-4 text-center text-lg-end">
-                        <button type="button" class="btn btn-primary px-4 py-2 fw-bold btn-open-formation-modal" data-bs-toggle="modal" data-bs-target="#formationModal">
-                            <i class="fa fa-user-plus me-2"></i>S'inscrire à une formation
-                        </button>
-                    </div>
+        <!-- Parcours de formation Ultra Compact -->
+        <section class="container-fluid pt-2 pb-4 bg-white">
+            <div class="container pt-0 pb-3">
+                <div class="text-center mb-3">
+                    <h1 class="mb-1" style="font-size: clamp(1.15rem, 2vw, 1.45rem); font-weight: 800; color: #d10000; line-height: 1.15;">Nos parcours de formation</h1>
+                    <p class="text-muted mx-auto mb-2" style="max-width:720px; font-size: 0.82rem; line-height: 1.35;">Choisissez une formation principale ou demandez un module spécialisé. Cliquez sur « Demander ce module » pour formuler votre demande directement à l'équipe.</p>
                 </div>
-            </div>
-        </section>
-
-        <!-- Parcours de formation -->
-        <section class="container-fluid py-5 bg-white">
-            <div class="container py-4">
-                <div class="text-center mb-5">
-                    <span class="section-kicker">Apprendre par la pratique</span>
-                    <h2 class="mb-3">Nos parcours de formation</h2>
-                    <p class="text-muted mx-auto" style="max-width:720px;">Choisissez une formation principale ou un module spécialisé. Les dates et modalités sont communiquées par l'équipe de la Salle du Numérique.</p>
-                </div>
-                <h3 class="h4 mb-4" style="color: #1a1a1a; font-weight: 700;">Formations principales</h3>
-                <div id="formationsPrincipalesContainer" class="row g-4 mb-5">
+                <h3 class="h5 mb-3" style="color: #1a1a1a; font-weight: 700;"><i class="fa fa-graduation-cap text-danger me-2"></i>Formations principales</h3>
+                <div id="formationsPrincipalesContainer" class="row g-4 mb-4">
                     <!-- Populated dynamically via site-content.js -->
                 </div>
 
-                <h3 class="h4 mb-4" style="color: #1a1a1a; font-weight: 700;">Modules spécialisés</h3>
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
+                    <h3 class="h5 mb-0" style="color: #1a1a1a; font-weight: 700;"><i class="fa fa-puzzle-piece text-danger me-2"></i>Modules spécialisés à la carte</h3>
+                    <button type="button" class="btn btn-sm btn-outline-danger fw-bold btn-open-module-modal" data-module="Autre module sur mesure">
+                        <i class="fa fa-plus-circle me-1"></i>Proposer un autre module
+                    </button>
+                </div>
                 <div id="formationsModulesContainer" class="row g-4">
                     <!-- Populated dynamically via site-content.js -->
                 </div>
@@ -117,7 +104,7 @@
          MODAL D'INSCRIPTION RAPIDE À LA FORMATION (Sans quitter la page)
     ════════════════════════════════════════════════════════════════════════ -->
     <div class="modal fade" id="formationModal" tabindex="-1" aria-labelledby="formationModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
             <div class="modal-content shadow-lg border-0" style="border-radius: 16px; overflow: hidden;">
                 <div class="modal-header py-3 px-4 text-white" style="background: #d10000;">
                     <div class="d-flex align-items-center">
@@ -202,12 +189,87 @@
                                 <textarea class="form-control" id="modalRemarquesApprenant" name="remarques" rows="2" placeholder="Précisez vos objectifs ou toute information utile..."></textarea>
                             </div>
 
-                            <div class="col-12 mt-4">
-                                <button type="submit" id="modalSubmitBtn" class="btn btn-primary w-100 py-3 fw-bold fs-5 shadow-sm">
-                                    <i class="fa fa-paper-plane me-2"></i>Confirmer mon inscription
-                                </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer border-0 pt-0 px-4 pb-4">
+                    <button type="submit" form="formationRegistrationForm" id="modalSubmitBtn" class="btn btn-primary w-100 py-3 fw-bold fs-5 shadow-sm">
+                        <i class="fa fa-paper-plane me-2"></i>Confirmer mon inscription
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════════════════════════════════
+         MODAL DÉDIÉ : DEMANDER UN MODULE SPÉCIFIQUE (Nom complet, Email, Nom du module)
+    ════════════════════════════════════════════════════════════════════════ -->
+    <div class="modal fade" id="moduleRequestModal" tabindex="-1" aria-labelledby="moduleRequestModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="max-width: 480px;">
+            <div class="modal-content shadow-lg border-0" style="border-radius: 14px; overflow: hidden;">
+                <div class="modal-header py-2 px-3 text-white" style="background: #d10000;">
+                    <div class="d-flex align-items-center">
+                        <i class="fa fa-file-signature fs-4 me-2"></i>
+                        <div>
+                            <h6 class="modal-title fw-bold text-white mb-0" id="moduleRequestModalLabel" style="font-size: 0.95rem;">Demande de module</h6>
+                            <small class="text-white-50" style="font-size: 0.72rem;">Salle du Numérique — UNILU</small>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white btn-sm" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                </div>
+
+                <div class="modal-body p-3" style="background: #ffffff;">
+                    <div id="moduleReqSuccessAlert" class="alert alert-success d-none mb-3" role="alert">
+                        <i class="fa fa-check-circle me-2"></i><strong>Votre demande a été transmise avec succès !</strong> L'administrateur a bien reçu votre demande et vous contactera rapidement par email.
+                    </div>
+                    <div id="moduleReqErrorAlert" class="alert alert-danger d-none mb-3" role="alert"></div>
+
+                    <form id="dedicatedModuleRequestForm" novalidate>
+                        <input type="text" name="website" style="display:none !important;" tabindex="-1" autocomplete="off">
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold text-dark small" for="moduleReqName">Nom complet <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light text-muted"><i class="fa fa-user"></i></span>
+                                <input type="text" class="form-control" id="moduleReqName" name="name" placeholder="Ex: Kahozi Juniors" required minlength="2">
                             </div>
                         </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold text-dark small" for="moduleReqEmail">Adresse Email <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light text-muted"><i class="fa fa-envelope"></i></span>
+                                <input type="email" class="form-control" id="moduleReqEmail" name="email" placeholder="votre.email@exemple.com" required>
+                            </div>
+                            <div class="form-text small">L'administrateur vous répondra directement à cette adresse.</div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold text-dark small" for="moduleReqModuleName">Module demandé <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light text-muted"><i class="fa fa-book"></i></span>
+                                <select class="form-select" id="moduleReqModuleName" name="module" required>
+                                    <option value="" disabled selected>-- Choisissez votre module --</option>
+                                    <option value="Microsoft Word">Microsoft Word (Mise en page de mémoire, TFC, rapports)</option>
+                                    <option value="Microsoft Excel">Microsoft Excel (Tableaux, calculs et formules avancées)</option>
+                                    <option value="Microsoft PowerPoint">Microsoft PowerPoint (Conception de présentations percutantes)</option>
+                                    <option value="Microsoft Access">Microsoft Access (Gestion &amp; création de bases de données)</option>
+                                    <option value="Microsoft Publisher">Microsoft Publisher (Création de brochures, affiches et PAO)</option>
+                                    <option value="Microsoft SharePoint">Microsoft SharePoint (Partage documentaire et travail d'équipe)</option>
+                                    <option value="Initiation à l'utilisation des IA">Initiation aux outils d'IA (ChatGPT, Gemini, etc.)</option>
+                                    <option value="Bureautique (Microsoft 365)">Bureautique complète (Microsoft 365)</option>
+                                    <option value="Les Bases de Windows">Les Bases de Windows &amp; Informatique générale</option>
+                                    <option value="Les Bases du Design">Les Bases du Design Numérique (Canva, etc.)</option>
+                                    <option value="Autre module spécialisé">Autre module spécialisé (sur mesure)</option>
+                                </select>
+                            </div>
+                            <div class="form-text small">Sélectionnez directement le module souhaité dans la liste.</div>
+                        </div>
+
+                        <button type="submit" id="moduleReqSubmitBtn" class="btn btn-primary w-100 py-3 fw-bold fs-6 shadow-sm">
+                            <i class="fa fa-paper-plane me-2"></i>Envoyer la demande au responsable
+                        </button>
                     </form>
                 </div>
             </div>
@@ -234,9 +296,11 @@
                     <p><i class="fa fa-envelope me-3"></i>numerique@SNU.ac.cd</p>
                     <div class="d-flex pt-2">
                         <a class="btn btn-outline-primary btn-square border-2 me-2"
-                            href="https://www.facebook.com/unilu.ac.cd" target="_blank" rel="noopener noreferrer"><i
+                            href="https://www.facebook.com/unilu.ac.cd" data-cms-href="general.facebook_unilu" target="_blank" rel="noopener noreferrer" title="Facebook UNILU"><i
                                 class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-outline-primary btn-square border-2 me-2" href="mailto:snunilu@unilu.ac.cd"><i
+                        <a class="btn btn-outline-primary btn-square border-2 me-2"
+                            href="https://www.tiktok.com" data-cms-href="general.tiktok" target="_blank" rel="noopener noreferrer" title="TikTok SNU"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298-.002.595.042.88.13V9.4a6.33 6.33 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.66a6.34 6.34 0 0 0 10.82 4.49 6.27 6.27 0 0 0 1.88-4.49V8.77a8.27 8.27 0 0 0 4.89 1.57V6.89a4.83 4.83 0 0 1-1-.2z"/></svg></a>
+                        <a class="btn btn-outline-primary btn-square border-2 me-2" href="mailto:numerique@SNU.ac.cd" title="Email"><i
                                 class="fa fa-envelope"></i></a>
                     </div>
                 </div>

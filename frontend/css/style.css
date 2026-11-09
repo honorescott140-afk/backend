@@ -106,15 +106,15 @@
 
 .section-kicker {
     display: inline-block;
-    margin-bottom: 12px;
-    padding: 6px 16px;
+    margin-bottom: 4px;
+    padding: 3px 12px;
     border: 1px solid rgba(209, 0, 0, .2);
     border-radius: 999px;
     color: #d10000;
     background: rgba(209, 0, 0, .06);
-    font-size: .75rem;
+    font-size: .72rem;
     font-weight: 800;
-    letter-spacing: 1.5px;
+    letter-spacing: 1.2px;
     text-transform: uppercase;
 }
 
@@ -213,18 +213,59 @@
     font-weight: 900;
     vertical-align: middle;
     margin-left: 8px;
+    transition: transform 0.25s ease;
+}
+
+.navbar .nav-item.dropdown:hover .dropdown-toggle::after,
+.navbar .dropdown.show .dropdown-toggle::after {
+    transform: rotate(180deg);
+}
+
+.navbar .dropdown-menu {
+    border-radius: 10px;
+    padding: 8px 0;
+    min-width: 190px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.navbar .dropdown-item {
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #212529;
+    transition: all 0.2s ease;
 }
 
 .navbar .dropdown-menu .dropdown-item:hover,
 .navbar .dropdown-menu .dropdown-item.active {
-    color: var(--bs-white);
-    background: var(--bs-primary);
+    color: #ffffff !important;
+    background: #d10000 !important;
 }
 
 @media (max-width: 991.98px) {
     .navbar .navbar-nav .nav-link {
         margin-left: 0;
         padding: 10px 0;
+    }
+    .navbar .dropdown-menu {
+        background: rgba(0, 0, 0, 0.2) !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding-left: 15px;
+        margin-top: 4px !important;
+        margin-bottom: 8px !important;
+    }
+    .navbar .dropdown-item {
+        color: #ffffff !important;
+        padding: 9px 15px;
+        border-radius: 6px;
+    }
+    .navbar .dropdown-item:hover,
+    .navbar .dropdown-item.active {
+        background: rgba(255, 255, 255, 0.25) !important;
+        color: #ffffff !important;
     }
 }
 
@@ -233,16 +274,15 @@
         display: block;
         border: none;
         margin-top: 0;
-        top: 150%;
+        top: 130%;
         opacity: 0;
         visibility: hidden;
-        transition: .5s;
+        transition: all 0.3s ease;
     }
 
     .navbar .nav-item:hover .dropdown-menu {
         top: 100%;
         visibility: visible;
-        transition: .5s;
         opacity: 1;
     }
 }
@@ -251,19 +291,66 @@
 
 /*** Hero Header ***/
 .hero-header {
-    margin-top: -100px;
-    padding-top: 150px;
     background: url(../img/hero-bg.jpg) top center no-repeat;
     background-size: cover;
 }
 
-.hero-header h1 {
-    font-weight: 700 !important;
-    /* bold heading */
+/* Accueil uniquement : wrapper carousel */
+.hero-header:has(.hero-banner),
+div.hero-header:has(.hero-banner) {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+/* Pages intérieures (Services, Formations, Actualités, À propos) : header compact sans grand vide */
+section.hero-header,
+div.hero-header:not(:has(.hero-banner)),
+.page-hero-header {
+    margin-top: 0 !important;
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+}
+
+.hero-header h1,
+section.hero-header h1,
+.hero-header h1.page-title {
+    font-size: clamp(1.6rem, 3.2vw, 2.2rem) !important;
+    font-weight: 800 !important;
+    line-height: 1.2 !important;
+    margin-bottom: 0.25rem !important;
+}
+
+.hero-header p.lead,
+section.hero-header p.lead {
+    font-size: 0.95rem !important;
+    line-height: 1.4 !important;
+    margin-bottom: 0 !important;
 }
 
 .hero-header .breadcrumb-item+.breadcrumb-item::before {
     color: var(--light);
+}
+
+/* Style interactif pour les cartes de services cliquables */
+.service-card {
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    position: relative;
+    border-radius: 12px;
+}
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(209, 0, 0, 0.12);
+    border-color: #d10000;
+}
+.service-card .service-hint {
+    opacity: 0.7;
+    transition: opacity 0.25s ease;
+}
+.service-card:hover .service-hint {
+    opacity: 1;
+    color: #d10000 !important;
 }
 
 /* === HERO BANNER : texte superposé sur le carousel === */
@@ -1157,12 +1244,14 @@ h3 > span[style*="#d10000"] {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    cursor: pointer;
+    user-select: none;
 }
 
 .hero-feat-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-    border-color: rgba(209, 0, 0, 0.2);
+    box-shadow: 0 10px 25px rgba(209, 0, 0, 0.12);
+    border-color: rgba(209, 0, 0, 0.35);
 }
 
 .hero-feat-icon {
@@ -1498,5 +1587,104 @@ main > .container-fluid > .container {
 .content-section {
     padding-top: clamp(2.5rem, 5vw, 5rem);
     padding-bottom: clamp(2.5rem, 5vw, 5rem);
+}
+
+/* ══════════════════════════════════════════════════════
+   VERROUILLAGE STATIQUE DE LA PAGE LORS D'UN MODAL OUVERT
+   ══════════════════════════════════════════════════════ */
+html.modal-open,
+body.modal-open {
+    overflow: hidden !important;
+    height: 100% !important;
+    overscroll-behavior: contain !important;
+}
+
+.modal {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 1060 !important;
+    overscroll-behavior: contain !important;
+}
+
+.modal.show {
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+}
+
+.modal-dialog {
+    margin: 1.25rem auto;
+    max-width: 480px;
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   FENÊTRE DÉTAIL DES SERVICES & ATOUTS ACCUEIL : OCCUPE 60% DE L'ÉCRAN
+   ════════════════════════════════════════════════════════════════════════ */
+#serviceDetailModal .modal-dialog,
+#heroFeatModal .modal-dialog,
+.service-modal-dialog,
+.hero-feat-modal-dialog {
+    margin: 1.75rem auto !important;
+    transition: width 0.3s ease, max-width 0.3s ease;
+}
+
+@media (min-width: 992px) {
+    #serviceDetailModal .modal-dialog,
+    #heroFeatModal .modal-dialog,
+    .service-modal-dialog,
+    .hero-feat-modal-dialog {
+        width: 60vw !important;
+        max-width: 60vw !important;
+        min-width: 640px;
+    }
+
+    #serviceDetailModal #serviceModalImg,
+    #heroFeatModal #heroFeatImg {
+        max-height: 280px !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    #serviceDetailModal .modal-dialog,
+    #heroFeatModal .modal-dialog,
+    .service-modal-dialog,
+    .hero-feat-modal-dialog {
+        width: 75vw !important;
+        max-width: 75vw !important;
+    }
+
+    #serviceDetailModal #serviceModalImg,
+    #heroFeatModal #heroFeatImg {
+        max-height: 230px !important;
+    }
+}
+
+@media (max-width: 767.98px) {
+    #serviceDetailModal .modal-dialog,
+    #heroFeatModal .modal-dialog,
+    .service-modal-dialog,
+    .hero-feat-modal-dialog {
+        width: 94vw !important;
+        max-width: 94vw !important;
+        margin: 0.5rem auto !important;
+    }
+
+    #serviceDetailModal #serviceModalImg,
+    #heroFeatModal #heroFeatImg {
+        max-height: 180px !important;
+    }
+}
+
+.modal-dialog-scrollable .modal-content {
+    max-height: calc(100vh - 3.5rem) !important;
+    overflow: hidden !important;
+}
+
+.modal-dialog-scrollable .modal-body {
+    overflow-y: auto !important;
+    max-height: calc(85vh - 120px) !important;
+    -webkit-overflow-scrolling: touch;
 }
 

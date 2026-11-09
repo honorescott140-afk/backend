@@ -1,5 +1,93 @@
 [
   {
+    "id": "msg_1794228104_4396",
+    "type": "inscription",
+    "formation": "Intelligence Artificielle & Prompt Engineering",
+    "statut": "Étudiant UNILU",
+    "creneau": "Matinée (08h30 - 11h30)",
+    "faculte": "Polytechnique, Bac 3",
+    "remarques": "Très motivé par les modèles génératifs",
+    "name": "Kanyinda Alain",
+    "email": "alain.kanyinda@unilu.ac.cd",
+    "phone": "+243 999 123 456",
+    "subject": "Inscription Formation : Intelligence Artificielle & Prompt Engineering",
+    "message": "Nouvelle inscription test",
+    "date": "09/11/2026 a 14:41",
+    "timestamp": 1794228104,
+    "read": false,
+    "status": "accepted"
+  },
+  {
+    "id": "msg_1794224794_4873",
+    "type": "reservation",
+    "formation": "",
+    "statut": "",
+    "creneau": "",
+    "faculte": "",
+    "remarques": "",
+    "name": "mushagalusa (esi)",
+    "email": "honorescott140@gmail.com",
+    "phone": "+243 991926394",
+    "subject": "Réservation Salle SNU : Autre événement (2026-11-11)",
+    "message": "=== DEMANDE DE RÉSERVATION DE LA SALLE (CONTRAT SNU) ===\nStructure / Organisation : esi\nReprésentant responsable : mushagalusa\nTéléphone : +243 991926394\nEmail : honorescott140@gmail.com\nNature de l'activité : Autre événement\nDate souhaitée : 2026-11-11\nParticipants attendus : 40 personnes (Capacité max 90)\nBesoins matériels & Détails : Machine, machine, machine, machine,",
+    "date": "09/11/2026 a 13:46",
+    "timestamp": 1794224794,
+    "read": true,
+    "status": "pending"
+  },
+  {
+    "id": "msg_1794053829_9328",
+    "type": "message",
+    "formation": "",
+    "statut": "",
+    "creneau": "",
+    "faculte": "",
+    "remarques": "",
+    "name": "Nyembo josue",
+    "email": "joshuajsh007@gmail.com",
+    "phone": "+243975147471",
+    "subject": "Demande d'abonnement",
+    "message": "Bonjour, j'aimerais savoir quel type d'abonnement pour la connexion la salle propose",
+    "date": "07/11/2026 a 14:17",
+    "timestamp": 1794053829,
+    "read": true,
+    "status": "pending"
+  },
+  {
+    "id": "msg_1793976707_7824",
+    "name": "honore mushagalusa",
+    "email": "honorescott140@gmail.com",
+    "phone": "Non renseigné",
+    "subject": "Demande de module : Microsoft Excel",
+    "message": "=== NOUVELLE DEMANDE DE MODULE ===\n\nNom du demandeur : honore mushagalusa\nAdresse e-mail : honorescott140@gmail.com\nModule demandé : Microsoft Excel\nDate de la demande : 06/11/2026 16:51:47\n\nCette demande a été transmise depuis le formulaire du site public de la Salle du Numérique.",
+    "date": "06/11/2026 a 16:51",
+    "timestamp": 1793976707,
+    "read": true
+  },
+  {
+    "id": "msg_1793970059_9136",
+    "name": "Mumbere Sarah",
+    "email": "sarah.mumbere@gmail.com",
+    "phone": "Non renseigné",
+    "subject": "Demande de module : Excel Avancé",
+    "message": "=== NOUVELLE DEMANDE DE MODULE ===\nNom : Mumbere Sarah\nEmail : sarah.mumbere@gmail.com\nModule demandé : Excel Avancé",
+    "date": "06/11/2026 a 15:00",
+    "timestamp": 1793970059,
+    "read": true
+  },
+  {
+    "id": "msg_1793969918_8637",
+    "name": "Jean Dupont",
+    "email": "jean.dupont@unilu.ac.cd",
+    "phone": "Non renseigné",
+    "subject": "Demande de module : Word Avancé",
+    "message": "=== NOUVELLE DEMANDE DE MODULE ===\nNom : Jean Dupont\nEmail : jean.dupont@unilu.ac.cd\nModule demandé : Word Avancé",
+    "date": "06/11/2026 a 14:58",
+    "timestamp": 1793969918,
+    "read": true,
+    "status": "accepted"
+  },
+  {
     "id": "msg_1793801236_6498",
     "name": "Prof. Kazadi (Faculté des Sciences Sociales)",
     "email": "kazadi@unilu.ac.cd",
@@ -8,7 +96,7 @@
     "message": "=== DEMANDE DE RÉSERVATION DE LA SALLE (CONTRAT SNU) ===\nStructure: Faculté des Sciences Sociales\nActivité: Conférence\nDate: 15/12/2026\nParticipants: 80 personnes\nBesoins: Rétroprojecteur, 50 PC",
     "date": "04/11/2026 a 16:07",
     "timestamp": 1793801236,
-    "read": false
+    "read": true
   },
   {
     "id": "msg_1793801203_3641",
@@ -19,6 +107,7 @@
     "message": "=== TEST INSCRIPTION ===\nFormation: Bureautique\nStatut: Etudiant UNILU\nSession: Matin",
     "date": "04/11/2026 a 16:06",
     "timestamp": 1793801203,
-    "read": false
+    "read": true,
+    "status": "accepted"
   }
 ]

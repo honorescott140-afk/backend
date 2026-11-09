@@ -383,10 +383,10 @@ class ClaudiaUnifiedHandler(SimpleHTTPRequestHandler):
 
                 name = sanitize(data.get("name", ""), 100)
                 email = sanitize(data.get("email", ""), 200)
-                phone = sanitize(data.get("phone", ""), 30)
+                phone = sanitize(data.get("phone", ""), 30) or "Non renseigné"
                 subject = sanitize(data.get("subject", ""), 200)
                 message = sanitize(data.get("message", ""), 2000)
-                if len(name) < 2 or not re.fullmatch(r"[^@\s]+@[^@\s]+\.[^@\s]+", email) or len(phone) < 7 or len(subject) < 3 or len(message) < 10:
+                if len(name) < 2 or not re.fullmatch(r"[^@\s]+@[^@\s]+\.[^@\s]+", email) or (phone != "Non renseigné" and len(phone) < 7) or len(subject) < 3 or len(message) < 5:
                     self.send_response(400)
                     self.send_header("Content-Type", "application/json; charset=utf-8")
                     self.end_headers()
@@ -404,6 +404,12 @@ class ClaudiaUnifiedHandler(SimpleHTTPRequestHandler):
                 now_str = time.strftime("%d/%m/%Y a %H:%M")
                 new_msg = {
                     "id": f"msg_{int(time.time())}_{int(time.time() * 1000) % 10000}",
+                    "type": sanitize(data.get("type", "message"), 30) or "message",
+                    "formation": sanitize(data.get("formation", ""), 200),
+                    "statut": sanitize(data.get("statut", ""), 100),
+                    "creneau": sanitize(data.get("creneau", ""), 100),
+                    "faculte": sanitize(data.get("faculte", ""), 200),
+                    "remarques": sanitize(data.get("remarques", ""), 1000),
                     "name": name,
                     "email": email,
                     "phone": phone,
@@ -411,7 +417,8 @@ class ClaudiaUnifiedHandler(SimpleHTTPRequestHandler):
                     "message": message,
                     "date": now_str,
                     "timestamp": int(time.time()),
-                    "read": False
+                    "read": False,
+                    "status": "pending"
                 }
 
                 messages.insert(0, new_msg)
@@ -425,6 +432,32 @@ class ClaudiaUnifiedHandler(SimpleHTTPRequestHandler):
                             json.dump(messages, f, ensure_ascii=False, indent=2)
                     except Exception:
                         pass
+
+                # Notification email optionnelle a l'administrateur si SMTP est configure
+                admin_email = os.environ.get("ADMIN_EMAIL", "honorescott140@gmail.com")
+                smtp_host = os.environ.get("SMTP_HOST")
+                if smtp_host:
+                    try:
+                        import smtplib
+                        from email.mime.text import MIMEText
+                        from email.mime.multipart import MIMEMultipart
+                        smtp_port = int(os.environ.get("SMTP_PORT", 587))
+                        smtp_user = os.environ.get("SMTP_USER", "")
+                        smtp_pass = os.environ.get("SMTP_PASS", "")
+                        mail = MIMEMultipart("alternative")
+                        mail["Subject"] = f"[SNU UNILU] {subject}"
+                        mail["From"] = smtp_user or "numerique@SNU.ac.cd"
+                        mail["To"] = admin_email
+                        body_text = f"Bonjour,\n\nNouveau message / demande de module recu depuis le site SNU :\n\n- De : {name} ({email})\n- Date : {now_str}\n- Objet : {subject}\n\nContenu :\n{message}\n"
+                        mail.attach(MIMEText(body_text, "plain", "utf-8"))
+                        s = smtplib.SMTP(smtp_host, smtp_port, timeout=4)
+                        s.starttls()
+                        if smtp_user and smtp_pass:
+                            s.login(smtp_user, smtp_pass)
+                        s.sendmail(mail["From"], [admin_email], mail.as_string())
+                        s.quit()
+                    except Exception as mail_err:
+                        print(f"[Notification Admin] SMTP indisponible : {mail_err}")
 
                 self.send_response(200)
                 self.send_header("Content-Type", "application/json; charset=utf-8")
@@ -460,6 +493,55 @@ class ClaudiaUnifiedHandler(SimpleHTTPRequestHandler):
                 for m in messages:
                     if mark_all or m.get("id") == target_id:
                         m["read"] = True
+
+                with open(MESSAGES_FILE, "w", encoding="utf-8") as f:
+                    json.dump(messages, f, ensure_ascii=False, indent=2)
+
+                if os.path.exists(os.path.dirname(FRONTEND_MESSAGES_FILE)):
+                    try:
+                        with open(FRONTEND_MESSAGES_FILE, "w", encoding="utf-8") as f:
+                            json.dump(messages, f, ensure_ascii=False, indent=2)
+                    except Exception:
+                        pass
+
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json; charset=utf-8")
+                self.end_headers()
+                self.wfile.write(b'{"success": true}')
+            except Exception as e:
+                self.send_response(500)
+                self.end_headers()
+            return
+
+        # 4b. API Messagerie : Mettre a jour le statut d'un message (ex: inscription acceptee)
+        if path == "/api/messages/status":
+            if not admin_authorized(self):
+                return
+            try:
+                content_len = int(self.headers.get("Content-Length", 0))
+                body = self.rfile.read(content_len)
+                req_data = json.loads(body.decode("utf-8"))
+                target_id = req_data.get("id")
+                new_status = str(req_data.get("status", "")).strip()[:30]
+
+                messages = []
+                if os.path.exists(MESSAGES_FILE):
+                    with open(MESSAGES_FILE, "r", encoding="utf-8") as f:
+                        messages = json.load(f)
+
+                found = False
+                for m in messages:
+                    if m.get("id") == target_id:
+                        m["status"] = new_status
+                        found = True
+                        break
+
+                if not found:
+                    self.send_response(404)
+                    self.send_header("Content-Type", "application/json; charset=utf-8")
+                    self.end_headers()
+                    self.wfile.write(b'{"success": false, "error": "Message introuvable"}')
+                    return
 
                 with open(MESSAGES_FILE, "w", encoding="utf-8") as f:
                     json.dump(messages, f, ensure_ascii=False, indent=2)

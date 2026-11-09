@@ -29,6 +29,21 @@ window.API_URL = API_URL;
         }
     });
 
+    // ── Redirection temporisée (1 seconde) sur le bouton "En savoir plus" de l'accueil vers Services ──
+    $(document).on('click', '#heroServiceBtn, .hero-service-btn', function (e) {
+        e.preventDefault();
+        var targetUrl = $(this).attr('href') || 'services.html';
+        var $btn = $(this);
+        if ($btn.hasClass('btn-loading')) return;
+
+        $btn.addClass('btn-loading').css({ 'pointer-events': 'none', 'opacity': '0.85' });
+        $btn.html('<i class="fa fa-spinner fa-spin me-2"></i> Chargement...');
+
+        setTimeout(function () {
+            window.location.href = targetUrl;
+        }, 1000); // 1 seconde de temporisation
+    });
+
 
     // Auto-scroll to bottom of chatbot messages when modal opens
     $('#chatbotModal').on('shown.bs.modal', function () {
@@ -734,9 +749,20 @@ window.API_URL = API_URL;
             }
         }
         var modalEl = document.getElementById('formationModal');
-        if (modalEl && window.bootstrap) {
-            var modal = bootstrap.Modal.getOrCreateInstance(modalEl);
-            modal.show();
+        if (modalEl) {
+            try {
+                var modal = (window.bootstrap && window.bootstrap.Modal) ?
+                    ((bootstrap.Modal.getInstance && bootstrap.Modal.getInstance(modalEl)) || new bootstrap.Modal(modalEl)) : null;
+                if (modal && typeof modal.show === 'function') {
+                    modal.show();
+                } else if (window.$ && typeof $(modalEl).modal === 'function') {
+                    $(modalEl).modal('show');
+                }
+            } catch (err) {
+                if (window.$ && typeof $(modalEl).modal === 'function') {
+                    $(modalEl).modal('show');
+                }
+            }
         }
     });
 
@@ -744,7 +770,7 @@ window.API_URL = API_URL;
     $('#formationRegistrationForm').submit(function (e) {
         e.preventDefault();
         var form = this;
-        var submitBtn = $(form).find('#modalSubmitBtn');
+        var submitBtn = $('#modalSubmitBtn');
         var originalText = submitBtn.html();
 
         var formation = $('#modalFormationSelect').val() || "Formation Générale";
@@ -767,6 +793,12 @@ window.API_URL = API_URL;
                       "Remarques : " + remarques;
 
         var payload = {
+            type: 'inscription',
+            formation: formation,
+            statut: statut,
+            creneau: creneau,
+            faculte: faculte,
+            remarques: remarques,
             name: name,
             phone: phone,
             email: email,
@@ -832,6 +864,7 @@ window.API_URL = API_URL;
                       "Besoins matériels & Détails : " + details;
 
         var payload = {
+            type: 'reservation',
             name: rep + " (" + org + ")",
             phone: phone,
             email: email,
@@ -882,6 +915,7 @@ window.API_URL = API_URL;
         submitBtn.prop('disabled', true).html('<i class="fa fa-spinner fa-spin me-2"></i> Envoi en cours...');
 
         var msgData = {
+            type: 'message',
             name: $('#contactName').val().trim(),
             email: $('#contactEmail').val().trim(),
             phone: $('#contactPhone').val().trim(),

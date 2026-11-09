@@ -60,8 +60,7 @@
                         <a href="services.html" class="nav-item nav-link active px-3">Services</a>
                         <a href="formations.html" class="nav-item nav-link px-3">Formations</a>
                         <a href="actualites.html" class="nav-item nav-link px-3">Actualités</a>
-                        <a href="project.html" class="nav-item nav-link px-3">En savoir plus</a>
-                        <a href="contact.html" class="nav-item nav-link px-3">Contact</a>
+                        <a href="project.html" class="nav-item nav-link px-3">À propos</a>
                         <div class="ms-lg-3 my-2 my-lg-0">
                             <button id="themeToggleBtn" class="theme-toggle-btn" title="Basculer Mode Sombre / Mode Clair">
                                 <i class="fa fa-moon me-1 theme-icon"></i> <span class="theme-text">Mode Sombre</span>
@@ -75,97 +74,145 @@
     <!-- Navbar End -->
 
     <main id="main-content">
-        <!-- Hero Header -->
-        <section class="container-fluid pb-5 bg-primary hero-header">
-            <div class="container py-5">
-                <div class="row g-3 align-items-center">
-                    <div class="col-lg-7 text-center text-lg-start">
-                        <h1 class="display-1 mb-3" style="font-size:clamp(2.6rem,6vw,4.5rem);font-weight:900;color:#d10000 !important;">Nos services</h1>
-                        <p class="lead text-dark mb-0">Des ressources, des espaces et un accompagnement pour apprendre et travailler efficacement.</p>
-                    </div>
-                    <div class="col-lg-5 text-center text-lg-end">
-                        <a href="contact.html" class="btn btn-primary px-4 py-2" style="font-weight:700;">Nous contacter</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Services Grid -->
-        <section class="container-fluid py-5 bg-white" aria-labelledby="services-title">
-            <div class="container py-4">
-                <div class="text-center mb-5">
-                    <span class="section-kicker">Ce que nous proposons</span>
-                    <h2 id="services-title" class="mb-3">Des services pensés pour la communauté universitaire</h2>
-                    <p class="text-muted mx-auto" style="max-width:720px;">La Salle du Numérique met à disposition des solutions concrètes pour la formation, la recherche, la collaboration et les projets numériques.</p>
+        <!-- Services Grid Ultra Compact -->
+        <section class="container-fluid pt-2 pb-4 bg-white" aria-labelledby="services-title">
+            <div class="container pt-0 pb-3">
+                <div class="text-center mb-3">
+                    <h1 id="services-title" class="mb-1" style="font-size: clamp(1.15rem, 2vw, 1.45rem); font-weight: 800; color: #d10000; line-height: 1.15;">Nos services</h1>
+                    <p class="text-muted mx-auto mb-2" style="max-width:720px; font-size: 0.82rem; line-height: 1.35;">Des services pensés pour la communauté universitaire. Cliquez sur un service pour afficher sa présentation détaillée.</p>
                 </div>
                 <div class="row g-4" id="servicesContainer">
                     <div class="col-md-6 col-lg-4">
-                        <article class="service-card p-4 h-100">
+                        <article class="service-card p-4 h-100" data-service-key="postes" tabindex="0" role="button" aria-label="Voir les détails des Postes informatiques">
                             <i class="fa fa-desktop service-icon"></i>
                             <h3 class="h5">Postes informatiques</h3>
                             <p class="text-muted mb-0">Des ordinateurs modernes pour les travaux pratiques, les recherches et les projets.</p>
+                            <span class="service-hint small text-primary mt-3 d-inline-block fw-bold"><i class="fa fa-info-circle me-1"></i>Cliquer pour voir les détails</span>
                         </article>
                     </div>
                     <div class="col-md-6 col-lg-4">
-                        <article class="service-card p-4 h-100">
+                        <article class="service-card p-4 h-100" data-service-key="internet" tabindex="0" role="button" aria-label="Voir les détails de la Connexion Internet">
                             <i class="fa fa-wifi service-icon"></i>
                             <h3 class="h5">Connexion Internet</h3>
                             <p class="text-muted mb-0">Une connexion stable et rapide pour apprendre, collaborer et accéder aux ressources en ligne.</p>
+                            <span class="service-hint small text-primary mt-3 d-inline-block fw-bold"><i class="fa fa-info-circle me-1"></i>Cliquer pour voir les détails</span>
                         </article>
                     </div>
                     <div class="col-md-6 col-lg-4">
-                        <article class="service-card p-4 h-100">
+                        <article class="service-card p-4 h-100" data-service-key="ressources" tabindex="0" role="button" aria-label="Voir les détails des Ressources numériques">
                             <i class="fa fa-book service-icon"></i>
                             <h3 class="h5">Ressources numériques</h3>
                             <p class="text-muted mb-0">Un accès facilité aux ouvrages, articles et outils utiles à vos études.</p>
+                            <span class="service-hint small text-primary mt-3 d-inline-block fw-bold"><i class="fa fa-info-circle me-1"></i>Cliquer pour voir les détails</span>
                         </article>
                     </div>
                     <div class="col-md-6 col-lg-4">
-                        <article class="service-card p-4 h-100">
+                        <article class="service-card p-4 h-100" data-service-key="espaces_prives" tabindex="0" role="button" aria-label="Voir les détails des Espaces de travail privés">
                             <i class="fa fa-laptop service-icon"></i>
-                            <h3 class="h5">Espaces de travail</h3>
-                            <p class="text-muted mb-0">Des espaces individuels et collaboratifs adaptés à vos besoins.</p>
+                            <h3 class="h5">Espaces de travail privés</h3>
+                            <p class="text-muted mb-0">Des bureaux individuels isolés et confortables pour vous concentrer sur vos TFC et mémoires.</p>
+                            <span class="service-hint small text-primary mt-3 d-inline-block fw-bold"><i class="fa fa-info-circle me-1"></i>Cliquer pour voir les détails</span>
                         </article>
                     </div>
                     <div class="col-md-6 col-lg-4">
-                        <article class="service-card p-4 h-100">
+                        <article class="service-card p-4 h-100" data-service-key="ateliers" tabindex="0" role="button" aria-label="Voir les détails des Ateliers pratiques">
                             <i class="fa fa-chalkboard-teacher service-icon"></i>
                             <h3 class="h5">Ateliers pratiques</h3>
                             <p class="text-muted mb-0">Des séances courtes pour développer des compétences directement utiles.</p>
+                            <span class="service-hint small text-primary mt-3 d-inline-block fw-bold"><i class="fa fa-info-circle me-1"></i>Cliquer pour voir les détails</span>
                         </article>
                     </div>
                     <div class="col-md-6 col-lg-4">
-                        <article class="service-card p-4 h-100">
+                        <article class="service-card p-4 h-100" data-service-key="formations" tabindex="0" role="button" aria-label="Voir les détails des Formations">
                             <i class="fa fa-graduation-cap service-icon"></i>
                             <h3 class="h5">Formations</h3>
                             <p class="text-muted mb-0">Des formations en bureautique, IA, design et outils numériques.</p>
+                            <span class="service-hint small text-primary mt-3 d-inline-block fw-bold"><i class="fa fa-info-circle me-1"></i>Cliquer pour voir les détails</span>
                         </article>
                     </div>
                     <div class="col-md-6 col-lg-4">
-                        <article class="service-card p-4 h-100">
+                        <article class="service-card p-4 h-100" data-service-key="espaces_collab" tabindex="0" role="button" aria-label="Voir les détails des Espaces collaboratifs">
                             <i class="fa fa-users service-icon"></i>
                             <h3 class="h5">Espaces collaboratifs</h3>
                             <p class="text-muted mb-0">Un cadre propice aux échanges, aux équipes et aux projets universitaires.</p>
+                            <span class="service-hint small text-primary mt-3 d-inline-block fw-bold"><i class="fa fa-info-circle me-1"></i>Cliquer pour voir les détails</span>
                         </article>
                     </div>
                     <div class="col-md-6 col-lg-4">
-                        <article class="service-card p-4 h-100">
+                        <article class="service-card p-4 h-100" data-service-key="accompagnement" tabindex="0" role="button" aria-label="Voir les détails de l'Accompagnement">
                             <i class="fa fa-comments service-icon"></i>
                             <h3 class="h5">Accompagnement</h3>
                             <p class="text-muted mb-0">Une équipe disponible pour vous orienter dans vos usages et vos projets.</p>
+                            <span class="service-hint small text-primary mt-3 d-inline-block fw-bold"><i class="fa fa-info-circle me-1"></i>Cliquer pour voir les détails</span>
                         </article>
                     </div>
                     <div class="col-md-6 col-lg-4">
-                        <article class="service-card p-4 h-100">
+                        <article class="service-card p-4 h-100" data-service-key="tp" tabindex="0" role="button" aria-label="Voir les détails des Travaux pratiques">
                             <i class="fa fa-book-open service-icon"></i>
                             <h3 class="h5">Travaux pratiques</h3>
                             <p class="text-muted mb-0">Un environnement équipé pour réaliser vos TP, TPE et travaux de recherche.</p>
+                            <span class="service-hint small text-primary mt-3 d-inline-block fw-bold"><i class="fa fa-info-circle me-1"></i>Cliquer pour voir les détails</span>
                         </article>
                     </div>
                 </div>
             </div>
         </section>
     </main>
+
+    <!-- ════════════════════════════════════════════════════════════════════════
+         MODAL DÉTAILS D'UN SERVICE (Image + Description détaillée + Équipements)
+    ════════════════════════════════════════════════════════════════════════ -->
+    <div class="modal fade" id="serviceDetailModal" tabindex="-1" aria-labelledby="serviceDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable service-modal-dialog">
+            <div class="modal-content shadow-lg border-0" style="border-radius: 14px; overflow: hidden;">
+                <div class="modal-header py-3 px-4 text-white" style="background: #d10000;">
+                    <div class="d-flex align-items-center">
+                        <i id="serviceModalHeaderIcon" class="fa fa-laptop fs-3 me-3"></i>
+                        <div>
+                            <h5 class="modal-title fw-bold text-white mb-0" id="serviceDetailModalLabel" style="font-size: 1.05rem;">Détails du service</h5>
+                            <small class="text-white-50" style="font-size: 0.78rem;">Salle du Numérique — UNILU</small>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                </div>
+
+                <div class="modal-body p-3 p-md-4">
+                    <!-- Image du service -->
+                    <div class="position-relative mb-3 text-center" style="border-radius: 10px; overflow: hidden; background: #f8f9fa;">
+                        <img id="serviceModalImg" src="img/Salle3.jpg" alt="Aperçu du service" class="img-fluid w-100" style="max-height: 260px; object-fit: cover;">
+                        <div id="serviceModalBadge" class="position-absolute top-0 end-0 m-2 px-3 py-1 bg-dark text-white rounded-pill small fw-bold shadow-sm" style="font-size: 0.78rem;">
+                            <i class="fa fa-check-circle text-success me-1"></i>Disponible
+                        </div>
+                    </div>
+
+                    <h4 id="serviceModalTitle" class="fw-bold mb-2" style="font-size: 1.25rem;">Espaces de travail privés</h4>
+                    
+                    <div class="mb-3">
+                        <p id="serviceModalDesc" class="text-muted mb-0" style="font-size: 0.95rem; line-height: 1.6;">
+                            Des bureaux individuels isolés et calmes au sein de la Salle du Numérique. Chaque bureau dispose d'un mobilier ergonomique, d'un fauteuil grand confort, de prises électriques dédiées et d'une connexion réseau pour vous permettre de travailler concentré sur vos travaux de fin de cycle, mémoires et recherches académiques.
+                        </p>
+                    </div>
+
+                    <div class="mb-3 p-3 rounded bg-light border">
+                        <h6 class="fw-bold text-uppercase text-danger small mb-2" style="font-size: 0.78rem; letter-spacing: 0.5px;"><i class="fa fa-check-square me-2"></i>Équipements inclus</h6>
+                        <ul id="serviceModalFeatures" class="list-unstyled row g-2 small mb-0">
+                            <li class="col-md-6 text-muted"><i class="fa fa-check text-danger me-2"></i>Bureau individuel ergonomique</li>
+                            <li class="col-md-6 text-muted"><i class="fa fa-check text-danger me-2"></i>Prise électrique & éclairage</li>
+                            <li class="col-md-6 text-muted"><i class="fa fa-check text-danger me-2"></i>Connexion Wi-Fi haute stabilité</li>
+                            <li class="col-md-6 text-muted"><i class="fa fa-check text-danger me-2"></i>Cadre calme et climatisé</li>
+                        </ul>
+                    </div>
+
+                    <div class="d-flex flex-wrap gap-2 justify-content-end pt-2 border-top">
+                        <button type="button" class="btn btn-sm btn-outline-secondary px-3 py-2" data-bs-dismiss="modal">Fermer</button>
+                        <a href="project.html#contact" class="btn btn-sm btn-primary px-3 py-2 fw-bold">
+                            <i class="fa fa-envelope me-1"></i>Nous contacter
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- ════════════════════════════════════════════════════════════════════════
          MODAL D'INSCRIPTION RAPIDE À LA FORMATION (Sans quitter la page)
@@ -288,9 +335,11 @@
                     <p><i class="fa fa-envelope me-3"></i>numerique@SNU.ac.cd</p>
                     <div class="d-flex pt-2">
                         <a class="btn btn-outline-primary btn-square border-2 me-2"
-                            href="https://www.facebook.com/unilu.ac.cd" target="_blank" rel="noopener noreferrer"><i
+                            href="https://www.facebook.com/unilu.ac.cd" data-cms-href="general.facebook_unilu" target="_blank" rel="noopener noreferrer" title="Facebook UNILU"><i
                                 class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-outline-primary btn-square border-2 me-2" href="mailto:snunilu@unilu.ac.cd"><i
+                        <a class="btn btn-outline-primary btn-square border-2 me-2"
+                            href="https://www.tiktok.com" data-cms-href="general.tiktok" target="_blank" rel="noopener noreferrer" title="TikTok SNU"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298-.002.595.042.88.13V9.4a6.33 6.33 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.66a6.34 6.34 0 0 0 10.82 4.49 6.27 6.27 0 0 0 1.88-4.49V8.77a8.27 8.27 0 0 0 4.89 1.57V6.89a4.83 4.83 0 0 1-1-.2z"/></svg></a>
+                        <a class="btn btn-outline-primary btn-square border-2 me-2" href="mailto:numerique@SNU.ac.cd" title="Email"><i
                                 class="fa fa-envelope"></i></a>
                     </div>
                 </div>

@@ -73,6 +73,39 @@ body.dark-mode .navbar-collapse {
     }
 }
 
+/* Menu déroulant À propos en Mode Sombre */
+body.dark-mode .navbar .dropdown-menu,
+html[data-theme="dark"] .navbar .dropdown-menu {
+    background: #161616 !important;
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.85) !important;
+}
+
+body.dark-mode .navbar .dropdown-item,
+html[data-theme="dark"] .navbar .dropdown-item {
+    color: #e8e8e8 !important;
+}
+
+body.dark-mode .navbar .dropdown-item:hover,
+body.dark-mode .navbar .dropdown-item.active,
+html[data-theme="dark"] .navbar .dropdown-item:hover,
+html[data-theme="dark"] .navbar .dropdown-item.active {
+    background: #d10000 !important;
+    color: #ffffff !important;
+}
+
+@media (max-width: 991.98px) {
+    body.dark-mode .navbar .dropdown-menu,
+    html[data-theme="dark"] .navbar .dropdown-menu {
+        background: #101010 !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+    body.dark-mode .navbar .dropdown-item,
+    html[data-theme="dark"] .navbar .dropdown-item {
+        color: #ffffff !important;
+    }
+}
+
 /* Ajustements finaux mobile : logo et nom à gauche, hamburger à droite. */
 .snu-navbar .navbar {
     min-height: 68px;
@@ -1833,5 +1866,62 @@ main [style*="white-space: nowrap"] {
     main .d-flex:not(.navbar):not(.btn):not(.btn-group) {
         min-width: 0;
         flex-wrap: wrap;
+    }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   FENÊTRE DÉTAIL DES SERVICES & ATOUTS ACCUEIL : OCCUPE 60% DE L'ÉCRAN
+   ════════════════════════════════════════════════════════════════════════ */
+#serviceDetailModal .modal-dialog,
+#heroFeatModal .modal-dialog,
+.service-modal-dialog,
+.hero-feat-modal-dialog {
+    margin: 1.75rem auto !important;
+}
+
+@media (min-width: 992px) {
+    #serviceDetailModal .modal-dialog,
+    #heroFeatModal .modal-dialog,
+    .service-modal-dialog,
+    .hero-feat-modal-dialog {
+        width: 60vw !important;
+        max-width: 60vw !important;
+        min-width: 640px !important;
+    }
+
+    #serviceDetailModal #serviceModalImg,
+    #heroFeatModal #heroFeatImg {
+        max-height: 280px !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    #serviceDetailModal .modal-dialog,
+    #heroFeatModal .modal-dialog,
+    .service-modal-dialog,
+    .hero-feat-modal-dialog {
+        width: 75vw !important;
+        max-width: 75vw !important;
+    }
+
+    #serviceDetailModal #serviceModalImg,
+    #heroFeatModal #heroFeatImg {
+        max-height: 230px !important;
+    }
+}
+
+@media (max-width: 767.98px) {
+    #serviceDetailModal .modal-dialog,
+    #heroFeatModal .modal-dialog,
+    .service-modal-dialog,
+    .hero-feat-modal-dialog {
+        width: 94vw !important;
+        max-width: 94vw !important;
+        margin: 0.5rem auto !important;
+    }
+
+    #serviceDetailModal #serviceModalImg,
+    #heroFeatModal #heroFeatImg {
+        max-height: 180px !important;
     }
 }

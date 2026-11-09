@@ -74,8 +74,7 @@
                         <a href="services.html" class="nav-item nav-link px-3">Services</a>
                         <a href="formations.html" class="nav-item nav-link px-3">Formations</a>
                         <a href="actualites.html" class="nav-item nav-link px-3">Actualités</a>
-                        <a href="project.html" class="nav-item nav-link px-3">En savoir plus</a>
-                        <a href="contact.html" class="nav-item nav-link active px-3">Contact</a>
+                        <a href="project.html#contact" class="nav-item nav-link active px-3">À propos</a>
                         <div class="ms-lg-3 my-2 my-lg-0">
                             <button id="themeToggleBtn" class="theme-toggle-btn" title="Basculer Mode Sombre / Mode Clair">
                                 <i class="fa fa-moon me-1 theme-icon"></i> <span class="theme-text">Mode Sombre</span>
@@ -391,149 +390,124 @@
 
     <main id="main-content">
     <!-- Contact & Map Section Start -->
-    <div class="container-fluid py-5">
-        <div class="container py-5">
-            <div class="row g-5">
-                <!-- Info Column -->
-                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
-                    <h2 class="mb-4" style="color: #1a1a1a; font-weight: 800; font-family: 'Montserrat', sans-serif;" data-cms="contact_page.title">
-                        Nous sommes à votre écoute</h2>
-                    <p class="mb-4 text-muted" style="line-height: 1.7; font-size: 1rem;">
-                        <span data-cms="contact_page.p1">Bienvenue sur la page de contact de la Salle du Numérique.</span><br><br>
-                        <span data-cms="contact_page.p2">Que vous souhaitiez obtenir des informations sur nos formations, découvrir nos services,
-                        réserver un espace de travail ou bénéficier d'un accompagnement numérique, notre équipe est à
-                        votre disposition.</span><br><br>
-                        <span data-cms="contact_page.p3">Nous serons heureux de répondre à toutes vos questions et de vous accompagner dans votre
-                        parcours d'apprentissage et d'innovation.</span><br><br>
-                        <strong data-cms="contact_page.slogan">Ensemble, innovons aujourd'hui pour inspirer demain.</strong>
-                    </p>
+    <div class="container-fluid py-4 bg-light">
+        <div class="container py-3">
+            <!-- En-tête Contact Centré -->
+            <div class="text-center mx-auto mb-4 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 650px;">
+                <div class="d-inline-block rounded-pill bg-danger bg-opacity-10 text-danger py-1 px-3 mb-2 small fw-bold">Contact &amp; Échange</div>
+                <h2 class="mb-2" style="color: #1a1a1a; font-weight: 800; font-family: 'Montserrat', sans-serif; font-size: clamp(1.4rem, 2.5vw, 1.85rem);" data-cms="contact_page.title">
+                    Nous sommes à votre écoute
+                </h2>
+                <p class="text-muted small mb-0" data-cms="contact_page.p1">
+                    Une question sur nos services, nos formations ou un besoin d'accompagnement ? Écrivez-nous directement.
+                </p>
+            </div>
 
-                    <h4 class="mt-5 mb-4"
-                        style="color: #1a1a1a; font-weight: 700; font-family: 'Montserrat', sans-serif;">Coordonnées
-                        Officielles</h4>
-                    <div class="row g-3">
-                        <!-- Facebook 1 -->
-                        <div class="col-sm-6">
+            <!-- Formulaire Centré et Compact -->
+            <div class="row justify-content-center">
+                <div class="col-lg-7 col-md-9 wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="bg-white p-4 border rounded-3 shadow-sm">
+                        <div class="d-flex align-items-center justify-content-center mb-3">
+                            <i class="fa fa-envelope-open-text text-danger fs-4 me-2"></i>
+                            <h4 class="mb-0 fw-bold text-dark" style="font-family: 'Montserrat', sans-serif; font-size: 1.25rem;">Envoyer un message</h4>
+                        </div>
+
+                        <!-- Success message placeholder -->
+                        <div id="contactAlert" class="alert alert-success d-none mb-3 py-2 small" role="alert">
+                            <i class="fa fa-check-circle me-2"></i> Message envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.
+                        </div>
+
+                        <form id="contactForm" class="needs-validation" novalidate>
+                            <div class="d-none" aria-hidden="true"><label for="website">Ne pas remplir</label><input type="text" id="website" name="website" tabindex="-1" autocomplete="off"></div>
+                            <div class="row g-2">
+                                <div class="col-12">
+                                    <label for="contactName" class="form-label small fw-bold mb-1 text-secondary">Nom complet</label>
+                                    <input type="text" class="form-control form-control-sm py-2" id="contactName" placeholder="Ex: Jean Mukendi" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="contactEmail" class="form-label small fw-bold mb-1 text-secondary">Adresse e-mail</label>
+                                    <input type="email" class="form-control form-control-sm py-2" id="contactEmail" placeholder="nom@exemple.com" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="contactPhone" class="form-label small fw-bold mb-1 text-secondary">Téléphone</label>
+                                    <input type="tel" class="form-control form-control-sm py-2" id="contactPhone" placeholder="+243 ..." required>
+                                </div>
+                                <div class="col-12">
+                                    <label for="contactSubject" class="form-label small fw-bold mb-1 text-secondary">Objet</label>
+                                    <input type="text" class="form-control form-control-sm py-2" id="contactSubject" placeholder="Objet de votre message" required>
+                                </div>
+                                <div class="col-12">
+                                    <label for="contactMessage" class="form-label small fw-bold mb-1 text-secondary">Votre message</label>
+                                    <textarea class="form-control form-control-sm py-2" placeholder="Écrivez votre message ici..." id="contactMessage" rows="3" style="resize: vertical; min-height: 85px;" required></textarea>
+                                </div>
+                                <div class="col-12 text-center mt-3">
+                                    <button class="btn btn-primary px-4 py-2 fw-bold rounded-pill shadow-sm" type="submit" style="font-size: 0.95rem;">
+                                        <i class="fa fa-paper-plane me-2"></i>Envoyer le message
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Coordonnées Officielles Centrées -->
+            <div class="row justify-content-center mt-4">
+                <div class="col-lg-9">
+                    <div class="text-center mb-3">
+                        <small class="text-uppercase text-muted fw-bold" style="letter-spacing: 1px;">Coordonnées Officielles</small>
+                    </div>
+                    <div class="row g-2 justify-content-center">
+                        <!-- Facebook UNILU -->
+                        <div class="col-sm-6 col-md-3">
                             <a href="https://www.facebook.com/unilu.ac.cd" data-cms-href="general.facebook_unilu" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
-                                <div class="p-3 border rounded shadow-sm bg-white d-flex align-items-center h-100 contact-link-card"
-                                    style="transition: all 0.3s ease;">
-                                    <i class="fab fa-facebook text-primary fs-3 me-3"
-                                        style="color: #3b5998 !important;"></i>
-                                    <div>
-                                        <small class="text-muted d-block" style="font-size: 0.75rem;">Facebook
-                                            UNILU</small>
-                                        <strong style="color: #333; font-size: 0.85rem;">Salle du Numérique de
-                                            l'UNILU</strong>
+                                <div class="p-2 border rounded shadow-sm bg-white d-flex align-items-center h-100 contact-link-card" style="transition: all 0.3s ease;">
+                                    <i class="fab fa-facebook text-primary fs-4 me-2" style="color: #3b5998 !important;"></i>
+                                    <div class="overflow-hidden">
+                                        <small class="text-muted d-block text-truncate" style="font-size: 0.7rem;">Facebook UNILU</small>
+                                        <strong style="color: #333; font-size: 0.78rem;" class="text-truncate d-block">Salle UNILU</strong>
                                     </div>
                                 </div>
                             </a>
                         </div>
-                        <!-- Facebook 2 -->
-                        <div class="col-sm-6">
-                            <a href="https://www.facebook.com" data-cms-href="general.facebook_snu" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
-                                <div class="p-3 border rounded shadow-sm bg-white d-flex align-items-center h-100 contact-link-card"
-                                    style="transition: all 0.3s ease;">
-                                    <i class="fab fa-facebook-f text-primary fs-3 me-3"
-                                        style="color: #4267B2 !important;"></i>
-                                    <div>
-                                        <small class="text-muted d-block" style="font-size: 0.75rem;">Facebook
-                                            SNU</small>
-                                        <strong style="color: #333; font-size: 0.85rem;">Salle du Numérique</strong>
+                        <!-- TikTok SNU -->
+                        <div class="col-sm-6 col-md-3">
+                            <a href="https://www.tiktok.com" data-cms-href="general.tiktok" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
+                                <div class="p-2 border rounded shadow-sm bg-white d-flex align-items-center h-100 contact-link-card" style="transition: all 0.3s ease;">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="#010101" class="me-2" style="min-width: 22px;">
+                                        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298-.002.595.042.88.13V9.4a6.33 6.33 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.66a6.34 6.34 0 0 0 10.82 4.49 6.27 6.27 0 0 0 1.88-4.49V8.77a8.27 8.27 0 0 0 4.89 1.57V6.89a4.83 4.83 0 0 1-1-.2z"/>
+                                    </svg>
+                                    <div class="overflow-hidden">
+                                        <small class="text-muted d-block text-truncate" style="font-size: 0.7rem;">TikTok SNU</small>
+                                        <strong style="color: #333; font-size: 0.78rem;" class="text-truncate d-block">TikTok Officiel</strong>
                                     </div>
                                 </div>
                             </a>
                         </div>
                         <!-- Email -->
-                        <div class="col-sm-6">
+                        <div class="col-sm-6 col-md-3">
                             <a href="mailto:numerique@SNU.ac.cd" class="text-decoration-none">
-                                <div class="p-3 border rounded shadow-sm bg-white d-flex align-items-center h-100 contact-link-card"
-                                    style="transition: all 0.3s ease;">
-                                    <i class="fa fa-envelope text-danger fs-3 me-3"
-                                        style="color: #d10000 !important;"></i>
-                                    <div>
-                                        <small class="text-muted d-block" style="font-size: 0.75rem;">Email
-                                            Officiel</small>
-                                        <strong style="color: #333; font-size: 0.85rem;">numerique@SNU.ac.cd</strong>
+                                <div class="p-2 border rounded shadow-sm bg-white d-flex align-items-center h-100 contact-link-card" style="transition: all 0.3s ease;">
+                                    <i class="fa fa-envelope text-danger fs-4 me-2" style="color: #d10000 !important;"></i>
+                                    <div class="overflow-hidden">
+                                        <small class="text-muted d-block text-truncate" style="font-size: 0.7rem;">Email Officiel</small>
+                                        <strong style="color: #333; font-size: 0.78rem;" class="text-truncate d-block">numerique@SNU.ac.cd</strong>
                                     </div>
                                 </div>
                             </a>
                         </div>
                         <!-- WhatsApp -->
-                        <div class="col-sm-6">
-                            <a href="https://api.whatsapp.com/send?phone=243972147721" target="_blank" rel="noopener noreferrer"
-                                class="text-decoration-none">
-                                <div class="p-3 border rounded shadow-sm bg-white d-flex align-items-center h-100 contact-link-card"
-                                    style="transition: all 0.3s ease;">
-                                    <i class="fab fa-whatsapp text-success fs-3 me-3"
-                                        style="color: #25D366 !important;"></i>
-                                    <div>
-                                        <small class="text-muted d-block" style="font-size: 0.75rem;">WhatsApp
-                                            SNU</small>
-                                        <strong style="color: #333; font-size: 0.85rem;">+243 972 147 721</strong>
+                        <div class="col-sm-6 col-md-3">
+                            <a href="https://api.whatsapp.com/send?phone=243972147721" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
+                                <div class="p-2 border rounded shadow-sm bg-white d-flex align-items-center h-100 contact-link-card" style="transition: all 0.3s ease;">
+                                    <i class="fab fa-whatsapp text-success fs-4 me-2" style="color: #25D366 !important;"></i>
+                                    <div class="overflow-hidden">
+                                        <small class="text-muted d-block text-truncate" style="font-size: 0.7rem;">WhatsApp SNU</small>
+                                        <strong style="color: #333; font-size: 0.78rem;" class="text-truncate d-block">+243 972 147 721</strong>
                                     </div>
                                 </div>
                             </a>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Form Column -->
-                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.3s">
-                    <div class="bg-white p-4 p-md-5 border rounded shadow-sm">
-                        <h3 class="mb-4"
-                            style="color: #1a1a1a; font-weight: 700; font-family: 'Montserrat', sans-serif;">Envoyer un
-                            message</h3>
-
-                        <!-- Success message placeholder -->
-                        <div id="contactAlert" class="alert alert-success d-none mb-4" role="alert">
-                            <i class="fa fa-check-circle me-2"></i> Message envoyé avec succès ! Nous vous répondrons
-                            dans les plus brefs délais.
-                        </div>
-
-                        <form id="contactForm" class="needs-validation" novalidate>
-                            <div class="d-none" aria-hidden="true"><label for="website">Ne pas remplir</label><input type="text" id="website" name="website" tabindex="-1" autocomplete="off"></div>
-                            <div class="row g-3">
-                                <div class="col-12">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="contactName"
-                                            placeholder=" " required>
-                                        <label for="contactName">Nom complet</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="email" class="form-control" id="contactEmail"
-                                            placeholder=" " required>
-                                        <label for="contactEmail">Adresse e-mail</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="tel" class="form-control" id="contactPhone" placeholder=" "
-                                            required>
-                                        <label for="contactPhone">Téléphone</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="contactSubject" placeholder=" "
-                                            required>
-                                        <label for="contactSubject">Objet</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-floating">
-                                        <textarea class="form-control" placeholder=" " id="contactMessage"
-                                            style="height: 150px;" required></textarea>
-                                        <label for="contactMessage">Votre message</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <button class="btn btn-primary w-100 py-3 mt-2" type="submit"
-                                        style="font-weight: 700;">Envoyer le message</button>
-                                </div>
-                            </div>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -608,9 +582,11 @@
                     <p><i class="fa fa-envelope me-3"></i>numerique@SNU.ac.cd</p>
                     <div class="d-flex pt-2">
                         <a class="btn btn-outline-primary btn-square border-2 me-2"
-                            href="https://www.facebook.com/unilu.ac.cd" target="_blank" rel="noopener noreferrer"><i
+                            href="https://www.facebook.com/unilu.ac.cd" data-cms-href="general.facebook_unilu" target="_blank" rel="noopener noreferrer" title="Facebook UNILU"><i
                                 class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-outline-primary btn-square border-2 me-2" href="mailto:snunilu@unilu.ac.cd"><i
+                        <a class="btn btn-outline-primary btn-square border-2 me-2"
+                            href="https://www.tiktok.com" data-cms-href="general.tiktok" target="_blank" rel="noopener noreferrer" title="TikTok SNU"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298-.002.595.042.88.13V9.4a6.33 6.33 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.66a6.34 6.34 0 0 0 10.82 4.49 6.27 6.27 0 0 0 1.88-4.49V8.77a8.27 8.27 0 0 0 4.89 1.57V6.89a4.83 4.83 0 0 1-1-.2z"/></svg></a>
+                        <a class="btn btn-outline-primary btn-square border-2 me-2" href="mailto:numerique@SNU.ac.cd" title="Email"><i
                                 class="fa fa-envelope"></i></a>
                     </div>
                 </div>
@@ -863,7 +839,7 @@
          MODAL D'INSCRIPTION RAPIDE À LA FORMATION (Sans quitter la page)
     ════════════════════════════════════════════════════════════════════════ -->
     <div class="modal fade" id="formationModal" tabindex="-1" aria-labelledby="formationModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
             <div class="modal-content shadow-lg border-0" style="border-radius: 16px; overflow: hidden;">
                 <div class="modal-header py-3 px-4 text-white" style="background: #d10000;">
                     <div class="d-flex align-items-center">
@@ -948,13 +924,14 @@
                                 <textarea class="form-control" id="modalRemarquesApprenant" name="remarques" rows="2" placeholder="Précisez vos objectifs ou toute information utile..."></textarea>
                             </div>
 
-                            <div class="col-12 mt-4">
-                                <button type="submit" id="modalSubmitBtn" class="btn btn-primary w-100 py-3 fw-bold fs-5 shadow-sm">
-                                    <i class="fa fa-paper-plane me-2"></i>Confirmer mon inscription
-                                </button>
-                            </div>
                         </div>
                     </form>
+                </div>
+
+                <div class="modal-footer border-0 pt-0 px-4 pb-4">
+                    <button type="submit" form="formationRegistrationForm" id="modalSubmitBtn" class="btn btn-primary w-100 py-3 fw-bold fs-5 shadow-sm">
+                        <i class="fa fa-paper-plane me-2"></i>Confirmer mon inscription
+                    </button>
                 </div>
             </div>
         </div>

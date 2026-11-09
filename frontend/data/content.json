@@ -10,12 +10,15 @@
     "address": "Fac. Sciences Sociales, UNILU — Auditoire WAZIA, Lubumbashi, RDC",
     "facebook_unilu": "https://www.facebook.com/unilu.ac.cd",
     "facebook_snu": "https://www.facebook.com",
+    "tiktok": "https://www.tiktok.com",
     "opening_hours": "Lundi au Vendredi : 8h00 à 17h00 | Samedi : 8h00 à 13h00",
     "maps_url": "https://maps.app.goo.gl/9PGNyMNYEFEz272T8"
   },
   "hero": {
     "main_title": "INNOVER AUJOURD'HUI",
     "subtitle_accent": "INSPIRER DEMAIN",
+    "btn_text": "En savoir plus",
+    "btn_link": "services.html",
     "slides": [
       "img/Salle1.jpg",
       "img/Salle2.jpg",
@@ -23,10 +26,16 @@
     ],
     "feat_1_icon": "fa fa-desktop",
     "feat_1_title": "Ordinateurs Modernes",
+    "feat_1_desc": "La Salle du Numérique met à votre disposition un parc informatique récent composé de plus de 100 ordinateurs de dernière génération. Chaque poste est configuré avec des écrans haute définition, des composants rapides et tous les logiciels bureautiques, de développement et de recherche indispensables pour vos études et projets.",
+    "feat_1_img": "img/Salle1.jpg",
     "feat_2_icon": "fa fa-bolt",
     "feat_2_title": "Connexion Ultra Rapide",
+    "feat_2_desc": "Profitez d'un accès internet dédié par fibre optique à très haut débit et à faible latence. Que ce soit pour vos recherches documentaires universitaires, le téléchargement d'articles scientifiques, le travail sur le cloud ou des conférences en ligne, notre bande passante garantit une navigation fluide et ininterrompue.",
+    "feat_2_img": "img/Salle2.jpg",
     "feat_3_icon": "fa fa-building",
-    "feat_3_title": "Espaces de Travail"
+    "feat_3_title": "Espaces de Travail",
+    "feat_3_desc": "Découvrez des environnements de travail climatisés, modernes et ergonomiques adaptés à tous vos besoins : des zones calmes pour l'étude et la rédaction individuelle, des bureaux privatifs pour les enseignants-chercheurs, et des tables modulables pour vos sessions de groupe et ateliers pratiques.",
+    "feat_3_img": "img/Salle3.jpg"
   },
   "about": {
     "title_prefix": "Découvrez notre",
@@ -46,10 +55,10 @@
   "directeur": {
     "subtitle": "",
     "title_prefix": "",
-    "title_highlight": "CT ROGER",
+    "title_highlight": "BIENVENUE",
     "name": "CT ROGER",
     "role": "Directeur de la Salle du Numérique (SNU)",
-    "photo": "img/uploads/upload_1793869399_Capturedécrandu2026-11-0413-52-58.png",
+    "photo": "img/dr-roger.jpeg",
     "lead": "Chers visiteurs, chers apprenants,",
     "p1": "C'est avec un grand plaisir que je vous accueille au sein de la Salle du Numérique. Dans un monde en constante évolution, notre engagement est de former des femmes et des hommes capables de créer, d'innover et d'apporter des solutions concrètes aux défis de notre époque.",
     "p2": "Au-delà des compétences techniques, nous cultivons la créativité, l'esprit d'initiative et la confiance en soi — des qualités essentielles pour transformer les idées en opportunités réelles. Chaque apprenant est encouragé à développer son potentiel et à devenir un acteur du changement dans sa communauté.",
@@ -226,6 +235,12 @@
         "icon": "far fa-file-alt",
         "title": "Initiation à l'utilisation des IA",
         "desc": "Description pratique du module de formation."
+      },
+      {
+        "id": "mod_8",
+        "icon": "far fa-file-alt",
+        "title": "honore",
+        "desc": "Description pratique du module de formation."
       }
     ]
   },
@@ -300,6 +315,14 @@
   },
   "news": {
     "items": [
+      {
+        "id": "news_1794045381385",
+        "category": "FORMATION ENERGIE SOLAIRE",
+        "title": "CONFERENCE TECH",
+        "date": "07 Nov 2026 à 11:45",
+        "excerpt": "Une conference qui vise à mobiliser la jeunesse",
+        "img": "img/Salle1.jpg"
+      },
       {
         "id": "news_1793867534989",
         "category": "formation",

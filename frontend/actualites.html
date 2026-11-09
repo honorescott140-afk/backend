@@ -60,8 +60,7 @@
                         <a href="services.html" class="nav-item nav-link px-3">Services</a>
                         <a href="formations.html" class="nav-item nav-link px-3">Formations</a>
                         <a href="actualites.html" class="nav-item nav-link active px-3">Actualités</a>
-                        <a href="project.html" class="nav-item nav-link px-3">En savoir plus</a>
-                        <a href="contact.html" class="nav-item nav-link px-3">Contact</a>
+                        <a href="project.html" class="nav-item nav-link px-3">À propos</a>
                         <div class="ms-lg-3 my-2 my-lg-0">
                             <button id="themeToggleBtn" class="theme-toggle-btn" title="Basculer Mode Sombre / Mode Clair">
                                 <i class="fa fa-moon me-1 theme-icon"></i> <span class="theme-text">Mode Sombre</span>
@@ -75,28 +74,12 @@
     <!-- Navbar End -->
 
     <main id="main-content">
-        <!-- Hero Header -->
-        <section class="container-fluid pb-5 bg-primary hero-header">
-            <div class="container py-5">
-                <div class="row align-items-center g-4">
-                    <div class="col-lg-8 text-center text-lg-start">
-                        <h1 class="display-1 mb-3" style="font-size:clamp(2.6rem,6vw,4.5rem);font-weight:900;color:#d10000 !important;">Actualités</h1>
-                        <p class="lead text-dark mb-0">Les annonces, ateliers et événements de la Salle du Numérique.</p>
-                    </div>
-                    <div class="col-lg-4 text-center text-lg-end">
-                        <a href="contact.html" class="btn btn-primary px-4 py-2" style="font-weight:700;">Nous contacter</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- News Section -->
-        <section class="container-fluid py-5 bg-white">
-            <div class="container py-4">
-                <div class="text-center mb-5">
-                    <span class="section-kicker">La vie de la salle</span>
-                    <h2 class="mb-3">Dernières informations</h2>
-                    <p class="text-muted mx-auto" style="max-width:720px;">Restez informés des activités, des nouveaux modules et des événements technologiques organisés à l'UNILU.</p>
+        <!-- News Section Ultra Compact -->
+        <section class="container-fluid pt-2 pb-4 bg-white">
+            <div class="container pt-0 pb-3">
+                <div class="text-center mb-3">
+                    <h1 class="mb-1" style="font-size: clamp(1.15rem, 2vw, 1.45rem); font-weight: 800; color: #d10000; line-height: 1.15;">Actualités & Événements</h1>
+                    <p class="text-muted mx-auto mb-2" style="max-width:720px; font-size: 0.82rem; line-height: 1.35;">Restez informés des activités, des nouveaux modules et des événements technologiques organisés à l'UNILU.</p>
                 </div>
                 <div id="newsContainer" class="row g-4">
                     <!-- Populated dynamically via site-content.js -->
@@ -226,9 +209,11 @@
                     <p><i class="fa fa-envelope me-3"></i>numerique@SNU.ac.cd</p>
                     <div class="d-flex pt-2">
                         <a class="btn btn-outline-primary btn-square border-2 me-2"
-                            href="https://www.facebook.com/unilu.ac.cd" target="_blank" rel="noopener noreferrer"><i
+                            href="https://www.facebook.com/unilu.ac.cd" data-cms-href="general.facebook_unilu" target="_blank" rel="noopener noreferrer" title="Facebook UNILU"><i
                                 class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-outline-primary btn-square border-2 me-2" href="mailto:snunilu@unilu.ac.cd"><i
+                        <a class="btn btn-outline-primary btn-square border-2 me-2"
+                            href="https://www.tiktok.com" data-cms-href="general.tiktok" target="_blank" rel="noopener noreferrer" title="TikTok SNU"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298-.002.595.042.88.13V9.4a6.33 6.33 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.66a6.34 6.34 0 0 0 10.82 4.49 6.27 6.27 0 0 0 1.88-4.49V8.77a8.27 8.27 0 0 0 4.89 1.57V6.89a4.83 4.83 0 0 1-1-.2z"/></svg></a>
+                        <a class="btn btn-outline-primary btn-square border-2 me-2" href="mailto:numerique@SNU.ac.cd" title="Email"><i
                                 class="fa fa-envelope"></i></a>
                     </div>
                 </div>

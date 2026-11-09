@@ -530,6 +530,453 @@
             border-radius: 10px;
             box-shadow: 0 10px 30px rgba(209, 0, 0, 0.35);
         }
+
+        /* ════════════════════════════════════════════════════════
+           MESSAGERIE — INTERFACE STYLE APPLICATION DE CHAT
+        ════════════════════════════════════════════════════════ */
+        .msg-app-card {
+            padding: 0 !important;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .msg-app-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 18px 22px;
+            flex-wrap: wrap;
+        }
+
+        .msg-app-body {
+            display: flex;
+            height: calc(100vh - 300px);
+            min-height: 480px;
+        }
+
+        /* Panneau liste des conversations */
+        .msg-list-pane {
+            width: 340px;
+            min-width: 300px;
+            max-width: 380px;
+            border-right: 1px solid rgba(0, 0, 0, 0.07);
+            display: flex;
+            flex-direction: column;
+            background: #f8fafc;
+        }
+
+        .msg-search-wrap {
+            position: relative;
+            padding: 12px 14px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            background: #fff;
+        }
+
+        .msg-search-wrap i {
+            position: absolute;
+            left: 27px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+
+        .msg-search-wrap input {
+            width: 100%;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 8px 12px 8px 34px;
+            font-size: 0.88rem;
+            background: #f8fafc;
+        }
+
+        .msg-search-wrap input:focus {
+            outline: none;
+            border-color: var(--snu-red);
+            background: #fff;
+        }
+
+        .msg-filter-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            padding: 10px 14px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            background: #fff;
+        }
+
+        .msg-chip {
+            border: 1.5px solid #e2e8f0;
+            background: #fff;
+            color: #475569;
+            border-radius: 999px;
+            padding: 4px 12px;
+            font-size: 0.74rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .15s;
+        }
+
+        .msg-chip:hover {
+            border-color: var(--snu-red);
+            color: var(--snu-red);
+        }
+
+        .msg-chip.active {
+            background: var(--snu-red);
+            border-color: var(--snu-red);
+            color: #fff;
+        }
+
+        .msg-conversations {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .msg-conv-item {
+            display: flex;
+            gap: 12px;
+            padding: 12px 14px;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            align-items: flex-start;
+            transition: background .15s;
+        }
+
+        .msg-conv-item:hover {
+            background: #eef2f7;
+        }
+
+        .msg-conv-item.active {
+            background: #fff1f1;
+            border-left: 3px solid var(--snu-red);
+        }
+
+        .msg-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 800;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .msg-conv-main {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .msg-conv-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+            align-items: baseline;
+        }
+
+        .msg-conv-name {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #1e293b;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .msg-conv-time {
+            font-size: 0.68rem;
+            color: #94a3b8;
+            white-space: nowrap;
+        }
+
+        .msg-conv-preview {
+            font-size: 0.8rem;
+            color: #64748b;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-top: 2px;
+        }
+
+        .msg-conv-badges {
+            display: flex;
+            gap: 4px;
+            margin-top: 4px;
+            flex-wrap: wrap;
+        }
+
+        .msg-unread-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--snu-red);
+            flex-shrink: 0;
+            margin-top: 6px;
+            box-shadow: 0 0 6px rgba(209, 0, 0, 0.5);
+        }
+
+        /* Panneau discussion */
+        .msg-chat-pane {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            background: #eef1f5;
+        }
+
+        .msg-chat-empty {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #94a3b8;
+            text-align: center;
+            padding: 24px;
+        }
+
+        .msg-chat-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 14px 20px;
+            background: #fff;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+            flex-wrap: wrap;
+        }
+
+        .msg-chat-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .msg-bubble {
+            max-width: 78%;
+            padding: 12px 16px;
+            border-radius: 16px;
+            font-size: 0.88rem;
+            line-height: 1.55;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .msg-bubble.in {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-bottom-left-radius: 4px;
+            align-self: flex-start;
+            color: #334155;
+        }
+
+        .msg-bubble.meta {
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+            align-self: flex-start;
+            font-size: 0.8rem;
+            color: #7c2d12;
+        }
+
+        .msg-bubble-date {
+            align-self: center;
+            font-size: 0.7rem;
+            color: #94a3b8;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 3px 12px;
+            border-radius: 999px;
+        }
+
+        .msg-chat-footer {
+            padding: 12px 20px;
+            background: #fff;
+            border-top: 1px solid rgba(0, 0, 0, 0.07);
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .msg-detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .msg-detail-item {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 8px 12px;
+            font-size: 0.8rem;
+        }
+
+        .msg-detail-item .lbl {
+            color: #94a3b8;
+            font-size: 0.66rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+        }
+
+        .msg-detail-item .val {
+            font-weight: 700;
+            color: #1e293b;
+            margin-top: 2px;
+        }
+
+        .msg-back-btn {
+            border: none;
+            background: #f1f5f9;
+            color: #475569;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: .15s;
+            font-size: .9rem;
+        }
+
+        .msg-back-btn:hover {
+            background: var(--snu-red);
+            color: #fff;
+        }
+
+        @media (max-width: 991.98px) {
+            .msg-app-body {
+                flex-direction: column;
+                height: auto;
+                min-height: 0;
+            }
+            .msg-list-pane {
+                width: 100%;
+                min-width: 0;
+                max-width: 100%;
+                border-right: none;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+                max-height: 460px;
+            }
+            .msg-chat-pane {
+                min-height: 480px;
+            }
+            /* Sur mobile : une seule vue à la fois — liste OU conversation */
+            .msg-app-body.msg-chat-open .msg-list-pane {
+                display: none;
+            }
+            .msg-app-body:not(.msg-chat-open) .msg-chat-pane {
+                display: none;
+            }
+        }
+
+        /* ── Interface des Inscriptions par Catégorie ── */
+        .insc-app-body {
+            display: flex;
+            height: calc(100vh - 300px);
+            min-height: 520px;
+            background: #fff;
+        }
+        .insc-categories-pane {
+            width: 320px;
+            min-width: 270px;
+            max-width: 360px;
+            border-right: 1px solid rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            background: #f8fafc;
+        }
+        .insc-cat-list {
+            flex: 1;
+            overflow-y: auto;
+        }
+        .insc-cat-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            padding: 12px 14px;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            background: transparent;
+            transition: background 0.15s, border-left-color 0.15s;
+        }
+        .insc-cat-item:hover {
+            background: #eef2f7;
+        }
+        .insc-cat-item.active {
+            background: #fff1f1;
+            border-left: 4px solid var(--snu-red);
+        }
+        .insc-cat-title {
+            font-size: 0.86rem;
+            font-weight: 700;
+            color: #1e293b;
+            line-height: 1.3;
+        }
+        .insc-cat-item.active .insc-cat-title {
+            color: var(--snu-red);
+        }
+        .insc-content-pane {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #ffffff;
+            overflow: hidden;
+            min-width: 0;
+        }
+        .insc-table-wrap {
+            flex: 1;
+            overflow-y: auto;
+            background: #f8fafc;
+        }
+        .insc-card-row {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+            transition: box-shadow 0.2s, border-color 0.2s;
+        }
+        .insc-card-row:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+        }
+        .insc-card-row.is-accepted {
+            border-left: 5px solid #198754;
+            background: #fbfdfc;
+        }
+        .insc-card-row.is-pending {
+            border-left: 5px solid #ffc107;
+        }
+        @media (max-width: 991.98px) {
+            .insc-app-body {
+                flex-direction: column;
+                height: auto;
+                min-height: 0;
+            }
+            .insc-categories-pane {
+                width: 100%;
+                min-width: 0;
+                max-width: 100%;
+                border-right: none;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+                max-height: 260px;
+            }
+            .insc-content-pane {
+                min-height: 480px;
+            }
+        }
     </style>
     <link href="css/dark-mode.css" rel="stylesheet">
 </head>
@@ -655,7 +1102,7 @@
                     <i class="fa fa-newspaper"></i> Actualités
                 </a>
                 <a class="nav-snu-link" href="#tab-ensavoirplus" data-tab="tab-ensavoirplus">
-                    <i class="fa fa-info-circle"></i> En savoir plus
+                    <i class="fa fa-info-circle"></i> À propos
                 </a>
                 <a class="nav-snu-link" href="#tab-services" data-tab="tab-services">
                     <i class="fa fa-desktop"></i> Services
@@ -771,19 +1218,94 @@
                         </div>
                     </div>
 
-                    <h5 class="fw-bold mb-3 border-bottom pb-2" style="color: var(--snu-blue);">Les 3 Atouts Rapides (Sous la bannière)</h5>
-                    <div class="row g-3 mb-4">
-                        <div class="col-md-4">
-                            <label class="form-label small fw-bold">Atout 1</label>
-                            <input type="text" class="form-control" data-bind="hero.feat_1_title">
+                    <h5 class="fw-bold mb-3 border-bottom pb-2" style="color: var(--snu-blue);">Les 3 Atouts &amp; Équipements de l'Accueil (Ordinateurs, Connexion, Espaces)</h5>
+                    <p class="small text-muted mb-3">Personnalisez le titre, l'explication détaillée et la photo de chaque atout affiché sous la bannière d'accueil.</p>
+                    <div class="row g-4 mb-4">
+                        <!-- Atout 1 -->
+                        <div class="col-lg-4">
+                            <div class="p-3 border rounded-3 bg-light h-100">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="fa fa-desktop text-danger fs-5 me-2"></i>
+                                    <h6 class="fw-bold mb-0 text-dark">Atout 1 : Ordinateurs</h6>
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label small fw-bold">Titre</label>
+                                    <input type="text" class="form-control form-control-sm" data-bind="hero.feat_1_title" placeholder="Ordinateurs Modernes">
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label small fw-bold">Image / Photo (explication)</label>
+                                    <div class="img-preview-box mb-1" style="height: 110px;">
+                                        <img id="preview_hero_feat_1" src="img/Salle1.jpg" style="width:100%; height:100%; object-fit:cover;">
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm mb-1" data-bind="hero.feat_1_img" placeholder="img/Salle1.jpg">
+                                    <label class="btn btn-sm btn-snu-outline-red w-100">
+                                        <i class="fa fa-upload me-1"></i> Changer photo
+                                        <input type="file" class="d-none img-file-input" data-target="hero.feat_1_img" data-preview="preview_hero_feat_1" accept="image/*">
+                                    </label>
+                                </div>
+                                <div>
+                                    <label class="form-label small fw-bold">Texte d'explication détaillé (Modal)</label>
+                                    <textarea class="form-control form-control-sm" rows="3" data-bind="hero.feat_1_desc" placeholder="Description complète des ordinateurs..."></textarea>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-4">
-                            <label class="form-label small fw-bold">Atout 2</label>
-                            <input type="text" class="form-control" data-bind="hero.feat_2_title">
+
+                        <!-- Atout 2 -->
+                        <div class="col-lg-4">
+                            <div class="p-3 border rounded-3 bg-light h-100">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="fa fa-bolt text-danger fs-5 me-2"></i>
+                                    <h6 class="fw-bold mb-0 text-dark">Atout 2 : Connexion</h6>
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label small fw-bold">Titre</label>
+                                    <input type="text" class="form-control form-control-sm" data-bind="hero.feat_2_title" placeholder="Connexion Ultra Rapide">
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label small fw-bold">Image / Photo (explication)</label>
+                                    <div class="img-preview-box mb-1" style="height: 110px;">
+                                        <img id="preview_hero_feat_2" src="img/Salle2.jpg" style="width:100%; height:100%; object-fit:cover;">
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm mb-1" data-bind="hero.feat_2_img" placeholder="img/Salle2.jpg">
+                                    <label class="btn btn-sm btn-snu-outline-red w-100">
+                                        <i class="fa fa-upload me-1"></i> Changer photo
+                                        <input type="file" class="d-none img-file-input" data-target="hero.feat_2_img" data-preview="preview_hero_feat_2" accept="image/*">
+                                    </label>
+                                </div>
+                                <div>
+                                    <label class="form-label small fw-bold">Texte d'explication détaillé (Modal)</label>
+                                    <textarea class="form-control form-control-sm" rows="3" data-bind="hero.feat_2_desc" placeholder="Description complète de la connexion..."></textarea>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-4">
-                            <label class="form-label small fw-bold">Atout 3</label>
-                            <input type="text" class="form-control" data-bind="hero.feat_3_title">
+
+                        <!-- Atout 3 -->
+                        <div class="col-lg-4">
+                            <div class="p-3 border rounded-3 bg-light h-100">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="fa fa-building text-danger fs-5 me-2"></i>
+                                    <h6 class="fw-bold mb-0 text-dark">Atout 3 : Espaces de Travail</h6>
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label small fw-bold">Titre</label>
+                                    <input type="text" class="form-control form-control-sm" data-bind="hero.feat_3_title" placeholder="Espaces de Travail">
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label small fw-bold">Image / Photo (explication)</label>
+                                    <div class="img-preview-box mb-1" style="height: 110px;">
+                                        <img id="preview_hero_feat_3" src="img/Salle3.jpg" style="width:100%; height:100%; object-fit:cover;">
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm mb-1" data-bind="hero.feat_3_img" placeholder="img/Salle3.jpg">
+                                    <label class="btn btn-sm btn-snu-outline-red w-100">
+                                        <i class="fa fa-upload me-1"></i> Changer photo
+                                        <input type="file" class="d-none img-file-input" data-target="hero.feat_3_img" data-preview="preview_hero_feat_3" accept="image/*">
+                                    </label>
+                                </div>
+                                <div>
+                                    <label class="form-label small fw-bold">Texte d'explication détaillé (Modal)</label>
+                                    <textarea class="form-control form-control-sm" rows="3" data-bind="hero.feat_3_desc" placeholder="Description complète des espaces..."></textarea>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -871,17 +1393,29 @@
                     <div class="p-4 mb-4 border rounded-3 bg-light">
                         <h5 class="fw-bold mb-3" style="color: var(--snu-red);"><i class="fa fa-plus-circle me-2"></i> Ajouter une nouvelle actualité</h5>
                         <div class="row g-3">
-                            <div class="col-md-6">
+                            <div class="col-md-5">
                                 <label class="form-label fw-bold small">Titre de l'actualité <span class="text-danger">*</span></label>
                                 <input type="text" id="newNewsTitle" class="form-control" placeholder="Ex: Nouveau module de formation disponible">
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label fw-bold small">Catégorie</label>
-                                <input type="text" id="newNewsCategory" class="form-control" placeholder="Ex: Ateliers, Formations, Salle du Numérique">
+                                <input type="text" id="newNewsCategory" class="form-control" placeholder="Ex: Formations, Salle du Numérique">
                             </div>
-                            <div class="col-md-3">
-                                <label class="form-label fw-bold small">Date d'affichage</label>
-                                <input type="text" id="newNewsDate" class="form-control" placeholder="Ex: 05 Nov 2026, À venir">
+                            <div class="col-md-4">
+                                <label class="form-label fw-bold small d-flex justify-content-between align-items-center">
+                                    <span><i class="fa fa-clock text-danger me-1"></i> Date &amp; Heure de publication</span>
+                                    <button type="button" id="btnSetNewsDateNow" class="btn btn-link p-0 text-decoration-none small text-danger" style="font-size: 0.75rem;" title="Mettre à l'heure courante">
+                                        <i class="fa fa-sync-alt me-1"></i>Maintenant
+                                    </button>
+                                </label>
+                                <div class="input-group">
+                                    <input type="text" id="newNewsDate" class="form-control" placeholder="Ex: 07 Nov 2026 à 11:38">
+                                    <label class="btn btn-outline-secondary d-flex align-items-center" title="Choisir sur le calendrier" style="cursor: pointer;">
+                                        <i class="fa fa-calendar-alt text-danger"></i>
+                                        <input type="datetime-local" id="newNewsDatePicker" class="visually-hidden" style="position: absolute; width: 1px; height: 1px; opacity: 0;">
+                                    </label>
+                                </div>
+                                <div class="form-text small" style="font-size: 0.72rem;">Automatique à la date et heure du jour, modifiable via le calendrier.</div>
                             </div>
                             <div class="col-12">
                                 <label class="form-label fw-bold small">Résumé / Description de l'actualité <span class="text-danger">*</span></label>
@@ -917,11 +1451,11 @@
             </div>
 
 
-            <!-- ── TAB 3 : EN SAVOIR PLUS (PAGE LA SALLE & DIRECTION) ── -->
+            <!-- ── TAB 3 : À PROPOS (PAGE LA SALLE & DIRECTION) ── -->
             <div class="tab-pane-admin d-none" id="tab-ensavoirplus">
                 <div class="admin-card mb-4">
                     <div class="admin-card-header d-flex align-items-center justify-content-between">
-                        <h4 class="admin-card-title mb-0"><i class="fa fa-info-circle"></i> Page "En savoir plus" (La Salle &amp; Direction)</h4>
+                        <h4 class="admin-card-title mb-0"><i class="fa fa-info-circle"></i> Page "À propos" (La Salle &amp; Direction)</h4>
                         <button class="btn btn-sm btn-snu-red btn-save-section"><i class="fa fa-save me-1"></i> Sauvegarder</button>
                     </div>
 
@@ -964,6 +1498,10 @@
                                 <div class="col-md-6">
                                     <label class="form-label fw-bold small">Préfixe Titre</label>
                                     <input type="text" class="form-control" data-bind="directeur.title_prefix" placeholder="Mot de bienvenue du">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold small">Titre mis en valeur (En rouge, ex: BIENVENUE)</label>
+                                    <input type="text" class="form-control" data-bind="directeur.title_highlight" placeholder="BIENVENUE">
                                 </div>
                                 <div class="col-12">
                                     <label class="form-label fw-bold small">Phrase d'introduction (Lead)</label>
@@ -1372,8 +1910,8 @@
                             <input type="text" class="form-control" data-bind="general.facebook_unilu" placeholder="https://www.facebook.com/unilu.ac.cd">
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label fw-bold small"><i class="fab fa-facebook text-primary me-1"></i> Lien Page Facebook SNU</label>
-                            <input type="text" class="form-control" data-bind="general.facebook_snu" placeholder="https://www.facebook.com">
+                            <label class="form-label fw-bold small"><i class="fab fa-tiktok text-dark me-1"></i> Lien Compte TikTok SNU</label>
+                            <input type="text" class="form-control" data-bind="general.tiktok" placeholder="https://www.tiktok.com/@salle_du_numerique">
                         </div>
                     </div>
                 </div>
@@ -1441,60 +1979,97 @@
                  ONGLET : BOÎTE DE RÉCEPTION & MESSAGERIE
             ════════════════════════════════════════════════════ -->
             <div class="tab-pane-admin d-none" id="tab-messages">
-                <div class="admin-card">
-                    <div class="admin-card-header d-flex align-items-center justify-content-between flex-wrap gap-2">
-                        <div>
-                            <h4 class="admin-card-title mb-1"><i class="fa fa-envelope text-danger me-2"></i> Boîte de Réception &amp; Messages du Site</h4>
-                            <p class="small text-muted mb-0">Consultez en direct tous les messages envoyés depuis le formulaire de contact du site.</p>
-                        </div>
+                <div class="admin-card msg-app-card">
+                    <!-- En-tête avec bascule de vue -->
+                    <div class="msg-app-header border-bottom">
                         <div class="d-flex align-items-center gap-2">
-                            <button id="btnRefreshMessages" class="btn btn-outline-secondary btn-sm d-flex align-items-center">
+                            <h4 class="admin-card-title mb-0"><i class="fa fa-envelope-open-text text-danger me-2"></i>Inscriptions &amp; Messagerie</h4>
+                            <span id="msgUnreadBadge" class="badge bg-danger d-none">0</span>
+                        </div>
+                        <div class="d-flex align-items-center gap-2 flex-wrap">
+                            <div class="btn-group btn-group-sm" role="group">
+                                <button type="button" class="btn btn-danger active fw-bold" id="btnSwitchToInscriptions">
+                                    <i class="fa fa-graduation-cap me-1"></i> Inscriptions par formation (<span id="countInscriptionsTop">0</span>)
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary fw-bold" id="btnSwitchToChat">
+                                    <i class="fa fa-comments me-1"></i> Boîte de réception (<span id="countMessagesTop">0</span>)
+                                </button>
+                            </div>
+                            <button id="btnRefreshMessages" class="btn btn-outline-secondary btn-sm d-flex align-items-center" title="Rafraîchir les données">
                                 <i class="fa fa-sync-alt me-1"></i> Actualiser
                             </button>
-                            <button id="btnMarkAllRead" class="btn btn-outline-primary btn-sm d-flex align-items-center">
-                                <i class="fa fa-check-double me-1"></i> Tout marquer comme lu
-                            </button>
                         </div>
                     </div>
 
-                    <!-- Cartes de statistiques -->
-                    <div class="row g-3 mb-4">
-                        <div class="col-sm-4">
-                            <div class="p-3 bg-light rounded-3 border text-center">
-                                <div class="text-muted small fw-semibold text-uppercase">Total Reçus</div>
-                                <div class="fs-3 fw-bold text-dark mt-1" id="statTotalMessages">0</div>
+                    <div class="d-flex align-items-center justify-content-between px-3 py-2 border-bottom" style="background:#fff;">
+                        <small class="text-muted" id="messagesLastUpdated"><i class="fa fa-clock me-1"></i>Synchronisation active</small>
+                    </div>
+
+                    <!-- ── VUE 1 : INTERFACE DÉDIÉE DES INSCRIPTIONS CLASSÉES PAR FORMATION / CATÉGORIE ── -->
+                    <div class="insc-app-body" id="viewInscriptions">
+                        <!-- Colonne gauche : Liste des formations (catégories) -->
+                        <div class="insc-categories-pane">
+                            <div class="p-3 border-bottom bg-white">
+                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                    <h6 class="fw-bold mb-0 text-dark small text-uppercase" style="letter-spacing:0.5px;">
+                                        <i class="fa fa-folder-open text-danger me-1"></i>Formations
+                                    </h6>
+                                    <span class="badge bg-light text-dark border small" id="inscCatCount">0</span>
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-text bg-light border-end-0"><i class="fa fa-search text-muted" style="font-size:0.75rem;"></i></span>
+                                    <input type="text" id="inscCatSearch" class="form-control bg-light border-start-0" placeholder="Filtrer les formations...">
+                                </div>
+                            </div>
+                            <div class="insc-cat-list" id="inscCategoriesList">
+                                <!-- Rempli dynamiquement -->
                             </div>
                         </div>
-                        <div class="col-sm-4">
-                            <div class="p-3 bg-light rounded-3 border border-danger text-center shadow-sm">
-                                <div class="text-danger small fw-bold text-uppercase">Nouveaux / Non Lus</div>
-                                <div class="fs-3 fw-bold text-danger mt-1" id="statUnreadMessages">0</div>
+
+                        <!-- Colonne droite : Liste des inscriptions de la catégorie sélectionnée -->
+                        <div class="insc-content-pane" id="inscContentPane">
+                            <div class="insc-header p-3 bg-white border-bottom d-flex align-items-center justify-content-between flex-wrap gap-2">
+                                <div style="min-width:0;">
+                                    <h5 class="fw-bold text-dark mb-1 d-flex align-items-center" id="inscSelectedCatTitle">
+                                        <i class="fa fa-graduation-cap text-danger me-2"></i>Toutes les formations
+                                    </h5>
+                                    <div class="small text-muted d-flex align-items-center gap-3 flex-wrap" id="inscSelectedCatStats">
+                                        <span><i class="fa fa-users me-1 text-primary"></i>Total : <strong id="statInscTotal">0</strong></span>
+                                        <span><i class="fa fa-check-circle me-1 text-success"></i>Acceptés : <strong id="statInscAccepted">0</strong></span>
+                                        <span><i class="fa fa-clock me-1 text-warning"></i>En attente : <strong id="statInscPending">0</strong></span>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center gap-2">
+                                    <button type="button" class="btn btn-snu-red btn-sm fw-bold shadow-sm d-flex align-items-center" id="btnDownloadCurrentCategoryPdf">
+                                        <i class="fa fa-file-pdf me-2"></i>Télécharger la liste PDF
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="p-3 bg-light rounded-3 border text-center">
-                                <div class="text-muted small fw-semibold text-uppercase">Messages Traités</div>
-                                <div class="fs-3 fw-bold text-success mt-1" id="statReadMessages">0</div>
+
+                            <div class="insc-table-wrap p-3" id="inscCardsContainer">
+                                <!-- Rempli dynamiquement avec les inscrits et leurs boutons "Accepter" -->
                             </div>
                         </div>
                     </div>
 
-                    <!-- Barre de filtre -->
-                    <div class="d-flex align-items-center justify-content-between mb-3 pb-2 border-bottom flex-wrap gap-2">
-                        <div class="btn-group btn-group-sm" role="group">
-                            <button type="button" class="btn btn-outline-dark active filter-msg-btn" data-filter="all">Tous les messages</button>
-                            <button type="button" class="btn btn-outline-dark filter-msg-btn" data-filter="unread">Non lus uniquement</button>
-                            <button type="button" class="btn btn-outline-dark filter-msg-btn" data-filter="read">Messages lus</button>
+                    <!-- ── VUE 2 : BOÎTE DE RÉCEPTION & MESSAGERIE CLASSIQUE ── -->
+                    <div class="msg-app-body d-none" id="viewChat">
+                        <!-- Liste des conversations -->
+                        <div class="msg-list-pane">
+                            <div class="msg-search-wrap">
+                                <i class="fa fa-search"></i>
+                                <input type="text" id="msgSearchInput" placeholder="Rechercher une conversation..." autocomplete="off">
+                            </div>
+                            <div class="msg-filter-chips" id="msgFilterChips"></div>
+                            <div id="msgConversationsList" class="msg-conversations"></div>
                         </div>
-                        <span class="small text-muted" id="messagesLastUpdated"><i class="fa fa-clock me-1"></i>Synchronisation active</span>
-                    </div>
-
-                    <!-- Liste des messages -->
-                    <div id="messagesListContainer" class="d-flex flex-column gap-3">
-                        <div class="text-center py-5 text-muted" id="messagesEmptyState">
-                            <i class="fa fa-inbox fa-3x mb-3 text-secondary opacity-50"></i>
-                            <p class="mb-1 fw-bold">Aucun message pour le moment</p>
-                            <small class="text-muted">Dès qu'un visiteur remplit le formulaire de contact sur le site, son message apparaîtra directement ici.</small>
+                        <!-- Fil de discussion -->
+                        <div class="msg-chat-pane" id="msgChatPane">
+                            <div class="msg-chat-empty">
+                                <i class="fa fa-comments fa-3x mb-3 opacity-50"></i>
+                                <p class="mb-1 fw-bold">Sélectionnez une conversation</p>
+                                <small class="text-muted">Les messages et inscriptions du site apparaissent ici, comme dans une application de messagerie.</small>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1556,6 +2131,8 @@
     <!-- Scripts -->
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
     <script>
         (function() {
             'use strict';
@@ -1647,18 +2224,41 @@
                         return;
                     }
 
+                    if (loginError) loginError.classList.add('d-none');
+
+                    // 1. Validation immédiate si mot de passe standard ou local (admin123, snu@2026!, etc.)
+                    if (isPasswordValid(entered)) {
+                        try {
+                            sessionStorage.setItem(AUTH_KEY, 'true');
+                        } catch (e) {}
+                        setAdminToken(DEFAULT_TOKEN);
+                        if (loginOverlay) loginOverlay.classList.add('d-none');
+                        if (adminPassword) adminPassword.value = '';
+                        showToast('Connexion réussie ! Bienvenue dans votre espace d\'administration.', 'success');
+                        loadInitialData();
+
+                        // Notification / token backend en tâche de fond (silencieuse)
+                        var targetUrl = (backendUrl ? backendUrl.replace(/\/$/, '') : '') + '/api/login';
+                        fetch(targetUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ password: entered })
+                        }).then(function(r) { return r.json(); }).then(function(j) {
+                            if (j && j.token) setAdminToken(j.token);
+                        }).catch(function() {});
+                        return;
+                    }
+
+                    // 2. Sinon, vérification auprès du serveur distant/local
                     var submitBtn = loginForm.querySelector('button[type="submit"]');
                     var origText = submitBtn ? submitBtn.innerHTML : '';
                     if (submitBtn) {
                         submitBtn.disabled = true;
                         submitBtn.innerHTML = '<i class="fa fa-spinner fa-spin me-2"></i> Vérification...';
                     }
-                    if (loginError) loginError.classList.add('d-none');
 
-                    // Communication avec le backend (Render en production, local en dev)
-                    var targetUrl = (backendUrl ? backendUrl.replace(/\/$/, '') : '') + '/api/login';
-
-                    fetch(targetUrl, {
+                    var serverUrl = (backendUrl ? backendUrl.replace(/\/$/, '') : '') + '/api/login';
+                    fetch(serverUrl, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ password: entered })
@@ -1678,33 +2278,13 @@
                             showToast('Connexion réussie ! Bienvenue dans votre espace d\'administration.', 'success');
                             loadInitialData();
                         } else {
-                            // Secours résilient si mot de passe valide localement
-                            if (isPasswordValid(entered)) {
-                                sessionStorage.setItem(AUTH_KEY, 'true');
-                                setAdminToken(DEFAULT_TOKEN);
-                                if (loginOverlay) loginOverlay.classList.add('d-none');
-                                if (adminPassword) adminPassword.value = '';
-                                showToast('Connexion réussie ! Bienvenue dans votre espace d\'administration.', 'success');
-                                loadInitialData();
-                            } else {
-                                throw new Error((res.json && res.json.error) ? res.json.error : 'Mot de passe incorrect.');
-                            }
+                            throw new Error((res.json && res.json.error) ? res.json.error : 'Mot de passe incorrect.');
                         }
                     })
                     .catch(function(err) {
-                        // En cas de délai réseau ou réveil Render, validation locale immédiate
-                        if (isPasswordValid(entered)) {
-                            sessionStorage.setItem(AUTH_KEY, 'true');
-                            setAdminToken(DEFAULT_TOKEN);
-                            if (loginOverlay) loginOverlay.classList.add('d-none');
-                            if (adminPassword) adminPassword.value = '';
-                            showToast('Connexion réussie ! Bienvenue dans votre espace d\'administration.', 'success');
-                            loadInitialData();
-                        } else {
-                            if (loginError) {
-                                loginError.textContent = err.message || 'Mot de passe administrateur incorrect.';
-                                loginError.classList.remove('d-none');
-                            }
+                        if (loginError) {
+                            loginError.textContent = err.message || 'Mot de passe administrateur incorrect.';
+                            loginError.classList.remove('d-none');
                         }
                     })
                     .finally(function() {
@@ -1826,6 +2406,20 @@
                         if (img && src) img.src = resolveAdminMedia(src);
                     });
                 }
+                if (currentContent.hero) {
+                    if (currentContent.hero.feat_1_img) {
+                        var p1 = document.getElementById('preview_hero_feat_1');
+                        if (p1) p1.src = resolveAdminMedia(currentContent.hero.feat_1_img);
+                    }
+                    if (currentContent.hero.feat_2_img) {
+                        var p2 = document.getElementById('preview_hero_feat_2');
+                        if (p2) p2.src = resolveAdminMedia(currentContent.hero.feat_2_img);
+                    }
+                    if (currentContent.hero.feat_3_img) {
+                        var p3 = document.getElementById('preview_hero_feat_3');
+                        if (p3) p3.src = resolveAdminMedia(currentContent.hero.feat_3_img);
+                    }
+                }
                 if (currentContent.about) {
                     if (currentContent.about.img1) document.getElementById('preview_about_img1').src = resolveAdminMedia(currentContent.about.img1);
                     if (currentContent.about.img2) document.getElementById('preview_about_img2').src = resolveAdminMedia(currentContent.about.img2);
@@ -1847,6 +2441,7 @@
                 }
 
                 // Remplir les listes dynamiques (News, Team, Services, Formations, Témoignages)
+                initNewNewsDateField();
                 renderNewsList();
                 renderTeamList();
                 renderServicesList();
@@ -1970,8 +2565,14 @@
                                                 <input type="text" class="form-control form-control-sm news-cat-input" data-index="${idx}" value="${escapeHtml(item.category || '')}">
                                             </div>
                                             <div class="col-6">
-                                                <label class="form-label small mb-1">Date</label>
-                                                <input type="text" class="form-control form-control-sm news-date-input" data-index="${idx}" value="${escapeHtml(item.date || '')}">
+                                                <label class="form-label small mb-1">Date &amp; Heure</label>
+                                                <div class="input-group input-group-sm">
+                                                    <input type="text" class="form-control form-control-sm news-date-input" id="news_date_${idx}" data-index="${idx}" value="${escapeHtml(item.date || '')}">
+                                                    <label class="btn btn-outline-secondary d-flex align-items-center" title="Modifier via le calendrier" style="cursor: pointer;">
+                                                        <i class="fa fa-calendar-alt text-danger"></i>
+                                                        <input type="datetime-local" class="visually-hidden news-date-picker" data-index="${idx}" style="position: absolute; width: 1px; height: 1px; opacity: 0;">
+                                                    </label>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -2006,6 +2607,21 @@
                     inp.addEventListener('input', function() {
                         var i = parseInt(this.getAttribute('data-index'), 10);
                         if (currentContent.news.items[i]) currentContent.news.items[i].date = this.value;
+                    });
+                });
+                container.querySelectorAll('.news-date-picker').forEach(function(picker) {
+                    picker.addEventListener('change', function() {
+                        var i = parseInt(this.getAttribute('data-index'), 10);
+                        if (this.value) {
+                            var d = new Date(this.value);
+                            if (!isNaN(d.getTime())) {
+                                var formatted = formatNewsDate(d);
+                                var textInp = document.getElementById('news_date_' + i);
+                                if (textInp) textInp.value = formatted;
+                                if (currentContent.news.items[i]) currentContent.news.items[i].date = formatted;
+                                showToast('Date mise à jour via le calendrier.', 'info');
+                            }
+                        }
                     });
                 });
                 container.querySelectorAll('.news-excerpt-input').forEach(function(inp) {
@@ -2062,6 +2678,61 @@
                 });
             }
 
+            // ── FORMATAGE ET GESTION AUTOMATIQUE DE LA DATE DES ACTUALITÉS ──
+            function formatNewsDate(dateObj) {
+                if (!dateObj || !(dateObj instanceof Date) || isNaN(dateObj.getTime())) {
+                    dateObj = new Date();
+                }
+                var months = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sep', 'Oct', 'Nov', 'Déc'];
+                var day = ('0' + dateObj.getDate()).slice(-2);
+                var month = months[dateObj.getMonth()];
+                var year = dateObj.getFullYear();
+                var hours = ('0' + dateObj.getHours()).slice(-2);
+                var minutes = ('0' + dateObj.getMinutes()).slice(-2);
+                return day + ' ' + month + ' ' + year + ' à ' + hours + ':' + minutes;
+            }
+
+            function toDatetimeLocalString(dateObj) {
+                if (!dateObj || !(dateObj instanceof Date) || isNaN(dateObj.getTime())) {
+                    dateObj = new Date();
+                }
+                var yyyy = dateObj.getFullYear();
+                var mm = ('0' + (dateObj.getMonth() + 1)).slice(-2);
+                var dd = ('0' + dateObj.getDate()).slice(-2);
+                var hh = ('0' + dateObj.getHours()).slice(-2);
+                var min = ('0' + dateObj.getMinutes()).slice(-2);
+                return yyyy + '-' + mm + '-' + dd + 'T' + hh + ':' + min;
+            }
+
+            function initNewNewsDateField() {
+                var dateInp = document.getElementById('newNewsDate');
+                var pickerInp = document.getElementById('newNewsDatePicker');
+                var now = new Date();
+                if (dateInp) dateInp.value = formatNewsDate(now);
+                if (pickerInp) pickerInp.value = toDatetimeLocalString(now);
+            }
+
+            var newNewsDatePicker = document.getElementById('newNewsDatePicker');
+            if (newNewsDatePicker) {
+                newNewsDatePicker.addEventListener('change', function() {
+                    if (this.value) {
+                        var d = new Date(this.value);
+                        if (!isNaN(d.getTime())) {
+                            var dateInp = document.getElementById('newNewsDate');
+                            if (dateInp) dateInp.value = formatNewsDate(d);
+                        }
+                    }
+                });
+            }
+
+            var btnSetNewsDateNow = document.getElementById('btnSetNewsDateNow');
+            if (btnSetNewsDateNow) {
+                btnSetNewsDateNow.addEventListener('click', function() {
+                    initNewNewsDateField();
+                    showToast('Date et heure synchronisées à l\'instant présent.', 'info');
+                });
+            }
+
             // Gestion de l'ajout d'une actualité
             var btnAddNews = document.getElementById('btnAddNews');
             if (btnAddNews) {
@@ -2074,7 +2745,7 @@
 
                     var title = titleInp ? titleInp.value.trim() : '';
                     var category = catInp ? catInp.value.trim() : 'Salle du Numérique';
-                    var date = dateInp ? dateInp.value.trim() : 'À venir';
+                    var date = (dateInp && dateInp.value.trim()) ? dateInp.value.trim() : formatNewsDate(new Date());
                     var excerpt = excerptInp ? excerptInp.value.trim() : '';
                     var img = imgInp ? imgInp.value.trim() : 'img/Salle1.jpg';
 
@@ -2096,7 +2767,7 @@
                         id: newId,
                         category: category || 'Salle du Numérique',
                         title: title,
-                        date: date || 'À venir',
+                        date: date,
                         excerpt: excerpt || '',
                         img: img || 'img/Salle1.jpg'
                     };
@@ -2106,7 +2777,7 @@
 
                     if (titleInp) titleInp.value = '';
                     if (excerptInp) excerptInp.value = '';
-                    if (dateInp) dateInp.value = '';
+                    initNewNewsDateField();
                     if (catInp) catInp.value = '';
                     if (imgInp) imgInp.value = 'img/Salle1.jpg';
                     var prev = document.getElementById('newNewsPreview');
@@ -2859,9 +3530,13 @@
                     });
             }
 
-            // ── 9. GESTION DE LA MESSAGERIE (BOÎTE DE RÉCEPTION) ──
+            // ── 9. MESSAGERIE — INTERFACE STYLE APPLICATION DE CHAT ──
             var allMessagesList = [];
-            var currentMessageFilter = 'all';
+            var msgFilter = 'all';
+            var msgSearch = '';
+            var openMsgId = null;
+            var selectedInscCategory = null; // null = Toutes les formations
+            var inscCategorySearchQuery = '';
 
             function loadMessages() {
                 var tryApi = fetch(backendUrl + '/api/messages?v=' + Date.now(), {
@@ -2910,20 +3585,42 @@
                     });
             }
 
+            // Classification d'une conversation : inscription / module / réservation / message
+            function getMsgInfo(msg) {
+                if (!msg) return { kind: 'message', category: 'Message', label: 'Message' };
+                var type = msg.type || '';
+                var subject = msg.subject || '';
+                if (type === 'inscription' || subject.indexOf('Inscription Formation') === 0) {
+                    var cat = msg.formation || subject.replace(/^Inscription Formation\s*:?\s*/i, '').trim() || 'Formation';
+                    return { kind: 'inscription', category: cat, label: 'Inscription' };
+                }
+                if (type === 'module_request' || subject.indexOf('Demande de module') === 0) {
+                    var mcat = msg.formation || subject.replace(/^Demande de module\s*:?\s*/i, '').trim() || 'Module';
+                    return { kind: 'module', category: mcat, label: 'Module' };
+                }
+                if (type === 'reservation' || subject.indexOf('Réservation Salle SNU') === 0 || subject.indexOf('Reservation Salle SNU') === 0) {
+                    return { kind: 'reservation', category: 'Réservation', label: 'Réservation' };
+                }
+                return { kind: 'message', category: 'Message', label: 'Message' };
+            }
+
+            function msgMatchesFilter(m) {
+                if (msgFilter === 'all') return true;
+                if (msgFilter === 'unread') return !m.read;
+                if (msgFilter.indexOf('kind:') === 0) return getMsgInfo(m).kind === msgFilter.slice(5);
+                if (msgFilter.indexOf('cat:') === 0) {
+                    var info = getMsgInfo(m);
+                    return (info.kind === 'inscription' || info.kind === 'module') && info.category === msgFilter.slice(4);
+                }
+                return true;
+            }
+
             function updateMessagesUI() {
                 var total = allMessagesList.length;
                 var unread = allMessagesList.filter(function(m) { return !m.read; }).length;
-                var read = total - unread;
 
-                var statTotal = document.getElementById('statTotalMessages');
-                var statUnread = document.getElementById('statUnreadMessages');
-                var statRead = document.getElementById('statReadMessages');
                 var badgeUnread = document.getElementById('badgeUnreadMessages');
-
-                if (statTotal) statTotal.textContent = total;
-                if (statUnread) statUnread.textContent = unread;
-                if (statRead) statRead.textContent = read;
-
+                var badgeChat = document.getElementById('msgUnreadBadge');
                 if (badgeUnread) {
                     if (unread > 0) {
                         badgeUnread.textContent = unread;
@@ -2932,105 +3629,465 @@
                         badgeUnread.classList.add('d-none');
                     }
                 }
+                if (badgeChat) {
+                    badgeChat.textContent = unread;
+                    badgeChat.classList.toggle('d-none', unread === 0);
+                }
 
                 var lastUpdated = document.getElementById('messagesLastUpdated');
                 if (lastUpdated) {
                     var now = new Date();
-                    lastUpdated.innerHTML = `<i class="fa fa-clock me-1"></i>Mis à jour à ${now.toLocaleTimeString('fr-FR', {hour: '2-digit', minute:'2-digit'})}`;
+                    lastUpdated.innerHTML = `<i class="fa fa-clock me-1"></i>Mis à jour à ${now.toLocaleTimeString('fr-FR', {hour: '2-digit', minute:'2-digit'})} — ${total} conversation${total > 1 ? 's' : ''}`;
                 }
 
-                renderMessagesList();
+                var appBody = document.querySelector('.msg-app-body');
+                if (appBody) appBody.classList.toggle('msg-chat-open', !!openMsgId);
+
+                // Rendu de la vue Inscriptions classées par formation
+                renderInscriptionsView();
+
+                // Rendu de la boîte de réception classique
+                renderFilterChips();
+                renderConversations();
+                renderChatPane();
             }
 
-            function renderMessagesList() {
-                var container = document.getElementById('messagesListContainer');
+            // ── VUE DES INSCRIPTIONS CLASSÉES PAR FORMATION (CATÉGORIE) ──
+            function renderInscriptionsView() {
+                var allInscriptions = allMessagesList.filter(function(m) {
+                    var info = getMsgInfo(m);
+                    return info.kind === 'inscription' || info.kind === 'module';
+                });
+                var otherMessages = allMessagesList.filter(function(m) {
+                    var info = getMsgInfo(m);
+                    return info.kind !== 'inscription' && info.kind !== 'module';
+                });
+
+                var countInscEl = document.getElementById('countInscriptionsTop');
+                if (countInscEl) countInscEl.textContent = allInscriptions.length;
+                var countMsgEl = document.getElementById('countMessagesTop');
+                if (countMsgEl) countMsgEl.textContent = otherMessages.length;
+
+                // Regroupement par formation / catégorie
+                var catMap = {};
+                allInscriptions.forEach(function(m) {
+                    var info = getMsgInfo(m);
+                    var cat = info.category || 'Formation Générale';
+                    if (!catMap[cat]) catMap[cat] = { total: 0, accepted: 0, pending: 0, items: [] };
+                    catMap[cat].total++;
+                    if (m.status === 'accepted') catMap[cat].accepted++;
+                    else catMap[cat].pending++;
+                    catMap[cat].items.push(m);
+                });
+
+                var catNames = Object.keys(catMap).sort(function(a, b) {
+                    return a.localeCompare(b, 'fr');
+                });
+
+                var catCountEl = document.getElementById('inscCatCount');
+                if (catCountEl) catCountEl.textContent = catNames.length + ' formation' + (catNames.length > 1 ? 's' : '');
+
+                // Rendu des catégories à gauche
+                var catListEl = document.getElementById('inscCategoriesList');
+                if (catListEl) {
+                    var q = (inscCategorySearchQuery || '').trim().toLowerCase();
+                    var filteredCats = catNames.filter(function(c) {
+                        return !q || c.toLowerCase().indexOf(q) !== -1;
+                    });
+
+                    var html = '';
+                    var allAccepted = allInscriptions.filter(function(m){ return m.status === 'accepted'; }).length;
+                    var allPending = allInscriptions.length - allAccepted;
+                    var isAllActive = selectedInscCategory === null;
+
+                    html += `
+                        <div class="insc-cat-item ${isAllActive ? 'active' : ''}" data-cat="__ALL__">
+                            <div style="min-width:0;">
+                                <div class="insc-cat-title"><i class="fa fa-layer-group me-1 text-danger"></i> Toutes les formations</div>
+                                <small class="text-muted" style="font-size:0.72rem;">${allInscriptions.length} inscrit(s) au total</small>
+                            </div>
+                            <div class="d-flex align-items-center gap-1">
+                                ${allPending > 0 ? `<span class="badge bg-warning text-dark" title="${allPending} en attente" style="font-size:0.65rem;">${allPending}</span>` : ''}
+                                <span class="badge ${isAllActive ? 'bg-danger text-white' : 'bg-light text-dark border'}" style="font-size:0.7rem;">${allInscriptions.length}</span>
+                            </div>
+                        </div>
+                    `;
+
+                    if (filteredCats.length === 0 && catNames.length > 0) {
+                        html += '<div class="p-3 text-center text-muted small">Aucune formation trouvée</div>';
+                    } else if (catNames.length === 0) {
+                        html += '<div class="p-4 text-center text-muted small"><i class="fa fa-graduation-cap fa-2x mb-2 opacity-50"></i><p class="mb-0">Aucune inscription pour l\'instant.</p></div>';
+                    } else {
+                        filteredCats.forEach(function(c) {
+                            var info = catMap[c];
+                            var isActive = selectedInscCategory === c;
+                            html += `
+                                <div class="insc-cat-item ${isActive ? 'active' : ''}" data-cat="${escapeHtml(c)}">
+                                    <div style="min-width:0;">
+                                        <div class="insc-cat-title text-truncate" title="${escapeHtml(c)}">${escapeHtml(c)}</div>
+                                        <small class="text-muted" style="font-size:0.72rem;">${info.total} inscrit(s)</small>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-1">
+                                        ${info.pending > 0 ? `<span class="badge bg-warning text-dark" title="${info.pending} en attente" style="font-size:0.65rem;">${info.pending}</span>` : ''}
+                                        <span class="badge ${isActive ? 'bg-danger text-white' : 'bg-light text-dark border'}" style="font-size:0.7rem;">${info.total}</span>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                    }
+
+                    catListEl.innerHTML = html;
+
+                    catListEl.querySelectorAll('.insc-cat-item').forEach(function(item) {
+                        item.addEventListener('click', function() {
+                            var c = this.getAttribute('data-cat');
+                            selectedInscCategory = (c === '__ALL__') ? null : c;
+                            renderInscriptionsView();
+                        });
+                    });
+                }
+
+                // Inscriptions de la catégorie sélectionnée
+                var currentItems = (selectedInscCategory === null)
+                    ? allInscriptions
+                    : (catMap[selectedInscCategory] ? catMap[selectedInscCategory].items : []);
+
+                var titleEl = document.getElementById('inscSelectedCatTitle');
+                if (titleEl) {
+                    titleEl.innerHTML = `<i class="fa fa-graduation-cap text-danger me-2"></i> ${escapeHtml(selectedInscCategory || 'Toutes les formations')}`;
+                }
+
+                var totalCount = currentItems.length;
+                var acceptedCount = currentItems.filter(function(m) { return m.status === 'accepted'; }).length;
+                var pendingCount = totalCount - acceptedCount;
+
+                var sTotal = document.getElementById('statInscTotal');
+                var sAccepted = document.getElementById('statInscAccepted');
+                var sPending = document.getElementById('statInscPending');
+                if (sTotal) sTotal.textContent = totalCount;
+                if (sAccepted) sAccepted.textContent = acceptedCount;
+                if (sPending) sPending.textContent = pendingCount;
+
+                var container = document.getElementById('inscCardsContainer');
+                if (container) {
+                    if (currentItems.length === 0) {
+                        container.innerHTML = `
+                            <div class="text-center py-5 text-muted bg-white rounded-3 border">
+                                <i class="fa fa-user-graduate fa-3x mb-3 text-danger opacity-50"></i>
+                                <h6 class="fw-bold text-dark">Aucune inscription dans cette catégorie</h6>
+                                <p class="small text-muted mb-0">Les apprenants qui s'inscrivent sur le site apparaîtront directement ici.</p>
+                            </div>
+                        `;
+                        return;
+                    }
+
+                    var cardsHtml = currentItems.map(function(m) {
+                        var isAccepted = m.status === 'accepted';
+                        var initial = (m.name || 'A').trim().charAt(0).toUpperCase();
+                        var phoneDigits = m.phone ? String(m.phone).replace(/[^0-9]/g, '') : '';
+                        var info = getMsgInfo(m);
+
+                        return `
+                            <div class="insc-card-row ${isAccepted ? 'is-accepted' : 'is-pending'}" data-id="${escapeHtml(m.id)}">
+                                <div class="d-flex align-items-start justify-content-between flex-wrap gap-2 mb-2">
+                                    <div class="d-flex align-items-center gap-3">
+                                        <div class="msg-avatar" style="background:${avatarColor(m.name)}; width:42px; height:42px; font-size:1rem;">
+                                            ${escapeHtml(initial)}
+                                        </div>
+                                        <div>
+                                            <h6 class="fw-bold mb-0 text-dark" style="font-size:0.95rem;">
+                                                ${escapeHtml(m.name || 'Anonyme')}
+                                            </h6>
+                                            <div class="small text-muted">
+                                                <i class="fa fa-graduation-cap text-danger me-1"></i>${escapeHtml(info.category)}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2">
+                                        ${isAccepted
+                                            ? `<span class="badge bg-success-subtle text-success border border-success fw-bold px-2 py-1"><i class="fa fa-check-circle me-1"></i>Accepté</span>`
+                                            : `<span class="badge bg-warning-subtle text-warning-emphasis border border-warning fw-bold px-2 py-1"><i class="fa fa-clock me-1"></i>En attente</span>`
+                                        }
+                                        <span class="badge bg-light text-muted border small"><i class="fa fa-calendar-alt me-1"></i>${escapeHtml(m.date || '')}</span>
+                                    </div>
+                                </div>
+
+                                <div class="row g-2 mb-3 small" style="background:#f8fafc; border-radius:8px; padding:10px;">
+                                    <div class="col-sm-6 col-md-3">
+                                        <span class="text-muted d-block" style="font-size:0.75rem;"><i class="fa fa-phone me-1"></i>Téléphone / WhatsApp</span>
+                                        <span class="fw-bold text-dark">${escapeHtml(m.phone || 'Non renseigné')}</span>
+                                    </div>
+                                    <div class="col-sm-6 col-md-3">
+                                        <span class="text-muted d-block" style="font-size:0.75rem;"><i class="fa fa-envelope me-1"></i>Email</span>
+                                        <span class="fw-bold text-dark text-truncate d-block">${escapeHtml(m.email || 'Non renseigné')}</span>
+                                    </div>
+                                    <div class="col-sm-6 col-md-3">
+                                        <span class="text-muted d-block" style="font-size:0.75rem;"><i class="fa fa-user-tag me-1"></i>Statut</span>
+                                        <span class="fw-bold text-dark">${escapeHtml(m.statut || 'Étudiant')}</span>
+                                    </div>
+                                    <div class="col-sm-6 col-md-3">
+                                        <span class="text-muted d-block" style="font-size:0.75rem;"><i class="fa fa-university me-1"></i>Faculté / Promotion</span>
+                                        <span class="fw-bold text-dark">${escapeHtml(m.faculte || 'Non spécifié')}</span>
+                                    </div>
+                                    ${m.creneau ? `
+                                        <div class="col-12 mt-1 pt-1 border-top">
+                                            <span class="text-muted me-2" style="font-size:0.75rem;"><i class="fa fa-clock me-1"></i>Créneau souhaité :</span>
+                                            <strong class="text-dark">${escapeHtml(m.creneau)}</strong>
+                                        </div>
+                                    ` : ''}
+                                    ${m.remarques ? `
+                                        <div class="col-12 mt-1 pt-1 border-top">
+                                            <span class="text-muted me-2" style="font-size:0.75rem;"><i class="fa fa-comment-dots me-1"></i>Remarques :</span>
+                                            <span class="text-secondary">${escapeHtml(m.remarques)}</span>
+                                        </div>
+                                    ` : ''}
+                                </div>
+
+                                <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 pt-2 border-top">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <!-- BOUTON ACCEPTER DEMANDÉ -->
+                                        <button type="button" class="btn btn-sm ${isAccepted ? 'btn-outline-secondary' : 'btn-success fw-bold'} btn-insc-quick-status" data-id="${escapeHtml(m.id)}" data-status="${isAccepted ? 'pending' : 'accepted'}">
+                                            <i class="fa ${isAccepted ? 'fa-undo' : 'fa-check'} me-1"></i> ${isAccepted ? 'Annuler acceptation' : 'Accepter'}
+                                        </button>
+                                        ${phoneDigits ? `
+                                            <a href="https://wa.me/${escapeHtml(phoneDigits)}" target="_blank" rel="noopener" class="btn btn-sm btn-outline-success" title="Contacter par WhatsApp">
+                                                <i class="fab fa-whatsapp me-1"></i>WhatsApp
+                                            </a>
+                                        ` : ''}
+                                        ${m.email ? `
+                                            <a href="mailto:${escapeHtml(m.email)}?subject=Inscription%20SNU%20-%20${encodeURIComponent(info.category)}" class="btn btn-sm btn-outline-primary" title="Envoyer un email">
+                                                <i class="fa fa-envelope me-1"></i>Email
+                                            </a>
+                                        ` : ''}
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <button type="button" class="btn btn-sm btn-outline-danger btn-delete-msg" data-id="${escapeHtml(m.id)}" title="Supprimer définitivement cette inscription">
+                                            <i class="fa fa-trash me-1"></i>Supprimer
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+
+                    container.innerHTML = cardsHtml;
+
+                    container.querySelectorAll('.btn-insc-quick-status').forEach(function(btn) {
+                        btn.addEventListener('click', function() {
+                            var id = this.getAttribute('data-id');
+                            var status = this.getAttribute('data-status');
+                            updateInscriptionStatus(id, status);
+                        });
+                    });
+
+                    container.querySelectorAll('.btn-delete-msg').forEach(function(btn) {
+                        btn.addEventListener('click', function() {
+                            var id = this.getAttribute('data-id');
+                            if (confirm('Voulez-vous vraiment supprimer cette inscription ?')) {
+                                deleteMessage(id);
+                            }
+                        });
+                    });
+                }
+            }
+
+            function renderFilterChips() {
+                var wrap = document.getElementById('msgFilterChips');
+                if (!wrap) return;
+
+                var chips = [
+                    { v: 'all', label: 'Toutes' },
+                    { v: 'unread', label: 'Non lus' },
+                    { v: 'kind:inscription', label: 'Inscriptions' },
+                    { v: 'kind:module', label: 'Modules' },
+                    { v: 'kind:reservation', label: 'Réservations' },
+                    { v: 'kind:message', label: 'Messages' }
+                ];
+
+                // Catégories dynamiques : une puce par formation / module
+                var cats = {};
+                allMessagesList.forEach(function(m) {
+                    var info = getMsgInfo(m);
+                    if (info.kind === 'inscription' || info.kind === 'module') cats[info.category] = true;
+                });
+                Object.keys(cats).sort(function(a, b) { return a.localeCompare(b, 'fr'); }).forEach(function(c) {
+                    chips.push({ v: 'cat:' + c, label: c });
+                });
+
+                wrap.innerHTML = chips.map(function(c) {
+                    return '<button type="button" class="msg-chip' + (msgFilter === c.v ? ' active' : '') + '" data-filter="' + escapeHtml(c.v) + '">' + escapeHtml(c.label) + '</button>';
+                }).join('');
+
+                wrap.querySelectorAll('.msg-chip').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        msgFilter = this.getAttribute('data-filter');
+                        renderFilterChips();
+                        renderConversations();
+                    });
+                });
+            }
+
+            function avatarColor(name) {
+                var s = String(name || 'V');
+                var h = 0;
+                for (var i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) % 360;
+                return 'hsl(' + h + ', 65%, 42%)';
+            }
+
+            function renderConversations() {
+                var container = document.getElementById('msgConversationsList');
                 if (!container) return;
 
+                var q = msgSearch.trim().toLowerCase();
                 var filtered = allMessagesList.filter(function(m) {
-                    if (currentMessageFilter === 'unread') return !m.read;
-                    if (currentMessageFilter === 'read') return m.read;
+                    if (!msgMatchesFilter(m)) return false;
+                    if (q) {
+                        var hay = ((m.name || '') + ' ' + (m.email || '') + ' ' + (m.subject || '') + ' ' + (m.message || '')).toLowerCase();
+                        if (hay.indexOf(q) === -1) return false;
+                    }
                     return true;
                 });
 
                 if (filtered.length === 0) {
-                    container.innerHTML = `
-                        <div class="text-center py-5 text-muted" id="messagesEmptyState">
-                            <i class="fa fa-inbox fa-3x mb-3 text-secondary opacity-50"></i>
-                            <p class="mb-1 fw-bold">${currentMessageFilter === 'unread' ? 'Aucun nouveau message non lu' : 'Aucun message trouvé'}</p>
-                            <small class="text-muted">Les messages envoyés depuis le site web apparaîtront directement ici.</small>
-                        </div>
-                    `;
+                    container.innerHTML = '<div class="text-center py-5 text-muted"><i class="fa fa-inbox fa-2x mb-2 opacity-50"></i><p class="mb-0 small fw-semibold">Aucune conversation</p></div>';
                     return;
                 }
 
-                var html = '';
-                filtered.forEach(function(msg) {
-                    var isUnread = !msg.read;
-                    var cardBorder = isUnread ? 'border-danger' : 'border-light-subtle';
-                    var bgClass = isUnread ? 'bg-white shadow-sm' : 'bg-light';
-                    var unreadBadge = isUnread ? '<span class="badge bg-danger ms-2"><i class="fa fa-bell me-1"></i>Nouveau</span>' : '<span class="badge bg-secondary ms-2 opacity-75">Lu</span>';
+                container.innerHTML = filtered.map(function(m) {
+                    var info = getMsgInfo(m);
+                    var isOpen = openMsgId === m.id;
+                    var initial = (m.name || 'V').trim().charAt(0).toUpperCase();
+                    var preview = m.subject || (m.message || '');
+                    if (preview.length > 60) preview = preview.slice(0, 60) + '…';
+                    var time = m.date || '';
+                    var unreadDot = !m.read ? '<span class="msg-unread-dot"></span>' : '';
 
-                    html += `
-                        <div class="card p-3 p-md-4 border rounded-3 ${cardBorder} ${bgClass} position-relative transition-all mb-3" data-id="${msg.id}">
-                            <div class="d-flex align-items-start justify-content-between flex-wrap gap-2 mb-3">
-                                <div class="d-flex align-items-center gap-3">
-                                    <div class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold ${isUnread ? 'bg-danger' : 'bg-secondary'}" style="width: 44px; height: 44px; font-size: 1.1rem;">
-                                        ${(msg.name || 'V').charAt(0).toUpperCase()}
-                                    </div>
-                                    <div>
-                                        <div class="fw-bold fs-6 text-dark d-flex align-items-center flex-wrap">
-                                            ${escapeHtml(msg.name || 'Visiteur')}
-                                            ${unreadBadge}
-                                        </div>
-                                        <div class="small text-muted d-flex align-items-center gap-3 flex-wrap mt-1">
-                                            ${msg.email ? `<span><i class="fa fa-envelope text-primary me-1"></i><a href="mailto:${escapeHtml(msg.email)}?subject=Re: ${encodeURIComponent(msg.subject || '')}" class="text-decoration-none text-muted">${escapeHtml(msg.email)}</a></span>` : ''}
-                                            ${msg.phone ? `<span><i class="fa fa-phone text-success me-1"></i><a href="tel:${escapeHtml(msg.phone)}" class="text-decoration-none text-muted">${escapeHtml(msg.phone)}</a></span>` : ''}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="text-end">
-                                    <span class="badge bg-light text-dark border small"><i class="fa fa-calendar-alt me-1 text-muted"></i>${escapeHtml(msg.date || '')}</span>
-                                </div>
-                            </div>
+                    return '<div class="msg-conv-item' + (isOpen ? ' active' : '') + '" data-id="' + escapeHtml(m.id) + '">' +
+                        '<div class="msg-avatar" style="background:' + avatarColor(m.name) + '">' + escapeHtml(initial) + '</div>' +
+                        '<div class="msg-conv-main">' +
+                            '<div class="msg-conv-top"><span class="msg-conv-name">' + escapeHtml(m.name || 'Visiteur') + '</span><span class="msg-conv-time">' + escapeHtml(time) + '</span></div>' +
+                            '<div class="msg-conv-preview">' + escapeHtml(preview) + '</div>' +
+                            '<div class="msg-conv-badges">' +
+                                '<span class="badge bg-light text-dark border" style="font-size:.62rem;">' + escapeHtml(info.label) + '</span>' +
+                                (info.kind !== 'message' ? '<span class="badge bg-primary-subtle text-primary border" style="font-size:.62rem;">' + escapeHtml(info.category) + '</span>' : '') +
+                            '</div>' +
+                        '</div>' + unreadDot +
+                    '</div>';
+                }).join('');
 
-                            <div class="mb-3">
-                                <div class="fw-semibold text-dark mb-1" style="font-size: 0.95rem;">
-                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle me-2">Objet</span>
-                                    ${escapeHtml(msg.subject || 'Sans objet')}
-                                </div>
-                                <div class="p-3 bg-white rounded border text-secondary" style="white-space: pre-wrap; line-height: 1.6; font-size: 0.92rem;">
-                                    ${escapeHtml(msg.message || '')}
-                                </div>
-                            </div>
-
-                            <div class="d-flex align-items-center justify-content-between pt-2 border-top flex-wrap gap-2">
-                                <div class="d-flex align-items-center gap-2">
-                                    <button class="btn btn-sm ${isUnread ? 'btn-outline-primary' : 'btn-outline-secondary'} btn-toggle-read" data-id="${msg.id}" data-read="${msg.read}">
-                                        <i class="fa ${isUnread ? 'fa-check' : 'fa-envelope-open'} me-1"></i>
-                                        ${isUnread ? 'Marquer comme lu' : 'Marquer comme non lu'}
-                                    </button>
-                                    ${msg.email ? `
-                                        <a href="mailto:${escapeHtml(msg.email)}?subject=Re: ${encodeURIComponent(msg.subject || 'Contact Salle du Numérique')}&body=Bonjour ${encodeURIComponent(msg.name || '')},%0D%0A%0D%0A" class="btn btn-sm btn-outline-success">
-                                            <i class="fa fa-reply me-1"></i> Répondre par e-mail
-                                        </a>
-                                    ` : ''}
-                                </div>
-                                <div>
-                                    <button class="btn btn-sm btn-outline-danger btn-delete-msg" data-id="${msg.id}" title="Supprimer ce message">
-                                        <i class="fa fa-trash me-1"></i> Supprimer
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    `;
+                container.querySelectorAll('.msg-conv-item').forEach(function(el) {
+                    el.addEventListener('click', function() {
+                        openConversation(this.getAttribute('data-id'));
+                    });
                 });
-
-                container.innerHTML = html;
-                attachMessageListeners();
             }
 
-            function attachMessageListeners() {
-                document.querySelectorAll('.btn-toggle-read').forEach(function(btn) {
+            function openConversation(id) {
+                openMsgId = id;
+                var msg = allMessagesList.find(function(m) { return m.id === id; });
+                if (msg && !msg.read) {
+                    toggleMessageRead(id, true); // ouvre et marque comme lu, comme une app de chat
+                } else {
+                    updateMessagesUI();
+                }
+            }
+
+            function renderChatPane() {
+                var pane = document.getElementById('msgChatPane');
+                if (!pane) return;
+
+                var msg = allMessagesList.find(function(m) { return m.id === openMsgId; });
+                if (!msg) {
+                    pane.innerHTML = '<div class="msg-chat-empty">' +
+                        '<i class="fa fa-comments fa-3x mb-3 opacity-50"></i>' +
+                        '<p class="mb-1 fw-bold">Sélectionnez une conversation</p>' +
+                        '<small class="text-muted">Les messages et inscriptions du site apparaissent ici, comme dans une application de messagerie.</small>' +
+                    '</div>';
+                    return;
+                }
+
+                var info = getMsgInfo(msg);
+                var isAccepted = msg.status === 'accepted';
+                var isInscription = (info.kind === 'inscription' || info.kind === 'module');
+                var initial = (msg.name || 'V').trim().charAt(0).toUpperCase();
+                var contactLine = [msg.email, msg.phone && msg.phone !== 'Non renseigné' ? msg.phone : ''].filter(Boolean).join(' • ');
+
+                var statusBadge = isAccepted
+                    ? '<span class="badge bg-success"><i class="fa fa-check-circle me-1"></i>Accepté</span>'
+                    : '<span class="badge bg-warning text-dark"><i class="fa fa-clock me-1"></i>En attente</span>';
+                var readBadge = msg.read
+                    ? '<span class="badge bg-secondary"><i class="fa fa-check-double me-1"></i>Lu</span>'
+                    : '<span class="badge bg-danger"><i class="fa fa-bell me-1"></i>Nouveau</span>';
+
+                var detail = function(label, val) {
+                    return val ? '<div class="msg-detail-item"><div class="lbl">' + label + '</div><div class="val">' + escapeHtml(val) + '</div></div>' : '';
+                };
+
+                var waDigits = msg.phone ? String(msg.phone).replace(/[^0-9]/g, '') : '';
+
+                pane.innerHTML =
+                    '<div class="msg-chat-header">' +
+                        '<div class="d-flex align-items-center gap-2" style="min-width:0;">' +
+                            '<button type="button" class="msg-back-btn" id="btnChatBack" title="Retour à la liste des messages"><i class="fa fa-arrow-left"></i></button>' +
+                            '<div class="msg-avatar" style="background:' + avatarColor(msg.name) + ';width:40px;height:40px;font-size:.95rem;">' + escapeHtml(initial) + '</div>' +
+                            '<div style="min-width:0;">' +
+                                '<div class="fw-bold text-dark" style="font-size:.95rem;">' + escapeHtml(msg.name || 'Visiteur') + '</div>' +
+                                '<div class="small text-muted text-truncate" style="max-width:340px;">' + escapeHtml(contactLine || '—') + '</div>' +
+                            '</div>' +
+                        '</div>' +
+                        '<div class="d-flex align-items-center gap-2 flex-wrap">' +
+                            '<span class="badge bg-primary-subtle text-primary border">' + escapeHtml(info.label) + '</span>' +
+                            (info.kind !== 'message' ? '<span class="badge bg-light text-dark border">' + escapeHtml(info.category) + '</span>' : '') +
+                            statusBadge + readBadge +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="msg-chat-body">' +
+                        '<div class="msg-bubble-date"><i class="fa fa-calendar-alt me-1"></i>' + escapeHtml(msg.date || '') + '</div>' +
+                        (isInscription ?
+                            '<div class="msg-bubble meta">' +
+                                '<strong><i class="fa fa-graduation-cap me-1"></i>' + escapeHtml(info.label) + ' — ' + escapeHtml(info.category) + '</strong>' +
+                                '<div class="msg-detail-grid">' +
+                                    detail('Statut', msg.statut) +
+                                    detail('Créneau préféré', msg.creneau) +
+                                    detail('Faculté / Promotion', msg.faculte) +
+                                    detail('Objet', msg.subject) +
+                                '</div>' +
+                                (msg.remarques ? '<div style="margin-top:8px;"><span class="fw-bold">Remarques :</span> ' + escapeHtml(msg.remarques) + '</div>' : '') +
+                            '</div>' : '') +
+                        '<div class="msg-bubble in">' + escapeHtml(msg.message || '') + '</div>' +
+                    '</div>' +
+                    '<div class="msg-chat-footer">' +
+                        (isInscription ?
+                            '<button class="btn btn-sm ' + (isAccepted ? 'btn-outline-secondary' : 'btn-success') + ' btn-insc-status" data-id="' + escapeHtml(msg.id) + '" data-status="' + (isAccepted ? 'pending' : 'accepted') + '">' +
+                                '<i class="fa ' + (isAccepted ? 'fa-undo' : 'fa-check-circle') + ' me-1"></i>' + (isAccepted ? 'Remettre en attente' : 'Accepter') +
+                            '</button>' +
+                            '<button class="btn btn-sm btn-outline-danger btn-insc-pdf" data-cat="' + escapeHtml(info.category) + '">' +
+                                '<i class="fa fa-file-pdf me-1"></i>PDF de la formation' +
+                            '</button>' : '') +
+                        '<button class="btn btn-sm ' + (msg.read ? 'btn-outline-secondary' : 'btn-outline-primary') + ' btn-toggle-read" data-id="' + escapeHtml(msg.id) + '" data-read="' + msg.read + '">' +
+                            '<i class="fa ' + (msg.read ? 'fa-envelope-open' : 'fa-check') + ' me-1"></i>' + (msg.read ? 'Marquer non lu' : 'Marquer lu') +
+                        '</button>' +
+                        (msg.email ? '<a href="mailto:' + escapeHtml(msg.email) + '?subject=Re%3A%20' + encodeURIComponent(msg.subject || 'Contact Salle du Numérique') + '" class="btn btn-sm btn-outline-success"><i class="fa fa-reply me-1"></i>Répondre</a>' : '') +
+                        (waDigits ? '<a href="https://wa.me/' + escapeHtml(waDigits) + '" target="_blank" rel="noopener" class="btn btn-sm btn-outline-success"><i class="fa fa-whatsapp me-1"></i>WhatsApp</a>' : '') +
+                        '<button class="btn btn-sm btn-outline-danger ms-auto btn-delete-msg" data-id="' + escapeHtml(msg.id) + '"><i class="fa fa-trash me-1"></i>Supprimer</button>' +
+                    '</div>';
+
+                attachChatListeners();
+            }
+
+            function attachChatListeners() {
+                var pane = document.getElementById('msgChatPane');
+                if (!pane) return;
+
+                var backBtn = pane.querySelector('#btnChatBack');
+                if (backBtn) {
+                    backBtn.addEventListener('click', function() {
+                        openMsgId = null;
+                        updateMessagesUI();
+                    });
+                }
+
+                pane.querySelectorAll('.btn-toggle-read').forEach(function(btn) {
                     btn.addEventListener('click', function() {
                         var id = this.getAttribute('data-id');
                         var currentRead = this.getAttribute('data-read') === 'true';
@@ -3038,12 +4095,26 @@
                     });
                 });
 
-                document.querySelectorAll('.btn-delete-msg').forEach(function(btn) {
+                pane.querySelectorAll('.btn-delete-msg').forEach(function(btn) {
                     btn.addEventListener('click', function() {
                         var id = this.getAttribute('data-id');
-                        if (confirm('Voulez-vous vraiment supprimer définitivement ce message ?')) {
+                        if (confirm('Voulez-vous vraiment supprimer définitivement cette conversation ?')) {
                             deleteMessage(id);
                         }
+                    });
+                });
+
+                pane.querySelectorAll('.btn-insc-status').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        var id = this.getAttribute('data-id');
+                        var status = this.getAttribute('data-status');
+                        updateInscriptionStatus(id, status);
+                    });
+                });
+
+                pane.querySelectorAll('.btn-insc-pdf').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        downloadInscriptionsPdf(this.getAttribute('data-cat'));
                     });
                 });
             }
@@ -3074,7 +4145,7 @@
                 if (allMessagesList.length === 0) return;
                 allMessagesList.forEach(function(m) { m.read = true; });
                 updateMessagesUI();
-                showToast('Tous les messages ont été marqués comme lus.', 'info');
+                showToast('Toutes les conversations ont été marquées comme lues.', 'info');
 
                 fetch(backendUrl + '/api/messages/read', {
                     method: 'POST',
@@ -3093,8 +4164,9 @@
 
             function deleteMessage(id) {
                 allMessagesList = allMessagesList.filter(function(m) { return m.id !== id; });
+                if (openMsgId === id) openMsgId = null;
                 updateMessagesUI();
-                showToast('Message supprimé.', 'warning');
+                showToast('Conversation supprimée.', 'warning');
 
                 fetch(backendUrl + '/api/messages/delete', {
                     method: 'POST',
@@ -3121,11 +4193,161 @@
                     .replace(/'/g, '&#39;');
             }
 
+            // ── 10. INSCRIPTIONS : STATUT & EXPORT PDF ──
+            function getInscriptionsForCategory(cat) {
+                return allMessagesList.filter(function(m) {
+                    var info = getMsgInfo(m);
+                    return (info.kind === 'inscription' || info.kind === 'module') &&
+                           (cat === null || cat === undefined || info.category === cat);
+                }).sort(function(a, b) {
+                    return (b.timestamp || 0) - (a.timestamp || 0);
+                });
+            }
+
+            function updateInscriptionStatus(id, status) {
+                var msg = allMessagesList.find(function(m) { return m.id === id; });
+                if (msg) {
+                    msg.status = status;
+                    updateMessagesUI();
+                    showToast(status === 'accepted' ? 'Inscription acceptée.' : 'Inscription remise en attente.', status === 'accepted' ? 'success' : 'info');
+
+                    fetch(backendUrl + '/api/messages/status', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + getAdminToken(),
+                            'X-Admin-Token': getAdminToken()
+                        },
+                        body: JSON.stringify({ id: id, status: status })
+                    }).catch(function(e) {});
+
+                    try {
+                        localStorage.setItem('snu_messages', JSON.stringify(allMessagesList));
+                    } catch(e) {}
+                }
+            }
+
+            function pdfSafe(str) {
+                return String(str == null ? '' : str)
+                    .replace(/[–—]/g, '-')
+                    .replace(/[‘’]/g, "'")
+                    .replace(/[“”]/g, '"')
+                    .replace(/…/g, '...')
+                    .replace(/\s+/g, ' ')
+                    .trim();
+            }
+
+            function downloadInscriptionsPdf(category) {
+                if (typeof window.jspdf === 'undefined') {
+                    showToast('La librairie PDF est indisponible (connexion internet requise).', 'danger');
+                    return;
+                }
+                var items = getInscriptionsForCategory(category);
+                if (items.length === 0) {
+                    showToast('Aucune inscription à exporter.', 'warning');
+                    return;
+                }
+
+                var jsPDF = window.jspdf.jsPDF;
+                var doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
+
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(14);
+                doc.setTextColor(209, 0, 0);
+                doc.text('Salle du Numerique UNILU - Liste des inscriptions', 14, 14);
+
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(9);
+                doc.setTextColor(90, 90, 90);
+                doc.text('Formation / categorie : ' + pdfSafe(category || 'Toutes les formations') +
+                    '  |  Genere le ' + new Date().toLocaleDateString('fr-FR') +
+                    '  |  Total : ' + items.length + ' inscrit(s)', 14, 20);
+
+                var head = [['Nom', 'Telephone', 'Email', 'Statut', 'Creneau', 'Faculte / Promotion', 'Remarques', 'Date', 'Decision']];
+                var body = items.map(function(m) {
+                    return [
+                        pdfSafe(m.name),
+                        pdfSafe(m.phone),
+                        pdfSafe(m.email),
+                        pdfSafe(m.statut),
+                        pdfSafe(m.creneau),
+                        pdfSafe(m.faculte),
+                        pdfSafe((m.remarques || '').slice(0, 100)),
+                        pdfSafe(m.date),
+                        m.status === 'accepted' ? 'Accepte' : 'En attente'
+                    ];
+                });
+
+                if (doc.autoTable) {
+                    doc.autoTable({
+                        startY: 26,
+                        head: head,
+                        body: body,
+                        styles: { fontSize: 7.5, cellPadding: 1.6 },
+                        headStyles: { fillColor: [209, 0, 0], textColor: 255, fontStyle: 'bold' },
+                        alternateRowStyles: { fillColor: [250, 250, 250] }
+                    });
+                } else {
+                    var y = 28;
+                    doc.setFontSize(7);
+                    body.forEach(function(row) {
+                        doc.text(row.join(' | ').slice(0, 160), 14, y);
+                        y += 5;
+                        if (y > 190) { doc.addPage(); y = 15; }
+                    });
+                }
+
+                var slug = pdfSafe(category || 'toutes_formations').replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '') || 'inscriptions';
+                var stamp = new Date().toISOString().slice(0, 10);
+                doc.save('Inscriptions_' + slug + '_' + stamp + '.pdf');
+            }
+
+            // ── Branchement des contrôlets de l'en-tête et de la recherche ──
+            var btnSwitchInsc = document.getElementById('btnSwitchToInscriptions');
+            var btnSwitchChat = document.getElementById('btnSwitchToChat');
+            var viewInsc = document.getElementById('viewInscriptions');
+            var viewChat = document.getElementById('viewChat');
+
+            if (btnSwitchInsc && btnSwitchChat) {
+                btnSwitchInsc.addEventListener('click', function() {
+                    btnSwitchInsc.classList.add('btn-danger', 'active');
+                    btnSwitchInsc.classList.remove('btn-outline-secondary');
+                    btnSwitchChat.classList.remove('btn-danger', 'active');
+                    btnSwitchChat.classList.add('btn-outline-secondary');
+                    if (viewInsc) viewInsc.classList.remove('d-none');
+                    if (viewChat) viewChat.classList.add('d-none');
+                });
+
+                btnSwitchChat.addEventListener('click', function() {
+                    btnSwitchChat.classList.add('btn-danger', 'active');
+                    btnSwitchChat.classList.remove('btn-outline-secondary');
+                    btnSwitchInsc.classList.remove('btn-danger', 'active');
+                    btnSwitchInsc.classList.add('btn-outline-secondary');
+                    if (viewChat) viewChat.classList.remove('d-none');
+                    if (viewInsc) viewInsc.classList.add('d-none');
+                });
+            }
+
+            var btnDlCategoryPdf = document.getElementById('btnDownloadCurrentCategoryPdf');
+            if (btnDlCategoryPdf) {
+                btnDlCategoryPdf.addEventListener('click', function() {
+                    downloadInscriptionsPdf(selectedInscCategory);
+                });
+            }
+
+            var inscSearch = document.getElementById('inscCatSearch');
+            if (inscSearch) {
+                inscSearch.addEventListener('input', function() {
+                    inscCategorySearchQuery = this.value;
+                    renderInscriptionsView();
+                });
+            }
+
             var btnRefreshMsgs = document.getElementById('btnRefreshMessages');
             if (btnRefreshMsgs) {
                 btnRefreshMsgs.addEventListener('click', function() {
                     loadMessages();
-                    showToast('Messages actualisés !', 'info');
+                    showToast('Messagerie actualisée !', 'info');
                 });
             }
 
@@ -3134,14 +4356,18 @@
                 btnMarkAll.addEventListener('click', markAllMessagesAsRead);
             }
 
-            document.querySelectorAll('.filter-msg-btn').forEach(function(btn) {
-                btn.addEventListener('click', function() {
-                    document.querySelectorAll('.filter-msg-btn').forEach(function(b) { b.classList.remove('active'); });
-                    this.classList.add('active');
-                    currentMessageFilter = this.getAttribute('data-filter');
-                    renderMessagesList();
+            var btnPdfAll = document.getElementById('btnPdfAllInscriptions');
+            if (btnPdfAll) {
+                btnPdfAll.addEventListener('click', function() { downloadInscriptionsPdf(null); });
+            }
+
+            var msgSearchInput = document.getElementById('msgSearchInput');
+            if (msgSearchInput) {
+                msgSearchInput.addEventListener('input', function() {
+                    msgSearch = this.value;
+                    renderConversations();
                 });
-            });
+            }
 
             // Polling automatique en arrière-plan toutes les 15 secondes si connecté
             setInterval(function() {

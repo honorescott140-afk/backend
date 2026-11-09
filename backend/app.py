@@ -711,14 +711,21 @@ def api_messages():
         now_str = time.strftime("%d/%m/%Y à %H:%M")
         new_msg = {
             "id": f"msg_{int(time.time())}_{int(time.time() * 1000) % 10000}",
-            "name": data.get("name", "Visiteur").strip(),
-            "email": data.get("email", "").strip(),
-            "phone": data.get("phone", "").strip(),
-            "subject": data.get("subject", "Sans objet").strip(),
-            "message": data.get("message", "").strip(),
+            "type": str(data.get("type", "message")).strip()[:30] or "message",
+            "formation": str(data.get("formation", "")).strip()[:200],
+            "statut": str(data.get("statut", "")).strip()[:100],
+            "creneau": str(data.get("creneau", "")).strip()[:100],
+            "faculte": str(data.get("faculte", "")).strip()[:200],
+            "remarques": str(data.get("remarques", "")).strip()[:1000],
+            "name": str(data.get("name", "Visiteur")).strip()[:200],
+            "email": str(data.get("email", "")).strip()[:200],
+            "phone": str(data.get("phone", "")).strip()[:50],
+            "subject": str(data.get("subject", "Sans objet")).strip()[:300],
+            "message": str(data.get("message", "")).strip()[:5000],
             "date": now_str,
             "timestamp": int(time.time()),
-            "read": False
+            "read": False,
+            "status": "pending"
         }
 
         messages.insert(0, new_msg)
@@ -732,6 +739,32 @@ def api_messages():
                     json.dump(messages, f, ensure_ascii=False, indent=2)
             except Exception:
                 pass
+
+        # Notification optionnelle à l'administrateur par email si SMTP est configuré
+        admin_email = os.environ.get("ADMIN_EMAIL", "honorescott140@gmail.com")
+        smtp_host = os.environ.get("SMTP_HOST")
+        if smtp_host:
+            try:
+                import smtplib
+                from email.mime.text import MIMEText
+                from email.mime.multipart import MIMEMultipart
+                smtp_port = int(os.environ.get("SMTP_PORT", 587))
+                smtp_user = os.environ.get("SMTP_USER", "")
+                smtp_pass = os.environ.get("SMTP_PASS", "")
+                mail = MIMEMultipart("alternative")
+                mail["Subject"] = f"[SNU UNILU] {new_msg['subject']}"
+                mail["From"] = smtp_user or "numerique@SNU.ac.cd"
+                mail["To"] = admin_email
+                body_text = f"Bonjour,\n\nNouveau message / demande de module reçu depuis le site SNU :\n\n- De : {new_msg['name']} ({new_msg['email']})\n- Date : {new_msg['date']}\n- Objet : {new_msg['subject']}\n\nContenu :\n{new_msg['message']}\n"
+                mail.attach(MIMEText(body_text, "plain", "utf-8"))
+                s = smtplib.SMTP(smtp_host, smtp_port, timeout=4)
+                s.starttls()
+                if smtp_user and smtp_pass:
+                    s.login(smtp_user, smtp_pass)
+                s.sendmail(mail["From"], [admin_email], mail.as_string())
+                s.quit()
+            except Exception as mail_err:
+                print(f"[Notification Admin] SMTP indisponible : {mail_err}")
 
         return jsonify({"success": True, "message": "Message envoyé avec succès !", "data": new_msg})
     except Exception as e:
@@ -769,6 +802,49 @@ def api_messages_read():
         return jsonify({"success": True})
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
+
+@app.route("/api/messages/status", methods=["POST", "OPTIONS"])
+def api_messages_status():
+    """Met à jour le statut de traitement d'un message (ex: inscription acceptée)."""
+    if request.method == "OPTIONS":
+        return jsonify({}), 200
+
+    try:
+        data = request.get_json(force=True) or {}
+        target_id = data.get("id")
+        new_status = str(data.get("status", "")).strip()[:30]
+        if not target_id or not new_status:
+            return jsonify({"success": False, "error": "id et status requis"}), 400
+
+        messages = []
+        if os.path.exists(MESSAGES_FILE):
+            with open(MESSAGES_FILE, "r", encoding="utf-8") as f:
+                messages = json.load(f)
+
+        found = False
+        for m in messages:
+            if m.get("id") == target_id:
+                m["status"] = new_status
+                found = True
+                break
+
+        if not found:
+            return jsonify({"success": False, "error": "Message introuvable"}), 404
+
+        with open(MESSAGES_FILE, "w", encoding="utf-8") as f:
+            json.dump(messages, f, ensure_ascii=False, indent=2)
+
+        if os.path.exists(os.path.dirname(FRONTEND_MESSAGES_FILE)):
+            try:
+                with open(FRONTEND_MESSAGES_FILE, "w", encoding="utf-8") as f:
+                    json.dump(messages, f, ensure_ascii=False, indent=2)
+            except Exception:
+                pass
+
+        return jsonify({"success": True})
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
 
 @app.route("/api/messages/delete", methods=["POST", "OPTIONS"])
 def api_messages_delete():
