@@ -230,20 +230,22 @@ window.API_URL = window.API_URL || "https://backend-eueq.onrender.com";
             var newsContainer = document.getElementById('newsContainer');
             if (newsContainer) {
                 newsContainer.innerHTML = '';
-                data.news.items.forEach(function (item) {
+                data.news.items.forEach(function (item, index) {
                     var col = document.createElement('div');
                     col.className = 'col-md-6 col-lg-4';
                     col.innerHTML = `
-                        <article class="news-card h-100">
+                        <article class="news-card h-100" data-news-index="${index}" tabindex="0" role="button" aria-label="Lire l’actualité : ${item.title || 'Actualité'}">
                             <img src="${resolveMediaUrl(item.img || 'img/Salle1.jpg')}" alt="${item.title || 'Actualité de la Salle du Numérique'}" class="news-card-img">
                             <div class="p-4">
                                 <div class="small text-danger fw-bold mb-2">${item.category || 'Actualité'} · ${item.date || ''}</div>
                                 <h3 class="h5">${item.title || ''}</h3>
                                 <p class="text-muted mb-0">${item.excerpt || ''}</p>
+                                <span class="small text-primary fw-bold mt-3 d-inline-block"><i class="fa fa-info-circle me-1"></i>Cliquer pour lire la suite</span>
                             </div>
                         </article>`;
                     newsContainer.appendChild(col);
                 });
+                newsContainer.dataset.newsItems = JSON.stringify(data.news.items);
             }
         }
 
@@ -639,6 +641,64 @@ window.API_URL = window.API_URL || "https://backend-eueq.onrender.com";
 
         openAnyBootstrapModal(modalEl);
     }
+
+    function showNewsDetail(item) {
+        if (!item) return;
+        var modalEl = document.getElementById('newsDetailModal');
+        if (!modalEl) {
+            modalEl = document.createElement('div');
+            modalEl.id = 'newsDetailModal';
+            modalEl.className = 'modal fade';
+            modalEl.tabIndex = -1;
+            modalEl.setAttribute('aria-labelledby', 'newsDetailModalLabel');
+            modalEl.setAttribute('aria-hidden', 'true');
+            modalEl.innerHTML = `
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable news-modal-dialog">
+                    <div class="modal-content shadow-lg border-0" style="border-radius:14px; overflow:hidden;">
+                        <div class="modal-header py-3 px-4 text-white" style="background:#d10000;">
+                            <div><h5 class="modal-title fw-bold text-white mb-0" id="newsDetailModalLabel">Détail de l’actualité</h5><small class="text-white-50">Salle du Numérique — UNILU</small></div>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                        </div>
+                        <div class="modal-body p-3 p-md-4">
+                            <img id="newsModalImg" class="img-fluid w-100 mb-3" style="max-height:360px; object-fit:cover; border-radius:10px;" alt="">
+                            <div id="newsModalMeta" class="small text-danger fw-bold mb-2"></div>
+                            <h3 id="newsModalTitle" class="fw-bold mb-3"></h3>
+                            <p id="newsModalText" class="text-muted mb-0" style="white-space:pre-line; line-height:1.7;"></p>
+                        </div>
+                    </div>
+                </div>`;
+            document.body.appendChild(modalEl);
+        }
+        var img = document.getElementById('newsModalImg');
+        img.src = resolveMediaUrl(item.img || 'img/Salle1.jpg');
+        img.alt = item.title || 'Actualité de la Salle du Numérique';
+        document.getElementById('newsModalMeta').textContent = (item.category || 'Actualité') + (item.date ? ' · ' + item.date : '');
+        document.getElementById('newsModalTitle').textContent = item.title || 'Actualité';
+        document.getElementById('newsModalText').textContent = item.content || item.description || item.excerpt || '';
+        openAnyBootstrapModal(modalEl);
+    }
+
+    function activateNewsCard(card) {
+        var container = card.closest('#newsContainer');
+        if (!container) return;
+        try {
+            var items = JSON.parse(container.dataset.newsItems || '[]');
+            showNewsDetail(items[Number(card.getAttribute('data-news-index'))]);
+        } catch (e) {}
+    }
+
+    document.addEventListener('click', function (event) {
+        var card = event.target.closest('.news-card[data-news-index]');
+        if (card && !event.target.closest('a, button')) activateNewsCard(card);
+    });
+
+    document.addEventListener('keydown', function (event) {
+        var card = event.target.closest && event.target.closest('.news-card[data-news-index]');
+        if (card && (event.key === 'Enter' || event.key === ' ')) {
+            event.preventDefault();
+            activateNewsCard(card);
+        }
+    });
 
     // Gestionnaire de clic sur les cartes de service
     document.addEventListener('click', function (event) {
