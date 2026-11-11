@@ -29,19 +29,10 @@ window.API_URL = API_URL;
         }
     });
 
-    // ── Redirection temporisée (1 seconde) sur le bouton "En savoir plus" de l'accueil vers Services ──
+    // Redirection immédiate vers les services depuis le bouton d'accueil.
     $(document).on('click', '#heroServiceBtn, .hero-service-btn', function (e) {
         e.preventDefault();
-        var targetUrl = $(this).attr('href') || 'services.html';
-        var $btn = $(this);
-        if ($btn.hasClass('btn-loading')) return;
-
-        $btn.addClass('btn-loading').css({ 'pointer-events': 'none', 'opacity': '0.85' });
-        $btn.html('<i class="fa fa-spinner fa-spin me-2"></i> Chargement...');
-
-        setTimeout(function () {
-            window.location.href = targetUrl;
-        }, 1000); // 1 seconde de temporisation
+        window.location.href = 'services.html';
     });
 
 
@@ -766,6 +757,135 @@ window.API_URL = API_URL;
         }
     });
 
+    function escapeReceiptText(value) {
+        return String(value == null || value === '' ? 'Non renseigné' : value)
+            .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+
+    function getAdminWhatsAppNumber() {
+        var configured = window.__SNU_CONTENT__ && window.__SNU_CONTENT__.general && window.__SNU_CONTENT__.general.whatsapp;
+        return String(configured || '+243 972 147 721').replace(/\D/g, '');
+    }
+
+    function createRegistrationPdf(data, reference) {
+        if (!window.jspdf || !window.jspdf.jsPDF) throw new Error('Le générateur PDF est indisponible. Rechargez la page puis réessayez.');
+        var Pdf = window.jspdf.jsPDF;
+        var doc = new Pdf({ unit: 'mm', format: 'a4' });
+        doc.setFillColor(209, 0, 0);
+        doc.rect(0, 0, 210, 39, 'F');
+        doc.setTextColor(255, 255, 255);
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(18);
+        doc.text('SALLE DU NUMERIQUE', 15, 17);
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(10);
+        doc.text('Universite de Lubumbashi - UNILU', 15, 25);
+        doc.text('FICHE OFFICIELLE DE DEMANDE D’INSCRIPTION', 15, 32);
+
+        doc.setTextColor(209, 0, 0);
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(11);
+        doc.text('Reference : ' + reference, 15, 51);
+
+        var rows = [
+            ['Formation', data.formation], ['Nom complet', data.name], ['Telephone / WhatsApp', data.phone],
+            ['Adresse e-mail', data.email], ['Statut', data.statut], ['Faculte / Promotion', data.faculte],
+            ['Session souhaitee', data.creneau], ['Remarques', data.remarques]
+        ];
+        var y = 64;
+        rows.forEach(function(row) {
+            var valueLines = doc.splitTextToSize(String(row[1] || 'Non renseigne'), 125);
+            var rowHeight = Math.max(13, valueLines.length * 5 + 7);
+            if (y + rowHeight > 267) {
+                doc.addPage();
+                y = 20;
+            }
+            doc.setDrawColor(225, 228, 232);
+            doc.line(15, y + rowHeight, 195, y + rowHeight);
+            doc.setTextColor(100, 108, 116);
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(9);
+            doc.text(row[0], 15, y + 5);
+            doc.setTextColor(32, 36, 42);
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(10);
+            doc.text(valueLines, 65, y + 5);
+            y += rowHeight;
+        });
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(8);
+        doc.setTextColor(115, 120, 126);
+        doc.text('Demande transmise a la Salle du Numerique. La confirmation definitive sera communiquee par l’equipe.', 15, Math.min(y + 12, 280), { maxWidth: 180 });
+        doc.text('Emise le ' + new Date().toLocaleString('fr-FR'), 15, 288);
+        return doc.output('blob');
+    }
+
+    function registrationReceiptMarkup(data, reference) {
+        var rows = [
+            ['Formation', data.formation], ['Nom complet', data.name], ['Téléphone / WhatsApp', data.phone],
+            ['Adresse e-mail', data.email], ['Statut', data.statut], ['Faculté / Promotion', data.faculte],
+            ['Session souhaitée', data.creneau], ['Remarques', data.remarques], ['Référence', reference]
+        ];
+        return `<div class="snu-print-sheet"><div class="snu-print-head"><img src="img/Logo_SNU.jpg" alt="Logo SNU"><div><h1>Salle du Numérique</h1><p>Université de Lubumbashi — UNILU</p><p>Fiche officielle de demande d’inscription</p></div></div><div class="snu-print-ref">Référence : ${escapeReceiptText(reference)}</div><table><tbody>${rows.map(function(row) { return `<tr><th>${escapeReceiptText(row[0])}</th><td>${escapeReceiptText(row[1])}</td></tr>`; }).join('')}</tbody></table><p class="snu-print-note">Cette fiche confirme la transmission de votre demande à la Salle du Numérique. L’inscription définitive est confirmée par l’équipe.</p><p class="snu-print-date">Émise le ${escapeReceiptText(new Date().toLocaleString('fr-FR'))}</p></div>`;
+    }
+
+    function openRegistrationReceipt(data, reference, pdfBlob) {
+        if (!document.getElementById('registrationReceiptStyles')) {
+            var receiptStyles = document.createElement('style');
+            receiptStyles.id = 'registrationReceiptStyles';
+            receiptStyles.textContent = '.snu-print-sheet{padding:18px;border:1px solid #e5e7eb;border-radius:12px;background:#fff}.snu-print-head{display:flex;align-items:center;gap:16px;padding-bottom:14px;border-bottom:3px solid #d10000}.snu-print-head img{width:64px;height:64px;object-fit:contain}.snu-print-head h1{font-size:1.25rem;color:#d10000;margin:0 0 4px}.snu-print-head p{margin:2px 0;color:#59616a}.snu-print-ref{margin:16px 0;color:#d10000;font-weight:700}.snu-print-sheet table{width:100%;border-collapse:collapse}.snu-print-sheet th,.snu-print-sheet td{text-align:left;padding:10px;border-bottom:1px solid #e5e7eb;vertical-align:top}.snu-print-sheet th{width:34%;color:#59616a}.snu-print-note{margin-top:18px;font-size:.88rem;color:#59616a}.snu-print-date{margin-top:20px;font-size:.8rem;color:#777}';
+            document.head.appendChild(receiptStyles);
+        }
+        var modalId = 'registrationReceiptModal';
+        var existing = document.getElementById(modalId);
+        if (existing) existing.remove();
+        var modal = document.createElement('div');
+        modal.id = modalId;
+        modal.className = 'modal fade';
+        modal.tabIndex = -1;
+        modal.setAttribute('aria-hidden', 'true');
+        modal.innerHTML = `<div class="modal-dialog modal-dialog-centered modal-lg"><div class="modal-content border-0 shadow-lg"><div class="modal-header text-white" style="background:#d10000"><h5 class="modal-title">Votre fiche d’inscription PDF</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fermer"></button></div><div class="modal-body"><div id="registrationReceiptPrintArea">${registrationReceiptMarkup(data, reference)}</div><div class="alert alert-success mt-3 mb-0">La fiche PDF a été transmise à l’administration avec votre demande.</div></div><div class="modal-footer flex-wrap"><button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button><button type="button" class="btn btn-outline-danger" id="printRegistrationReceipt"><i class="fa fa-print me-2"></i>Ouvrir / imprimer le PDF</button><button type="button" class="btn btn-danger" id="downloadRegistrationPdf"><i class="fa fa-download me-2"></i>Télécharger le PDF</button><button type="button" class="btn btn-success" id="sendRegistrationReceiptWhatsApp"><i class="fab fa-whatsapp me-2"></i>Envoyer à l’admin sur WhatsApp</button></div></div></div>`;
+        document.body.appendChild(modal);
+
+        var modalApi = window.bootstrap && window.bootstrap.Modal ? new window.bootstrap.Modal(modal) : null;
+        if (modalApi) modalApi.show();
+        else { modal.classList.add('show'); modal.style.display = 'block'; modal.setAttribute('aria-modal', 'true'); }
+
+        modal.querySelector('#printRegistrationReceipt').addEventListener('click', function() {
+            var printWindow = window.open('', '_blank');
+            if (!printWindow) {
+                alert('Autorisez les fenêtres contextuelles pour ouvrir et imprimer le PDF.');
+                return;
+            }
+            var pdfUrl = URL.createObjectURL(pdfBlob);
+            printWindow.location.href = pdfUrl;
+        });
+
+        modal.querySelector('#downloadRegistrationPdf').addEventListener('click', function() {
+            var pdfUrl = URL.createObjectURL(pdfBlob);
+            var link = document.createElement('a');
+            link.href = pdfUrl;
+            link.download = 'Fiche_Inscription_' + reference + '.pdf';
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            setTimeout(function() { URL.revokeObjectURL(pdfUrl); }, 60000);
+        });
+
+        modal.querySelector('#sendRegistrationReceiptWhatsApp').addEventListener('click', function() {
+            var message = [
+                'Bonjour, je vous transmets ma demande d’inscription à la Salle du Numérique.',
+                'Référence : ' + reference,
+                'Formation : ' + data.formation,
+                'Nom : ' + data.name,
+                'La fiche PDF a été envoyée dans la messagerie admin. Je joins aussi le PDF dans WhatsApp.',
+                'Merci.'
+            ].join('\n');
+            window.open('https://wa.me/' + getAdminWhatsAppNumber() + '?text=' + encodeURIComponent(message), '_blank', 'noopener');
+        });
+    }
+
     // Soumission AJAX du formulaire d'inscription formation
     $('#formationRegistrationForm').submit(function (e) {
         e.preventDefault();
@@ -781,16 +901,9 @@ window.API_URL = API_URL;
         var creneau = $('#modalCreneauApprenant').val() || "Session standard";
         var faculte = $('#modalFaculteApprenant').val().trim() || "Non spécifiée";
         var remarques = $('#modalRemarquesApprenant').val().trim() || "Aucune remarque particulière.";
+        var refCode = 'SNU-FRM-' + Date.now().toString().slice(-8);
 
-        var msgBody = "=== DEMANDE D'INSCRIPTION À LA FORMATION ===\n" +
-                      "Formation : " + formation + "\n" +
-                      "Nom Apprenant : " + name + "\n" +
-                      "Téléphone / WhatsApp : " + phone + "\n" +
-                      "Email : " + email + "\n" +
-                      "Statut : " + statut + "\n" +
-                      "Faculté / Promotion : " + faculte + "\n" +
-                      "Session souhaitée : " + creneau + "\n" +
-                      "Remarques : " + remarques;
+        var msgBody = "Fiche PDF d'inscription jointe à cette demande. Référence : " + refCode;
 
         var payload = {
             type: 'inscription',
@@ -807,24 +920,77 @@ window.API_URL = API_URL;
             website: $(form).find('input[name="website"]').val() || ""
         };
 
+        var receiptData = {
+            formation: formation,
+            name: name,
+            phone: phone,
+            email: email,
+            statut: statut,
+            faculte: faculte,
+            creneau: creneau,
+            remarques: remarques
+        };
+        var pdfBlob;
+        try {
+            pdfBlob = createRegistrationPdf(receiptData, refCode);
+        } catch (pdfError) {
+            $('#formationAlertError').removeClass('d-none').text(pdfError.message || 'Impossible de créer la fiche PDF.');
+            return;
+        }
+
         submitBtn.prop('disabled', true).html('<i class="fa fa-spinner fa-spin me-2"></i> Enregistrement...');
         $('#formationAlertSuccess').addClass('d-none');
         $('#formationAlertError').addClass('d-none');
 
-        var apiUrl = (window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')) ? '/api/messages' : (API_URL + '/api/messages');
-        fetch(apiUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
+        function makeRegistrationRequestOptions() {
+            var registrationFormData = new FormData();
+            registrationFormData.append('data', JSON.stringify(payload));
+            registrationFormData.append('pdf', pdfBlob, 'Fiche_Inscription_' + refCode + '.pdf');
+            return { method: 'POST', body: registrationFormData };
+        }
+        // Utiliser d’abord la route du site (proxy Netlify ou serveur local).
+        // Un aperçu statique peut répondre 404/405 aux POST; dans ce cas, envoyer
+        // la demande au backend de production au lieu d’arrêter le formulaire.
+        var registrationRequest = fetch('/api/messages', makeRegistrationRequestOptions()).then(function(res) {
+            if (res.status === 404 || res.status === 405) {
+                return fetch(API_URL + '/api/messages', makeRegistrationRequestOptions());
+            }
+            return res;
+        });
+        registrationRequest
+        .then(function (res) {
+            return res.text().then(function (body) {
+                var responseData = null;
+                if (body.trim()) {
+                    try {
+                        responseData = JSON.parse(body);
+                    } catch (parseError) {
+                        if (!res.ok) throw new Error('Le serveur a refusé la demande (HTTP ' + res.status + ').');
+                        throw new Error('Le serveur a répondu dans un format invalide. Réessayez dans un instant.');
+                    }
+                }
+                if (!res.ok) {
+                    throw new Error((responseData && responseData.error) || 'Impossible de transmettre la demande (HTTP ' + res.status + ').');
+                }
+                // Certaines passerelles confirment une requête acceptée sans corps JSON.
+                // Le statut HTTP 2xx suffit alors pour poursuivre vers la fiche.
+                if (!body.trim()) return { success: true };
+                return responseData;
+            });
         })
-        .then(function (res) { return res.json(); })
         .then(function (data) {
             if (!data.success) throw new Error(data.error || 'Erreur lors de l’inscription');
-            var refCode = 'SNU-FRM-' + Math.floor(1000 + Math.random() * 9000);
+            var showReceipt = function() { openRegistrationReceipt(receiptData, refCode, pdfBlob); };
+            var formModal = form.closest('.modal');
+            var formModalApi = formModal && window.bootstrap && window.bootstrap.Modal ? window.bootstrap.Modal.getInstance(formModal) : null;
+            if (formModalApi && formModal.classList.contains('show')) {
+                formModal.addEventListener('hidden.bs.modal', showReceipt, { once: true });
+                formModalApi.hide();
+            } else {
+                showReceipt();
+            }
             $('#formationAlertSuccess').removeClass('d-none').html(
-                '<i class="fa fa-check-circle me-2"></i><strong>Inscription enregistrée avec succès !</strong> Référence : <code>' + refCode + '</code>.<br>' +
-                'Formation : <strong>' + formation + '</strong>.<br>' +
-                'Notre équipe vous contactera dans les plus brefs délais par WhatsApp au <strong>' + phone + '</strong>.'
+                '<i class="fa fa-check-circle me-2"></i><strong>Votre demande a été transmise !</strong> Référence : <code>' + refCode + '</code>. Votre fiche est ouverte.'
             );
             form.reset();
             $('#modalFormationSelect').val(formation);

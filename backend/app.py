@@ -5,7 +5,7 @@ import time
 import hashlib
 import threading
 from werkzeug.utils import secure_filename
-from flask import Flask, request, jsonify, send_from_directory, redirect
+from flask import Flask, request, jsonify, send_from_directory, send_file, redirect
 from flask_cors import CORS
 from dotenv import load_dotenv
 
@@ -480,6 +480,8 @@ DATA_FILE = os.path.join(DATABASE_DIR, "content.json")
 SITE_DATA_FILE = os.path.join(FRONTEND_DIR, "data", "content.json")
 MESSAGES_FILE = os.path.join(DATABASE_DIR, "messages.json")
 FRONTEND_MESSAGES_FILE = os.path.join(FRONTEND_DIR, "data", "messages.json")
+REGISTRATION_PDF_DIR = os.path.join(DATABASE_DIR, "registration_pdfs")
+os.makedirs(REGISTRATION_PDF_DIR, exist_ok=True)
 
 # Dossiers d'Uploads
 UPLOAD_FOLDER = os.path.join(FRONTEND_DIR, "img", "uploads")
@@ -693,7 +695,11 @@ def api_messages():
 
     # POST: Nouveau message ou inscription formation
     try:
-        data = request.get_json(force=True)
+        if request.is_json:
+            data = request.get_json(force=True)
+        else:
+            raw_data = request.form.get("data", "")
+            data = json.loads(raw_data) if raw_data else request.form.to_dict()
         if not data or not isinstance(data, dict):
             return jsonify({"success": False, "error": "Données invalides"}), 400
 
@@ -709,8 +715,26 @@ def api_messages():
                 messages = []
 
         now_str = time.strftime("%d/%m/%Y à %H:%M")
+        message_id = f"msg_{int(time.time())}_{int(time.time() * 1000) % 10000}"
+        pdf_file = request.files.get("pdf")
+        pdf_filename = ""
+        if pdf_file and pdf_file.filename:
+            if not pdf_file.filename.lower().endswith(".pdf"):
+                return jsonify({"success": False, "error": "La pièce jointe doit être un PDF."}), 400
+            pdf_bytes = pdf_file.read()
+            if not pdf_bytes.startswith(b"%PDF-"):
+                return jsonify({"success": False, "error": "Le fichier reçu n'est pas un PDF valide."}), 400
+            if len(pdf_bytes) > 8 * 1024 * 1024:
+                return jsonify({"success": False, "error": "Le PDF dépasse la taille maximale de 8 Mo."}), 413
+            pdf_filename = secure_filename(message_id + ".pdf")
+            os.makedirs(REGISTRATION_PDF_DIR, exist_ok=True)
+            with open(os.path.join(REGISTRATION_PDF_DIR, pdf_filename), "wb") as pdf_out:
+                pdf_out.write(pdf_bytes)
+        if str(data.get("type", "")).strip() == "inscription" and not pdf_filename:
+            return jsonify({"success": False, "error": "La fiche PDF est absente de la demande."}), 400
+
         new_msg = {
-            "id": f"msg_{int(time.time())}_{int(time.time() * 1000) % 10000}",
+            "id": message_id,
             "type": str(data.get("type", "message")).strip()[:30] or "message",
             "formation": str(data.get("formation", "")).strip()[:200],
             "statut": str(data.get("statut", "")).strip()[:100],
@@ -722,6 +746,7 @@ def api_messages():
             "phone": str(data.get("phone", "")).strip()[:50],
             "subject": str(data.get("subject", "Sans objet")).strip()[:300],
             "message": str(data.get("message", "")).strip()[:5000],
+            "pdf_attachment": pdf_filename,
             "date": now_str,
             "timestamp": int(time.time()),
             "read": False,
@@ -748,15 +773,20 @@ def api_messages():
                 import smtplib
                 from email.mime.text import MIMEText
                 from email.mime.multipart import MIMEMultipart
+                from email.mime.application import MIMEApplication
                 smtp_port = int(os.environ.get("SMTP_PORT", 587))
                 smtp_user = os.environ.get("SMTP_USER", "")
                 smtp_pass = os.environ.get("SMTP_PASS", "")
-                mail = MIMEMultipart("alternative")
+                mail = MIMEMultipart("mixed")
                 mail["Subject"] = f"[SNU UNILU] {new_msg['subject']}"
                 mail["From"] = smtp_user or "numerique@SNU.ac.cd"
                 mail["To"] = admin_email
                 body_text = f"Bonjour,\n\nNouveau message / demande de module reçu depuis le site SNU :\n\n- De : {new_msg['name']} ({new_msg['email']})\n- Date : {new_msg['date']}\n- Objet : {new_msg['subject']}\n\nContenu :\n{new_msg['message']}\n"
                 mail.attach(MIMEText(body_text, "plain", "utf-8"))
+                if pdf_filename:
+                    pdf_part = MIMEApplication(pdf_bytes, _subtype="pdf")
+                    pdf_part.add_header("Content-Disposition", "attachment", filename=f"Fiche_{message_id}.pdf")
+                    mail.attach(pdf_part)
                 s = smtplib.SMTP(smtp_host, smtp_port, timeout=4)
                 s.starttls()
                 if smtp_user and smtp_pass:
@@ -767,6 +797,30 @@ def api_messages():
                 print(f"[Notification Admin] SMTP indisponible : {mail_err}")
 
         return jsonify({"success": True, "message": "Message envoyé avec succès !", "data": new_msg})
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+@app.route("/api/messages/<message_id>/pdf", methods=["GET", "OPTIONS"])
+def api_message_registration_pdf(message_id):
+    if request.method == "OPTIONS":
+        return jsonify({}), 200
+    bearer = request.headers.get("Authorization", "")
+    bearer_token = bearer[7:].strip() if bearer.lower().startswith("bearer ") else ""
+    supplied_token = request.headers.get("X-Admin-Token", "") or bearer_token
+    if not supplied_token or supplied_token != ADMIN_API_TOKEN:
+        return jsonify({"success": False, "error": "Accès administrateur requis."}), 401
+
+    msg_file = MESSAGES_FILE if os.path.exists(MESSAGES_FILE) else FRONTEND_MESSAGES_FILE
+    try:
+        with open(msg_file, "r", encoding="utf-8") as f:
+            messages = json.load(f)
+        message = next((item for item in messages if item.get("id") == message_id), None)
+        filename = secure_filename((message or {}).get("pdf_attachment", ""))
+        pdf_path = os.path.join(REGISTRATION_PDF_DIR, filename)
+        if not filename or not os.path.isfile(pdf_path):
+            return jsonify({"success": False, "error": "Fiche PDF introuvable."}), 404
+        return send_file(pdf_path, mimetype="application/pdf", as_attachment=True,
+                         download_name=f"Fiche_{secure_filename(message_id)}.pdf", max_age=0)
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
 

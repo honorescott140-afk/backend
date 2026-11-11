@@ -17,7 +17,7 @@ window.API_URL = window.API_URL || "https://backend-eueq.onrender.com";
         var clean = url.replace(/^\//, '');
         if (clean.startsWith('img/uploads/') && !window.location.origin.includes('localhost') && !window.location.origin.includes('127.0.0.1')) {
             var backend = (window.API_URL || 'https://backend-eueq.onrender.com').replace(/\/$/, '');
-            return backend + '/' + clean;
+            return backend + '/' + clean + '?v=' + Date.now();
         }
         return url;
     }
@@ -57,8 +57,45 @@ window.API_URL = window.API_URL || "https://backend-eueq.onrender.com";
             var val = getNestedValue(data, key);
             if (val) {
                 el.setAttribute('src', resolveMediaUrl(val));
+                el.hidden = false;
+            } else if (val !== null && val !== undefined) {
+                el.removeAttribute('src');
+                el.hidden = true;
             }
         });
+
+        // Les photos illustratives de la section À propos sont facultatives.
+        // Masquer leur tuile et élargir le texte quand elles sont supprimées.
+        if (data.about) {
+            var aboutImageStates = [1, 2].map(function(index) {
+                var img = document.querySelector('[data-cms-img="about.img' + index + '"]');
+                var tile = img && img.closest('.col-6');
+                var src = data.about['img' + index];
+                if (img && tile) {
+                    if (src) {
+                        img.setAttribute('src', resolveMediaUrl(src));
+                        tile.style.display = '';
+                    } else {
+                        img.removeAttribute('src');
+                        tile.style.display = 'none';
+                    }
+                }
+                return { tile: tile, visible: Boolean(img && tile && src) };
+            });
+            var visibleAboutTiles = aboutImageStates.filter(function(state) { return state.visible; });
+            visibleAboutTiles.forEach(function(state) {
+                state.tile.classList.toggle('col-6', visibleAboutTiles.length === 2);
+                state.tile.classList.toggle('col-12', visibleAboutTiles.length === 1);
+            });
+            var imagesColumn = document.getElementById('aboutImagesColumn');
+            var textColumn = document.getElementById('aboutTextColumn');
+            if (imagesColumn && textColumn) {
+                var hasAboutImages = visibleAboutTiles.length > 0;
+                imagesColumn.style.display = hasAboutImages ? '' : 'none';
+                textColumn.classList.toggle('col-lg-6', hasAboutImages);
+                textColumn.classList.toggle('col-lg-12', !hasAboutImages);
+            }
+        }
 
         // 3. Liens avec [data-cms-href]
         var linkEls = document.querySelectorAll('[data-cms-href]');
@@ -67,6 +104,8 @@ window.API_URL = window.API_URL || "https://backend-eueq.onrender.com";
             var val = getNestedValue(data, key);
             if (val) {
                 el.setAttribute('href', val);
+            } else if (val !== null && val !== undefined) {
+                el.removeAttribute('href');
             }
         });
 
@@ -82,23 +121,39 @@ window.API_URL = window.API_URL || "https://backend-eueq.onrender.com";
                 });
                 var iconName = val.startsWith('fa-') ? val : ('fa-' + val);
                 el.className = 'fa ' + iconName + ' ' + currentClasses.join(' ');
+            } else if (val !== null && val !== undefined) {
+                el.className = Array.from(el.classList).filter(function(c) {
+                    return !c.startsWith('fa-') || ['fa-3x', 'fa-2x', 'fa-lg', 'fa-sm'].indexOf(c) !== -1;
+                }).join(' ');
             }
         });
 
         // 4. Carrousel Hero (si présent)
-        if (data.hero && data.hero.slides && data.hero.slides.length) {
-            var heroImgs = document.querySelectorAll('.header-carousel img');
-            if (heroImgs.length) {
-                data.hero.slides.forEach(function (src, idx) {
-                    if (heroImgs[idx]) {
-                        heroImgs[idx].setAttribute('src', resolveMediaUrl(src));
+        if (data.hero && Array.isArray(data.hero.slides)) {
+            var $hero = window.jQuery ? window.jQuery('.header-carousel') : null;
+            if ($hero && $hero.length) {
+                try {
+                    if ($hero.data('owl.carousel')) $hero.trigger('destroy.owl.carousel');
+                    $hero[0].innerHTML = '';
+                    data.hero.slides.filter(Boolean).forEach(function (src, idx) {
+                        var slide = document.createElement('img');
+                        slide.className = 'w-100';
+                        slide.alt = 'Salle du Numérique — photo ' + (idx + 1);
+                        slide.src = resolveMediaUrl(src);
+                        $hero[0].appendChild(slide);
+                    });
+                    if (data.hero.slides.filter(Boolean).length && typeof $hero.owlCarousel === 'function') {
+                        $hero.owlCarousel({ items: 1, autoplay: true, smartSpeed: 1000, loop: data.hero.slides.filter(Boolean).length > 1, dots: true });
                     }
-                });
+                } catch (e) {
+                    // Si la bibliothèque carousel est indisponible, les images directes
+                    // ont tout de même reçu les nouvelles sources.
+                }
             }
         }
 
         // 5. Équipe de gestion (si présente)
-        if (data.team && data.team.members && data.team.members.length) {
+        if (data.team && Array.isArray(data.team.members)) {
             var teamCards = document.querySelectorAll('.snu-team-card');
             teamCards.forEach(function (card, idx) {
                 var m = data.team.members[idx];
@@ -113,7 +168,7 @@ window.API_URL = window.API_URL || "https://backend-eueq.onrender.com";
         }
 
         // 6. Services (dynamique : ajout, modification, suppression)
-        if (data.services && data.services.items && data.services.items.length) {
+        if (data.services && Array.isArray(data.services.items)) {
             var firstCard = document.querySelector('.service-card');
             var srvContainer = document.getElementById('servicesContainer') || (firstCard ? firstCard.closest('.row') : null);
             if (srvContainer) {
@@ -139,7 +194,7 @@ window.API_URL = window.API_URL || "https://backend-eueq.onrender.com";
         }
 
         // 7. Formations Principales (dynamique : ajout, modification, suppression)
-        if (data.formations && data.formations.principales && data.formations.principales.length) {
+        if (data.formations && Array.isArray(data.formations.principales)) {
             var princContainer = document.getElementById('formationsPrincipalesContainer');
             if (princContainer) {
                 princContainer.innerHTML = '';
@@ -167,7 +222,7 @@ window.API_URL = window.API_URL || "https://backend-eueq.onrender.com";
         }
 
         // 7b. Modules Spécifiques (dynamique : ajout, modification, suppression)
-        if (data.formations && data.formations.modules && data.formations.modules.length) {
+        if (data.formations && Array.isArray(data.formations.modules)) {
             var modContainer = document.getElementById('formationsModulesContainer');
             if (modContainer) {
                 modContainer.innerHTML = '';
@@ -226,7 +281,7 @@ window.API_URL = window.API_URL || "https://backend-eueq.onrender.com";
         }
 
         // 8. Actualités
-        if (data.news && data.news.items && data.news.items.length) {
+        if (data.news && Array.isArray(data.news.items)) {
             var newsContainer = document.getElementById('newsContainer');
             if (newsContainer) {
                 newsContainer.innerHTML = '';
@@ -250,7 +305,7 @@ window.API_URL = window.API_URL || "https://backend-eueq.onrender.com";
         }
 
         // 8b. Équipe de la Salle du Numérique
-        if (data.team && data.team.members && data.team.members.length) {
+        if (data.team && Array.isArray(data.team.members)) {
             var teamContainer = document.getElementById('teamContainer') || document.querySelector('.snu-team-section .row');
             if (teamContainer) {
                 teamContainer.innerHTML = '';
@@ -277,7 +332,7 @@ window.API_URL = window.API_URL || "https://backend-eueq.onrender.com";
             if (tTitle && data.testimonials.main_title) tTitle.innerHTML = data.testimonials.main_title;
             if (tSub && data.testimonials.subtitle) tSub.innerHTML = data.testimonials.subtitle;
 
-            if (data.testimonials.items && data.testimonials.items.length) {
+            if (Array.isArray(data.testimonials.items)) {
                 var testCarousel = document.querySelector('.testimonial-carousel');
                 if (testCarousel) {
                     var $carousel = window.jQuery ? window.jQuery(testCarousel) : null;
@@ -637,6 +692,49 @@ window.API_URL = window.API_URL || "https://backend-eueq.onrender.com";
             featEl.innerHTML = data.features.map(function (f) {
                 return '<li class="col-md-6 text-muted mb-2"><i class="fa fa-check text-danger me-2"></i>' + f + '</li>';
             }).join('');
+        }
+
+        var linksWrap = document.getElementById('serviceLibraryLinks');
+        if (linksWrap) linksWrap.remove();
+        var currentContent = window.__SNU_CONTENT__ || {};
+        var currentService = (currentContent.services && currentContent.services.items || []).find(function (service) {
+            return service.id === key || (service.title || '').toLowerCase().includes('biblioth');
+        });
+        var defaultLibraryLinks = [
+            {label: 'Google Scholar', url: 'https://scholar.google.com/'},
+            {label: 'PubMed', url: 'https://pubmed.ncbi.nlm.nih.gov/'},
+            {label: 'DOAJ', url: 'https://doaj.org/'},
+            {label: 'CORE', url: 'https://core.ac.uk/'},
+            {label: 'JSTOR', url: 'https://www.jstor.org/'},
+            {label: 'Internet Archive', url: 'https://archive.org/'}
+        ];
+        var libraryLinks = currentService && Array.isArray(currentService.links) ? currentService.links : defaultLibraryLinks;
+        if (featEl && featEl.parentElement) featEl.parentElement.style.display = '';
+        var isLibraryService = key === 'srv_3' || key === 'ressources' || (titleHint || '').toLowerCase().includes('biblioth');
+        if (imgEl && imgEl.parentElement) imgEl.parentElement.style.display = isLibraryService ? 'none' : '';
+        if (isLibraryService) {
+            if (descEl) descEl.textContent = '';
+            if (featEl) featEl.innerHTML = '';
+            linksWrap = document.createElement('div');
+            linksWrap.id = 'serviceLibraryLinks';
+            linksWrap.className = 'row g-2 mb-3';
+            libraryLinks.filter(function(link) { return link && String(link.label || '').trim() && String(link.url || '').trim(); }).forEach(function (link) {
+                var col = document.createElement('div'); col.className = 'col-md-6';
+                var anchor = document.createElement('a');
+                anchor.className = 'btn btn-primary w-100'; anchor.textContent = link.label || 'Ressource';
+                var safeUrl = '';
+                try {
+                    var parsedUrl = new URL(link.url || '', window.location.href);
+                    if (parsedUrl.protocol === 'https:' || parsedUrl.protocol === 'http:') safeUrl = parsedUrl.href;
+                } catch (e) {}
+                anchor.href = safeUrl || '#'; anchor.target = '_blank'; anchor.rel = 'noopener noreferrer';
+                if (!safeUrl) { anchor.classList.add('disabled'); anchor.setAttribute('aria-disabled', 'true'); }
+                col.appendChild(anchor); linksWrap.appendChild(col);
+            });
+            if (featEl && featEl.parentElement) {
+                featEl.parentElement.style.display = 'none';
+                featEl.parentElement.insertAdjacentElement('afterend', linksWrap);
+            }
         }
 
         openAnyBootstrapModal(modalEl);
@@ -1050,7 +1148,7 @@ window.API_URL = window.API_URL || "https://backend-eueq.onrender.com";
     }
 
     function loadContent() {
-        // Priorité 1 : modifications locales dans le navigateur
+        // Cache temporaire; les données sauvegardées sur le serveur restent prioritaires.
         var localData = null;
         try {
             var raw = localStorage.getItem(STORAGE_KEY);
@@ -1058,16 +1156,11 @@ window.API_URL = window.API_URL || "https://backend-eueq.onrender.com";
         } catch (e) {
         }
 
-        if (localData) {
-            applySiteContent(localData);
-        }
-
-        // Priorité 2 : API distante (Render) si en ligne sur salle-du-numerique.org, sinon fichier local data/content.json
-        var backendUrl = (window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1'))
-            ? ''
-            : (window.API_URL || 'https://backend-eueq.onrender.com');
-
-        var primaryUrl = backendUrl ? (backendUrl + '/api/content?v=' + Date.now()) : ('data/content.json?v=' + Date.now());
+        // Le contenu sauvegardé par l'admin sur le serveur est la source de vérité,
+        // en local comme en production. Le fichier statique sert seulement de secours.
+        var isLocal = window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1');
+        var backendUrl = isLocal ? window.location.origin : (window.API_URL || 'https://backend-eueq.onrender.com');
+        var primaryUrl = backendUrl.replace(/\/$/, '') + '/api/content?v=' + Date.now();
 
         function fetchFallback() {
             fetch('data/content.json?v=' + Date.now())
@@ -1076,14 +1169,11 @@ window.API_URL = window.API_URL || "https://backend-eueq.onrender.com";
                     return res.json();
                 })
                 .then(function (fallbackData) {
-                    if (!localData) {
-                        applySiteContent(fallbackData);
-                    } else {
-                        var merged = Object.assign({}, fallbackData, localData);
-                        applySiteContent(merged);
-                    }
+                    applySiteContent(fallbackData);
                 })
-                .catch(function () {});
+                .catch(function () {
+                    if (localData) applySiteContent(localData);
+                });
         }
 
         fetch(primaryUrl)
@@ -1093,17 +1183,11 @@ window.API_URL = window.API_URL || "https://backend-eueq.onrender.com";
             })
             .then(function (json) {
                 var serverData = (json && json.data) ? json.data : json;
-                if (!localData) {
-                    applySiteContent(serverData);
-                } else {
-                    var merged = Object.assign({}, serverData, localData);
-                    applySiteContent(merged);
-                }
+                try { localStorage.setItem(STORAGE_KEY, JSON.stringify(serverData)); } catch (e) {}
+                applySiteContent(serverData);
             })
             .catch(function () {
-                if (backendUrl) {
-                    fetchFallback();
-                }
+                fetchFallback();
             });
     }
 

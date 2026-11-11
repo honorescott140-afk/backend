@@ -13,6 +13,8 @@ import hmac
 import re
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 import urllib.parse
+from email.parser import BytesParser
+from email.policy import default as email_policy
 
 PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 8080
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -32,6 +34,7 @@ DB_FILE = os.path.join(DATA_DIR, "content.json")
 FRONTEND_DB_FILE = os.path.join(FRONTEND_DIR, "data", "content.json")
 MESSAGES_FILE = os.path.join(DATA_DIR, "messages.json")
 FRONTEND_MESSAGES_FILE = os.path.join(FRONTEND_DIR, "data", "messages.json")
+REGISTRATION_PDF_DIR = os.path.join(DATA_DIR, "registration_pdfs")
 
 UPLOAD_DIR = os.path.join(FRONTEND_DIR, "img", "uploads")
 ADMIN_UPLOAD_DIR = os.path.join(ADMIN_DIR, "img", "uploads")
@@ -42,6 +45,7 @@ os.makedirs(DATA_DIR, exist_ok=True)
 os.makedirs(os.path.dirname(FRONTEND_DB_FILE), exist_ok=True)
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 os.makedirs(ADMIN_UPLOAD_DIR, exist_ok=True)
+os.makedirs(REGISTRATION_PDF_DIR, exist_ok=True)
 
 
 def admin_authorized(handler):
@@ -146,6 +150,37 @@ class ClaudiaUnifiedHandler(SimpleHTTPRequestHandler):
                     self.wfile.write(f.read())
             else:
                 self.wfile.write(b'[]')
+            return
+
+        pdf_match = re.fullmatch(r"/api/messages/([^/]+)/pdf", path)
+        if pdf_match:
+            if not admin_authorized(self):
+                return
+            message_id = urllib.parse.unquote(pdf_match.group(1))
+            try:
+                with open(MESSAGES_FILE, "r", encoding="utf-8") as f:
+                    messages = json.load(f)
+                message = next((item for item in messages if item.get("id") == message_id), None)
+                filename = os.path.basename((message or {}).get("pdf_attachment", ""))
+                pdf_path = os.path.join(REGISTRATION_PDF_DIR, filename)
+                if not filename or not os.path.isfile(pdf_path):
+                    self.send_response(404)
+                    self.send_header("Content-Type", "application/json; charset=utf-8")
+                    self.end_headers()
+                    self.wfile.write(b'{"success":false,"error":"Fiche PDF introuvable."}')
+                    return
+                self.send_response(200)
+                self.send_header("Content-Type", "application/pdf")
+                self.send_header("Content-Disposition", f'attachment; filename="Fiche_{message_id}.pdf"')
+                self.send_header("Content-Length", str(os.path.getsize(pdf_path)))
+                self.end_headers()
+                with open(pdf_path, "rb") as f:
+                    self.wfile.write(f.read())
+            except Exception as exc:
+                self.send_response(500)
+                self.send_header("Content-Type", "application/json; charset=utf-8")
+                self.end_headers()
+                self.wfile.write(json.dumps({"success": False, "error": str(exc)}).encode("utf-8"))
             return
 
         # 5. Routage Administration : /admin, /admi, /admin/, etc.
@@ -342,11 +377,41 @@ class ClaudiaUnifiedHandler(SimpleHTTPRequestHandler):
         if path == "/api/messages":
             try:
                 content_type = self.headers.get("Content-Type", "")
-                if "application/json" not in content_type:
+                content_len = int(self.headers.get("Content-Length", 0))
+                if content_len > 10 * 1024 * 1024:
+                    self.send_response(413)
+                    self.send_header("Content-Type", "application/json; charset=utf-8")
+                    self.end_headers()
+                    self.wfile.write(b'{"success":false,"error":"La demande depasse 10 Mo."}')
+                    return
+                body = self.rfile.read(content_len)
+                pdf_bytes = None
+                if "multipart/form-data" in content_type:
+                    mime_message = BytesParser(policy=email_policy).parsebytes(
+                        b"MIME-Version: 1.0\r\nContent-Type: " + content_type.encode("latin-1") + b"\r\n\r\n" + body
+                    )
+                    form_fields = {}
+                    for part in mime_message.iter_parts():
+                        field_name = part.get_param("name", header="content-disposition")
+                        if field_name == "data":
+                            raw_data = part.get_payload(decode=True) or b"{}"
+                            form_fields["data"] = json.loads(raw_data.decode("utf-8"))
+                        elif field_name == "pdf":
+                            pdf_bytes = part.get_payload(decode=True) or b""
+                    data = form_fields.get("data", {})
+                elif "application/json" in content_type:
+                    if content_len > 100_000:
+                        self.send_response(413)
+                        self.send_header("Content-Type", "application/json; charset=utf-8")
+                        self.end_headers()
+                        self.wfile.write(b'{"success":false,"error":"Payload trop volumineux"}')
+                        return
+                    data = json.loads(body.decode("utf-8")) if body else {}
+                else:
                     self.send_response(415)
                     self.send_header("Content-Type", "application/json; charset=utf-8")
                     self.end_headers()
-                    self.wfile.write(b'{"success": false, "error": "Format JSON requis"}')
+                    self.wfile.write(b'{"success":false,"error":"Envoyez le formulaire en JSON ou avec son PDF."}')
                     return
 
                 client_ip = self.client_address[0] if self.client_address else "unknown"
@@ -360,16 +425,6 @@ class ClaudiaUnifiedHandler(SimpleHTTPRequestHandler):
                     return
                 recent_attempts.append(now)
                 CONTACT_ATTEMPTS[client_ip] = recent_attempts
-
-                content_len = int(self.headers.get("Content-Length", 0))
-                if content_len > 100_000:
-                    self.send_response(413)
-                    self.send_header("Content-Type", "application/json; charset=utf-8")
-                    self.end_headers()
-                    self.wfile.write(b'{"success": false, "error": "Payload trop volumineux"}')
-                    return
-                body = self.rfile.read(content_len)
-                data = json.loads(body.decode("utf-8"))
 
                 if not isinstance(data, dict) or str(data.get("website", "")).strip():
                     self.send_response(400)
@@ -393,6 +448,20 @@ class ClaudiaUnifiedHandler(SimpleHTTPRequestHandler):
                     self.wfile.write(b'{"success": false, "error": "Veuillez verifier les champs du formulaire"}')
                     return
 
+                if data.get("type") == "inscription":
+                    if not pdf_bytes or not pdf_bytes.startswith(b"%PDF-"):
+                        self.send_response(400)
+                        self.send_header("Content-Type", "application/json; charset=utf-8")
+                        self.end_headers()
+                        self.wfile.write(b'{"success":false,"error":"La fiche PDF est absente ou invalide. Veuillez recharger la page et recommencer."}')
+                        return
+                    if len(pdf_bytes) > 8 * 1024 * 1024:
+                        self.send_response(413)
+                        self.send_header("Content-Type", "application/json; charset=utf-8")
+                        self.end_headers()
+                        self.wfile.write(b'{"success":false,"error":"La fiche PDF depasse 8 Mo."}')
+                        return
+
                 messages = []
                 if os.path.exists(MESSAGES_FILE):
                     try:
@@ -402,8 +471,14 @@ class ClaudiaUnifiedHandler(SimpleHTTPRequestHandler):
                         messages = []
 
                 now_str = time.strftime("%d/%m/%Y a %H:%M")
+                message_id = f"msg_{int(time.time())}_{int(time.time() * 1000) % 10000}"
+                pdf_filename = message_id + ".pdf" if pdf_bytes else ""
+                if pdf_filename:
+                    os.makedirs(REGISTRATION_PDF_DIR, exist_ok=True)
+                    with open(os.path.join(REGISTRATION_PDF_DIR, pdf_filename), "wb") as pdf_out:
+                        pdf_out.write(pdf_bytes)
                 new_msg = {
-                    "id": f"msg_{int(time.time())}_{int(time.time() * 1000) % 10000}",
+                    "id": message_id,
                     "type": sanitize(data.get("type", "message"), 30) or "message",
                     "formation": sanitize(data.get("formation", ""), 200),
                     "statut": sanitize(data.get("statut", ""), 100),
@@ -415,6 +490,7 @@ class ClaudiaUnifiedHandler(SimpleHTTPRequestHandler):
                     "phone": phone,
                     "subject": subject,
                     "message": message,
+                    "pdf_attachment": pdf_filename,
                     "date": now_str,
                     "timestamp": int(time.time()),
                     "read": False,
@@ -441,15 +517,20 @@ class ClaudiaUnifiedHandler(SimpleHTTPRequestHandler):
                         import smtplib
                         from email.mime.text import MIMEText
                         from email.mime.multipart import MIMEMultipart
+                        from email.mime.application import MIMEApplication
                         smtp_port = int(os.environ.get("SMTP_PORT", 587))
                         smtp_user = os.environ.get("SMTP_USER", "")
                         smtp_pass = os.environ.get("SMTP_PASS", "")
-                        mail = MIMEMultipart("alternative")
+                        mail = MIMEMultipart("mixed")
                         mail["Subject"] = f"[SNU UNILU] {subject}"
                         mail["From"] = smtp_user or "numerique@SNU.ac.cd"
                         mail["To"] = admin_email
                         body_text = f"Bonjour,\n\nNouveau message / demande de module recu depuis le site SNU :\n\n- De : {name} ({email})\n- Date : {now_str}\n- Objet : {subject}\n\nContenu :\n{message}\n"
                         mail.attach(MIMEText(body_text, "plain", "utf-8"))
+                        if pdf_bytes:
+                            pdf_part = MIMEApplication(pdf_bytes, _subtype="pdf")
+                            pdf_part.add_header("Content-Disposition", "attachment", filename=f"Fiche_{message_id}.pdf")
+                            mail.attach(pdf_part)
                         s = smtplib.SMTP(smtp_host, smtp_port, timeout=4)
                         s.starttls()
                         if smtp_user and smtp_pass:

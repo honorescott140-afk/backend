@@ -20,7 +20,7 @@
     "btn_text": "En savoir plus",
     "btn_link": "services.html",
     "slides": [
-      "img/Salle1.jpg",
+      "img/uploads/upload_1794407924_Capturedécrandu2026-11-0601-52-35.png",
       "img/Salle2.jpg",
       "img/Salle3.jpg"
     ],
@@ -42,9 +42,9 @@
     "title_highlight": "Espace Tech",
     "p1": "La Salle du Numérique de l'Université de Lubumbashi (SNU) est un centre technologique moderne conçu pour propulser l'éducation, la formation et la recherche vers de nouveaux sommets. Nous mettons à la disposition de la communauté universitaire des ressources de pointe.",
     "p2": "Que vous soyez étudiant cherchant à approfondir vos compétences pratiques, enseignant préparant des cours interactifs, ou jeune innovateur travaillant sur des projets tech, notre espace offre des solutions adaptées à vos besoins.",
-    "img1": "img/about-1.jpg",
+    "img1": "",
     "img1_label": "Salle du Numérique",
-    "img2": "img/about-2.jpg",
+    "img2": "",
     "img2_label": "de l'Université de Lubumbashi",
     "points": [
       "Matériel Professionnel",
@@ -122,7 +122,33 @@
         "id": "srv_3",
         "icon": "fa fa-book",
         "title": "Bibliothèques Numériques",
-        "desc": "Consultez des milliers d'ouvrages numériques, articles de recherche et bases de données scientifiques universitaires."
+        "desc": "",
+        "links": [
+          {
+            "label": "Google Scholar",
+            "url": "https://scholar.google.com/"
+          },
+          {
+            "label": "PubMed",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/"
+          },
+          {
+            "label": "DOAJ",
+            "url": "https://doaj.org/"
+          },
+          {
+            "label": "CORE",
+            "url": "https://core.ac.uk/"
+          },
+          {
+            "label": "JSTOR",
+            "url": "https://www.jstor.org/"
+          },
+          {
+            "label": "Internet Archive",
+            "url": "https://archive.org/"
+          }
+        ]
       },
       {
         "id": "srv_4",

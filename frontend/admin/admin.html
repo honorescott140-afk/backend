@@ -2,7 +2,20 @@
 <html lang="fr">
 
 <head>
-    <base href="/admin/">
+    <base id="adminBase" href="/admin/">
+    <script>
+        (function () {
+            var path = window.location.pathname;
+            var adminMarker = path.lastIndexOf('/admin');
+            var basePath;
+            if (adminMarker >= 0) {
+                basePath = path.slice(0, adminMarker) + '/admin/';
+            } else {
+                basePath = path.slice(0, path.lastIndexOf('/') + 1) || '/';
+            }
+            document.getElementById('adminBase').setAttribute('href', basePath);
+        })();
+    </script>
     <meta charset="utf-8">
     <title>Administration — Salle du Numérique UNILU</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -45,6 +58,8 @@
             font-family: 'Roboto', sans-serif;
             color: var(--snu-text-dark);
             height: 100vh;
+            height: 100dvh;
+            min-height: 100vh;
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -78,12 +93,15 @@
             top: 0;
             z-index: 1030;
             padding: 10px 0;
+            flex: 0 0 auto;
         }
 
         .admin-logo-img {
             height: 55px;
             width: 55px;
-            object-fit: cover;
+            object-fit: contain;
+            background-color: #ffffff;
+            padding: 2px;
             border-radius: 50%;
             margin-right: 14px;
             border: 2px solid rgba(255, 255, 255, 0.7);
@@ -168,11 +186,12 @@
             position: relative;
             z-index: 1;
             display: flex;
-            flex: 1;
+            flex: 1 1 auto;
+            min-height: 0;
             max-width: 1600px;
             margin: 0 auto;
             width: 100%;
-            height: calc(100vh - 75px);
+            height: auto;
             overflow: hidden;
         }
 
@@ -247,9 +266,23 @@
         /* Contenu Principal - SEUL CE BLOC DÉROULE */
         .admin-content-pane {
             flex: 1;
+            min-width: 0;
             height: 100%;
             padding: 32px 36px;
             overflow-y: auto;
+        }
+
+        .admin-content-pane .form-label {
+            display: block;
+            width: 100%;
+            margin-bottom: 0.4rem;
+        }
+
+        .admin-content-pane .form-control,
+        .admin-content-pane .form-select {
+            display: block;
+            width: 100%;
+            min-width: 0;
         }
 
         /* Scrollbars fines et fluides */
@@ -293,6 +326,15 @@
         }
 
         @media (max-width: 767.98px) {
+            .snu-login-card {
+                padding: 32px 22px;
+            }
+            .admin-card {
+                padding: 20px 16px;
+            }
+            .admin-card-title {
+                font-size: 1.1rem;
+            }
             .admin-logo-img {
                 height: 44px;
                 width: 44px;
@@ -336,6 +378,8 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
             padding-bottom: 16px;
             margin-bottom: 24px;
             border-bottom: 1.5px solid rgba(0, 0, 0, 0.06);
@@ -345,6 +389,8 @@
             font-size: 1.35rem;
             color: var(--snu-text-dark);
             margin: 0;
+            min-width: 0;
+            overflow-wrap: anywhere;
             display: flex;
             align-items: center;
         }
@@ -459,16 +505,21 @@
         /* Login Screen avec le style de la Salle SNU */
         #loginOverlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            box-sizing: border-box;
             background: url('img/tech_background.png') center/cover no-repeat fixed;
             z-index: 99999;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
+        }
+
+        #loginOverlay.d-none {
+            display: none !important;
         }
 
         #loginOverlay::before {
@@ -484,12 +535,19 @@
             z-index: 2;
             background: #ffffff;
             border-radius: 18px;
-            width: 100%;
+            width: min(100%, 440px);
             max-width: 440px;
+            flex: 0 1 440px;
+            box-sizing: border-box;
             padding: 40px 36px;
             box-shadow: 0 20px 50px rgba(209, 0, 0, 0.12), 0 4px 20px rgba(0, 0, 0, 0.06);
             border: 1px solid rgba(209, 0, 0, 0.15);
             text-align: center;
+        }
+
+        #loginForm > a {
+            display: block;
+            margin-top: 0.5rem;
         }
 
         .snu-login-card::before {
@@ -996,7 +1054,7 @@
                     <i class="fa fa-moon theme-icon"></i>
                 </button>
             </div>
-            <img src="img/Logo_SNU.jpg" alt="Logo SNU" class="admin-logo-img mb-3" style="width: 76px; height: 76px;">
+            <img src="img/Logo_SNU.jpg" onerror="this.onerror=null;this.src='../img/Logo_SNU.jpg';" alt="Logo SNU" class="admin-logo-img mb-3" style="width: 76px; height: 76px; object-fit: contain; background-color: #ffffff;">
             <h3 class="mb-1" style="color: var(--snu-text-dark); font-weight: 900;">Salle du <span style="color: var(--snu-red);">Numérique</span></h3>
             <p class="text-muted small mb-4">Université de Lubumbashi — Espace Administration</p>
 
@@ -1013,7 +1071,7 @@
                 <button type="submit" class="btn btn-snu-red w-100 py-2 mb-3">
                     <i class="fa fa-sign-in-alt me-2"></i> Accéder au tableau de bord
                 </button>
-                <a href="/" target="_blank" class="text-decoration-none small text-muted">
+                <a href="../" target="_blank" class="text-decoration-none small text-muted">
                     <i class="fa fa-arrow-left me-1"></i> Retour au site public
                 </a>
             </form>
@@ -1031,7 +1089,7 @@
                 
                 <!-- Logo & Titre SNU -->
                 <div class="d-flex align-items-center">
-                    <img src="img/Logo_SNU.jpg" alt="Logo SNU" class="admin-logo-img">
+                    <img src="img/Logo_SNU.jpg" onerror="this.onerror=null;this.src='../img/Logo_SNU.jpg';" alt="Logo SNU" class="admin-logo-img">
                     <div>
                         <h1 class="admin-brand-text mb-0">Salle du Numérique</h1>
                         <span class="admin-badge-pill">Administration</span>
@@ -1046,7 +1104,7 @@
                     </button>
 
                     <!-- Bouton Voir le Site Public -->
-                    <a href="/" target="_blank" class="btn btn-view-site d-flex align-items-center" title="Ouvrir le site utilisateur">
+                    <a href="../" target="_blank" class="btn btn-view-site d-flex align-items-center" title="Ouvrir le site utilisateur">
                         <i class="fa fa-external-link-alt me-2"></i> Voir le Site Utilisateur
                     </a>
 
@@ -1078,7 +1136,7 @@
                 <button id="btnSaveAllMobile" class="btn btn-save-master flex-fill py-2 d-flex align-items-center justify-content-center fw-bold" style="font-size: 0.88rem;">
                     <i class="fa fa-save me-2"></i> Enregistrer Tout
                 </button>
-                <a href="/" target="_blank" class="btn btn-view-site flex-fill py-2 d-flex align-items-center justify-content-center fw-bold" style="font-size: 0.88rem;">
+                <a href="../" target="_blank" class="btn btn-view-site flex-fill py-2 d-flex align-items-center justify-content-center fw-bold" style="font-size: 0.88rem;">
                     <i class="fa fa-external-link-alt me-2"></i> Voir le Site
                 </a>
             </div>
@@ -1341,6 +1399,7 @@
                                     <i class="fa fa-camera me-1"></i> Remplacer la photo 1
                                     <input type="file" class="d-none img-file-input" data-target="about.img1" data-preview="preview_about_img1" accept="image/*">
                                 </label>
+                                <button type="button" class="btn btn-sm btn-outline-danger w-100 mt-2 remove-about-image" data-index="1"><i class="fa fa-trash-alt me-1"></i>Supprimer la photo 1</button>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -1354,6 +1413,7 @@
                                     <i class="fa fa-camera me-1"></i> Remplacer la photo 2
                                     <input type="file" class="d-none img-file-input" data-target="about.img2" data-preview="preview_about_img2" accept="image/*">
                                 </label>
+                                <button type="button" class="btn btn-sm btn-outline-danger w-100 mt-2 remove-about-image" data-index="2"><i class="fa fa-trash-alt me-1"></i>Supprimer la photo 2</button>
                             </div>
                         </div>
                     </div>
@@ -1795,6 +1855,9 @@
                         <div class="d-flex gap-2">
                             <button type="button" class="btn btn-sm btn-snu-blue" id="btnAddService">
                                 <i class="fa fa-plus-circle me-1"></i> Ajouter un Service
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-danger" id="btnAddLibraryService">
+                                <i class="fa fa-book me-1"></i> Ajouter Ressources &amp; Bibliothèques Numériques
                             </button>
                             <button class="btn btn-sm btn-snu-red btn-save-section"><i class="fa fa-save me-1"></i> Sauvegarder</button>
                         </div>
@@ -2421,8 +2484,20 @@
                     }
                 }
                 if (currentContent.about) {
-                    if (currentContent.about.img1) document.getElementById('preview_about_img1').src = resolveAdminMedia(currentContent.about.img1);
-                    if (currentContent.about.img2) document.getElementById('preview_about_img2').src = resolveAdminMedia(currentContent.about.img2);
+                    [1, 2].forEach(function(index) {
+                        var preview = document.getElementById('preview_about_img' + index);
+                        var imagePath = currentContent.about['img' + index];
+                        if (!preview) return;
+                        if (imagePath) {
+                            preview.src = resolveAdminMedia(imagePath);
+                            preview.style.display = '';
+                            if (preview.closest('.img-preview-box')) preview.closest('.img-preview-box').style.display = '';
+                        } else {
+                            preview.removeAttribute('src');
+                            preview.style.display = 'none';
+                            if (preview.closest('.img-preview-box')) preview.closest('.img-preview-box').style.display = 'none';
+                        }
+                    });
                 }
                 if (currentContent.directeur && currentContent.directeur.photo) {
                     document.getElementById('preview_dir_photo').src = resolveAdminMedia(currentContent.directeur.photo);
@@ -2469,30 +2544,7 @@
                 tryApi.catch(tryLocal)
                     .then(function(data) {
                         currentContent = data;
-
-                        function deepMerge(target, source) {
-                            for (var key in source) {
-                                if (source.hasOwnProperty(key)) {
-                                    if (source[key] && typeof source[key] === 'object' && !Array.isArray(source[key])) {
-                                        if (!target[key] || typeof target[key] !== 'object' || Array.isArray(target[key])) {
-                                            target[key] = {};
-                                        }
-                                        deepMerge(target[key], source[key]);
-                                    } else {
-                                        target[key] = source[key];
-                                    }
-                                }
-                            }
-                            return target;
-                        }
-
-                        var localRaw = localStorage.getItem(STORAGE_KEY);
-                        if (localRaw) {
-                            try {
-                                var localData = JSON.parse(localRaw);
-                                deepMerge(currentContent, localData);
-                            } catch(e) {}
-                        }
+                        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(currentContent)); } catch(e) {}
 
                         populateInputs();
                         checkBackendConnection();
@@ -2896,7 +2948,11 @@
                                 var textInp = container.querySelector(`.team-img-input[data-index="${i}"]`);
                                 if (textInp) textInp.value = newSrc;
                                 var prev = document.getElementById('preview_team_' + i);
-                                if (prev) prev.src = newSrc;
+                                if (prev) {
+                                    prev.src = newSrc;
+                                    prev.style.display = '';
+                                    if (prev.closest('.img-preview-box')) prev.closest('.img-preview-box').style.display = '';
+                                }
                                 showToast('Photo du membre mise à jour !', 'success');
                             });
                         }
@@ -2938,6 +2994,16 @@
                 if (!currentContent.services.items) currentContent.services.items = [];
 
                 currentContent.services.items.forEach(function(srv, idx) {
+                    if (srv.id === 'srv_3' || (srv.title || '').toLowerCase().includes('biblioth')) {
+                        if (!Array.isArray(srv.links)) srv.links = [
+                            {label: 'Google Scholar', url: 'https://scholar.google.com/'},
+                            {label: 'PubMed', url: 'https://pubmed.ncbi.nlm.nih.gov/'},
+                            {label: 'DOAJ', url: 'https://doaj.org/'},
+                            {label: 'CORE', url: 'https://core.ac.uk/'},
+                            {label: 'JSTOR', url: 'https://www.jstor.org/'},
+                            {label: 'Internet Archive', url: 'https://archive.org/'}
+                        ];
+                    }
                     var col = document.createElement('div');
                     col.className = 'col-md-4';
                     col.innerHTML = `
@@ -2960,6 +3026,7 @@
                                 <label class="form-label small">Description</label>
                                 <textarea class="form-control form-control-sm srv-desc-input" rows="3" data-index="${idx}" placeholder="Description du service">${srv.desc}</textarea>
                             </div>
+                            ${(srv.id === 'srv_3' || (srv.title || '').toLowerCase().includes('biblioth')) ? `<div class="mt-3 border-top pt-3"><div class="d-flex justify-content-between align-items-center gap-2"><strong class="small text-danger">Liens de la bibliothèque</strong><button type="button" class="btn btn-sm btn-outline-danger srv-add-link" data-index="${idx}"><i class="fa fa-plus me-1"></i>Ajouter un lien</button></div><div class="small text-muted mt-1">Ajoutez autant de ressources que nécessaire. Chaque lien doit avoir un nom et une adresse.</div>${srv.links.map(function(link, linkIndex) { return `<div class="row g-2 mt-1 align-items-center"><div class="col-5"><input class="form-control form-control-sm srv-link-label" data-index="${idx}" data-link-index="${linkIndex}" value="${(link.label || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;')}" placeholder="Nom (ex. Google Scholar)"></div><div class="col-6"><input class="form-control form-control-sm srv-link-url" data-index="${idx}" data-link-index="${linkIndex}" value="${(link.url || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;')}" placeholder="https://..." type="url"></div><div class="col-1"><button type="button" class="btn btn-sm btn-outline-secondary srv-link-delete" data-index="${idx}" data-link-index="${linkIndex}" title="Supprimer ce lien"><i class="fa fa-times"></i></button></div></div>`; }).join('')}</div>` : ''}
                         </div>
                     `;
                     container.appendChild(col);
@@ -2979,6 +3046,30 @@
                 container.querySelectorAll('.srv-desc-input').forEach(function(inp) {
                     inp.addEventListener('input', function() {
                         currentContent.services.items[this.getAttribute('data-index')].desc = this.value;
+                    });
+                });
+                container.querySelectorAll('.srv-link-label, .srv-link-url').forEach(function(inp) {
+                    inp.addEventListener('input', function() {
+                        var service = currentContent.services.items[Number(this.dataset.index)];
+                        if (!Array.isArray(service.links)) service.links = [];
+                        var link = service.links[Number(this.dataset.linkIndex)];
+                        link[this.classList.contains('srv-link-label') ? 'label' : 'url'] = this.value;
+                    });
+                });
+                container.querySelectorAll('.srv-add-link').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        var service = currentContent.services.items[Number(this.dataset.index)];
+                        if (!Array.isArray(service.links)) service.links = [];
+                        service.links.push({label: '', url: ''});
+                        renderServicesList();
+                        showToast('Nouveau champ de lien ajouté. Cliquez sur Enregistrer Tout pour publier.', 'info');
+                    });
+                });
+                container.querySelectorAll('.srv-link-delete').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        var service = currentContent.services.items[Number(this.dataset.index)];
+                        service.links.splice(Number(this.dataset.linkIndex), 1);
+                        renderServicesList();
                     });
                 });
                 container.querySelectorAll('.srv-delete-btn').forEach(function(btn) {
@@ -3008,6 +3099,37 @@
                     });
                     renderServicesList();
                     showToast('Nouveau service ajouté en bas de liste ! N\'oubliez pas d\'enregistrer.', 'success');
+                });
+            }
+
+            var btnAddLibraryService = document.getElementById('btnAddLibraryService');
+            if (btnAddLibraryService) {
+                btnAddLibraryService.addEventListener('click', function() {
+                    if (!currentContent.services) currentContent.services = { items: [] };
+                    if (!Array.isArray(currentContent.services.items)) currentContent.services.items = [];
+                    var existing = currentContent.services.items.find(function(service) {
+                        return service.id === 'ressources_bibliotheques' || (service.title || '').toLowerCase().includes('biblioth');
+                    });
+                    if (existing) {
+                        showToast('Le service Ressources & Bibliothèques est déjà dans la liste. Modifiez-le ci-dessous.', 'info');
+                        return;
+                    }
+                    currentContent.services.items.push({
+                        id: 'ressources_bibliotheques',
+                        icon: 'fa fa-book',
+                        title: 'Ressources & Bibliothèques Numériques',
+                        desc: '',
+                        links: [
+                            {label: 'Google Scholar', url: 'https://scholar.google.com/'},
+                            {label: 'PubMed', url: 'https://pubmed.ncbi.nlm.nih.gov/'},
+                            {label: 'DOAJ', url: 'https://doaj.org/'},
+                            {label: 'CORE', url: 'https://core.ac.uk/'},
+                            {label: 'JSTOR', url: 'https://www.jstor.org/'},
+                            {label: 'Internet Archive', url: 'https://archive.org/'}
+                        ]
+                    });
+                    renderServicesList();
+                    showToast('Le service et ses six liens ont été ajoutés. Cliquez sur Enregistrer Tout pour les publier.', 'success');
                 });
             }
 
@@ -3366,6 +3488,23 @@
                 });
             });
 
+            document.querySelectorAll('.remove-about-image').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    var imageIndex = this.getAttribute('data-index');
+                    var path = 'about.img' + imageIndex;
+                    setNested(currentContent, path, '');
+                    var pathInput = document.querySelector('[data-bind="' + path + '"]');
+                    var preview = document.getElementById('preview_about_img' + imageIndex);
+                    if (pathInput) pathInput.value = '';
+                    if (preview) {
+                        preview.removeAttribute('src');
+                        preview.style.display = 'none';
+                        if (preview.closest('.img-preview-box')) preview.closest('.img-preview-box').style.display = 'none';
+                    }
+                    showToast('Photo illustrative supprimée. Cliquez sur « Enregistrer Tout » pour publier.', 'info');
+                });
+            });
+
             document.querySelectorAll('[data-bind]').forEach(function(inp) {
                 inp.addEventListener('input', function() {
                     var path = this.getAttribute('data-bind');
@@ -3407,7 +3546,7 @@
                     showToast('Toutes les modifications ont été enregistrées sur le serveur !', 'success');
                 })
                 .catch(function(err) {
-                    showToast('Modifications enregistrées localement !', 'success');
+                    showToast('Sauvegarde serveur impossible : les changements restent sur ce navigateur.', 'danger');
                 })
                 .finally(function() {
                     saveButtons.forEach(function(btn) {
@@ -4054,6 +4193,7 @@
                                 '</div>' +
                                 (msg.remarques ? '<div style="margin-top:8px;"><span class="fw-bold">Remarques :</span> ' + escapeHtml(msg.remarques) + '</div>' : '') +
                             '</div>' : '') +
+                        (msg.pdf_attachment ? '<div class="msg-bubble meta"><i class="fa fa-file-pdf text-danger me-2"></i>La fiche PDF officielle est jointe à cette inscription.</div>' : '') +
                         '<div class="msg-bubble in">' + escapeHtml(msg.message || '') + '</div>' +
                     '</div>' +
                     '<div class="msg-chat-footer">' +
@@ -4064,6 +4204,7 @@
                             '<button class="btn btn-sm btn-outline-danger btn-insc-pdf" data-cat="' + escapeHtml(info.category) + '">' +
                                 '<i class="fa fa-file-pdf me-1"></i>PDF de la formation' +
                             '</button>' : '') +
+                        (msg.pdf_attachment ? '<button class="btn btn-sm btn-danger btn-download-registration-pdf" data-id="' + escapeHtml(msg.id) + '"><i class="fa fa-file-pdf me-1"></i>Ouvrir la fiche PDF reçue</button>' : '') +
                         '<button class="btn btn-sm ' + (msg.read ? 'btn-outline-secondary' : 'btn-outline-primary') + ' btn-toggle-read" data-id="' + escapeHtml(msg.id) + '" data-read="' + msg.read + '">' +
                             '<i class="fa ' + (msg.read ? 'fa-envelope-open' : 'fa-check') + ' me-1"></i>' + (msg.read ? 'Marquer non lu' : 'Marquer lu') +
                         '</button>' +
@@ -4115,6 +4256,36 @@
                 pane.querySelectorAll('.btn-insc-pdf').forEach(function(btn) {
                     btn.addEventListener('click', function() {
                         downloadInscriptionsPdf(this.getAttribute('data-cat'));
+                    });
+                });
+
+                pane.querySelectorAll('.btn-download-registration-pdf').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        var messageId = this.getAttribute('data-id');
+                        var downloadButton = this;
+                        downloadButton.disabled = true;
+                        fetch(backendUrl + '/api/messages/' + encodeURIComponent(messageId) + '/pdf', {
+                            headers: {
+                                'Authorization': 'Bearer ' + getAdminToken(),
+                                'X-Admin-Token': getAdminToken()
+                            }
+                        })
+                        .then(function(res) {
+                            if (!res.ok) throw new Error('La fiche PDF n’a pas pu être téléchargée.');
+                            return res.blob();
+                        })
+                        .then(function(pdfBlob) {
+                            var pdfUrl = URL.createObjectURL(pdfBlob);
+                            var link = document.createElement('a');
+                            link.href = pdfUrl;
+                            link.download = 'Fiche_Inscription_' + messageId + '.pdf';
+                            document.body.appendChild(link);
+                            link.click();
+                            link.remove();
+                            setTimeout(function() { URL.revokeObjectURL(pdfUrl); }, 60000);
+                        })
+                        .catch(function(err) { showToast(err.message || 'Erreur de téléchargement du PDF.', 'danger'); })
+                        .finally(function() { downloadButton.disabled = false; });
                     });
                 });
             }
